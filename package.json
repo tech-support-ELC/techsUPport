@@ -1,5 +1,5 @@
 {
-  "name": "heroku-cra-node",
+  "name": "capstone",
   "version": "3.0.0",
   "description": "How to use create-react-app with a custom Node API on Heroku",
   "engines": {
@@ -7,14 +7,17 @@
   },
   "scripts": {
     "start": "node server",
-    "build": "cd react-ui/ && npm install && npm run build"
+    "build": "cd react-ui/ && npm install && npm run build",
+    "connect": "node db.js"
   },
   "cacheDirectories": [
     "node_modules",
     "react-ui/node_modules"
   ],
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.17.1",
+    "pg": "^8.3.2",
+    "sequelize": "^6.3.4"
   },
   "repository": {
     "type": "git",
