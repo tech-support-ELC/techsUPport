@@ -6,6 +6,7 @@ const Home = (props) => {
   return (
     <div>
       <h1>Welcome {firstName}!</h1>
+      <h2>Onboarding </h2>
     </div>
   )
 }
