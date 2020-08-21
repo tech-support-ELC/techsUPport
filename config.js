@@ -1,5 +1,6 @@
 const pkg = require('./package.json')
 const databaseName = pkg.name + (process.env.NODE_ENV === 'test' ? '-test' : '')
+require('./dbSecrets')
 
 module.exports = {
   dialect: process.env.DIALECT,
