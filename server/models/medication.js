@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
-const db = require("./database");
+const db = require('../db/db');
 
-module.exports = db.define("medication", {
+const Medication = db.define("medication", {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -14,3 +14,4 @@ module.exports = db.define("medication", {
     type: Sequelize.STRING,
   },
 });
+module.exports = Medication;

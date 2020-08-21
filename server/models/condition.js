@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize')
-// const db = require('./db')
+const Sequelize = require('sequelize');
+const db = require('../db/db');
 
 const Condition = db.define('condition', {
   name: {
