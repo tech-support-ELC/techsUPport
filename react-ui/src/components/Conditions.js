@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react'
 import {connect} from 'react-redux';
-import {getAllConditionsThunk} from '../store/conditions';
+import {getAllConditionsThunk} from '../redux/conditions';
 
-class Conditions extends React.Component {
+class Conditions extends Component {
   componentDidMount() {
     this.props.getAllConditions();
   }
