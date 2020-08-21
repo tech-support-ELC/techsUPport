@@ -5,26 +5,34 @@ const Doctor_Patient = require('./doctor_patient');
 const Medication = require('./medication');
 const Patient = require('./patient');
 const Patient_Medication = require('./patient_medication');
+
+
 Doctor.belongsToMany(Patient, {
-through: {
+  through: {
     model: 'doctor_patient',
     as: 'doctorId',
     // unique: false
-    }
+  }
 });
 
 Patient.belongsToMany(Doctor, {
   through: {
-      model: 'doctor_patient',
-      as: 'patientId',
-      // unique: false
-    }
+    model: 'doctor_patient',
+    as: 'patientId',
+    // unique: false
+  }
 });
 
 Medication.belongsToMany(Patient, {
   through: {
     model: 'patient_medication',
-    }
+  }
+});
+
+Patient.belongsToMany(Medication, {
+  through: {
+    model: 'patient_medication',
+  }
 });
 
 Condition.belongsToMany(Patient, {
@@ -32,6 +40,14 @@ Condition.belongsToMany(Patient, {
     model: 'patient_condition',
   }
 });
+
+
+Patient.belongsToMany(Condition, {
+  through: {
+    model: 'patient_condition',
+  }
+});
+
 
 module.exports = {
   Condition,
