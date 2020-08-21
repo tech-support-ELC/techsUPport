@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-const Home = () => {
-  const { firstName } = this.props.currentUser
+const Home = (props) => {
+  const { firstName } = props.currentUser
   return (
     <div>
       <h1>Welcome {firstName}!</h1>

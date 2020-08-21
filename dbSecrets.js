@@ -1,0 +1,6 @@
+process.env.NODE_ENV = 'development'
+process.env.DIALECT = 'postgres'
+process.env.DATABASE_URL = 'capstone.c3dxjld76vva.us-east-1.rds.amazonaws.com'
+process.env.DB_PASSWORD = 'capstoneTeam#1'
+process.env.DB_USERNAME = 'capstone'
+process.env.PORT = '5432'
