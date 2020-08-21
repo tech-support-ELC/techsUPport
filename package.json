@@ -7,8 +7,9 @@
   },
   "scripts": {
     "start": "node server",
-    "build": "cd react-ui/ && npm install && npm run build",
-    "connect": "node db.js"
+    "build": "cd react-ui/ && npm run build",
+    "start-dev": "NODE_ENV='development' npm run build & NODE_ENV='development' npm run start-server",
+    "start-server": "nodemon server"
   },
   "cacheDirectories": [
     "node_modules",
@@ -32,6 +33,7 @@
   "license": "MIT",
   "devDependencies": {
     "babel-eslint": "^9.0.0",
-    "eslint": "^5.12.0"
+    "eslint": "^5.12.0",
+    "nodemon": "^2.0.4"
   }
 }
