@@ -1,5 +1,10 @@
+const Condition = require('./condition');
+const Patient_Condition = require('./patient_condition');
 const Doctor = require('./doctor')
 const Doctor_Patient = require('./doctor_patient')
+
+
+
 
 
 //Doctor.belongsToMany(Patient, {
@@ -8,7 +13,12 @@ const Doctor_Patient = require('./doctor_patient')
 //         as: doctorId
 //     }
 // })
+
+
+
 module.exports = {
-    Doctor,
-    Doctor_Patient
-}
+  Condition,
+  Patient_Condition,
+  Doctor,
+  Doctor_Patient
+};
