@@ -3,8 +3,9 @@ const Patient_Condition = require('./patient_condition');
 const Doctor = require('./doctor');
 const Doctor_Patient = require('./doctor_patient');
 const Medication = require('./medication');
-const Patient = require('./patient');
+const Patient = require('./user');
 const Patient_Medication = require('./patient_medication');
+
 
 Doctor.belongsToMany(Patient, {
   through: {
@@ -40,11 +41,13 @@ Condition.belongsToMany(Patient, {
   }
 });
 
+
 Patient.belongsToMany(Condition, {
   through: {
     model: 'patient_condition',
   }
 });
+
 
 module.exports = {
   Condition,

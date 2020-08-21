@@ -7,6 +7,7 @@ const Patient_Medication = db.define('patient_medication', {
     primaryKey: true,
     autoIncrement: true
   },
+
   date: {
     type: Sequelize.DATEONLY,
   }
