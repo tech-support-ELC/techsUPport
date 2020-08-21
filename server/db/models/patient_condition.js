@@ -7,6 +7,7 @@ const Patient_Condition = db.define('patient_condition', {
     primaryKey: true,
     autoIncrement: true
   },
+
   value: {
     type: Sequelize.INTEGER,
   },
