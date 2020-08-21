@@ -6,7 +6,11 @@ npm-debug.log
 *.env
 *.dev
 .DS_Store
+<<<<<<< HEAD
 secrets.js
+=======
+dbSecrets.js
+>>>>>>> 2db73603b81894b334e16a36bbd09d21f304eb0a
 
 # Docker
 Dockerfile
