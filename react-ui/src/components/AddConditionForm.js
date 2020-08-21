@@ -25,38 +25,45 @@ class AddConditionForm extends Component {
   render() {
     return (
       <div>
-        <h1>Add new condition</h1>
-        <div>
-          <input
-            className='input'
-            placeholder='Condition name'
-            type='text'
-            name='name'
-            onChange={this.handleChange}
-            value={this.state.name}
-          />
-        </div>
-        <div>
-          <input
-            className='input'
-            placeholder='Is diagnosed?'
-            type='text'
-            name='diagnosed'
-            onChange={this.handleChange}
-            value={this.state.diagnosed}
-          />
-        </div>
-        <div>
-          <input
-            className='input'
-            placeholder='typeOfPain'
-            type='text'
-            name='typeOfPain'
-            onChange={this.handleChange}
-            value={this.state.typeOfPain}
-          />
-        </div>
+        <form onSubmit={this.handleSubmit}>
+          <h1>Add new condition form</h1>
+          <div>
+            <input
+              className='input'
+              placeholder='Condition name'
+              type='text'
+              name='name'
+              onChange={this.handleChange}
+              value={this.state.name}
+            />
+          </div>
+          <div>
+            <input
+              className='input'
+              placeholder='Is diagnosed?(true/false)'
+              type='text'
+              name='diagnosed'
+              onChange={this.handleChange}
+              value={this.state.diagnosed}
+            />
+          </div>
+          <div>
+            <input
+              className='input'
+              placeholder='Type of pain'
+              type='text'
+              name='typeOfPain'
+              onChange={this.handleChange}
+              value={this.state.typeOfPain}
+            />
+          </div>
+          <button type="submit">
+            Submit
+          </button>
+        </form>
+
       </div>
     )
   }
 }
+export default AddConditionForm;
