@@ -25,13 +25,7 @@ if (!isDev && cluster.isMaster) {
   // Priority serve any static files.
   app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
   app.use('/api', require('./api'));
-  
-  // Answer API requests.
-  app.get('/api', function (req, res) {
-    res.set('Content-Type', 'application/json');
-    res.send('{"message":"Hello from the custom server!"}');
-  });
-
+  app.use('/auth', require('./auth'));
   // All remaining requests return the React app, so it can handle routing.
   app.get('*', function (request, response) {
     response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
@@ -45,7 +39,7 @@ if (!isDev && cluster.isMaster) {
 
 async function connect() {
   try {
-    await db.sync()
+    await db.sync({ force: true })
     console.log('db synced')
   } catch (err) {
     console.error(err)

@@ -6,6 +6,7 @@ import { Login, Signup } from './Auth'
 // import Navbar from './Navbar'
 // import Footer from './Footer'
 import { fetchCurrentUser } from '../redux/auth'
+import { fetchUsers } from '../redux/users.js'
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -17,6 +18,7 @@ class Root extends Component {
     return (
       <Router>
         <div>
+          <h1>This is the root</h1>
           {/* <Navbar /> */}
           <Route exact path='/' component={Home} />
           <Route path='/login' component={Login} />
@@ -34,6 +36,7 @@ const mapState = null
 
 const mapDispatch = dispatch => ({
   fetchInitialData: () => {
+    dispatch(fetchUsers())
     dispatch(fetchCurrentUser())
   }
 })

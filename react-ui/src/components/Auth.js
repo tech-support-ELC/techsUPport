@@ -15,30 +15,29 @@ const Auth = (props) => {
           type='email'
           required
         />
-        <label>password</label>
-        <input
-          name='password'
-          type='password'
-          required
-        />
+        <p>
+          <label>password</label>
+          <input
+            name='password'
+            type='password'
+            required
+          />
+        </p>
         <button type='submit'>{message}</button>
       </form>
 
       <div>
         <span>OR</span>
       </div>
-
-      <div>
-        <p>
-          <a
-            target='_self'
-            href='/auth/google'
-          >
-            <i />
-            <span>{message} with Google</span>
-          </a>
-        </p>
-      </div>
+      <p>
+        <a
+          target='_self'
+          href='/auth/google'
+        >
+          <i />
+          <span>{message} with Google</span>
+        </a>
+      </p>
     </div>
   )
 }
