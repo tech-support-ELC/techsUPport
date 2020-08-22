@@ -6,7 +6,6 @@ import { Login, Signup } from './Auth'
 // import Navbar from './Navbar'
 // import Footer from './Footer'
 import { fetchCurrentUser } from '../redux/auth'
-import { fetchUsers } from '../redux/users.js'
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -36,7 +35,6 @@ const mapState = null
 
 const mapDispatch = dispatch => ({
   fetchInitialData: () => {
-    dispatch(fetchUsers())
     dispatch(fetchCurrentUser())
   }
 })

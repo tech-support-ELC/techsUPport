@@ -9,14 +9,30 @@ const Auth = (props) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <label>email</label>
+        <label>First Name</label>
+        <input
+          name='firstName'
+          type='text'
+          placeholder='First Name'
+          required
+        />
+        <p>
+          <label>Last Name</label>
+          <input
+            name='lastName'
+            type='text'
+            placeholder='Last Name'
+            required
+          />
+        </p>
+        <label>Email</label>
         <input
           name='email'
           type='email'
           required
         />
         <p>
-          <label>password</label>
+          <label>Password</label>
           <input
             name='password'
             type='password'
@@ -25,7 +41,6 @@ const Auth = (props) => {
         </p>
         <button type='submit'>{message}</button>
       </form>
-
       <div>
         <span>OR</span>
       </div>
@@ -59,9 +74,12 @@ const mapStateSignup = () => ({ message: 'Sign up' })
 const mapDispatchSignup = (dispatch, ownProps) => ({
   handleSubmit: event => {
     event.preventDefault()
+    const firstName = event.target.firstName.value
+    console.log(firstName)
+    const lastName = event.target.lastName.value
     const email = event.target.email.value
     const password = event.target.password.value
-    const credentials = { email, password }
+    const credentials = { firstName, lastName, email, password }
     dispatch(signup(credentials, ownProps.history))
   }
 })

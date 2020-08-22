@@ -39,7 +39,7 @@ if (!isDev && cluster.isMaster) {
 
 async function connect() {
   try {
-    await db.sync({ force: true })
+    await db.sync()
     console.log('db synced')
   } catch (err) {
     console.error(err)
