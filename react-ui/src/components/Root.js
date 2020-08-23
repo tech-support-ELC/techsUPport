@@ -6,6 +6,7 @@ import { Login, Signup } from './Auth'
 // import Navbar from './Navbar'
 // import Footer from './Footer'
 import { fetchCurrentUser } from '../redux/auth'
+import Conditions from './Conditions'
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -22,6 +23,7 @@ class Root extends Component {
           <Route exact path='/' component={Home} />
           <Route path='/login' component={Login} />
           <Route path='/signup' component={Signup} />
+          <Route exact path='/conditions' component={Conditions} />
           {/* <Footer /> */}
         </div>
       </Router>
