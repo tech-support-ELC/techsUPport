@@ -67,6 +67,14 @@ if (!isDev && cluster.isMaster) {
   app.use('/api', require('./api'));
   app.use('/auth', require('./auth'));
 
+
+  // Answer API requests.
+  app.get('/api', function (req, res) {
+    res.set('Content-Type', 'application/json');
+    res.send('{"message":"Hello from the custom server!"}');
+  });
+
+
   // All remaining requests return the React app, so it can handle routing.
   app.get('*', function (req, res) {
     res.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));

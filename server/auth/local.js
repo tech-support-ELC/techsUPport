@@ -1,9 +1,16 @@
+require('dotenv').config()
 const router = require('express').Router()
 const { User } = require('../db/models/')
+const jwt = require('jsonwebtoken')
 
-router.put('/login', async (req, res, next) => {
+function generateAccessToken(user) {
+  return jwt.sign(user.dataValues, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' })
+}
+
+router.post('/login', async (req, res, next) => {
   try {
     const user = await User.findOne({ where: { email: req.body.email } })
+    console.log(user)
     if (!user) {
       console.log('No such user found:', req.body.email)
       res.status(401).send('Wrong username and/or password')
@@ -11,17 +18,19 @@ router.put('/login', async (req, res, next) => {
       console.log('Incorrect password for user:', req.body.email)
       res.status(401).send('Wrong username and/or password')
     } else {
-      req.login(user, err => (err ? next(err) : res.json(user)))
+      const accessToken = generateAccessToken(user)
+      const refreshToken = jwt.sign(user.dataValues, process.env.REFRESH_TOKEN_SECRET)
+      req.login(user, err => (err ? next(err) : res.json({ accessToken: accessToken, refreshToken: refreshToken })))
     }
   } catch (err) {
     next(err)
   }
 })
 
+
 router.post('/signup', async (req, res, next) => {
   try {
     const user = await User.create(req.body)
-    console.log(req.body)
     req.login(user, err => (err ? next(err) : res.json(user)))
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
