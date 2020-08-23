@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { login, signup } from '../redux/auth'
+import { signup } from '../redux/auth'
 
 /* -----------------    COMPONENT     ------------------ */
 
-const Auth = (props) => {
-  const { message, handleSubmit } = props
+const Signup = (props) => {
+  const { handleSubmit } = props
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -39,7 +39,7 @@ const Auth = (props) => {
             required
           />
         </p>
-        <button type='submit'>{message}</button>
+        <button type='submit'>Sign up</button>
       </form>
       <div>
         <span>OR</span>
@@ -50,7 +50,7 @@ const Auth = (props) => {
           href='/auth/google'
         >
           <i />
-          <span>{message} with Google</span>
+          <span>Sign up with Google</span>
         </a>
       </p>
     </div>
@@ -59,23 +59,10 @@ const Auth = (props) => {
 
 /* -----------------    CONTAINER     ------------------ */
 
-const mapStateLogin = () => ({ message: 'Log in' })
-const mapDispatchLogin = (dispatch, ownProps) => ({
-  handleSubmit: event => {
-    event.preventDefault()
-    const email = event.target.email.value
-    const password = event.target.password.value
-    const credentials = { email, password }
-    dispatch(login(credentials, ownProps.history))
-  }
-})
-
-const mapStateSignup = () => ({ message: 'Sign up' })
-const mapDispatchSignup = (dispatch, ownProps) => ({
+const mapDispatch = (dispatch, ownProps) => ({
   handleSubmit: event => {
     event.preventDefault()
     const firstName = event.target.firstName.value
-    console.log(firstName)
     const lastName = event.target.lastName.value
     const email = event.target.email.value
     const password = event.target.password.value
@@ -84,5 +71,4 @@ const mapDispatchSignup = (dispatch, ownProps) => ({
   }
 })
 
-export const Login = connect(mapStateLogin, mapDispatchLogin)(Auth)
-export const Signup = connect(mapStateSignup, mapDispatchSignup)(Auth)
+export default connect(null, mapDispatch)(Signup)
