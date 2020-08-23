@@ -34,7 +34,7 @@ export const login = (credentials, history) => {
       const { data } = await axios.put('/auth/local/login', credentials)
       setUserAndRedirect(data, history, dispatch)
     } catch (err) {
-      console.error(`Logging in with ${credentials.email} and ${credentials.password} was unsuccesful`, err)
+      console.error(`Logging in with ${credentials.email} was unsuccesful`, err)
     }
   }
 }
@@ -58,7 +58,7 @@ export const signup = (credentials, history) => {
       const { data } = await axios.post('/auth/local/signup', credentials)
       setUserAndRedirect(data, history, dispatch)
     } catch (err) {
-      console.error(`Signing up with ${credentials.email} and ${credentials.password} was unsuccesful`, err)
+      console.error(`Signing up with ${credentials.email} was unsuccesful`, err)
     }
   }
 }
