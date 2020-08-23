@@ -1,10 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
+import { addMedication } from "../redux/medications";
 
 class AddMedication extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = { name: "", dosage: "", frequency: "" };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
