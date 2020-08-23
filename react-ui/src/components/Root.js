@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Home from './Home'
-import { Login, Signup } from './Auth'
+import Signup from './Signup'
+import Login from './Login'
 // import Navbar from './Navbar'
 // import Footer from './Footer'
 import { fetchCurrentUser } from '../redux/auth'
@@ -17,6 +18,7 @@ class Root extends Component {
     return (
       <Router>
         <div>
+          <h1>This is the root</h1>
           {/* <Navbar /> */}
           <Route exact path='/' component={Home} />
           <Route path='/login' component={Login} />

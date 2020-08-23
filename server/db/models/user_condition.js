@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db');
 
-const Patient_Condition = db.define('patient_condition', {
+const User_Condition = db.define('user_condition', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -19,4 +19,4 @@ const Patient_Condition = db.define('patient_condition', {
   }
 });
 
-module.exports = Patient_Condition;
+module.exports = User_Condition;
