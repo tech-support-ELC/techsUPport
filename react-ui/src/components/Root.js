@@ -8,6 +8,8 @@ import Medications from "./Medications";
 // import Navbar from './Navbar'
 // import Footer from './Footer'
 import { fetchCurrentUser } from "../redux/auth";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -19,13 +21,19 @@ class Root extends Component {
     return (
       <Router>
         <div>
+          <Navbar />
+        </div>
+        <div>
           <h1>This is the root</h1>
-          {/* <Navbar /> */}
+
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
           <Route path="/medications" component={Medications} />
           {/* <Footer /> */}
+        </div>
+        <div>
+          <Footer />
         </div>
       </Router>
     );
