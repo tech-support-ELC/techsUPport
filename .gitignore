@@ -8,6 +8,7 @@ package-lock.json
 *.dev
 .DS_Store
 dbSecrets.js
+.env
 
 
 # Docker

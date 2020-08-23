@@ -19,8 +19,8 @@ router.post('/login', async (req, res, next) => {
       res.status(401).send('Wrong username and/or password')
     } else {
       const accessToken = generateAccessToken(user)
-      const refreshToken = jwt.sign(user.dataValues, process.env.REFRESH_TOKEN_SECRET)
-      req.login(user, err => (err ? next(err) : res.json({ accessToken: accessToken, refreshToken: refreshToken })))
+      const refreshToken = jwt.sign({ user }, process.env.REFRESH_TOKEN_SECRET)
+      req.login(user, err => (err ? next(err) : res.json({ accessToken, refreshToken })))
     }
   } catch (err) {
     next(err)
