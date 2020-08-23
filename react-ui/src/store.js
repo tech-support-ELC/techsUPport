@@ -6,12 +6,14 @@ import conditions from "./redux/conditions";
 import currentUser from "./redux/auth";
 import users from "./redux/users";
 import medications from "./redux/medications";
+import medication from "./redux/singleMedication";
 
 const reducer = combineReducers({
   users,
   currentUser,
   conditions,
   medications,
+  medication,
 });
 
 const middleware = composeWithDevTools(
