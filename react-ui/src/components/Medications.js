@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchMedications } from "../redux/medications";
+import { fetchMedications, deleteMedication } from "../redux/medications";
+import AddMedication from "./AddMedication";
+import RemoveMedication from "./RemoveMedication";
 
 class Medications extends React.Component {
   componentDidMount() {
@@ -14,9 +16,18 @@ class Medications extends React.Component {
         <div>
           {medications &&
             medications.map((medication) => {
-              return <div>{medication.name}</div>;
+              return (
+                <div>
+                  {medication.name}
+                  <RemoveMedication
+                    medication={medication}
+                    remove={deleteMedication}
+                  />
+                </div>
+              );
             })}
         </div>
+        <AddMedication />
       </div>
     );
   }
@@ -31,4 +42,5 @@ const mapDispatchToProps = (dispatch) => {
     fetchMedications: () => dispatch(fetchMedications()),
   };
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(Medications);
