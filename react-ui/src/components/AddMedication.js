@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-class NewProduct extends React.Component {
+class AddMedication extends React.Component {
   constructor() {
     super();
     this.state = {};
@@ -15,7 +15,7 @@ class NewProduct extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.addMdication(this.state);
+    this.props.addMedication(this.state);
   }
 
   render() {
@@ -56,14 +56,14 @@ class NewProduct extends React.Component {
   }
 }
 
-const mapState = (state) => {
-  return {
-    user: state.user,
-  };
-};
+// const mapState = (state) => {
+//   return {
+//     medication: state.medication,
+//   };
+// };
 
 const mapDispatch = (dispatch) => {
-  return { addProduct: (product) => dispatch(addProduct(product)) };
+  return { addMedication: (medication) => dispatch(addMedication(medication)) };
 };
 
-export default connect(mapState, mapDispatch)(NewProduct);
+export default connect(null, mapDispatch)(AddMedication);
