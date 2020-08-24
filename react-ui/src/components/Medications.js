@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from 'react-router-dom'
 
 import { fetchMedications, deleteMedication } from "../redux/medications";
 import AddMedication from "./AddMedication";
@@ -43,6 +44,7 @@ class Medications extends React.Component {
             })}
           <div>
             <AddMedication />
+            <Link to='/conditions'>Add a Condition</Link>
           </div>
           <div>
             {/* <SingleMedication medication={this.state.selected} /> */}

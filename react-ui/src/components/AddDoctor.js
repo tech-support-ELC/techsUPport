@@ -68,7 +68,8 @@ export function AddDoctor(props) {
                     />
                 </div>
                 <br />
-                <button type='submit'><Link to='/medications'>Add Doctor</Link></button>
+                <button type='submit'>Add A Doctor</button>
+                <Link to='/medications'>Add A Medication</Link>
             </form>
 
         </div>

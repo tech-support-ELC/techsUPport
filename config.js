@@ -14,5 +14,4 @@ module.exports = {
   database: databaseName
 }
 
-};
 
