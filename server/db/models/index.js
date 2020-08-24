@@ -34,7 +34,7 @@ User.belongsToMany(Condition, {
     model: 'user_condition',
   }
 });
-Condition.belongsTo(User)
+// Condition.belongsTo(User)
 
 module.exports = {
   Condition,
