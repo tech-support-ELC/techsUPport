@@ -88,7 +88,7 @@ if (!isDev && cluster.isMaster) {
   app.listen(PORT, async function () {
     console.error(
       `Node ${
-        isDev ? "dev server" : "cluster worker " + process.pid
+      isDev ? "dev server" : "cluster worker " + process.pid
       }: listening on port ${PORT}`
     );
     await db.sync();

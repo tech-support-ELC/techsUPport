@@ -8,7 +8,7 @@ import EditCondition from './EditCondition'
 import {deleteConditionThunk} from '../redux/conditions'
 class SingleCondition extends Component {
   componentDidMount() {
-    console.log(this.props);
+    console.log('props in condition',this.props);
     const id = this.props.match.params.id;
     this.props.getSingleCondition(id);
   }
