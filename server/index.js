@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const path = require("path");
 const cluster = require("cluster");
@@ -8,9 +9,13 @@ const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const db = require("./db");
 const sessionStore = new SequelizeStore({ db });
 const numCPUs = require("os").cpus().length;
-process.env.NODE_ENV = "development";
-const isDev = process.env.NODE_ENV !== "production";
+const isDev = process.env.NODE_ENV === "development";
 const PORT = process.env.PORT || 5000;
+
+//Document upload middleware
+const cloudinary = require('cloudinary')
+const formData = require('express-form-data');
+
 
 // Multi-process to utilize all CPU cores.
 if (!isDev && cluster.isMaster) {
@@ -29,6 +34,12 @@ if (!isDev && cluster.isMaster) {
 } else {
   const app = express();
   module.exports = app;
+
+  cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
+  })
 
   // passport registration
   passport.serializeUser((user, done) => done(null, user.id));
@@ -66,6 +77,8 @@ if (!isDev && cluster.isMaster) {
 
   app.use("/api", require("./api"));
   app.use("/auth", require("./auth"));
+
+  app.use(formData.parse())
 
   // Answer API requests.
   app.get("/api", function (req, res) {
