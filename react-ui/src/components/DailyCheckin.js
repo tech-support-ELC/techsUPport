@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux';
 import {getAllConditionsThunk} from '../redux/conditions';
 import {fetchMedications} from '../redux/medications';
-// import {} from '../redux/doctors';
+import {getAllDoctorsThunk} from '../redux/doctors';
 
 class DailyCheckin extends Component {
   constructor() {
@@ -78,7 +78,7 @@ const mapDispatchToProps = dispatch => {
   return {
     getAllConditions: () => dispatch(getAllConditionsThunk()),
     getAllMedications: () => dispatch(fetchMedications()),
-    // getAllDoctors: () => dispatch(()),
+    getAllDoctors: () => dispatch(getAllDoctorsThunk()),
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(DailyCheckin)

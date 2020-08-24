@@ -1,5 +1,5 @@
 const Condition = require('./condition');
-const User_Condition = require('./user_condition');
+// const User_Condition = require('./user_condition');
 const Doctor = require('./doctor');
 // const Doctor_User = require('./doctor_User');
 const Medication = require('./medication');
@@ -34,11 +34,11 @@ User.belongsToMany(Condition, {
     model: 'user_condition',
   }
 });
-// Condition.belongsTo(User)
-
+Condition.belongsTo(User);
+User.hasMany(Condition);
 module.exports = {
   Condition,
-  User_Condition,
+  // User_Condition,
   Doctor,
   // Doctor_User,
   Medication,
