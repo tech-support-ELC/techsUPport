@@ -1,15 +1,10 @@
 import React from "react";
 
 const RemoveMedication = (props) => {
-  // let medication = props.medication;
-  async function handleRemove(event) {
-    event.preventDefault();
-    await this.props.remove(this.props.medication);
-  }
-
+  const { medication, remove } = props
   return (
     <div>
-      <button type="button" onClick={(e) => handleRemove(e)}>
+      <button type="sumbit" onClick={() => remove(medication.id)}>
         Delete
       </button>
     </div>
