@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { addDoctorThunk } from '../redux/doctors'
+import { Link } from 'react-router-dom'
 
 
 export function AddDoctor(props) {
@@ -23,7 +24,7 @@ export function AddDoctor(props) {
     return (
         <div>
             <form onSubmit={(event) => handleSubmit(event)}>
-                <h1>Add a New Doctor</h1>
+                <h1>Add Your New Doctor</h1>
                 <div>
                     <input
                         type="text"
@@ -67,7 +68,7 @@ export function AddDoctor(props) {
                     />
                 </div>
                 <br />
-                <button type='submit'>Add Doctor</button>
+                <button type='submit'><Link to='/medications'>Add Doctor</Link></button>
             </form>
 
         </div>
