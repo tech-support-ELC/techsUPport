@@ -11,6 +11,8 @@ import { fetchCurrentUser } from '../redux/auth'
 import Conditions from './Conditions';
 import DailyCheckin from './DailyCheckin';
 import SingleCondition from './SingleCondition';
+// import AllDoctors from "./AllDoctors"
+import AddDoctor from "./AddDoctor"
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
@@ -37,6 +39,7 @@ class Root extends Component {
           <Route path='/conditions/:id' component={SingleCondition} />
 
           <Route path="/medications" component={Medications} />
+          <Route path="/doctors" component={AddDoctor} />
           {/* <Footer /> */}
         </div>
         <div>
