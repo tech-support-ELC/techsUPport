@@ -1,9 +1,11 @@
-const pkg = require('./package.json')
-const databaseName = pkg.name + (process.env.NODE_ENV === 'test' ? '-test' : '')
-if (process.env.NODE_ENV !== 'production') require('./dbSecrets')
+require("dotenv").config();
+
+const pkg = require("./package.json");
+const databaseName =
+  pkg.name + (process.env.NODE_ENV === "test" ? "-test" : "");
 
 module.exports = {
-  dialect: 'postgres',
+  dialect: "postgres",
   logging: false,
   host: process.env.DATABASE_URL,
   password: process.env.DB_PASSWORD,
@@ -11,3 +13,5 @@ module.exports = {
   port: '5432',
   database: databaseName
 }
+
+

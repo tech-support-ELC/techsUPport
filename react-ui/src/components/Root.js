@@ -8,7 +8,13 @@ import Medications from "./Medications";
 import Conditions from "./Conditions";
 // import Navbar from './Navbar'
 // import Footer from './Footer'
-import { fetchCurrentUser } from "../redux/auth";
+import { fetchCurrentUser } from '../redux/auth'
+import DailyCheckin from './DailyCheckin';
+import SingleCondition from './SingleCondition';
+// import AllDoctors from "./AllDoctors"
+import AddDoctor from "./AddDoctor"
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -20,14 +26,24 @@ class Root extends Component {
     return (
       <Router>
         <div>
+          <Navbar />
+        </div>
+        <div>
           <h1>This is the root</h1>
           {/* <Navbar /> */}
-          <Route exact path="/" component={Home} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
+          <Route exact path='/' component={Home} />
+          <Route path='/login' component={Login} />
+          <Route path='/signup' component={Signup} />
+          <Route path='/dailycheckin' components={DailyCheckin} />
+          <Route exact path='/conditions' component={Conditions} />
+          <Route path='/conditions/:id' component={SingleCondition} />
+
           <Route path="/medications" component={Medications} />
-          <Route path="/conditions" component={Conditions} />
+          <Route path="/doctors" component={AddDoctor} />
           {/* <Footer /> */}
+        </div>
+        <div>
+          <Footer />
         </div>
       </Router>
     );
