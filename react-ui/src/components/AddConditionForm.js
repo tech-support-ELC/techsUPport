@@ -6,11 +6,14 @@ class AddConditionForm extends Component {
       name: '',
       diagnosed: '',
       typeOfPain: '',
+      userId: 0
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(evt) {
+    const userId = this.props.currentUser.id;
+    this.setState({userId})
     this.setState({[evt.target.name]: evt.target.value})
   }
   handleSubmit(evt) {
@@ -20,6 +23,7 @@ class AddConditionForm extends Component {
       name: '',
       diagnosed: '',
       typeOfPain: '',
+      userId: 0
     }
   }
   render() {
