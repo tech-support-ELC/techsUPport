@@ -2,9 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { getAllDoctorsThunk } from "../redux/doctors";
 import { AddDoctor } from "./AddDoctor";
-// import SingleDoctor from "./SingleDoctor"
+import SingleDoctor from "./SingleDoctor"
 
-class AllDoctors extends React.Component {
+export class AllDoctors extends React.Component {
     componentDidMount() {
         const userId = this.props.currentUser.id
         this.props.getAllDoctors(userId)
@@ -16,16 +16,14 @@ class AllDoctors extends React.Component {
                 <h1>All Doctors</h1>
                 <AddDoctor />
                 <div>
-                    {doctors.map((doctor) => {
+                    {doctors && doctors.map((doctor) => {
                         return (
                             <div>
-                                {doctor !== undefined ? (
-                                    <SingleDoctor
-                                        key={doctor.id}
-                                        doctor={doctor}
-                                        user={this.props.currentUser}
-                                    />
-                                ) : null}
+                                <SingleDoctor
+                                    key={doctor.id}
+                                    doctor={doctor}
+                                    user={this.props.currentUser}
+                                />
                             </div>
                         )
                     })}
