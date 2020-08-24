@@ -10,9 +10,11 @@ export function AddDoctor(props) {
     const [doctorType, setDoctorType] = useState('')
 
     const handleSubmit = (event) => {
+        console.log('submitted')
         event.preventDefault()
-        const userId = props.user.id
-        const payload = { firstName, lastName, address, doctorType, userId }
+        const currentUser = props.currentUser.id
+        const payload = { firstName, lastName, address, doctorType, currentUser }
+        console.log(payload)
         props.addNewDoctor(payload)
     }
 

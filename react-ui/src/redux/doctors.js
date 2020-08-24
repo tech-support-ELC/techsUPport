@@ -28,7 +28,8 @@ const getAllDoctors = doctors => {
 }
 
 //THUNKS
-export const addDoctorThunk = doctor => {
+export const addDoctorThunk = (doctor) => {
+    console.log('inside add doctor thunk')
     return async dispatch => {
         try {
             let { data } = await axios.post('/api/doctors', doctor)
