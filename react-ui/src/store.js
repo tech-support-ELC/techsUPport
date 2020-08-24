@@ -12,6 +12,7 @@ const reducer = combineReducers({
   users,
   currentUser,
   conditions,
+  condition,
   medications,
   medication,
 });
