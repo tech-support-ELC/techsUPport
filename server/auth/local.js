@@ -4,7 +4,7 @@ const { User } = require('../db/models/')
 const jwt = require('jsonwebtoken')
 
 function generateAccessToken(user) {
-  return jwt.sign(user.dataValues, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' })
+  return jwt.sign({ user }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' })
 }
 
 router.post('/login', async (req, res, next) => {

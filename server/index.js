@@ -26,7 +26,7 @@ if (!isDev && cluster.isMaster) {
   });
 
 } else {
-  require('../dbSecrets')
+
   const app = express();
   module.exports = app
 
