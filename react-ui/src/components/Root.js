@@ -6,7 +6,7 @@ import Signup from "./Signup";
 import Login from "./Login";
 import Conditions from './Conditions'
 import Medications from "./Medications";
-import Conditions from "./Conditions";
+
 // import Navbar from './Navbar'
 // import Footer from './Footer'
 import { fetchCurrentUser } from '../redux/auth'

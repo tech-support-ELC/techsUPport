@@ -4,7 +4,9 @@ module.exports = router;
 
 router.get('/', async (req, res, next) => {
   try {
-    const conditions = await Condition.findAll();
+    const conditions = await Condition.findAll({where: {
+      userId: req.user.id
+    }});
     res.json(conditions);
   } catch (error) {
     next(error);

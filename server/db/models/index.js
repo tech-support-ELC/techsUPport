@@ -7,8 +7,8 @@ const User = require('./user');
 const User_Medication = require('./user_medication');
 
 
-Doctor.belongsTo(User)
-User.hasMany(Doctor)
+Doctor.belongsTo(User);
+User.hasMany(Doctor);
 
 Medication.belongsToMany(User, {
   through: {
