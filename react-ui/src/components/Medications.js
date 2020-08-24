@@ -1,11 +1,25 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchMedications } from "../redux/medications";
+
+import { fetchMedications, deleteMedication } from "../redux/medications";
+import AddMedication from "./AddMedication";
+import RemoveMedication from "./RemoveMedication";
+import SingleMedication from "./SingleMedication";
 
 class Medications extends React.Component {
+  constructor() {
+    super();
+    this.state = { selected: "" };
+    this.handleSelect = this.handleSelect.bind(this);
+  }
   componentDidMount() {
     this.props.fetchMedications();
   }
+
+  handleSelect(medication) {
+    this.setState({ selected: medication });
+  }
+
   render() {
     const medications = this.props.medications;
     return (
@@ -14,8 +28,25 @@ class Medications extends React.Component {
         <div>
           {medications &&
             medications.map((medication) => {
-              return <div>{medication.name}</div>;
+              return (
+                <div key={medication.id}>
+                  <p onClick={this.handleSelect(medication)}>
+                    {medication.name}
+                  </p>
+
+                  <RemoveMedication
+                    medication={medication}
+                    remove={deleteMedication}
+                  />
+                </div>
+              );
             })}
+          <div>
+            <AddMedication />
+          </div>
+          <div>
+            <SingleMedication medication={this.state.selected} />
+          </div>
         </div>
       </div>
     );
@@ -31,4 +62,5 @@ const mapDispatchToProps = (dispatch) => {
     fetchMedications: () => dispatch(fetchMedications()),
   };
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(Medications);
