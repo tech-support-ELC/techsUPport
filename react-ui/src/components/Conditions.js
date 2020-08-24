@@ -11,7 +11,7 @@ class Conditions extends Component {
     const conditions = this.props.conditions;
     return (
       <div>
-        <AddConditionForm addCondition={this.props.addCondition} />
+        <AddConditionForm addCondition={this.props.addCondition} currentUser={this.props.currentUser}/>
         <h1>All conditions</h1>
         <div>
           {
@@ -30,7 +30,8 @@ class Conditions extends Component {
 }
 const mapStateToProps = state => {
   return {
-    conditions: state.conditions
+    conditions: state.conditions,
+    currentUser: state.currentUser
   }
 }
 const mapDispatchToProps = dispatch => {
