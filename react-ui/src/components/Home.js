@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { logout } from '../redux/auth'
 
+
 const Home = (props) => {
   const { firstName } = props.currentUser
   const { handleClick } = props
