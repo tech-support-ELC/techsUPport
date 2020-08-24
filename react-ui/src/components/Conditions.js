@@ -1,7 +1,8 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getAllConditionsThunk, addConditionThunk} from '../redux/conditions';
-import AddConditionForm from './AddConditionForm'
+import {getAllConditionsThunk, addConditionThunk, deleteConditionThunk} from '../redux/conditions';
+import AddConditionForm from './AddConditionForm';
+import SingleCondition from './SingleCondition';
 class Conditions extends Component {
   componentDidMount() {
     this.props.getAllConditions();
@@ -16,7 +17,10 @@ class Conditions extends Component {
           {
             conditions && conditions.map(condition => {
               return (
-                <div>{condition.name}</div>
+                <div key={condition.key}>
+                  {condition.name}
+                  <SingleCondition condition={condition} deleteCondition={this.props.deleteCondition} />
+                </div>
               )
             })
           }
@@ -33,7 +37,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getAllConditions: () => dispatch(getAllConditionsThunk()),
-    addCondition: (condition) => dispatch(addConditionThunk(condition))
+    addCondition: (condition) => dispatch(addConditionThunk(condition)),
+    deleteCondition: (id) => dispatch(deleteConditionThunk(id))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Conditions)

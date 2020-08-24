@@ -4,7 +4,7 @@ const initialState = [];
 const GET_ALL_CONDITIONS = 'GET_ALL_CONDITIONS';
 const ADD_CONDITION = 'ADD_CONDITION';
 const UPDATE_CONDITION = 'UPDATE_CONDITION';
-
+const DELETE_CONDITION = 'DELETE_CONDITION';
 const getAllConditions = conditions => {
   return {
     type: GET_ALL_CONDITIONS,
@@ -23,6 +23,11 @@ const updateCondition = condition => {
     name: condition.name,
     diagnosed: condition.diagnosed,
     typeOfPain: condition.typeOfPain
+  }
+}
+const deleteCondition = id => {
+  return {
+    id
   }
 }
 export const getAllConditionsThunk = () => {
@@ -65,6 +70,16 @@ export const updateConditionThunk = (
     }
   }
 }
+export const deleteConditionThunk = (id) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(`/api/conditions/${id}`);
+      dispatch(deleteCondition(id));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_CONDITIONS:
@@ -73,6 +88,8 @@ export default function(state = initialState, action) {
       return [...state, action.condition]
     case UPDATE_CONDITION:
       return [...state, action.condition]
+    case DELETE_CONDITION:
+      return state.filter(condition => condition.id !== action.id);
     default:
       return state
   }

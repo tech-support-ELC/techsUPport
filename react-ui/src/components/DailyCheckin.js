@@ -5,8 +5,20 @@ import {getAllConditionsThunk} from '../redux/conditions';
 // import {} from '../redux/doctors';
 
 class DailyCheckin extends Component {
+  constructor() {
+    super();
+    this.state = {};
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
   componentDidMount() {
     this.props.getAllConditions();
+  }
+  handleChange(evt) {
+    this.setState({[evt.target.name]: evt.target.value})
+  }
+  handleSubmit(evt) {
+    evt.preventDefault();
   }
   render() {
     const conditions = this.props.conditions;
@@ -18,8 +30,21 @@ class DailyCheckin extends Component {
         <div>
           {
             conditions && conditions.map(condition => {
+              const name = condition.name;
+              this.setState({
+                name: false
+              })
               return (
-                <div>{condition.name}</div>
+                <form onSubmit={this.handleSubmit}>
+                  <label>
+                    {condition.name}
+                    <input
+                      name={condition.name}
+                      type="checkbox"
+                      checked={this.state.name}
+                      onChange={this.handleChange} />
+                  </label>
+                </form>
               )
             })
           }
