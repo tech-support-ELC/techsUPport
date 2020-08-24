@@ -51,10 +51,10 @@ export const deleteDoctorThunk = id => {
     }
 }
 
-export const getAllDoctorsThunk = () => {
+export const getAllDoctorsThunk = (userId) => {
     return async dispatch => {
         try {
-            const { data } = await axios.get('/api/doctors')
+            const { data } = await axios.get(`/api/doctors/${userId}`)
             dispatch(getAllDoctors(data))
         } catch (error) {
             console.log(error)
