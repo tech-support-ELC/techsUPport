@@ -12,7 +12,9 @@ export function AddDoctor(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault()
+        console.log(props)
         const userId = props.currentUser.id
+
         const payload = { firstName, lastName, address, doctorType, userId }
         props.addNewDoctor(payload)
     }

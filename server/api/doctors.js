@@ -11,9 +11,9 @@ router.post('/', async (req, res, next) => {
     }
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     try {
-        const allDoctors = await Doctor.findAll({ where: { userId: req.params.id } })
+        const allDoctors = await Doctor.findAll({ where: { userId: req.user.id } })
         if (allDoctors) {
             res.json(allDoctors)
         }

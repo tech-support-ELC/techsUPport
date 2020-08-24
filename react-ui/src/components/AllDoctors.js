@@ -6,8 +6,7 @@ import SingleDoctor from "./SingleDoctor"
 
 export class AllDoctors extends React.Component {
     componentDidMount() {
-        const userId = this.props.currentUser.id
-        this.props.getAllDoctors(userId)
+        this.props.getAllDoctors()
     }
     render() {
         const doctors = this.props.doctors;
@@ -40,7 +39,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
     return {
-        getAllDoctors: (userId) => dispatch(getAllDoctorsThunk(userId)),
+        getAllDoctors: () => dispatch(getAllDoctorsThunk()),
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AllDoctors);
