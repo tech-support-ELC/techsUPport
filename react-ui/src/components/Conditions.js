@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {getAllConditionsThunk, addConditionThunk, deleteConditionThunk} from '../redux/conditions';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getAllConditionsThunk, addConditionThunk, deleteConditionThunk } from '../redux/conditions';
 import AddConditionForm from './AddConditionForm';
 
 class Conditions extends Component {

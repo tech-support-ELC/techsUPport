@@ -42,8 +42,8 @@ export const login = (credentials, history) => {
 export const logout = history => {
   return async dispatch => {
     try {
-      const { data } = await axios.delete('/auth/local/logout')
-      dispatch(removeCurrentUser(data))
+      await axios.delete('/auth/local/logout')
+      dispatch(removeCurrentUser())
       history.push('/login')
     } catch (err) {
       console.error('Logging out was unsuccesful', err)

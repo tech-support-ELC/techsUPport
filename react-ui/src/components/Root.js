@@ -5,10 +5,10 @@ import Home from "./Home";
 import Signup from "./Signup";
 import Login from "./Login";
 import Medications from "./Medications";
+import Conditions from "./Conditions";
 // import Navbar from './Navbar'
 // import Footer from './Footer'
 import { fetchCurrentUser } from '../redux/auth'
-import Conditions from './Conditions';
 import DailyCheckin from './DailyCheckin';
 import SingleCondition from './SingleCondition';
 // import AllDoctors from "./AllDoctors"

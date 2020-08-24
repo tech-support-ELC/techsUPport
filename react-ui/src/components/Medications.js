@@ -21,7 +21,8 @@ class Medications extends React.Component {
   // }
 
   render() {
-    const medications = this.props.medications;
+    const { medications, remove } = this.props
+
     return (
       <div>
         <h1>All medications</h1>
@@ -36,7 +37,7 @@ class Medications extends React.Component {
 
                   <RemoveMedication
                     medication={medication}
-                    remove={deleteMedication}
+                    remove={remove}
                   />
                 </div>
               );
@@ -60,6 +61,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchMedications: () => dispatch(fetchMedications()),
+    remove: (id) => dispatch(deleteMedication(id)),
   };
 };
 
