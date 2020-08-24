@@ -7,18 +7,18 @@ import RemoveMedication from "./RemoveMedication";
 import SingleMedication from "./SingleMedication";
 
 class Medications extends React.Component {
-  constructor() {
-    super();
-    this.state = { selected: "" };
-    this.handleSelect = this.handleSelect.bind(this);
-  }
+  // constructor() {
+  //   super();
+  //   this.state = { selected: "" };
+  //   this.handleSelect = this.handleSelect.bind(this);
+  // }
   componentDidMount() {
     this.props.fetchMedications();
   }
 
-  handleSelect(medication) {
-    this.setState({ selected: medication });
-  }
+  // handleSelect(medication) {
+  //   this.setState({ selected: medication });
+  // }
 
   render() {
     const medications = this.props.medications;
@@ -30,9 +30,9 @@ class Medications extends React.Component {
             medications.map((medication) => {
               return (
                 <div key={medication.id}>
-                  <p onClick={this.handleSelect(medication)}>
-                    {medication.name}
-                  </p>
+                  {/* <p onClick={this.handleSelect(medication)}> */}
+                  {medication.name}
+                  {/* </p> */}
 
                   <RemoveMedication
                     medication={medication}
@@ -45,7 +45,7 @@ class Medications extends React.Component {
             <AddMedication />
           </div>
           <div>
-            <SingleMedication medication={this.state.selected} />
+            {/* <SingleMedication medication={this.state.selected} /> */}
           </div>
         </div>
       </div>
