@@ -31,7 +31,7 @@ export default function reducer(currentUser = {}, action) {
 export const login = (credentials, history) => {
   return async dispatch => {
     try {
-      const { data } = await axios.put('/auth/local/login', credentials)
+      const { data } = await axios.post('/auth/local/login', credentials)
       setUserAndRedirect(data, history, dispatch)
     } catch (err) {
       console.error(`Logging in with ${credentials.email} was unsuccesful`, err)
