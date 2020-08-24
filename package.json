@@ -18,10 +18,14 @@
   "dependencies": {
     "connect-session-sequelize": "^7.0.1",
     "crypto": "^1.0.1",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
+    "passport-facebook": "^3.0.0",
+    "passport-google-oauth": "^2.0.0",
     "pg": "^8.3.2",
     "sequelize": "^6.3.4"
   },
