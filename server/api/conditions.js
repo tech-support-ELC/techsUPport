@@ -31,7 +31,7 @@ router.get('/:id', async (req, res, next) => {
    }
  });
 
- router.put(':/id', async (req, res, next) => {
+ router.put('/:id', async (req, res, next) => {
    try {
     const selectedCondition = await Condition.findOne({
       where: {id: req.params.id}
