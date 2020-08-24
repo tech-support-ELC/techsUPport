@@ -15,7 +15,7 @@ class EditCondition extends Component {
   }
   handleSubmit(evt) {
     evt.preventDefault()
-    this.props.EditCondition(this.props.conditionId, this.state)
+    this.props.editCondition(this.props.conditionId, this.state)
     this.setState({
       name: '',
       diagnosed: '',

@@ -8,18 +8,18 @@ import EditCondition from './EditCondition'
 
 class SingleCondition extends Component {
   componentDidMount() {
-    const id = this.props.match.params.id
-    this.props.getSingleCondition(id)
+    console.log(this.props);
+    const id = this.props.match.params.id;
+    this.props.getSingleCondition(id);
   }
   render() {
-    const condition = this.props.condition
+    const condition = this.props.condition;
     return (
       <div>
-          <EditCondition
-            conditionId={condition.id}
-            editCondition={this.props.editCondition}
-          />
-        )}
+        <EditCondition
+          conditionId={condition.id}
+          editCondition={this.props.editCondition}
+        />
         <div>
           {condition.name}
         </div>

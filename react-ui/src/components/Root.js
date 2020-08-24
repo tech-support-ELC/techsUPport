@@ -7,8 +7,9 @@ import Login from './Login'
 // import Navbar from './Navbar'
 // import Footer from './Footer'
 import { fetchCurrentUser } from '../redux/auth'
-import Conditions from './Conditions'
-import DailyCheckin from './DailyCheckin'
+import Conditions from './Conditions';
+import DailyCheckin from './DailyCheckin';
+import SingleCondition from './SingleCondition';
 /* -----------------    COMPONENT     ------------------ */
 
 class Root extends Component {
@@ -26,6 +27,7 @@ class Root extends Component {
           <Route path='/signup' component={Signup} />
           <Route path='/dailycheckin' components={DailyCheckin} />
           <Route exact path='/conditions' component={Conditions} />
+          <Route path='/conditions/:id' component={SingleCondition} />
           {/* <Footer /> */}
         </div>
       </Router>

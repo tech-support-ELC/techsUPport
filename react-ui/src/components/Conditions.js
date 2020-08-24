@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getAllConditionsThunk, addConditionThunk, deleteConditionThunk} from '../redux/conditions';
 import AddConditionForm from './AddConditionForm';
-import SingleCondition from './SingleCondition';
+
 class Conditions extends Component {
   componentDidMount() {
     this.props.getAllConditions();
@@ -19,7 +19,6 @@ class Conditions extends Component {
               return (
                 <div key={condition.key}>
                   {condition.name}
-                  <SingleCondition condition={condition} deleteCondition={this.props.deleteCondition} />
                 </div>
               )
             })

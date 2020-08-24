@@ -14,9 +14,8 @@ const updateCondition = condition => {
   return {
     type: UPDATE_CONDITION,
     name: condition.name,
-    quantity: condition.quantity,
-    price: condition.price,
-    description: condition.description
+    diagnosed: condition.diagnosed,
+    typeOfPain: condition.typeOfPain
   }
 }
 export const getSingleConditionThunk = id => {
