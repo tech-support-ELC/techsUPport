@@ -12,8 +12,9 @@ export function AddDoctor(props) {
     const handleSubmit = (event) => {
         console.log('submitted')
         event.preventDefault()
-        const currentUser = props.currentUser.id
-        const payload = { firstName, lastName, address, doctorType, currentUser }
+        console.log("WHAT ARE PROPS", props)
+        const userId = props.currentUser.id
+        const payload = { firstName, lastName, address, doctorType, userId }
         console.log(payload)
         props.addNewDoctor(payload)
     }
@@ -21,7 +22,7 @@ export function AddDoctor(props) {
 
     return (
         <div>
-            <form onSubmit={() => handleSubmit()}>
+            <form onSubmit={(event) => handleSubmit(event)}>
                 <h1>Add a New Doctor</h1>
                 <div>
                     <input
@@ -74,7 +75,7 @@ export function AddDoctor(props) {
 }
 const mapStateToProps = state => {
     return {
-        user: state.user
+        currentUser: state.currentUser
     }
 }
 const mapDispatchToProps = dispatch => {

@@ -15,7 +15,9 @@ router.post('/', async (req, res, next) => {
 router.get('/', async (req, res, next) => {
     try {
         const allDoctors = await Doctor.findAll()
-        res.json(allDoctors)
+        if (allDoctors) {
+            res.json(allDoctors)
+        }
     } catch (error) {
         next(error)
     }

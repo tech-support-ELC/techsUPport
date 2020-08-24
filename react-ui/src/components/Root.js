@@ -8,7 +8,8 @@ import Medications from "./Medications";
 // import Navbar from './Navbar'
 // import Footer from './Footer'
 import { fetchCurrentUser } from "../redux/auth";
-import AllDoctors from "./AllDoctors"
+// import AllDoctors from "./AllDoctors"
+import AddDoctor from "./AddDoctor"
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -26,7 +27,7 @@ class Root extends Component {
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
           <Route path="/medications" component={Medications} />
-          <Route path="/doctors" component={AllDoctors} />
+          <Route path="/doctors" component={AddDoctor} />
           {/* <Footer /> */}
         </div>
       </Router>
