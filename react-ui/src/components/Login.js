@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { login, logout } from '../redux/auth'
+import { login } from '../redux/auth'
 
 /* -----------------    COMPONENT     ------------------ */
 
 const Login = (props) => {
-  const { handleSubmit, handleClick } = props
+  const { handleSubmit } = props
   return (
     <div>
       <form onSubmit={handleSubmit}>

@@ -5,10 +5,10 @@ import {
   updateSingleConditionThunk
 } from '../redux/singleCondition'
 import EditCondition from './EditCondition'
-
+import {deleteConditionThunk} from '../redux/conditions'
 class SingleCondition extends Component {
   componentDidMount() {
-    console.log(this.props);
+    console.log('props in condition',this.props);
     const id = this.props.match.params.id;
     this.props.getSingleCondition(id);
   }
@@ -16,19 +16,30 @@ class SingleCondition extends Component {
     const condition = this.props.condition;
     return (
       <div>
+        {condition &&
         <EditCondition
           conditionId={condition.id}
           editCondition={this.props.editCondition}
         />
+        }
         <div>
-          {condition.name}
+          {condition && condition.name}
         </div>
         <div>
-          {condition.diagnosed}
+          {condition && condition.diagnosed}
         </div>
         <div>
-          {condition.typeOfPain}
+          {condition && condition.typeOfPain}
         </div>
+        {
+          condition &&
+          <button
+          type="submit"
+          onClick={() => this.props.removeCondition(condition.id)}
+        >
+          Remove Condition
+        </button>
+        }
       </div>
     )
   }
@@ -43,6 +54,7 @@ const mapDispatchToProps = dispatch => {
     getSingleCondition: id => dispatch(getSingleConditionThunk(id)),
     editCondition: (id, condition) =>
       dispatch(updateSingleConditionThunk(id, condition)),
+    removeCondition: id => dispatch(deleteConditionThunk(id))
   }
 }
 

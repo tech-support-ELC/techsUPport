@@ -16,9 +16,9 @@ const newMedication = (medication) => ({
   medication,
 });
 
-const removeMedication = (medication) => ({
+const removeMedication = (id) => ({
   type: REMOVE_MEDICATION,
-  medication,
+  id,
 });
 
 export const fetchMedications = () => {
@@ -42,13 +42,11 @@ export const addMedication = (medication) => {
   };
 };
 
-export const deleteMedication = (medication) => {
+export const deleteMedication = (id) => {
   return async (dispatch) => {
     try {
-      const deletedMedication = await axios.delete(
-        `/api/medications/${medication.id}`
-      );
-      dispatch(removeMedication(deletedMedication));
+      await axios.delete(`/api/medications/${id}`);
+      dispatch(removeMedication(id));
     } catch (err) {
       console.log(err);
     }
@@ -61,7 +59,7 @@ export default function (state = initialState, action) {
     case NEW_MEDICATION:
       return [...state, action.medication];
     case REMOVE_MEDICATION:
-      return state.filter((med) => med.id !== action.medication.id);
+      return state.filter((med) => med.id !== action.id);
     default:
       return state;
   }

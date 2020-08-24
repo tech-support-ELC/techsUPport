@@ -6,6 +6,7 @@ import Signup from "./Signup";
 import Login from "./Login";
 import Conditions from './Conditions'
 import Medications from "./Medications";
+import Conditions from "./Conditions";
 // import Navbar from './Navbar'
 // import Footer from './Footer'
 import { fetchCurrentUser } from '../redux/auth'
@@ -37,7 +38,6 @@ class Root extends Component {
           <Route path='/dailycheckin' components={DailyCheckin} />
           <Route exact path='/conditions' component={Conditions} />
           <Route path='/conditions/:id' component={SingleCondition} />
-
           <Route path="/medications" component={Medications} />
           <Route path="/doctors" component={AddDoctor} />
 
