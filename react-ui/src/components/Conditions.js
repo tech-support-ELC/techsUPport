@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAllConditionsThunk, addConditionThunk, deleteConditionThunk } from '../redux/conditions';
 import AddConditionForm from './AddConditionForm';
+import { Link } from 'react-router-dom'
 
 class Conditions extends Component {
   componentDidMount() {
@@ -12,6 +13,7 @@ class Conditions extends Component {
     return (
       <div>
         <AddConditionForm addCondition={this.props.addCondition} />
+        <Link to='/dailycheckin'>Complete your first daily checkin</Link>
         <h1>All conditions</h1>
         <div>
           {

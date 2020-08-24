@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./Home";
 import Signup from "./Signup";
 import Login from "./Login";
+import Conditions from './Conditions'
 import Medications from "./Medications";
 import Conditions from "./Conditions";
 // import Navbar from './Navbar'
@@ -39,6 +40,7 @@ class Root extends Component {
           <Route path='/conditions/:id' component={SingleCondition} />
           <Route path="/medications" component={Medications} />
           <Route path="/doctors" component={AddDoctor} />
+
           {/* <Footer /> */}
         </div>
         <div>
