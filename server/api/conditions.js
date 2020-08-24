@@ -40,7 +40,7 @@ router.get('/:id', async (req, res, next) => {
       const updatedCondition = await selectedCondition.update(req.body);
       res.json(updatedCondition);
     } else {
-      res.status(404).send('Condition not found')
+      res.status(404).send('Condition not found');
     }
    } catch (error) {
     next(error);
