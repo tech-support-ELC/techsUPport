@@ -13,5 +13,3 @@ module.exports = {
   port: '5432',
   database: databaseName
 }
-
-

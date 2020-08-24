@@ -31,7 +31,7 @@ router.get('/:id', async (req, res, next) => {
    }
  });
 
- router.put(':/id', async (req, res, next) => {
+ router.put('/:id', async (req, res, next) => {
    try {
     const selectedCondition = await Condition.findOne({
       where: {id: req.params.id}
@@ -40,7 +40,7 @@ router.get('/:id', async (req, res, next) => {
       const updatedCondition = await selectedCondition.update(req.body);
       res.json(updatedCondition);
     } else {
-      res.status(404).send('Condition not found')
+      res.status(404).send('Condition not found');
     }
    } catch (error) {
     next(error);

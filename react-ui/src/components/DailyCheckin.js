@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux';
 import {getAllConditionsThunk} from '../redux/conditions';
-// import {fetchMedications} from '../redux/medications';
+import {fetchMedications} from '../redux/medications';
 // import {} from '../redux/doctors';
 
 class DailyCheckin extends Component {
@@ -30,10 +30,6 @@ class DailyCheckin extends Component {
         <div>
           {
             conditions && conditions.map(condition => {
-              const name = condition.name;
-              this.setState({
-                name: false
-              })
               return (
                 <form onSubmit={this.handleSubmit}>
                   <label>
@@ -81,7 +77,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getAllConditions: () => dispatch(getAllConditionsThunk()),
-    // getAllMedications: () => dispatch(fetchMedications()),
+    getAllMedications: () => dispatch(fetchMedications()),
     // getAllDoctors: () => dispatch(()),
   }
 }

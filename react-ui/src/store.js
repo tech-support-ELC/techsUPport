@@ -8,7 +8,6 @@ import users from "./redux/users";
 import medications from "./redux/medications";
 import medication from "./redux/singleMedication";
 import condition from './redux/singleCondition';
-
 const reducer = combineReducers({
   users,
   currentUser,

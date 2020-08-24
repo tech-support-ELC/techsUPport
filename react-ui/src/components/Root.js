@@ -37,7 +37,6 @@ class Root extends Component {
           <Route path='/dailycheckin' components={DailyCheckin} />
           <Route exact path='/conditions' component={Conditions} />
           <Route path='/conditions/:id' component={SingleCondition} />
-
           <Route path="/medications" component={Medications} />
           <Route path="/doctors" component={AddDoctor} />
           {/* <Footer /> */}
