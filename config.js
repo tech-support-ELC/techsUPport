@@ -1,6 +1,7 @@
+require('dotenv').config()
+
 const pkg = require('./package.json')
 const databaseName = pkg.name + (process.env.NODE_ENV === 'test' ? '-test' : '')
-if (process.env.NODE_ENV !== 'production') require('./dbSecrets')
 
 module.exports = {
   dialect: 'postgres',

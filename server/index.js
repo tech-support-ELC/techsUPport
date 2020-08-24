@@ -27,7 +27,7 @@ if (!isDev && cluster.isMaster) {
   });
 
 } else {
-  require('../dbSecrets')
+
   const app = express();
   module.exports = app
 
@@ -73,6 +73,14 @@ if (!isDev && cluster.isMaster) {
     res.set('Content-Type', 'application/json');
     res.send('{"message":"Hello from the custom server!"}');
   });
+
+
+  // Answer API requests.
+  app.get('/api', function (req, res) {
+    res.set('Content-Type', 'application/json');
+    res.send('{"message":"Hello from the custom server!"}');
+  });
+
 
   // All remaining requests return the React app, so it can handle routing.
   app.get('*', function (req, res) {
