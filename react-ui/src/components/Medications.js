@@ -22,7 +22,7 @@ class Medications extends React.Component {
   // }
 
   render() {
-    const { medications, remove, currentUser } = this.props;
+    const { medications, remove } = this.props;
 
     return (
       <div>
@@ -33,7 +33,9 @@ class Medications extends React.Component {
               return (
                 <div key={medication.id}>
                   {/* <p onClick={this.handleSelect(medication)}> */}
-                  {medication.name}
+                  <Link to={`/medications/${medication.id}`}>
+                    {medication.name}
+                  </Link>
                   {/* </p> */}
 
                   <RemoveMedication medication={medication} remove={remove} />
@@ -41,8 +43,7 @@ class Medications extends React.Component {
               );
             })}
           <div>
-            <AddMedication currentUser={currentUser} />
-            <Link to="/conditions">Add a Condition</Link>
+            <AddMedication />
           </div>
           <div>
             {/* <SingleMedication medication={this.state.selected} /> */}
