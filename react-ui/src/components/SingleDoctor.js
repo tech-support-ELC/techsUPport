@@ -6,8 +6,8 @@ import { fetchSingleDoctor } from "../redux/singleDoctor";
 import { deleteDoctorThunk } from "../redux/doctors"
 
 export class SingleDoctor extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             clicked: false
         }
@@ -15,7 +15,7 @@ export class SingleDoctor extends React.Component {
         this.handleDelete = this.handleDelete.bind(this)
     }
     componentDidMount() {
-        const id = Number(this.props.match.params.id)
+        const id = this.props.doctor.id
         this.props.fetchSingleDoctor(id)
     }
 
@@ -32,7 +32,10 @@ export class SingleDoctor extends React.Component {
     }
 
     render() {
-        const doctor = this.props.doctor[0]
+        console.log('props', this.props)
+        console.log('doctor in props', this.props.doctor)
+        const doctor = this.props.doctor
+
         if (!doctor) {
             return "This doctor is not in our system"
         } else {
@@ -60,7 +63,7 @@ export class SingleDoctor extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        doctor: state.doctor,
+        // doctor: state.doctor,
         currentUser: state.currentUser
     };
 };
