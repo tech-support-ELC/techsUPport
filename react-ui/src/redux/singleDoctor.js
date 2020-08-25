@@ -58,6 +58,7 @@ export default function (state = initialState, action) {
             if (action.doctor.lastName) updated.lastName = action.doctor.lastName
             if (action.doctor.address) updated.address = action.doctor.address
             if (action.doctor.doctorType) updated.doctorType = action.doctor.doctorType
+
             return updated
         default:
             return state

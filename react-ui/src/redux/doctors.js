@@ -1,10 +1,12 @@
 import axios from 'axios'
+
 const initialState = []
 
 //ACTION TYPES
 const ADD_DOCTOR = 'ADD_DOCTOR'
 const GET_ALL_DOCTORS = 'GET_ALL_DOCTORS'
 const REMOVE_DOCTOR = 'REMOVE_DOCTOR'
+const UPDATE_DOCTORS_LIST = 'UPDATE_DOCTORS_LIST'
 
 //ACTION CREATORS
 const addDoctor = doctor => {
@@ -27,9 +29,16 @@ const getAllDoctors = doctors => {
     }
 }
 
+export const updateAllDoctors = (id, doctor) => {
+    return {
+        type: UPDATE_DOCTORS_LIST,
+        id,
+        doctor
+    }
+}
+
 //THUNKS
 export const addDoctorThunk = (doctor) => {
-    console.log('inside add doctor thunk')
     return async dispatch => {
         try {
             let { data } = await axios.post('/api/doctors', doctor)
@@ -62,6 +71,8 @@ export const getAllDoctorsThunk = () => {
     }
 }
 
+
+
 export default function (state = initialState, action) {
     switch (action.type) {
         case GET_ALL_DOCTORS:
@@ -70,6 +81,14 @@ export default function (state = initialState, action) {
             return state.filter(doctor => doctor.id !== action.id)
         case ADD_DOCTOR:
             return [...state, action.doctor]
+        case UPDATE_DOCTORS_LIST:
+            return [...state.doctors].map((doctor) => {
+                if (doctor.id === action.id) {
+                    return action.doctor
+                } else {
+                    return doctor
+                }
+            })
         default:
             return state
     }
