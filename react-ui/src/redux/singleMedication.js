@@ -34,6 +34,20 @@ export const updateMedication = (medication, updatedMedication) => {
   };
 };
 
+export const fetchMedId = (medName) => {
+  return async () => {
+    try {
+      const { data } = await axios.get(
+        `https://rxnav.nlm.nih.gov/REST/rxcui.json?name=${medName}`
+      );
+      console.log(data.idGroup.rxnormId[0]);
+      return data.idGroup.rxnormId[0];
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export default function (state = initialState, action) {
   switch (action.type) {
     case GET_MEDICATION:
