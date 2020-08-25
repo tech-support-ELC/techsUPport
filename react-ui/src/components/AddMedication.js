@@ -5,18 +5,21 @@ import { addMedication } from "../redux/medications";
 class AddMedication extends React.Component {
   constructor() {
     super();
-    this.state = { name: "", dosage: "", frequency: "" };
+    this.state = { name: "", dosage: "", frequency: "", userId: 0 };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
+    const userId = this.props.currentUser.id;
+    this.setState({ userId });
     this.setState({ [event.target.name]: event.target.value });
   }
 
   handleSubmit(event) {
     event.preventDefault();
     this.props.addMedication(this.state);
+    this.setState = { name: "", dosage: "", frequency: "", userId: 0 };
   }
 
   render() {
