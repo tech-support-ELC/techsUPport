@@ -25,6 +25,7 @@ User.belongsToMany(Medication, {
 Condition.belongsToMany(User, {
   through: {
     model: 'score',
+    unique: false
   }
 });
 
@@ -32,6 +33,7 @@ Condition.belongsToMany(User, {
 User.belongsToMany(Condition, {
   through: {
     model: 'score',
+    unique: false
   }
 });
 Condition.belongsTo(User);

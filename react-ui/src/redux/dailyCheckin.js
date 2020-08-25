@@ -24,10 +24,10 @@ export const getScoreThunk = () => {
     }
   }
 }
-export const addScoreThunk = (value, date, notes) => {
+export const addScoreThunk = (rate, date, notes) => {
   return async dispatch => {
     try {
-      const {data} = await axios.post('/api/dailycheckin/score', {value, date, notes})
+      const {data} = await axios.post('/api/dailycheckin/score', {rate, date, notes})
       dispatch(addScore(data))
     } catch (error) {
       console.error(error)
@@ -42,7 +42,7 @@ export default function(state = initialState, action) {
     case ADD_SCORE:
       return [
         ...state,
-        ...action.score
+        action.score
       ]
     default:
       return state
