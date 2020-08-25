@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getAllDoctorsThunk } from "../redux/doctors";
+import { getAllDoctorsThunk, addDoctorThunk } from "../redux/doctors";
 import { AddDoctor } from "./AddDoctor";
 import { Link } from 'react-router-dom'
 
@@ -13,7 +13,7 @@ export class AllDoctors extends React.Component {
         return (
             <div>
                 <h1>All Doctors</h1>
-                <AddDoctor />
+                <AddDoctor currentUser={this.props.currentUser} addNewDoctor={this.props.addNewDoctor} />
                 <div>
                     {doctors && doctors.map((doctor) => {
                         return (
@@ -36,6 +36,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getAllDoctors: () => dispatch(getAllDoctorsThunk()),
+        addNewDoctor: (newDoctor) => dispatch(addDoctorThunk(newDoctor))
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AllDoctors);

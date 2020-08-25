@@ -38,8 +38,8 @@ export const fetchSingleDoctor = (id) => {
 export const updateSingleDoctor = (id, doctor) => {
     return async (dispatch) => {
         try {
-            await axios.put(`/api/doctors/${id}`, doctor)
-            dispatch(updateDoctor(doctor))
+            const { data } = await axios.put(`/api/doctors/${id}`, doctor)
+            dispatch(updateDoctor(data))
         } catch (err) {
             console.log(err)
         }

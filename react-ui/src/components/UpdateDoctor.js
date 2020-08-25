@@ -14,13 +14,14 @@ export function UpdateDoctor(props) {
         event.preventDefault()
         console.log(props)
         const userId = props.currentUser.id
+        const id = props.doctor.id
         const payload = { firstName, lastName, address, doctorType, userId }
         for (let key in payload) {
             if (payload[key] === '') {
                 delete payload[key]
             }
         }
-        props.updateDoctor(payload)
+        props.updateDoctor(id, payload)
     }
 
 
@@ -81,8 +82,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-
-        updateDoctor: (updatedDoctor) => dispatch(updateSingleDoctor(updatedDoctor))
+        updateDoctor: (id, updatedDoctor) => dispatch(updateSingleDoctor(id, updatedDoctor))
     }
 }
 
