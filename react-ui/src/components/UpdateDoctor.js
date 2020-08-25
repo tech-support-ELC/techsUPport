@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { updateSingleDoctor } from '../redux/singleDoctor'
-import { updateAllDoctors } from '../redux/doctors'
 import { Link } from 'react-router-dom'
 
 
@@ -13,9 +12,9 @@ export function UpdateDoctor(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.log(props)
+        console.log('what are props inside update doctor', props)
         const userId = props.currentUser.id
-        const id = props.doctor.id
+        const id = props.doctor[0].id
         const payload = { firstName, lastName, address, doctorType, userId }
         for (let key in payload) {
             if (payload[key] === '') {
@@ -23,7 +22,6 @@ export function UpdateDoctor(props) {
             }
         }
         props.updateDoctor(id, payload)
-        props.updateAllDocs(id, payload)
     }
 
 
@@ -70,7 +68,7 @@ export function UpdateDoctor(props) {
                     />
                 </div>
                 <br />
-                <button type='submit'>Update Doctor</button>
+                <button type='submit'>change this doctor</button>
                 <Link to='/medications'>Add A Medication</Link>
             </form>
 
@@ -79,13 +77,14 @@ export function UpdateDoctor(props) {
 }
 const mapStateToProps = state => {
     return {
+        doctor: state.doctor,
         currentUser: state.currentUser
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
-        updateDoctor: (id, updatedDoctor) => dispatch(updateSingleDoctor(id, updatedDoctor)),
-        updateAllDocs: (id, doctor) => dispatch(updateAllDoctors(id, doctor))
+        updateDoctor: (id, updatedDoctor) => dispatch(updateSingleDoctor(id, updatedDoctor))
+        // updateAllDocs: (id, doctor) => dispatch(updateAllDoctors(id, doctor))
     }
 }
 

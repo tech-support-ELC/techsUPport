@@ -39,6 +39,7 @@ export const updateSingleDoctor = (id, doctor) => {
     return async (dispatch) => {
         try {
             const { data } = await axios.put(`/api/doctors/${id}`, doctor)
+            console.log("what is data", data)
             dispatch(updateDoctor(data))
         } catch (err) {
             console.log(err)
@@ -54,11 +55,10 @@ export default function (state = initialState, action) {
             return action.doctor
         case UPDATE_SINGLE_DOCTOR:
             let updated = { ...state }
-            if (action.doctor.firstName) updated.firstName = action.doctor.firstName
-            if (action.doctor.lastName) updated.lastName = action.doctor.lastName
-            if (action.doctor.address) updated.address = action.doctor.address
-            if (action.doctor.doctorType) updated.doctorType = action.doctor.doctorType
-
+            updated.firstName = action.doctor.firstName
+            updated.lastName = action.doctor.lastName
+            updated.address = action.doctor.address
+            updated.doctorType = action.doctor.doctorType
             return updated
         default:
             return state
