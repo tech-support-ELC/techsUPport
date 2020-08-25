@@ -22,6 +22,7 @@ export function UpdateDoctor(props) {
             }
         }
         props.updateDoctor(id, payload)
+        // props.updateAllDocs(id, payload)
     }
 
 
@@ -83,7 +84,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        updateDoctor: (id, updatedDoctor) => dispatch(updateSingleDoctor(id, updatedDoctor))
+        updateDoctor: (id, updatedDoctor) => dispatch(updateSingleDoctor(id, updatedDoctor)),
         // updateAllDocs: (id, doctor) => dispatch(updateAllDoctors(id, doctor))
     }
 }

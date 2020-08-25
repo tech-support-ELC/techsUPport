@@ -1,5 +1,8 @@
 import axios from 'axios'
+import { updateAllDoctors } from './doctors'
+
 const initialState = {}
+
 
 const SET_SINGLE_DOCTOR = 'SET_SINGLE_DOCTOR'
 const UPDATE_SINGLE_DOCTOR = 'UPDATE_SINGLE_DOCTOR'
@@ -41,6 +44,7 @@ export const updateSingleDoctor = (id, doctor) => {
             const { data } = await axios.put(`/api/doctors/${id}`, doctor)
             console.log("what is data", data)
             dispatch(updateDoctor(data))
+            dispatch(updateAllDoctors(data.id, data))
         } catch (err) {
             console.log(err)
         }
