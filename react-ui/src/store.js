@@ -10,6 +10,7 @@ import medications from "./redux/medications";
 import medication from "./redux/singleMedication";
 import doctors from "./redux/doctors"
 import doctor from './redux/singleDoctor'
+import score from './redux/dailyCheckin'
 
 const reducer = combineReducers({
   users,
@@ -19,7 +20,8 @@ const reducer = combineReducers({
   medications,
   medication,
   doctors,
-  doctor
+  doctor,
+  score
 });
 
 const middleware = composeWithDevTools(
