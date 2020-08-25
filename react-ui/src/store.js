@@ -8,7 +8,7 @@ import users from "./redux/users";
 import medications from "./redux/medications";
 import medication from "./redux/singleMedication";
 import condition from './redux/singleCondition';
-
+import score from './redux/dailyCheckin'
 const reducer = combineReducers({
   users,
   currentUser,
@@ -16,6 +16,7 @@ const reducer = combineReducers({
   condition,
   medications,
   medication,
+  score
 });
 
 const middleware = composeWithDevTools(

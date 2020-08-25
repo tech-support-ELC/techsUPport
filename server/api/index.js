@@ -4,9 +4,9 @@ module.exports = router;
 
 router.use('/conditions', require('./conditions'));
 router.use('/users', require('./users'));
-router.use('/doctors', require('./doctors'))
+router.use('/doctors', require('./doctors'));
 router.use("/medications", require("./medications"));
-
+router.use('/dailycheckin', require('./dailycheckin'));
 
 router.use((req, res, next) => {
   const error = new Error("Not Found");

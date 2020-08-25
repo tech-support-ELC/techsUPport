@@ -1,22 +1,22 @@
-const Sequelize = require('sequelize')
+const Sequelize = require('sequelize');
 const db = require('../db');
 
-const User_Condition = db.define('user_condition', {
+const Score = db.define('score', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-
   value: {
     type: Sequelize.INTEGER,
   },
   date: {
-    type: Sequelize.DATE,
+    type: Sequelize.DATEONLY,
+    defaultValue: Sequelize.NOW
   },
   notes: {
     type: Sequelize.TEXT
   }
 });
 
-module.exports = User_Condition;
+module.exports = Score;
