@@ -8,48 +8,55 @@ export class UploadDocuments extends Component {
       uploading: false,
       documents: []
     }
-
+    this.changeHandler = this.changeHandler.bind(this)
+    this.uploadHandler = this.uploadHandler.bind(this)
   }
-  async onChange(e) {
+
+  changeHandler(e) {
     const files = Array.from(e.target.files)
-    this.setState({ uploading: true })
+    this.setState({
+      uploading: true,
+      documents: files
+    })
+  }
 
+  async uploadHandler() {
     const formData = new FormData()
-
-    files.forEach((file, i) => {
+    this.state.documents.forEach((file, i) => {
       formData.append(i, file)
     })
 
-    const { data } = await axios.post('/api/uploadDocuments', formData)
+    const { data } = await axios.post('/uploadDocuments', formData)
+    console.log(data)
     this.setState({
       uploading: false,
       documents: data
     })
   }
 
-
   render() {
     const { uploading, documents } = this.state
     return (
       <div>
-        {
-          uploading ? 'spinning' :
 
-            documents.map(doc => {
-              const { id } = doc
-              return (
-                <ul key={id}>
-                  <img src={doc.secure_url} alt='document' />
-                </ul>
-              )
-            })
+        {
+          documents.map((doc, i) => {
+            return (
+              <div key={i}>
+                <img src={doc.secure_url} alt='document' />
+              </div>
+            )
+          })
         }
+
         <p>
-          < button type="file" onChange={this.onChange} multiple>Upload</button>
+          <input type="file" onChange={this.changeHandler} multiple />
+          <button type="submit" onClick={this.uploadHandler}>Upload</button>
         </p>
       </div>
     );
   };
 }
+
 
 export default UploadDocuments;

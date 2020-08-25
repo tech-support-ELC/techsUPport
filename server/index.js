@@ -1,4 +1,3 @@
-require('dotenv').config()
 const express = require("express");
 const path = require("path");
 const cluster = require("cluster");
@@ -11,10 +10,6 @@ const sessionStore = new SequelizeStore({ db });
 const numCPUs = require("os").cpus().length;
 const isDev = process.env.NODE_ENV === "development";
 const PORT = process.env.PORT || 5000;
-
-//Document upload middleware
-const cloudinary = require('cloudinary')
-const formData = require('express-form-data');
 
 
 // Multi-process to utilize all CPU cores.
@@ -34,12 +29,6 @@ if (!isDev && cluster.isMaster) {
 } else {
   const app = express();
   module.exports = app;
-
-  cloudinary.config({
-    cloud_name: process.env.CLOUD_NAME,
-    api_key: process.env.API_KEY,
-    api_secret: process.env.API_SECRET
-  })
 
   // passport registration
   passport.serializeUser((user, done) => done(null, user.id));
@@ -72,13 +61,16 @@ if (!isDev && cluster.isMaster) {
   app.use(passport.initialize());
   app.use(passport.session());
 
+  // Image upload middleware
+  app.use("/", require('./cloudinaryMiddleware'))
+
   // Priority serve any static files.
   app.use(express.static(path.resolve(__dirname, "../react-ui/build")));
 
   app.use("/api", require("./api"));
   app.use("/auth", require("./auth"));
 
-  app.use(formData.parse())
+
 
   // Answer API requests.
   app.get("/api", function (req, res) {
