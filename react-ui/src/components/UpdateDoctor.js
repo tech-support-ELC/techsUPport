@@ -14,7 +14,7 @@ export function UpdateDoctor(props) {
         event.preventDefault()
         console.log('what are props inside update doctor', props)
         const userId = props.currentUser.id
-        const id = props.doctor[0].id
+        const id = props.doctor.id
         const payload = { firstName, lastName, address, doctorType, userId }
         for (let key in payload) {
             if (payload[key] === '') {

@@ -54,7 +54,7 @@ export default function (state = initialState, action) {
         case SET_SINGLE_DOCTOR:
             return action.doctor
         case UPDATE_SINGLE_DOCTOR:
-            let updated = { ...state }
+            let updated = { ...state.doctor }
             updated.firstName = action.doctor.firstName
             updated.lastName = action.doctor.lastName
             updated.address = action.doctor.address

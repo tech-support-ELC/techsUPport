@@ -32,7 +32,7 @@ export class SingleDoctor extends React.Component {
     }
 
     render() {
-        const doctor = this.props.doctor[0]
+        const doctor = this.props.doctor
 
         if (!doctor) {
             return "This doctor is not in our system"
