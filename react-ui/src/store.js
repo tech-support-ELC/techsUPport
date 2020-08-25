@@ -9,6 +9,7 @@ import medications from "./redux/medications";
 import medication from "./redux/singleMedication";
 import condition from './redux/singleCondition';
 import score from './redux/dailyCheckin'
+
 const reducer = combineReducers({
   users,
   currentUser,

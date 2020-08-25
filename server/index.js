@@ -8,9 +8,9 @@ const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const db = require("./db");
 const sessionStore = new SequelizeStore({ db });
 const numCPUs = require("os").cpus().length;
-process.env.NODE_ENV = "development";
-const isDev = process.env.NODE_ENV !== "production";
+const isDev = process.env.NODE_ENV === "development";
 const PORT = process.env.PORT || 5000;
+
 
 // Multi-process to utilize all CPU cores.
 if (!isDev && cluster.isMaster) {
@@ -61,11 +61,16 @@ if (!isDev && cluster.isMaster) {
   app.use(passport.initialize());
   app.use(passport.session());
 
+  // Image upload middleware
+  app.use(require('./cloudinaryMiddleware'))
+
   // Priority serve any static files.
   app.use(express.static(path.resolve(__dirname, "../react-ui/build")));
 
   app.use("/api", require("./api"));
   app.use("/auth", require("./auth"));
+
+
 
   // Answer API requests.
   app.get("/api", function (req, res) {
