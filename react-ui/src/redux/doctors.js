@@ -67,7 +67,7 @@ export default function (state = initialState, action) {
         case GET_ALL_DOCTORS:
             return action.doctors
         case REMOVE_DOCTOR:
-            return state.filter(doctor => doctor.id !== action.doctor.id)
+            return state.filter(doctor => doctor.id !== action.id)
         case ADD_DOCTOR:
             return [...state, action.doctor]
         default:
