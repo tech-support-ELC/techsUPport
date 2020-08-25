@@ -16,7 +16,6 @@ const Home = (props) => {
         <button type='submit' onClick={handleClick}>Log out</button>
       </p>
     </div >
-
   )
 }
 const mapState = ({ currentUser }) => ({ currentUser })
