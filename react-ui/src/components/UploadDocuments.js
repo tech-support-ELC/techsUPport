@@ -40,14 +40,13 @@ export class UploadDocuments extends Component {
       <div>
 
         {
-          uploading ? "Loading..." :
-            documents.map((doc, i) => {
-              return (
-                <div key={i}>
-                  <img src={doc.secure_url} alt='document' />
-                </div>
-              )
-            })
+          documents.map((doc, i) => {
+            return (
+              <div key={i}>
+                <img src={doc.secure_url} alt='document' />
+              </div>
+            )
+          })
         }
 
         <p>

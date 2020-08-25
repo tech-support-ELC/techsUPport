@@ -1,7 +1,9 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {getScoreThunk, addScoreThunk} from '../redux/dailyCheckin';
-class DailyCheckin extends Component {
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getScoreThunk, addScoreThunk } from '../redux/dailyCheckin';
+
+
+export class DailyCheckin extends Component {
   constructor() {
     super();
     this.state = {
@@ -17,7 +19,7 @@ class DailyCheckin extends Component {
     this.props.getScore();
   }
   handleChange(evt) {
-    this.setState({[evt.target.name]: evt.target.value})
+    this.setState({ [evt.target.name]: evt.target.value })
   }
   handleSubmit(evt) {
     evt.preventDefault();
@@ -39,21 +41,21 @@ class DailyCheckin extends Component {
           score && score.map(condition => {
             return (
               <div key={condition.id}>
-              condition.name
+                {condition.name}
               </div>
             )
           })
         }
         <form onSubmit={this.handleSubmit}>
-        <div>
-          <input
-            className='input'
-            placeholder='Give score for condition'
-            type='text'
-            name='value'
-            onChange={this.handleChange}
-            value={this.state.value}
-          />
+          <div>
+            <input
+              className='input'
+              placeholder='Give score for condition'
+              type='text'
+              name='value'
+              onChange={this.handleChange}
+              value={this.state.value}
+            />
           </div>
           <div>
             <input
