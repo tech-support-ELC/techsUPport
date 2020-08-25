@@ -10,11 +10,13 @@ const Condition = db.define('condition', {
     }
   },
   diagnosed: {
-    type: Sequelize.BOOLEAN,
+    type: Sequelize.STRING,
+    defaultValue: ''
   },
   typeOfPain: {
-    type: Sequelize.ENUM('physical', 'mental health')
-  }
+    type: Sequelize.STRING,
+    defaultValue: ''
+  },
 });
 
 module.exports = Condition;

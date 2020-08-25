@@ -2,11 +2,23 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAllConditionsThunk, addConditionThunk, deleteConditionThunk } from '../redux/conditions';
 import AddConditionForm from './AddConditionForm';
-import { Link } from 'react-router-dom'
-
+import { Link } from 'react-router-dom';
+import ExtraCondition from './ExtraCondition';
 class Conditions extends Component {
+  constructor() {
+    super();
+    this.state = {
+      display: false
+    }
+    this.display = this.display.bind(this);
+  }
   componentDidMount() {
     this.props.getAllConditions();
+  }
+  display(){
+    this.setState({
+      display: !this.state.display
+  })
   }
   render() {
     const conditions = this.props.conditions;
@@ -20,8 +32,18 @@ class Conditions extends Component {
           {
             conditions && conditions.map(condition => {
               return (
-                <div key={condition.key}>
+                <div key={condition.id}>
+                  <Link to={`/conditions/${condition.id}`}>
                   {condition.name}
+                  </Link>
+                  <div onClick={this.display}>
+                    {condition.name}
+                  </div>
+                  <div>
+                    {
+                      this.state.display ? <ExtraCondition condition={condition}/> : null
+                    }
+                  </div>
                 </div>
               )
             })
@@ -34,7 +56,7 @@ class Conditions extends Component {
 const mapStateToProps = state => {
   return {
     conditions: state.conditions,
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
   }
 }
 const mapDispatchToProps = dispatch => {

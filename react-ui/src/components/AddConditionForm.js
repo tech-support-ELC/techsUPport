@@ -19,12 +19,12 @@ class AddConditionForm extends Component {
   handleSubmit(evt) {
     evt.preventDefault();
     this.props.addCondition(this.state);
-    this.setState = {
+    this.setState({
       name: "",
       diagnosed: "",
       typeOfPain: "",
       userId: 0,
-    };
+    });
   }
   render() {
     return (
@@ -42,24 +42,32 @@ class AddConditionForm extends Component {
             />
           </div>
           <div>
-            <input
-              className="input"
-              placeholder="Is diagnosed?(true/false)"
-              type="text"
-              name="diagnosed"
-              onChange={this.handleChange}
-              value={this.state.diagnosed}
-            />
+            <label>
+              Is it diagnosed?
+              <select
+                onChange={this.handleChange}
+                value={this.state.diagnosed}
+                name="diagnosed"
+              >
+                <option value=""></option>
+                <option value="yes">yes</option>
+                <option value="no">no</option>
+              </select>
+            </label>
           </div>
           <div>
-            <input
-              className="input"
-              placeholder="Type of pain"
-              type="text"
-              name="typeOfPain"
-              onChange={this.handleChange}
-              value={this.state.typeOfPain}
-            />
+            <label>
+              Type of pain?
+              <select
+                onChange={this.handleChange}
+                value={this.state.typeOfPain}
+                name="typeOfPain"
+              >
+                <option value=""></option>
+                <option value="mental health">mental health</option>
+                <option value="physical">physical</option>
+              </select>
+            </label>
           </div>
           <button type="submit">Submit</button>
         </form>
