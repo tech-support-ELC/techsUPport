@@ -27,7 +27,6 @@ export class UploadDocuments extends Component {
     })
 
     const { data } = await axios.post('api/uploadDocuments', formData)
-    console.log(data)
     this.setState({
       uploading: false,
       documents: data
@@ -40,14 +39,13 @@ export class UploadDocuments extends Component {
       <div>
 
         {
-          uploading ? "Loading..." :
-            documents.map((doc, i) => {
-              return (
-                <div key={i}>
-                  <img src={doc.secure_url} alt='document' />
-                </div>
-              )
-            })
+          documents.map((doc, i) => {
+            return (
+              <div key={i}>
+                <img src={doc.secure_url} alt='document' />
+              </div>
+            )
+          })
         }
 
         <p>
