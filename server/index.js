@@ -62,7 +62,7 @@ if (!isDev && cluster.isMaster) {
   app.use(passport.session());
 
   // Image upload middleware
-  app.use("/", require('./cloudinaryMiddleware'))
+  app.use(require('./cloudinaryMiddleware'))
 
   // Priority serve any static files.
   app.use(express.static(path.resolve(__dirname, "../react-ui/build")));
