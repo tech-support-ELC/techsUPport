@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { addDoctorThunk } from '../redux/doctors'
+import { updateSingleDoctor } from '../redux/singleDoctor'
 import { Link } from 'react-router-dom'
 
 
-export function AddDoctor(props) {
+export function UpdateDoctor(props) {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [address, setAddress] = useState('')
@@ -12,20 +12,26 @@ export function AddDoctor(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault()
+        console.log('what are props inside update doctor', props)
         const userId = props.currentUser.id
+        const id = props.doctor[0].id
         const payload = { firstName, lastName, address, doctorType, userId }
-        props.addNewDoctor(payload)
+        for (let key in payload) {
+            if (payload[key] === '') {
+                delete payload[key]
+            }
+        }
+        props.updateDoctor(id, payload)
     }
 
 
     return (
         <div>
             <form onSubmit={(event) => handleSubmit(event)}>
-                <h1>Add Your New Doctor</h1>
+                <h1>Update This Doctor</h1>
                 <div>
                     <input
                         type="text"
-                        required
                         placeholder="first name or title"
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
@@ -36,7 +42,6 @@ export function AddDoctor(props) {
                 <div>
                     <input
                         type="text"
-                        required
                         placeholder="last name"
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
@@ -47,7 +52,6 @@ export function AddDoctor(props) {
                 <div>
                     <input
                         type="text"
-                        required
                         placeholder="office address"
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
@@ -58,14 +62,13 @@ export function AddDoctor(props) {
                 <div>
                     <input
                         type="text"
-                        required
                         placeholder="specialty"
                         value={doctorType}
                         onChange={(e) => setDoctorType(e.target.value)}
                     />
                 </div>
                 <br />
-                <button type='submit'>Add A Doctor</button>
+                <button type='submit'>change this doctor</button>
                 <Link to='/medications'>Add A Medication</Link>
             </form>
 
@@ -74,13 +77,15 @@ export function AddDoctor(props) {
 }
 const mapStateToProps = state => {
     return {
+        doctor: state.doctor,
         currentUser: state.currentUser
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
-        addNewDoctor: (newDoctor) => dispatch(addDoctorThunk(newDoctor))
+        updateDoctor: (id, updatedDoctor) => dispatch(updateSingleDoctor(id, updatedDoctor))
+        // updateAllDocs: (id, doctor) => dispatch(updateAllDoctors(id, doctor))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddDoctor)
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateDoctor)

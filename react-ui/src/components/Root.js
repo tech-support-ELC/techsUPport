@@ -9,8 +9,9 @@ import Medications from "./Medications";
 import { fetchCurrentUser } from '../redux/auth'
 import DailyCheckin from './DailyCheckin';
 import SingleCondition from './SingleCondition';
-// import AllDoctors from "./AllDoctors"
-import AddDoctor from "./AddDoctor"
+import AllDoctors from "./AllDoctors"
+import SingleDoctor from "./SingleDoctor"
+// import AddDoctor from "./AddDoctor"
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import UploadDocuments from "./UploadDocuments"
@@ -36,7 +37,8 @@ class Root extends Component {
           <Route exact path='/conditions' component={Conditions} />
           <Route path='/conditions/:id' component={SingleCondition} />
           <Route path="/medications" component={Medications} />
-          <Route path="/doctors" component={AddDoctor} />
+          <Route path="/doctors" component={AllDoctors} />
+          <Route path="/doctors/:id" component={SingleDoctor} />
           <Route path="/uploadDoc" component={UploadDocuments} />
 
         </div>
