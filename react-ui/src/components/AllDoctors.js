@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { getAllDoctorsThunk } from "../redux/doctors";
 import { AddDoctor } from "./AddDoctor";
-import SingleDoctor from "./SingleDoctor"
+import { Link } from 'react-router-dom'
 
 export class AllDoctors extends React.Component {
     componentDidMount() {
@@ -17,12 +17,8 @@ export class AllDoctors extends React.Component {
                 <div>
                     {doctors && doctors.map((doctor) => {
                         return (
-                            <div>
-                                <SingleDoctor
-                                    key={doctor.id}
-                                    doctor={doctor}
-                                    user={this.props.currentUser}
-                                />
+                            <div key={doctor.id}>
+                                <Link to={`/doctors/${doctor.id}`}>{doctor.firstName} {doctor.lastName}</Link>
                             </div>
                         )
                     })}

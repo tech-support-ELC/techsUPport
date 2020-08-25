@@ -9,6 +9,7 @@ import users from "./redux/users";
 import medications from "./redux/medications";
 import medication from "./redux/singleMedication";
 import doctors from "./redux/doctors"
+import doctor from './redux/singleDoctor'
 
 const reducer = combineReducers({
   users,
@@ -17,7 +18,8 @@ const reducer = combineReducers({
   condition,
   medications,
   medication,
-  doctors
+  doctors,
+  doctor
 });
 
 const middleware = composeWithDevTools(
