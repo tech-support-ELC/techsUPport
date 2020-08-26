@@ -14,21 +14,27 @@ class Medications extends React.Component {
     this.handleSelect = this.handleSelect.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
   componentDidMount() {
     this.props.fetchMedications();
   }
 
   handleSelect(medication) {
-    this.setState({ selected: medication });
+    this.setState({ selected: medication, add: false });
   }
 
   handleAdd() {
-    this.setState({ add: true });
+    this.setState({ selected: null, add: true });
   }
 
   handleClose() {
     this.setState({ selected: null, add: false });
+  }
+
+  handleRemove(id) {
+    this.props.remove(id);
+    this.handleClose();
   }
 
   render() {
@@ -76,10 +82,21 @@ class Medications extends React.Component {
 
             {this.state.selected && (
               <>
-                <SingleMedication medication={this.state.selected} />
                 <button type="button" onClick={() => this.handleClose()}>
                   X
                 </button>
+
+                <SingleMedication
+                  medication={this.state.selected}
+                  remove={remove}
+                  // close={this.handleClose}
+                />
+
+                <RemoveMedication
+                  medication={this.state.selected}
+                  remove={this.handleRemove}
+                  // close={this.handleClose}
+                />
               </>
             )}
           </div>
