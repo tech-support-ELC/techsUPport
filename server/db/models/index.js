@@ -1,6 +1,6 @@
-const Condition = require('./condition');
-const Score = require('./score');
-const Doctor = require('./doctor');
+const Condition = require("./condition");
+const Score = require("./score");
+const Doctor = require("./doctor");
 // const Doctor_User = require('./doctor_User');
 const Medication = require("./medication");
 const User = require("./user");
