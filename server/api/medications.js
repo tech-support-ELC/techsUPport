@@ -4,7 +4,9 @@ const { Medication } = require("../db/models");
 //GET ALL MEDS
 router.get("/", async (req, res, next) => {
   try {
-    const medication = await Medication.findAll();
+    const medication = await Medication.findAll({
+      where: { userId: req.user.id },
+    });
     res.json(medication);
   } catch (err) {
     next(err);
@@ -24,11 +26,12 @@ router.get("/:id", async (req, res, next) => {
 //ADD MED
 router.post("/", async (req, res, next) => {
   try {
-    const { name, dosage, frequency } = req.body;
+    const { name, dosage, frequency, userId } = req.body;
     const newMedication = await Medication.create({
       name,
       dosage,
       frequency,
+      userId,
     });
     res.json(newMedication);
   } catch (err) {

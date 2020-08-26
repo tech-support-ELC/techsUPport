@@ -23,19 +23,19 @@ class Root extends Component {
     this.props.fetchInitialData();
   }
   render() {
-    const { isLoggedIn } = this.props
+    const { isLoggedIn } = this.props;
     return (
-
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        <Route path='/login' component={Login} />
-        <Route path='/signup' component={Signup} />
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
 
         {isLoggedIn && (
           <>
             {/* Routes placed here are only available after logging in */}
             <Navbar />
-            <Route path='/' component={Home} />
+
+            <Route exact path='/' component={Home} />
             <Route exact path='/dailycheckin/score' component={ConditionDC} />
             <Route exact path='/conditions' component={Conditions} />
             <Route path='/conditions/:id' component={SingleCondition} />
@@ -58,13 +58,13 @@ class Root extends Component {
 
 /* -----------------    CONTAINER     ------------------ */
 
-const mapState = state => {
+const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.currentUser.id
-  }
-}
+    isLoggedIn: !!state.currentUser.id,
+  };
+};
 const mapDispatch = (dispatch) => ({
   fetchInitialData: () => {
     dispatch(fetchCurrentUser());
