@@ -37,7 +37,7 @@ class Root extends Component {
             {/* Routes placed here are only available after logging in */}
             <Navbar />
             <Route path='/' component={Home} />
-            <Route path='/dailycheckin' component={DailyCheckin} />
+            <Route exact path='/dailycheckin/score' component={DailyCheckin} />
             <Route exact path='/conditions' component={Conditions} />
             <Route path='/conditions/:id' component={SingleCondition} />
             <Route path="/medications" component={Medications} />
