@@ -1,5 +1,5 @@
 const Condition = require("./condition");
-// const User_Condition = require('./user_condition');
+const Score = require("./score");
 const Doctor = require("./doctor");
 // const Doctor_User = require('./doctor_User');
 const Medication = require("./medication");
@@ -26,14 +26,14 @@ User.belongsToMany(Medication, {
 
 Condition.belongsToMany(User, {
   through: {
-    model: 'score',
-  }
+    model: "score",
+  },
 });
 
 User.belongsToMany(Condition, {
   through: {
-    model: 'score',
-  }
+    model: "score",
+  },
 });
 Condition.belongsTo(User);
 User.hasMany(Condition);

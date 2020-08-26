@@ -40,13 +40,11 @@ class Root extends Component {
           <Route path="/medications" component={Medications} />
           <Route path="/doctors" component={AllDoctors} />
           <Route path="/doctors/:id" component={SingleDoctor} />
-          <Route path="/dailycheckin" components={DailyCheckin} />
           <Route path="/medications/:id" component={SingleMedication} />
           <Route path="/uploadDoc" component={UploadDocuments} />
         </div>
-        <div>
-          <Footer />
-        </div>
+
+        <Footer />
       </Router>
     );
   }
