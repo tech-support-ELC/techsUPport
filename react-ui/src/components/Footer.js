@@ -2,10 +2,10 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div>
+    <footer>
       <div>Github!</div>
       <div>Names!</div>
-    </div>
+    </footer>
   );
 };
 
