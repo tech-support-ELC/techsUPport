@@ -19,7 +19,8 @@ export class Documents extends Component {
                 <Link to={`/documents/${i}`}>
                   <img src={doc.secure_url}
                     alt='document' width="200" height="200"
-                    onError={() => props.onError(doc.public_id)} />
+                  // onError={() => props.onError(doc.public_id)}
+                  />
                 </Link>
               </div>
             ))
