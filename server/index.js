@@ -11,7 +11,7 @@ const numCPUs = require("os").cpus().length;
 const isDev = process.env.NODE_ENV === "development";
 const PORT = process.env.PORT || 5000;
 const cors = require('cors')
-const CLIENT_ORIGIN = 'http://localhost:5000'
+const CLIENT_ORIGIN = require('./CLIENT_ORIGIN')
 
 
 // Multi-process to utilize all CPU cores.
@@ -75,8 +75,6 @@ if (!isDev && cluster.isMaster) {
 
   app.use("/api", require("./api"));
   app.use("/auth", require("./auth"));
-
-
 
   // Answer API requests.
   app.get("/api", function (req, res) {

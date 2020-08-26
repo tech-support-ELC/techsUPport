@@ -8,6 +8,7 @@ import currentUser from "./redux/auth";
 import users from "./redux/users";
 import medications from "./redux/medications";
 import medication from "./redux/singleMedication";
+import documents from "./redux/documents";
 
 const reducer = combineReducers({
   users,
@@ -16,6 +17,7 @@ const reducer = combineReducers({
   condition,
   medications,
   medication,
+  documents
 });
 
 const middleware = composeWithDevTools(

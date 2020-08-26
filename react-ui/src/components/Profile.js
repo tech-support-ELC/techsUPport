@@ -12,7 +12,7 @@ const Home = (props) => {
       <h1>User Profile</h1>
       <h4>Name: {firstName} {lastName}</h4>
       <h4>Email: {email}</h4>
-      <p><Documents {...props} /></p>
+      <span><Documents {...props} /></span>
       <p><UploadDocuments userid={id} /></p>
       <p>
         <button type='submit' onClick={handleClick}>Log out</button>

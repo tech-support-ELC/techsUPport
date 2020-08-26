@@ -34,7 +34,8 @@ export const fetchDocuments = () => {
     try {
       // figure out the api request for Cloudinary
       const { data } = await axios.get("/api/uploadDocuments");
-      dispatch(getDocuments(data));
+      console.log(data.resources)
+      dispatch(getDocuments(data.resources));
     } catch (error) {
       console.log(error);
     }

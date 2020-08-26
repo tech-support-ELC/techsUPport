@@ -6,7 +6,7 @@ const authenticateToken = require('../auth/verifyToken')
 //only authenticated user himself or admin can view, delete or update images
 router.get('/', async (req, res, next) => {
   try {
-    const documents = await cloudinary.v2.search.execute()
+    const documents = await cloudinary.api.resources()
     if (documents) res.json(documents)
   } catch (err) {
     next(err)
