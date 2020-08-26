@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 const Condition = require("./condition");
 // const User_Condition = require('./user_condition');
 const Doctor = require("./doctor");
-=======
-const Condition = require('./condition');
-const Score = require('./score');
-const Doctor = require('./doctor');
->>>>>>> b9a45833a8e6731363923532f8c58d3154621fb3
 // const Doctor_User = require('./doctor_User');
 const Medication = require("./medication");
 const User = require("./user");
