@@ -25,29 +25,29 @@ class Medications extends React.Component {
     const { medications, remove } = this.props;
 
     return (
-      <div>
-        <h1>All medications</h1>
-        <div>
-          {medications &&
-            medications.map((medication) => {
-              return (
-                <div key={medication.id}>
-                  {/* <p onClick={this.handleSelect(medication)}> */}
-                  <Link to={`/medications/${medication.id}`}>
-                    {medication.name}
-                  </Link>
-                  {/* </p> */}
+      <div className="main">
+        <div className="column">
+          <h3>My Saved Medications</h3>
+          <div className="scroll">
+            {medications &&
+              medications.map((medication) => {
+                return (
+                  <div key={medication.id} className="listItem">
+                    {/* <p onClick={this.handleSelect(medication)}> */}
+                    <Link to={`/medications/${medication.id}`}>
+                      {medication.name}
+                    </Link>
 
-                  <RemoveMedication medication={medication} remove={remove} />
-                </div>
-              );
-            })}
-          <div>
-            <AddMedication />
+                    <RemoveMedication medication={medication} remove={remove} />
+                  </div>
+                );
+              })}
           </div>
-          <div>
-            {/* <SingleMedication medication={this.state.selected} /> */}
-          </div>
+        </div>
+        <div className="column" id="medModal">
+          {/* <SingleMedication medication={this.state.selected} /> */}
+
+          <AddMedication />
         </div>
       </div>
     );

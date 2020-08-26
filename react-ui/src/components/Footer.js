@@ -2,10 +2,10 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div>
-      <div>Github!</div>
-      <div>Names!</div>
-    </div>
+    <footer>
+      <div className="column">Github!</div>
+      <div className="column">Names!</div>
+    </footer>
   );
 };
 
