@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { API_URL } from './API_URL';
 const initialState = [];
 
 const GET_ALL_CONDITIONS = 'GET_ALL_CONDITIONS';
@@ -33,7 +34,7 @@ export const updateAllConditions = (id, condition) => {
 export const getAllConditionsThunk = () => {
   return async dispatch => {
     try {
-      const {data} = await axios.get('/api/conditions/');
+      const {data} = await axios.get(`${API_URL}/api/conditions/`);
       dispatch(getAllConditions(data));
     } catch (error) {
       console.log(error)
@@ -43,7 +44,7 @@ export const getAllConditionsThunk = () => {
 export const addConditionThunk = (condition) => {
   return async dispatch => {
     try {
-      const {data} = await axios.post('/api/conditions', condition);
+      const {data} = await axios.post(`${API_URL}/api/conditions`, condition);
       dispatch(addCondition(data));
     } catch (error) {
       console.log(error)
@@ -56,7 +57,7 @@ export const deleteConditionThunk = (id) => {
     try {
       await axios.delete(`/api/conditions/${id}`);
       dispatch(deleteCondition(id));
-      const {data} = await axios.get('/api/conditions/');
+      const {data} = await axios.get(`${API_URL}/api/conditions/`);
       dispatch(getAllConditions(data));
     } catch (err) {
       console.log(err);

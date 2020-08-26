@@ -8,7 +8,8 @@
   "scripts": {
     "start": "nodemon server",
     "build": "cd react-ui/ && npm run build",
-    "start-dev": "NODE_ENV='development' npm run build & NODE_ENV='development' npm run start-server"
+    "start-dev": "NODE_ENV='development' npm run build & NODE_ENV='development' npm run start-server",
+    "seed": "node seed.js"
   },
   "cacheDirectories": [
     "node_modules",

@@ -7,16 +7,15 @@ import Login from "./Login";
 import Conditions from "./Conditions";
 import Medications from "./Medications";
 import { fetchCurrentUser } from "../redux/auth";
-import DailyCheckin from "./DailyCheckin";
+import ConditionDC from "./ConditionDC";
 import SingleCondition from "./SingleCondition";
-import AddDoctor from "./AddDoctor";
-import Documents from "./Documents";
-import Profile from "./Profile";
-import AllDoctors from "./AllDoctors";
+import Documents from "./Documents"
+import Profile from "./Profile"
+import AllDoctors from "./AllDoctors"
 import SingleDoctor from "./SingleDoctor";
 import SingleMedication from "./SingleMedication";
 import Navbar from "./Navbar";
-
+import DoctorDC from "./DoctorDC";
 /* -----------------    COMPONENT     ------------------ */
 
 class Root extends Component {
@@ -35,16 +34,18 @@ class Root extends Component {
           <>
             {/* Routes placed here are only available after logging in */}
             <Navbar />
-            <Route exact path="/" component={Home} />
-            <Route exact path="/dailycheckin/score" component={DailyCheckin} />
-            <Route exact path="/conditions" component={Conditions} />
-            <Route path="/conditions/:id" component={SingleCondition} />
+
+            <Route exact path='/' component={Home} />
+            <Route exact path='/dailycheckin/score' component={ConditionDC} />
+            <Route exact path='/conditions' component={Conditions} />
+            <Route path='/conditions/:id' component={SingleCondition} />
             <Route path="/medications" component={Medications} />
             <Route path="/medications/:id" component={SingleMedication} />
-            <Route path="/doctors" component={AddDoctor} />
+            <Route path="/doctors" component={AllDoctors} />
             <Route path="/doctors/:id" component={SingleDoctor} />
             <Route exact path="/profile" component={Profile} />
             <Route path="/documents/:id" component={Documents} />
+            <Route exact path='/dailycheckin/appointment' component={DoctorDC} />
           </>
         )}
 
