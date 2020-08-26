@@ -23,7 +23,7 @@ router.get('/', async (req, res, next) => {
 })
 router.get('/:id', async (req, res, next) => {
     try {
-        const oneDoctor = await Doctor.findAll({ where: { id: req.params.id, userId: req.user.id } })
+        const oneDoctor = await Doctor.findOne({ where: { id: req.params.id, userId: req.user.id } })
         if (oneDoctor) {
             res.json(oneDoctor)
         }

@@ -82,7 +82,7 @@ export default function (state = initialState, action) {
         case ADD_DOCTOR:
             return [...state, action.doctor]
         case UPDATE_DOCTORS_LIST:
-            return [...state.doctors].map((doctor) => {
+            return [...state].map((doctor) => {
                 if (doctor.id === action.id) {
                     return action.doctor
                 } else {

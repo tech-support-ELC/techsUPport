@@ -26,13 +26,14 @@ export class SingleDoctor extends React.Component {
     async handleDelete(id) {
         try {
             await this.props.deleteDoctor(id)
+            this.props.closeTheModal()
         } catch (err) {
             console.log(err)
         }
     }
 
     render() {
-        const doctor = this.props.doctor[0]
+        const doctor = this.props.doctor
 
         if (!doctor) {
             return "This doctor is not in our system"
@@ -46,7 +47,11 @@ export class SingleDoctor extends React.Component {
                     <div>
                         {this.state.clicked === true && <UpdateDoctor />}
                     </div>
-                    <button onClick={() => this.updateDoctor()}>Update Doctor</button>
+                    <div>
+                        {this.state.clicked === false &&
+                            <button onClick={() => this.updateDoctor()}>Update Doctor</button>
+                        }
+                    </div>
                     <button onClick={() => this.handleDelete(doctor.id)}>Delete Doctor</button>
                     {/* <button onClick={() => }>Delete Doctor</button> */}
                 </div>

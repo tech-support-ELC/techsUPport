@@ -14,7 +14,7 @@ export function UpdateDoctor(props) {
         event.preventDefault()
         console.log('what are props inside update doctor', props)
         const userId = props.currentUser.id
-        const id = props.doctor[0].id
+        const id = props.doctor.id
         const payload = { firstName, lastName, address, doctorType, userId }
         for (let key in payload) {
             if (payload[key] === '') {
@@ -22,6 +22,7 @@ export function UpdateDoctor(props) {
             }
         }
         props.updateDoctor(id, payload)
+        // props.updateAllDocs(id, payload)
     }
 
 
@@ -83,7 +84,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        updateDoctor: (id, updatedDoctor) => dispatch(updateSingleDoctor(id, updatedDoctor))
+        updateDoctor: (id, updatedDoctor) => dispatch(updateSingleDoctor(id, updatedDoctor)),
         // updateAllDocs: (id, doctor) => dispatch(updateAllDoctors(id, doctor))
     }
 }
