@@ -14,13 +14,22 @@ export class SingleMedication extends React.Component {
   }
 
   render() {
+    console.log(this.props, "HERE");
+
     const medication = this.props.medication;
+    const rxcui = this.props.rxcui;
+
     return (
       <div>
-        <p>{medication.name}</p>
-        <p>{medication.dosage}</p>
-        <p>{medication.frequency}</p>
-        <UpdateMedication medication={medication} />
+        {medication && (
+          <div>
+            <p>{medication.name}</p>
+            <p>{medication.dosage}</p>
+            <p>{medication.frequency}</p>
+            <p>{rxcui}</p>
+            <UpdateMedication medication={medication} />
+          </div>
+        )}
       </div>
     );
   }
@@ -28,7 +37,8 @@ export class SingleMedication extends React.Component {
 
 const mapState = (state) => {
   return {
-    medication: state.medication,
+    medication: state.medication.medication,
+    rxcui: state.medication.rxcui,
   };
 };
 

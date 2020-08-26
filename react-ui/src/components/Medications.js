@@ -44,10 +44,11 @@ class Medications extends React.Component {
               })}
           </div>
         </div>
-        <div className="column" id="medModal">
+        <div className="column">
+          <div className="modal">
+            <AddMedication />
+          </div>
           {/* <SingleMedication medication={this.state.selected} /> */}
-
-          <AddMedication />
         </div>
       </div>
     );
