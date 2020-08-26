@@ -1,6 +1,8 @@
 require('dotenv').config()
 const jwt = require('jsonwebtoken')
 
+//authenticate verifies if the user is the logged in user?
+
 // authentication token middleware
 module.exports = function (req, res, next) {
   // formate of token

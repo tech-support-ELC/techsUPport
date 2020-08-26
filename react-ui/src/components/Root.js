@@ -9,7 +9,6 @@ import Medications from "./Medications";
 import { fetchCurrentUser } from "../redux/auth";
 import DailyCheckin from "./DailyCheckin";
 import SingleCondition from "./SingleCondition";
-import AddDoctor from "./AddDoctor";
 import Documents from "./Documents"
 import Profile from "./Profile"
 import AllDoctors from "./AllDoctors"
@@ -36,13 +35,13 @@ class Root extends Component {
           <>
             {/* Routes placed here are only available after logging in */}
             <Navbar />
-            <Route path='/' component={Home} />
+            <Route exact path='/' component={Home} />
             <Route exact path='/dailycheckin/score' component={DailyCheckin} />
             <Route exact path='/conditions' component={Conditions} />
             <Route path='/conditions/:id' component={SingleCondition} />
             <Route path="/medications" component={Medications} />
             <Route path="/medications/:id" component={SingleMedication} />
-            <Route path="/doctors" component={AddDoctor} />
+            <Route path="/doctors" component={AllDoctors} />
             <Route path="/doctors/:id" component={SingleDoctor} />
             <Route exact path="/profile" component={Profile} />
             <Route path="/documents/:id" component={Documents} />
