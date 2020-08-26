@@ -1,4 +1,3 @@
-
 const Condition = require('./condition');
 const Score = require('./score');
 const Doctor = require('./doctor');
