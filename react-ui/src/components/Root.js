@@ -7,7 +7,7 @@ import Login from "./Login";
 import Conditions from "./Conditions";
 import Medications from "./Medications";
 import { fetchCurrentUser } from "../redux/auth";
-import DailyCheckin from "./DailyCheckin";
+import ConditionDC from "./ConditionDC";
 import SingleCondition from "./SingleCondition";
 import Documents from "./Documents"
 import Profile from "./Profile"
@@ -15,7 +15,7 @@ import AllDoctors from "./AllDoctors"
 import SingleDoctor from "./SingleDoctor";
 import SingleMedication from "./SingleMedication";
 import Navbar from "./Navbar";
-
+import DoctorDC from "./DoctorDC";
 /* -----------------    COMPONENT     ------------------ */
 
 class Root extends Component {
@@ -23,20 +23,20 @@ class Root extends Component {
     this.props.fetchInitialData();
   }
   render() {
-    const { isLoggedIn } = this.props
+    const { isLoggedIn } = this.props;
     return (
-
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        <Route path='/login' component={Login} />
-        <Route path='/signup' component={Signup} />
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
 
         {isLoggedIn && (
           <>
             {/* Routes placed here are only available after logging in */}
             <Navbar />
+
             <Route exact path='/' component={Home} />
-            <Route exact path='/dailycheckin/score' component={DailyCheckin} />
+            <Route exact path='/dailycheckin/score' component={ConditionDC} />
             <Route exact path='/conditions' component={Conditions} />
             <Route path='/conditions/:id' component={SingleCondition} />
             <Route path="/medications" component={Medications} />
@@ -45,6 +45,7 @@ class Root extends Component {
             <Route path="/doctors/:id" component={SingleDoctor} />
             <Route exact path="/profile" component={Profile} />
             <Route path="/documents/:id" component={Documents} />
+            <Route exact path='/dailycheckin/appointment' component={DoctorDC} />
           </>
         )}
 
@@ -57,13 +58,13 @@ class Root extends Component {
 
 /* -----------------    CONTAINER     ------------------ */
 
-const mapState = state => {
+const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.currentUser.id
-  }
-}
+    isLoggedIn: !!state.currentUser.id,
+  };
+};
 const mapDispatch = (dispatch) => ({
   fetchInitialData: () => {
     dispatch(fetchCurrentUser());

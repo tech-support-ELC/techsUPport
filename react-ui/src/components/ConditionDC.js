@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getScoreThunk, addScoreThunk } from '../redux/dailyCheckin';
+import { getScoreThunk, addScoreThunk } from '../redux/dcCondition';
 import DCConditionForm from './DCConditionForm';
-class DailyCheckin extends Component {
+class ConditionDC extends Component {
   componentDidMount() {
     this.props.getScore();
   }
   render() {
     const score = this.props.score;
-
     return (
       <div>
         <h1>Daily checkin</h1>
@@ -34,7 +33,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getScore: () => dispatch(getScoreThunk()),
-    addScore: (score) => dispatch(addScoreThunk(score))
+    addScore: (score) => dispatch(addScoreThunk(score)),
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(DailyCheckin)
+export default connect(mapStateToProps, mapDispatchToProps)(ConditionDC)

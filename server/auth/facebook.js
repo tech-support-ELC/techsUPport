@@ -3,7 +3,7 @@ const passport = require('passport')
 const router = require('express').Router()
 const FacebookStrategy = require('passport-facebook').Strategy
 const { User } = require('../db/models')
-const CLIENT_ORIGIN = require('../CLIENT_ORIGIN')
+const CLIENT_ORIGIN = require('../CLIENT_ORIGIN');
 module.exports = router
 
 const facebookConfig = {

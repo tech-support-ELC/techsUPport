@@ -1,8 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { login } from '../redux/auth'
-import { API_URL } from '../redux/API_URL'
-
+import { API_URL } from '../redux/API_URL';
 /* -----------------    COMPONENT     ------------------ */
 
 const Login = (props) => {
