@@ -13,6 +13,7 @@ import doctors from "./redux/doctors";
 import doctor from './redux/singleDoctor';
 import score from './redux/dcCondition';
 import appointment from './redux/dcDoctor';
+import med from './redux/dcMedication'
 const reducer = combineReducers({
   users,
   currentUser,
@@ -24,7 +25,8 @@ const reducer = combineReducers({
   doctors,
   doctor,
   score,
-  appointment
+  appointment,
+  med
 });
 
 const middleware = composeWithDevTools(
