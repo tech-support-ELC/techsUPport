@@ -3,6 +3,8 @@ const Score = require('../db/models/score');
 const Condition = require('../db/models/condition');
 const Doctor = require('../db/models/doctor');
 const Appointment = require('../db/models/appointment');
+const Medication = require('../db/models/medication');
+const DailyMed = require('../db/models/dailyMed');
 module.exports = router;
 
 router.get('/score', async (req, res, next) => {
@@ -52,6 +54,31 @@ router.post('/appointment', async (req, res, next) => {
     console.log(req.body);
     const newAppointment = await Appointment.create({time, doctorId, userId});
     res.json(newAppointment);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/meds', async (req, res, next) => {
+  try {
+    const medications = await Medication.findAll({
+      where: {
+        userId: req.user.id,
+      }
+    });
+    if (medications) res.json(medications);
+  } catch (error) {
+    next(error);
+  }
+});
+router.post('/meds', async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+    const notes = req.body.notes.notes;
+    const medicationId = req.body.notes.medicationId;
+    console.log(req.body);
+    const newDailyMed = await DailyMed.create({notes, medicationId, userId});
+    res.json(newDailyMed);
   } catch (error) {
     next(error);
   }
