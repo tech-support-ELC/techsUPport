@@ -4,14 +4,12 @@ import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from "react-router-dom";
 import store from './store'
 import Root from './components/Root'
-import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <Navbar />
       <Root />
       <Footer />
     </Router>

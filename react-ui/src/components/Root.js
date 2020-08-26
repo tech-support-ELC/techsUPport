@@ -14,6 +14,7 @@ import AddDoctor from "./AddDoctor";
 import Documents from "./Documents"
 import Profile from "./Profile"
 import SingleMedication from "./SingleMedication";
+import Navbar from "./Navbar";
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -33,6 +34,7 @@ class Root extends Component {
         {isLoggedIn && (
           <>
             {/* Routes placed here are only available after logging in */}
+            <Navbar />
             <Route path='/' component={Home} />
             <Route path='/dailycheckin' component={DailyCheckin} />
             <Route exact path='/conditions' component={Conditions} />
