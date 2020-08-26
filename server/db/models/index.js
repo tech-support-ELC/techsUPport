@@ -26,14 +26,14 @@ User.belongsToMany(Medication, {
 
 Condition.belongsToMany(User, {
   through: {
-    model: 'score',
-  }
+    model: "score",
+  },
 });
 
 User.belongsToMany(Condition, {
   through: {
-    model: 'score',
-  }
+    model: "score",
+  },
 });
 Condition.belongsTo(User);
 User.hasMany(Condition);

@@ -53,8 +53,6 @@ class AddMedication extends React.Component {
             onChange={this.handleChange}
           />
 
-          <br />
-          <br />
           <button type="submit">Submit</button>
         </form>
       </div>
