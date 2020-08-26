@@ -6,11 +6,12 @@ import Signup from "./Signup";
 import Login from "./Login";
 import Conditions from "./Conditions";
 import Medications from "./Medications";
-import { fetchCurrentUser } from "../redux/auth";
-import DailyCheckin from "./DailyCheckin";
-import SingleCondition from "./SingleCondition";
-// import AllDoctors from "./AllDoctors"
-import AddDoctor from "./AddDoctor";
+import { fetchCurrentUser } from '../redux/auth'
+import DailyCheckin from './DailyCheckin';
+import SingleCondition from './SingleCondition';
+import AllDoctors from "./AllDoctors"
+import SingleDoctor from "./SingleDoctor"
+// import AddDoctor from "./AddDoctor"
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import UploadDocuments from "./UploadDocuments";
@@ -25,18 +26,21 @@ class Root extends Component {
   render() {
     return (
       <Router>
-        <Navbar />
-
         <div>
-          <Route exact path="/" component={Home} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/dailycheckin" components={DailyCheckin} />
-          <Route exact path="/conditions" component={Conditions} />
-          <Route path="/conditions/:id" component={SingleCondition} />
+          <Navbar />
+        </div>
+        <div>
+          <h1>This is the root</h1>
+          <Route exact path='/' component={Home} />
+          <Route path='/login' component={Login} />
+          <Route path='/signup' component={Signup} />
+          <Route exact path='/dailycheckin/score' components={DailyCheckin} />
+          <Route exact path='/conditions' component={Conditions} />
+          <Route path='/conditions/:id' component={SingleCondition} />
           <Route path="/medications" component={Medications} />
+          <Route path="/doctors" component={AllDoctors} />
+          <Route path="/doctors/:id" component={SingleDoctor} />
           <Route path="/medications/:id" component={SingleMedication} />
-          <Route path="/doctors" component={AddDoctor} />
           <Route path="/uploadDoc" component={UploadDocuments} />
         </div>
 
