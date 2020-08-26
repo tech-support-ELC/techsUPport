@@ -57,10 +57,9 @@ export default function(state = initialState, action) {
       return action.condition
     case UPDATE_CONDITION:
       let updated = { ...state.condition }
-      updated.firstName = action.condition.firstName
-      updated.lastName = action.condition.lastName
-      updated.address = action.condition.address
-      updated.conditionType = action.condition.conditionType
+      updated.name = action.condition.name
+      updated.diagnosed = action.condition.diagnosed
+      updated.typeOfPain = action.condition.address
       return updated
     default:
       return state
