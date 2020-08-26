@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import axios from "axios";
+import { uploadDocumentsThunk } from '../redux/documents'
+import { connect } from 'react-redux'
 
 export class UploadDocuments extends Component {
   constructor() {
     super()
     this.state = {
-      uploading: false,
       documents: []
     }
     this.changeHandler = this.changeHandler.bind(this)
@@ -13,50 +13,33 @@ export class UploadDocuments extends Component {
   }
 
   changeHandler(e) {
+    e.preventDefault()
     const files = Array.from(e.target.files)
     this.setState({
-      uploading: true,
       documents: files
     })
   }
 
-  async uploadHandler() {
+  uploadHandler(e) {
+    e.preventDefault()
     const formData = new FormData()
     this.state.documents.forEach((file, i) => {
       formData.append(i, file)
     })
-
-    const { data } = await axios.post('api/uploadDocuments', formData)
-    console.log(data)
-    this.setState({
-      uploading: false,
-      documents: data
-    })
+    this.props.uploadDocumentsThunk(formData)
   }
 
   render() {
-    const { uploading, documents } = this.state
     return (
-      <div>
-
-        {
-          documents.map((doc, i) => {
-            return (
-              <div key={i}>
-                <img src={doc.secure_url} alt='document' />
-              </div>
-            )
-          })
-        }
-
-        <p>
-          <input type="file" onChange={this.changeHandler} multiple />
-          <button type="submit" onClick={this.uploadHandler}>Upload</button>
-        </p>
-      </div>
+      <>
+        <input type="file" onChange={this.changeHandler} multiple />
+        <button type="submit" onClick={this.uploadHandler}>Upload</button>
+      </>
     );
   };
 }
 
+const mapDispatchToProps = { uploadDocumentsThunk }
 
-export default UploadDocuments;
+export default connect(null, mapDispatchToProps)(UploadDocuments);
+
