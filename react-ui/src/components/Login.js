@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { login } from '../redux/auth'
-
+import { API_URL } from '../redux/API_URL';
 /* -----------------    COMPONENT     ------------------ */
 
 const Login = (props) => {
@@ -31,14 +31,14 @@ const Login = (props) => {
       <p>
         <a
           target='_self'
-          href='/auth/google'
+          href={`${API_URL}/auth/google`}
         >
           <i />
           <span>Log in with Google</span>
         </a>
         <a
           target='_self'
-          href='/auth/facebook'
+          href={`${API_URL}/auth/facebook`}
         >
           <i />
           <span>Log in with Facebook</span>
