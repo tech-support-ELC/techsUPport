@@ -17,18 +17,20 @@ router.get('/score', async (req, res, next) => {
 });
 router.post('/score', async (req, res, next) => {
   try {
-    const [findOrder, created] = await Condition.findOrCreate({
-      where: {
-        userId: req.user.id,
-      }
-    });
-    const conditionId = findOrder.id;
+    // const [findCondition, created] = await Condition.findOrCreate({
+    //   where: {
+    //     userId: req.user.id,
+    //   }
+    // });
+    // const conditionId = findCondition.id;
     const userId = req.user.id;
-    const value = req.body.value;
-    const date = req.body.date;
-    const notes = req.body.notes;
-    await Score.create({value, date, notes, conditionId, userId});
-    res.json(findOrder);
+    const rate = req.body.rate.rate;
+    const date = req.body.rate.date;
+    const notes = req.body.rate.notes;
+    const conditionId = req.body.rate.conditionId;
+    console.log(req.body);
+    const newScore = await Score.create({rate, date, notes, conditionId, userId});
+    res.json(newScore);
   } catch (error) {
     next(error);
   }

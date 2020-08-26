@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
-class EditCondition extends Component {
+import { connect } from 'react-redux';
+import {
+  updateSingleConditionThunk
+} from '../redux/singleCondition'
+class UpdateCondition extends Component {
   constructor() {
     super();
     this.state = {
@@ -15,7 +19,8 @@ class EditCondition extends Component {
   }
   handleSubmit(evt) {
     evt.preventDefault()
-    this.props.editCondition(this.props.conditionId, this.state)
+    const id = this.props.condition.id
+    this.props.updateCondition(id, this.state)
     this.setState({
       name: '',
       diagnosed: '',
@@ -68,4 +73,16 @@ class EditCondition extends Component {
     )
   }
 }
-export default EditCondition;
+const mapStateToProps = state => {
+  return {
+      condition: state.condition,
+      currentUser: state.currentUser
+  }
+}
+const mapDispatchToProps = dispatch => {
+  return {
+      updateCondition: (id, condition) => dispatch(updateSingleConditionThunk(id, condition)),
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateCondition)
+
