@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { getAllDoctorsThunk, addDoctorThunk } from "../redux/doctors";
 import { fetchSingleDoctor } from '../redux/singleDoctor'
 import { AddDoctor } from "./AddDoctor";
-import { Link } from 'react-router-dom'
 import ReactModal from 'react-modal'
 import SingleDoctor from './SingleDoctor'
 
