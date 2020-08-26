@@ -5,6 +5,11 @@
   "engines": {
     "node": "10.x"
   },
+  "scripts": {
+    "start": "nodemon server",
+    "build": "cd react-ui/ && npm run build",
+    "start-dev": "NODE_ENV='development' npm run build & NODE_ENV='development' npm run start-server"
+  },
   "cacheDirectories": [
     "node_modules",
     "react-ui/node_modules"
@@ -24,13 +29,7 @@
     "passport-facebook": "^3.0.0",
     "passport-google-oauth": "^2.0.0",
     "pg": "^8.3.2",
-    "sequelize": "^6.3.4",
-    "start": "nodemon server",
-    "build": "cd react-ui/ && npm run build",
-    "start-dev": "NODE_ENV='development' npm run build & NODE_ENV='development' npm run start-server",
-    "babel-eslint": "^9.0.0",
-    "eslint": "^5.12.0",
-    "nodemon": "^2.0.4"
+    "sequelize": "^6.3.4"
   },
   "repository": {
     "type": "git",
@@ -42,5 +41,10 @@
     "create-react-app",
     "react"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-eslint": "^9.0.0",
+    "eslint": "^5.12.0",
+    "nodemon": "^2.0.4"
+  }
 }
