@@ -6,10 +6,9 @@
     "node": "10.x"
   },
   "scripts": {
-    "start": "node server",
+    "start": "nodemon server",
     "build": "cd react-ui/ && npm run build",
-    "start-dev": "NODE_ENV='development' npm run build & NODE_ENV='development' npm run start-server",
-    "start-server": "nodemon server"
+    "start-dev": "NODE_ENV='development' npm run build & NODE_ENV='development' npm run start-server"
   },
   "cacheDirectories": [
     "node_modules",

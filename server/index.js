@@ -10,6 +10,8 @@ const sessionStore = new SequelizeStore({ db });
 const numCPUs = require("os").cpus().length;
 const isDev = process.env.NODE_ENV === "development";
 const PORT = process.env.PORT || 5000;
+const cors = require('cors')
+const CLIENT_ORIGIN = 'http://localhost:5000'
 
 
 // Multi-process to utilize all CPU cores.
@@ -60,6 +62,10 @@ if (!isDev && cluster.isMaster) {
   );
   app.use(passport.initialize());
   app.use(passport.session());
+
+  app.use(cors({
+    origin: CLIENT_ORIGIN
+  }))
 
   // Image upload middleware
   app.use(require('./cloudinaryMiddleware'))

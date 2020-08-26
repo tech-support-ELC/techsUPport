@@ -13,7 +13,8 @@ import SingleCondition from './SingleCondition';
 import AddDoctor from "./AddDoctor"
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import UploadDocuments from "./UploadDocuments"
+import Documents from "./Documents"
+import Profile from "./Profile"
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -32,12 +33,14 @@ class Root extends Component {
           <Route exact path='/' component={Home} />
           <Route path='/login' component={Login} />
           <Route path='/signup' component={Signup} />
-          <Route path='/dailycheckin' components={DailyCheckin} />
+          <Route path='/dailycheckin' component={DailyCheckin} />
           <Route exact path='/conditions' component={Conditions} />
           <Route path='/conditions/:id' component={SingleCondition} />
           <Route path="/medications" component={Medications} />
           <Route path="/doctors" component={AddDoctor} />
-          <Route path="/uploadDoc" component={UploadDocuments} />
+
+          <Route exact path="/profile" component={Profile} />
+          <Route path="/documents/:id" component={Documents} />
 
         </div>
         <div>
