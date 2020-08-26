@@ -5,7 +5,8 @@ import { fetchMedication } from "../redux/singleMedication";
 export class SingleMedication extends React.Component {
   componentDidMount() {
     try {
-      this.props.loadSingleMedication(this.props.medication.id);
+      const id = this.props.match.params.id;
+      this.props.loadSingleMedication(id);
     } catch (err) {
       console.log(err);
     }
@@ -23,10 +24,16 @@ export class SingleMedication extends React.Component {
   }
 }
 
+const mapState = (state) => {
+  return {
+    medication: state.medication,
+  };
+};
+
 const mapDispatch = (dispatch) => {
   return {
     loadSingleMedication: (id) => dispatch(fetchMedication(id)),
   };
 };
 
-export default connect(null, mapDispatch)(SingleMedication);
+export default connect(mapState, mapDispatch)(SingleMedication);

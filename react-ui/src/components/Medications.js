@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 import { fetchMedications, deleteMedication } from "../redux/medications";
 import AddMedication from "./AddMedication";
@@ -22,7 +22,7 @@ class Medications extends React.Component {
   // }
 
   render() {
-    const { medications, remove } = this.props
+    const { medications, remove } = this.props;
 
     return (
       <div>
@@ -33,19 +33,17 @@ class Medications extends React.Component {
               return (
                 <div key={medication.id}>
                   {/* <p onClick={this.handleSelect(medication)}> */}
-                  {medication.name}
+                  <Link to={`/medications/${medication.id}`}>
+                    {medication.name}
+                  </Link>
                   {/* </p> */}
 
-                  <RemoveMedication
-                    medication={medication}
-                    remove={remove}
-                  />
+                  <RemoveMedication medication={medication} remove={remove} />
                 </div>
               );
             })}
           <div>
             <AddMedication />
-            <Link to='/conditions'>Add a Condition</Link>
           </div>
           <div>
             {/* <SingleMedication medication={this.state.selected} /> */}
@@ -58,6 +56,7 @@ class Medications extends React.Component {
 const mapStateToProps = (state) => {
   return {
     medications: state.medications,
+    currentUser: state.currentUser,
   };
 };
 const mapDispatchToProps = (dispatch) => {

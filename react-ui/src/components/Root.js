@@ -4,17 +4,18 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./Home";
 import Signup from "./Signup";
 import Login from "./Login";
-import Conditions from './Conditions'
+import Conditions from "./Conditions";
 import Medications from "./Medications";
-import { fetchCurrentUser } from '../redux/auth'
-import DailyCheckin from './DailyCheckin';
-import SingleCondition from './SingleCondition';
+import { fetchCurrentUser } from "../redux/auth";
+import DailyCheckin from "./DailyCheckin";
+import SingleCondition from "./SingleCondition";
 // import AllDoctors from "./AllDoctors"
-import AddDoctor from "./AddDoctor"
+import AddDoctor from "./AddDoctor";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Documents from "./Documents"
 import Profile from "./Profile"
+import SingleMedication from "./SingleMedication";
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -37,11 +38,11 @@ class Root extends Component {
           <Route exact path='/conditions' component={Conditions} />
           <Route path='/conditions/:id' component={SingleCondition} />
           <Route path="/medications" component={Medications} />
+          <Route path="/medications/:id" component={SingleMedication} />
           <Route path="/doctors" component={AddDoctor} />
 
           <Route exact path="/profile" component={Profile} />
           <Route path="/documents/:id" component={Documents} />
-
         </div>
         <div>
           <Footer />

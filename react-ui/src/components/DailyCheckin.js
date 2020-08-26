@@ -1,84 +1,97 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getAllConditionsThunk} from '../redux/conditions';
-import {fetchMedications} from '../redux/medications';
-// import {} from '../redux/doctors';
-
+import {getScoreThunk, addScoreThunk} from '../redux/dailyCheckin';
 class DailyCheckin extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      value: 0,
+      date: new Date(),
+      notes: ''
+    };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount() {
-    this.props.getAllConditions();
+    console.log('props in daily checkin', this.props)
+    this.props.getScore();
   }
   handleChange(evt) {
     this.setState({[evt.target.name]: evt.target.value})
   }
   handleSubmit(evt) {
     evt.preventDefault();
+    this.props.addScore(this.state);
+    this.setState({
+      value: 0,
+      date: new Date(),
+      notes: ''
+    })
   }
   render() {
-    const conditions = this.props.conditions;
-    const medications = this.props.medications;
-    const doctors = this.props.doctors;
+    const score = this.props.score;
+
     return (
       <div>
         <h1>Daily checkin</h1>
+        <h3>Conditions</h3>
+        {
+          score && score.map(condition => {
+            return (
+              <div key={condition.id}>
+              condition.name
+              </div>
+            )
+          })
+        }
+        <form onSubmit={this.handleSubmit}>
         <div>
-          {
-            conditions && conditions.map(condition => {
-              return (
-                <form onSubmit={this.handleSubmit}>
-                  <label>
-                    {condition.name}
-                    <input
-                      name={condition.name}
-                      type="checkbox"
-                      checked={this.state.name}
-                      onChange={this.handleChange} />
-                  </label>
-                </form>
-              )
-            })
-          }
-        </div>
-        <div>
-          {
-            medications && medications.map(medication => {
-              return (
-                <div>{medication.name}</div>
-              )
-            })
-          }
-        </div>
-        <div>
-          {
-            doctors && doctors.map(doctor => {
-              return (
-                <div>{doctor.firstName} {doctor.lastName}</div>
-              )
-            })
-          }
-        </div>
+          <input
+            className='input'
+            placeholder='Give score for condition'
+            type='text'
+            name='value'
+            onChange={this.handleChange}
+            value={this.state.value}
+          />
+          </div>
+          <div>
+            <input
+              className='input'
+              placeholder='Date'
+              type='text'
+              name='date'
+              onChange={this.handleChange}
+              value={this.state.date}
+            />
+          </div>
+          <div>
+            <input
+              className='input'
+              placeholder='Notes'
+              type='text'
+              name='notes'
+              onChange={this.handleChange}
+              value={this.state.notes}
+            />
+          </div>
+          <button type="submit">
+            Submit
+          </button>
+        </form>
       </div>
     )
   }
 }
 const mapStateToProps = state => {
   return {
-    conditions: state.conditions,
-    doctors: state.doctors,
-    medications: state.medications
+    score: state.score,
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
-    getAllConditions: () => dispatch(getAllConditionsThunk()),
-    getAllMedications: () => dispatch(fetchMedications()),
-    // getAllDoctors: () => dispatch(()),
+    getScore: () => dispatch(getScoreThunk()),
+    addScore: (score) => dispatch(addScoreThunk(score))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(DailyCheckin)
