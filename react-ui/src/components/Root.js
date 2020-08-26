@@ -13,7 +13,8 @@ import AllDoctors from "./AllDoctors"
 import SingleDoctor from "./SingleDoctor";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import UploadDocuments from "./UploadDocuments";
+import Documents from "./Documents"
+import Profile from "./Profile"
 import SingleMedication from "./SingleMedication";
 
 /* -----------------    COMPONENT     ------------------ */
@@ -37,10 +38,13 @@ class Root extends Component {
           <Route exact path='/conditions' component={Conditions} />
           <Route path='/conditions/:id' component={SingleCondition} />
           <Route path="/medications" component={Medications} />
-          <Route path="/doctors" component={AllDoctors} />
-          <Route path="/doctors/:id" component={SingleDoctor} />
           <Route path="/medications/:id" component={SingleMedication} />
-          <Route path="/uploadDoc" component={UploadDocuments} />
+          <Route path="/doctors" component={AddDoctor} />
+          <Route path="/doctors/:id" component={SingleDoctor} />
+
+          <Route exact path="/profile" component={Profile} />
+          <Route path="/documents/:id" component={Documents} />
+
         </div>
 
         <Footer />
