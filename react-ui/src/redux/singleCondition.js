@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { API_URL } from './API_URL';
 import {updateAllConditions} from './conditions';
 const initialState = {};
 
@@ -22,7 +23,7 @@ const updateCondition = condition => {
 export const getSingleConditionThunk = id => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`/api/conditions/${id}`);
+      const {data} = await axios.get(`${API_URL}/api/conditions/${id}`);
       dispatch(getSingleCondition(data));
     } catch (error) {
       console.log(error)
@@ -38,7 +39,7 @@ export const updateSingleConditionThunk = (
   return async dispatch => {
     try {
       const {data} = await axios.put(
-        `/api/conditions/${id}`,
+        `${API_URL}/api/conditions/${id}`,
         name,
         diagnosed,
         typeOfPain
