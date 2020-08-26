@@ -3,8 +3,8 @@ import React from "react";
 const Footer = () => {
   return (
     <footer>
-      <div>Github!</div>
-      <div>Names!</div>
+      <div className="column">Github!</div>
+      <div className="column">Names!</div>
     </footer>
   );
 };

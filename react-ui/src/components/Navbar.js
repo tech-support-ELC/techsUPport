@@ -3,17 +3,17 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <div>
+    <nav>
       <div>
         <Link to="/">Home</Link>
       </div>
-      <div>
+      <div id="upperRight">
         <Link to="/medications">My Medications</Link>
         <Link to="/doctors">My Doctors</Link>
         <Link to="/conditions">My Conditions</Link>
         <Link to="/uploadDoc">Add Documents</Link>
       </div>
-    </div>
+    </nav>
   );
 };
 
