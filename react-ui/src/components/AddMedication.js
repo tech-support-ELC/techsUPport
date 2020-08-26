@@ -5,18 +5,23 @@ import { addMedication } from "../redux/medications";
 class AddMedication extends React.Component {
   constructor() {
     super();
-    this.state = { name: "", dosage: "", frequency: "" };
+    this.state = { name: "", dosage: "", frequency: "", userId: 0 };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentDidMount() {}
+
   handleChange(event) {
+    const currentUser = this.props.currentUser.id;
+    this.setState({ userId: currentUser });
     this.setState({ [event.target.name]: event.target.value });
   }
 
   handleSubmit(event) {
     event.preventDefault();
     this.props.addMedication(this.state);
+    this.setState({ name: "", dosage: "", frequency: "", userId: 0 });
   }
 
   render() {
@@ -57,14 +62,14 @@ class AddMedication extends React.Component {
   }
 }
 
-// const mapState = (state) => {
-//   return {
-//     medication: state.medication,
-//   };
-// };
+const mapState = (state) => {
+  return {
+    currentUser: state.currentUser,
+  };
+};
 
 const mapDispatch = (dispatch) => {
   return { addMedication: (medication) => dispatch(addMedication(medication)) };
 };
 
-export default connect(null, mapDispatch)(AddMedication);
+export default connect(mapState, mapDispatch)(AddMedication);
