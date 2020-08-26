@@ -15,9 +15,7 @@ const getSingleCondition = condition => {
 const updateCondition = condition => {
   return {
     type: UPDATE_CONDITION,
-    name: condition.name,
-    diagnosed: condition.diagnosed,
-    typeOfPain: condition.typeOfPain
+    condition
   }
 }
 export const getSingleConditionThunk = id => {
@@ -32,17 +30,13 @@ export const getSingleConditionThunk = id => {
 }
 export const updateSingleConditionThunk = (
   id,
-  name,
-  diagnosed,
-  typeOfPain
+  condition
 ) => {
   return async dispatch => {
     try {
       const {data} = await axios.put(
         `${API_URL}/api/conditions/${id}`,
-        name,
-        diagnosed,
-        typeOfPain
+        condition
       );
       dispatch(updateCondition(data));
       dispatch(updateAllConditions(data.id, data));
