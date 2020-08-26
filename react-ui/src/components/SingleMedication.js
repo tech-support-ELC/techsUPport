@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchMedication } from "../redux/singleMedication";
+import UpdateMedication from "./UpdateMedication";
 
 export class SingleMedication extends React.Component {
   componentDidMount() {
@@ -19,6 +20,7 @@ export class SingleMedication extends React.Component {
         <p>{medication.name}</p>
         <p>{medication.dosage}</p>
         <p>{medication.frequency}</p>
+        <UpdateMedication medication={medication} />
       </div>
     );
   }

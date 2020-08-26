@@ -1,4 +1,5 @@
 import axios from "axios";
+import { API_URL } from "./API_URL";
 
 const GET_MEDICATION = "GET_MEDICATION";
 
@@ -12,7 +13,7 @@ const getSingleMedication = (medication) => ({
 export const fetchMedication = (id) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`/api/medications/${id}`);
+      const { data } = await axios.get(`${API_URL}/api/medications/${id}`);
       dispatch(getSingleMedication(data));
     } catch (error) {
       console.log(error);
@@ -24,7 +25,7 @@ export const updateMedication = (medication, updatedMedication) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.put(
-        `/api/medications/${medication.id}`,
+        `${API_URL}/api/medications/${medication.id}`,
         updatedMedication
       );
       dispatch(getSingleMedication(data));
