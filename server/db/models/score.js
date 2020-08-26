@@ -7,8 +7,12 @@ const Score = db.define('score', {
     primaryKey: true,
     autoIncrement: true
   },
-  value: {
+  rate: {
     type: Sequelize.INTEGER,
+    validate: {
+      min: 1,
+      max: 10
+    }
   },
   date: {
     type: Sequelize.DATEONLY,

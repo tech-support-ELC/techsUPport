@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {updateAllConditions} from './conditions';
 const initialState = {};
 
 const GET_SINGLE_CONDITION = 'GET_SINGLE_CONDITION'
@@ -21,8 +22,8 @@ const updateCondition = condition => {
 export const getSingleConditionThunk = id => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`/api/conditions/${id}`)
-      dispatch(getSingleCondition(data))
+      const {data} = await axios.get(`/api/conditions/${id}`);
+      dispatch(getSingleCondition(data));
     } catch (error) {
       console.log(error)
     }
@@ -41,8 +42,9 @@ export const updateSingleConditionThunk = (
         name,
         diagnosed,
         typeOfPain
-      )
-      dispatch(updateCondition(data))
+      );
+      dispatch(updateCondition(data));
+      dispatch(updateAllConditions(data.id, data));
     } catch (error) {
       console.log(error)
     }
@@ -54,12 +56,11 @@ export default function(state = initialState, action) {
     case GET_SINGLE_CONDITION:
       return action.condition
     case UPDATE_CONDITION:
-      return {
-        ...state,
-        name: action.name,
-        diagnosed: action.diagnosed,
-        typeOfPain: action.typeOfPain,
-      }
+      let updated = { ...state.condition }
+      updated.name = action.condition.name
+      updated.diagnosed = action.condition.diagnosed
+      updated.typeOfPain = action.condition.address
+      return updated
     default:
       return state
   }
