@@ -1,41 +1,56 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
 import {
   getSingleConditionThunk,
-  updateSingleConditionThunk
-} from '../redux/singleCondition'
-import EditCondition from './EditCondition'
-import {deleteConditionThunk} from '../redux/conditions'
+} from '../redux/singleCondition';
+import {deleteConditionThunk} from '../redux/conditions';
+import UpdateCondition from './UpdateCondition';
 class SingleCondition extends Component {
+  constructor() {
+    super()
+    this.state = {
+        clicked: false
+    }
+    this.updateCondition = this.updateCondition.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
+}
   componentDidMount() {
-    console.log('props in condition',this.props);
-    const id = this.props.match.params.id;
+    const id = this.props.condition.id;
     this.props.getSingleCondition(id);
+  }
+  updateCondition = () => {
+    this.setState({ clicked: true })
+  }
+  async handleDelete(id) {
+    try {
+        await this.props.deleteCondition(id)
+        this.props.closeTheModal()
+    } catch (err) {
+        console.log(err)
+    }
   }
   render() {
     const condition = this.props.condition;
+    if (!condition) {
+      return "This condition is not in our system"
+  } else {
     return (
       <div>
-        {condition &&
-        <EditCondition
-          conditionId={condition.id}
-          editCondition={this.props.editCondition}
-        />
-        }
+        <div>{condition.name} </div>
+        <div>{condition.diagnosed}</div>
+        <div>{condition.typeOfPain}</div>
         <div>
-          {condition && condition.name}
+          {this.state.clicked && <UpdateCondition />}
         </div>
         <div>
-          {condition && condition.diagnosed}
-        </div>
-        <div>
-          {condition && condition.typeOfPain}
+            {!this.state.clicked &&
+                <button onClick={() => this.updateCondition()}>Update Condition</button>
+            }
         </div>
         {
-          condition &&
-          <button
-          type="submit"
-          onClick={() => this.props.removeCondition(condition.id)}
+        <button
+        type="submit"
+        onClick={() => this.props.removeCondition(condition.id)}
         >
           Remove Condition
         </button>
@@ -43,6 +58,7 @@ class SingleCondition extends Component {
       </div>
     )
   }
+}
 }
 const mapStateToProps = state => {
   return {
@@ -52,8 +68,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getSingleCondition: id => dispatch(getSingleConditionThunk(id)),
-    editCondition: (id, condition) =>
-      dispatch(updateSingleConditionThunk(id, condition)),
     removeCondition: id => dispatch(deleteConditionThunk(id))
   }
 }

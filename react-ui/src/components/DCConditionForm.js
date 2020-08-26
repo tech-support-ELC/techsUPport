@@ -18,7 +18,6 @@ class DCConditionForm extends Component {
     this.setState({conditionId});
     const target = evt.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    console.log(target.checked)
     const name = target.name;
     this.setState({
       [name]: value
@@ -27,7 +26,6 @@ class DCConditionForm extends Component {
   handleSubmit(evt) {
     evt.preventDefault();
     this.props.addScore(this.state);
-    console.log('state in DC',this.state)
     this.setState({
       isClicked: false,
       name: '',
@@ -63,19 +61,6 @@ class DCConditionForm extends Component {
               onChange={this.handleChange}
               value={this.state.rate}
             />
-          </label>
-        </div>
-        <div>
-          <label>
-            Date
-          <input
-            className='input'
-            placeholder='Date'
-            type='text'
-            name='date'
-            onChange={this.handleChange}
-            value={this.state.date}
-          />
           </label>
         </div>
         <div>
