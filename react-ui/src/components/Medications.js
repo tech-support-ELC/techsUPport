@@ -8,18 +8,34 @@ import RemoveMedication from "./RemoveMedication";
 import SingleMedication from "./SingleMedication";
 
 class Medications extends React.Component {
-  // constructor() {
-  //   super();
-  //   this.state = { selected: "" };
-  //   this.handleSelect = this.handleSelect.bind(this);
-  // }
+  constructor() {
+    super();
+    this.state = { selected: null, add: false };
+    this.handleSelect = this.handleSelect.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
+  }
   componentDidMount() {
     this.props.fetchMedications();
   }
 
-  // handleSelect(medication) {
-  //   this.setState({ selected: medication });
-  // }
+  handleSelect(medication) {
+    this.setState({ selected: medication, add: false });
+  }
+
+  handleAdd() {
+    this.setState({ selected: null, add: true });
+  }
+
+  handleClose() {
+    this.setState({ selected: null, add: false });
+  }
+
+  handleRemove(id) {
+    this.props.remove(id);
+    this.handleClose();
+  }
 
   render() {
     const { medications, remove } = this.props;
@@ -33,21 +49,57 @@ class Medications extends React.Component {
               medications.map((medication) => {
                 return (
                   <div key={medication.id} className="listItem">
-                    {/* <p onClick={this.handleSelect(medication)}> */}
-                    <Link to={`/medications/${medication.id}`}>
+                    <button
+                      type="button"
+                      onClick={() => this.handleSelect(medication)}
+                    >
                       {medication.name}
-                    </Link>
+                    </button>
+                    {/* <p onClick={this.handleSelect(medication)}> */}
+                    {/* <Link to={`/medications/${medication.id}`}>
+                      {medication.name}
+                    </Link> */}
 
                     <RemoveMedication medication={medication} remove={remove} />
                   </div>
                 );
               })}
           </div>
+          <button type="button" onClick={() => this.handleAdd()}>
+            Add a Medication
+          </button>
         </div>
-        <div className="column" id="medModal">
-          {/* <SingleMedication medication={this.state.selected} /> */}
+        <div className="column">
+          <div className="modal">
+            {this.state.add && (
+              <>
+                <AddMedication />
+                <button type="button" onClick={() => this.handleClose()}>
+                  X
+                </button>
+              </>
+            )}
 
-          <AddMedication />
+            {this.state.selected && (
+              <>
+                <button type="button" onClick={() => this.handleClose()}>
+                  X
+                </button>
+
+                <SingleMedication
+                  medication={this.state.selected}
+                  remove={remove}
+                  // close={this.handleClose}
+                />
+
+                <RemoveMedication
+                  medication={this.state.selected}
+                  remove={this.handleRemove}
+                  // close={this.handleClose}
+                />
+              </>
+            )}
+          </div>
         </div>
       </div>
     );

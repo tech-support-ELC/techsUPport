@@ -1,16 +1,15 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const User_Medication = db.define('user_medication', {
+const DailyMed = db.define('dailyMed', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-
-  date: {
-    type: Sequelize.DATEONLY,
+  notes: {
+    type: Sequelize.TEXT
   }
 });
 
-module.exports = User_Medication;
+module.exports = DailyMed;

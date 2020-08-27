@@ -1,50 +1,63 @@
-const Condition = require("./condition");
-const Score = require("./score");
-const Doctor = require("./doctor");
-// const Doctor_User = require('./doctor_User');
+const Condition = require('./condition');
+const Score = require('./score');
+const Doctor = require('./doctor');
+const Appointment = require('./appointment');
 const Medication = require("./medication");
 const User = require("./user");
-const User_Medication = require("./user_medication");
-
-Doctor.belongsTo(User);
-User.hasMany(Doctor);
+const DailyMed = require('./dailyMed');
 
 Medication.belongsTo(User);
 User.hasMany(Medication);
-
 Medication.belongsToMany(User, {
   through: {
-    model: "user_medication",
+    model: "dailyMed",
+    unique: false
   },
 });
 
 User.belongsToMany(Medication, {
   through: {
-    model: "user_medication",
+    model: "dailyMed",
+    unique: false
   },
 });
 
+Condition.belongsTo(User);
+User.hasMany(Condition);
 Condition.belongsToMany(User, {
   through: {
     model: 'score',
     unique: false
   }
 });
-
 User.belongsToMany(Condition, {
   through: {
     model: 'score',
     unique: false
   }
 });
-Condition.belongsTo(User);
-User.hasMany(Condition);
+
+Doctor.belongsTo(User);
+User.hasMany(Doctor);
+Doctor.belongsToMany(User, {
+  through: {
+    model: 'appointment',
+    unique: false
+  }
+});
+User.belongsToMany(Doctor, {
+  through: {
+    model: 'appointment',
+    unique: false
+  }
+});
+
 module.exports = {
   Condition,
-  // User_Condition,
+  Score,
   Doctor,
-  // Doctor_User,
+  Appointment,
   Medication,
-  // User_Medication,
+  DailyMed,
   User,
 };

@@ -3,12 +3,13 @@ const passport = require('passport')
 const router = require('express').Router()
 const FacebookStrategy = require('passport-facebook').Strategy
 const { User } = require('../db/models')
+const CLIENT_ORIGIN = require('../CLIENT_ORIGIN');
 module.exports = router
 
 const facebookConfig = {
   clientID: process.env.FACEBOOK_APP_ID,
   clientSecret: process.env.FACEBOOK_APP_SECRET,
-  callbackURL: '/auth/facebook/verify',
+  callbackURL: `${CLIENT_ORIGIN}/auth/facebook/verify`,
   profileFields: ['id', 'emails', 'name']
 }
 

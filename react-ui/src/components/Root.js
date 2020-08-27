@@ -1,21 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { withRouter, Route, Switch } from "react-router-dom";
 import Home from "./Home";
 import Signup from "./Signup";
 import Login from "./Login";
 import Conditions from "./Conditions";
 import Medications from "./Medications";
 import { fetchCurrentUser } from "../redux/auth";
-import DailyCheckin from "./DailyCheckin";
+import ConditionDC from "./ConditionDC";
 import SingleCondition from "./SingleCondition";
+import Documents from "./Documents"
+import Profile from "./Profile"
 import AllDoctors from "./AllDoctors"
 import SingleDoctor from "./SingleDoctor";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
-import UploadDocuments from "./UploadDocuments";
 import SingleMedication from "./SingleMedication";
-
+import Navbar from "./Navbar";
+import DoctorDC from "./DoctorDC";
+import MedicationDC from './MedicationDC';
 /* -----------------    COMPONENT     ------------------ */
 
 class Root extends Component {
@@ -23,40 +24,55 @@ class Root extends Component {
     this.props.fetchInitialData();
   }
   render() {
+    const { isLoggedIn } = this.props;
     return (
-      <Router>
-        <div>
-          <Navbar />
-        </div>
-        <div>
-          <h1>This is the root</h1>
-          <Route exact path='/' component={Home} />
-          <Route path='/login' component={Login} />
-          <Route path='/signup' component={Signup} />
-          <Route exact path='/dailycheckin/score' component={DailyCheckin} />
-          <Route exact path='/conditions' component={Conditions} />
-          <Route path='/conditions/:id' component={SingleCondition} />
-          <Route path="/medications" component={Medications} />
-          <Route path="/doctors" component={AllDoctors} />
-          <Route path="/doctors/:id" component={SingleDoctor} />
-          <Route path="/medications/:id" component={SingleMedication} />
-          <Route path="/uploadDoc" component={UploadDocuments} />
-        </div>
+      <Switch>
+        {/* Routes placed here are available to all visitors */}
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
 
-        <Footer />
-      </Router>
+        {isLoggedIn && (
+          <>
+            {/* Routes placed here are only available after logging in */}
+            <Navbar />
+
+            <Route exact path='/' component={Home} />
+            <Route exact path='/dailycheckin/score' component={ConditionDC} />
+            <Route exact path='/conditions' component={Conditions} />
+            <Route path='/conditions/:id' component={SingleCondition} />
+            <Route path="/medications" component={Medications} />
+            <Route path="/medications/:id" component={SingleMedication} />
+            <Route path="/doctors" component={AllDoctors} />
+            <Route path="/doctors/:id" component={SingleDoctor} />
+            <Route exact path="/profile" component={Profile} />
+            <Route path="/documents/:id" component={Documents} />
+            <Route exact path='/dailycheckin/appointment' component={DoctorDC} />
+            <Route exact path='/dailycheckin/meds' component={MedicationDC} />
+          </>
+        )}
+
+        {/* Displays our Login component as a fallback */}
+        <Route component={Login} />
+      </Switch>
     );
   }
 }
 
 /* -----------------    CONTAINER     ------------------ */
 
-const mapState = null;
-
+const mapState = (state) => {
+  return {
+    // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
+    // Otherwise, state.user will be an empty object, and state.user.id will be falsey
+    isLoggedIn: !!state.currentUser.id,
+  };
+};
 const mapDispatch = (dispatch) => ({
   fetchInitialData: () => {
     dispatch(fetchCurrentUser());
   },
 });
 
-export default connect(mapState, mapDispatch)(Root);
+// The `withRouter` wrapper makes sure that updates are not blocked
+// when the url changes
+export default withRouter(connect(mapState, mapDispatch)(Root));

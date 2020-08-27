@@ -1,14 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
+import { BrowserRouter as Router } from "react-router-dom";
 import store from "./store";
 import Root from "./components/Root";
-import * as serviceWorker from "./serviceWorker";
-import "./style.scss";
+import Footer from "./components/Footer";
+import * as serviceWorker from './serviceWorker';
+import './style.scss'
 
 ReactDOM.render(
   <Provider store={store}>
-    <Root />
+    <Router>
+      <Root />
+      <Footer />
+    </Router>
   </Provider>,
   document.getElementById("root")
 );
