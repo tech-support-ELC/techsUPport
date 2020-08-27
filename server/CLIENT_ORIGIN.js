@@ -1,2 +1,2 @@
 
-exports.CLIENT_ORIGIN = 'https://elemental-health.surge.sh'
+export const CLIENT_ORIGIN = 'https://elemental-health.surge.sh'
