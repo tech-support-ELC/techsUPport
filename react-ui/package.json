@@ -24,11 +24,17 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "https://elemental-health.surge.sh"
+  "proxy": "http://localhost:5000"
 }
