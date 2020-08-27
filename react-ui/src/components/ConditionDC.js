@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {getScoreThunk, addScoreThunk} from '../redux/dcCondition';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getScoreThunk, addScoreThunk } from '../redux/dcCondition';
 import DCConditionForm from './DCConditionForm';
 class ConditionDC extends Component {
   componentDidMount() {
@@ -16,8 +16,8 @@ class ConditionDC extends Component {
           score && score.map(condition => {
             return (
               <div key={condition.id}>
-                <DCConditionForm condition={condition} addScore={this.props.addScore}/>
-            </div>
+                <DCConditionForm condition={condition} addScore={this.props.addScore} />
+              </div>
             )
           })
         }
