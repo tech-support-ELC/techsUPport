@@ -9,7 +9,7 @@ const db = require("./db");
 const sessionStore = new SequelizeStore({ db });
 const numCPUs = require("os").cpus().length;
 const isDev = process.env.NODE_ENV === "development";
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT
 const cors = require('cors')
 const CLIENT_ORIGIN = require('./CLIENT_ORIGIN')
 
@@ -84,7 +84,7 @@ if (!isDev && cluster.isMaster) {
 
   // All remaining requests return the React app, so it can handle routing.
   app.get("*", function (req, res) {
-    res.sendFile(path.resolve(__dirname, "../react-ui/build", "index.html"));
+    res.sendFile(path.join(__dirname, "../react-ui/build", "index.html"));
   });
 
   // error handling endware

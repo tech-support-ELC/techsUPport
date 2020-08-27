@@ -33,6 +33,7 @@ export const login = (credentials, history) => {
   return async dispatch => {
     try {
       const { data } = await axios.post(`${API_URL}/auth/local/login`, credentials)
+      // const { data } = await axios.post(`/auth/local/login`, credentials)
       setUserAndRedirect(data, history, dispatch)
     } catch (err) {
       console.error(`Logging in with ${credentials.email} was unsuccesful`, err)
@@ -57,6 +58,7 @@ export const signup = (credentials, history) => {
   return async dispatch => {
     try {
       const { data } = await axios.post(`${API_URL}/auth/local/signup`, credentials)
+      // const { data } = await axios.post(`/auth/local/signup`, credentials)
       setUserAndRedirect(data, history, dispatch)
     } catch (err) {
       console.error(`Signing up with ${credentials.email} was unsuccesful`, err)
@@ -67,7 +69,9 @@ export const signup = (credentials, history) => {
 export const fetchCurrentUser = () => {
   return async dispatch => {
     try {
-      const { data } = await axios.get(`${API_URL}/auth/local/me`)
+      console.log(API_URL)
+      const { data } = await axios.get(`/${API_URL}/auth/local/me`)
+      // const { data } = await axios.get(`/auth/local/me`)
       dispatch(setCurrentUser(data))
     } catch (err) {
       console.error('Fetching current user failed', err)
