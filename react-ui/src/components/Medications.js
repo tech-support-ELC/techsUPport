@@ -48,18 +48,16 @@ class Medications extends React.Component {
             {medications &&
               medications.map((medication) => {
                 return (
-                  <div key={medication.id} className="listItem">
-                    <button
-                      type="button"
-                      onClick={() => this.handleSelect(medication)}
-                    >
-                      {medication.name}
-                    </button>
-                    {/* <p onClick={this.handleSelect(medication)}> */}
-                    {/* <Link to={`/medications/${medication.id}`}>
-                      {medication.name}
-                    </Link> */}
-
+                  <div className="listItem" key={medication.id}>
+                    <>
+                      <button
+                        className="medName"
+                        type="button"
+                        onClick={() => this.handleSelect(medication)}
+                      >
+                        {medication.name}
+                      </button>
+                    </>
                     <RemoveMedication medication={medication} remove={remove} />
                   </div>
                 );
@@ -87,9 +85,9 @@ class Medications extends React.Component {
                 </button>
 
                 <SingleMedication
-                  medication={this.state.selected}
+                  selected={this.state.selected}
                   remove={remove}
-                  // close={this.handleClose}
+                  // closeModal={this.handleClose}
                 />
 
                 <RemoveMedication
