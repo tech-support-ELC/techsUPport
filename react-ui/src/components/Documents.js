@@ -17,7 +17,7 @@ export class Documents extends Component {
             documents.map((doc, i) => (
               <div key={i}>
                 <Link to={`/documents/${i}`}>
-                  <img src={doc.secure_url}
+                  <img src={doc.imageUrl}
                     alt='document' width="200" height="200"
                   // onError={() => props.onError(doc.public_id)}
                   />

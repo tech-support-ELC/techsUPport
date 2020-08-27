@@ -7,6 +7,7 @@ import { API_URL } from './API_URL'
 const GET_DOCUMENTS = "GET_DOCUMENTS";
 const UPLOAD_DOCUMENTS = "UPLOAD_DOCUMENTS"
 
+
 /* ------------     ACTION CREATORS      ------------------ */
 
 const getDocuments = (documents) => ({ type: GET_DOCUMENTS, documents });
@@ -42,10 +43,10 @@ export const fetchDocuments = () => {
   }
 }
 
-export const uploadDocumentsThunk = (document) => {
+export const uploadDocumentsThunk = (docInfo) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post(`${API_URL}/api/documents`, document)
+      const { data } = await axios.post(`${API_URL}/api/documents`, docInfo)
       dispatch(uploadDocuments(data));
     } catch (error) {
       console.log(error);
