@@ -69,7 +69,8 @@ export const signup = (credentials, history) => {
 export const fetchCurrentUser = () => {
   return async dispatch => {
     try {
-      const { data } = await axios.get(`${API_URL}/auth/local/me`)
+      console.log(API_URL)
+      const { data } = await axios.get(`/${API_URL}/auth/local/me`)
       // const { data } = await axios.get(`/auth/local/me`)
       dispatch(setCurrentUser(data))
     } catch (err) {
