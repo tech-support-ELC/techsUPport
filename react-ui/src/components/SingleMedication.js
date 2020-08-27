@@ -13,7 +13,7 @@ export class SingleMedication extends React.Component {
   }
   componentDidMount() {
     try {
-      const id = this.props.selected.id;
+      const id = this.props.selected.id || this.props.medication;
       this.props.loadSingleMedication(id);
     } catch (err) {
       console.log(err);
@@ -35,14 +35,6 @@ export class SingleMedication extends React.Component {
   handleUpdate(medication, updatedMedication) {
     this.props.update(medication, updatedMedication);
   }
-  // handleReload(id) {
-  //   this.props.loadSingleMedication(id);
-  // }
-
-  // handleRemove() {
-  //   this.setState({ view: false });
-
-  // }
 
   render() {
     const medication = this.props.medication;

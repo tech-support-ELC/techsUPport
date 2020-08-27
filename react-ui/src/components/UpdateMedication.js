@@ -1,6 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
-import { updateMedication } from "../redux/singleMedication";
 
 export default class UpdateMedication extends React.Component {
   constructor() {

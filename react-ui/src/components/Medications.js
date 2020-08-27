@@ -48,14 +48,16 @@ class Medications extends React.Component {
             {medications &&
               medications.map((medication) => {
                 return (
-                  <div key={medication.id} className="listItem">
-                    <button
-                      type="button"
-                      onClick={() => this.handleSelect(medication)}
-                    >
-                      {medication.name}
-                    </button>
-
+                  <div className="listItem" key={medication.id}>
+                    <>
+                      <button
+                        className="medName"
+                        type="button"
+                        onClick={() => this.handleSelect(medication)}
+                      >
+                        {medication.name}
+                      </button>
+                    </>
                     <RemoveMedication medication={medication} remove={remove} />
                   </div>
                 );
