@@ -17,6 +17,7 @@ import SingleMedication from "./SingleMedication";
 import Navbar from "./Navbar";
 import DoctorDC from "./DoctorDC";
 import MedicationDC from './MedicationDC';
+import BarChartCondition from './BarChartCondition'
 /* -----------------    COMPONENT     ------------------ */
 
 class Root extends Component {
@@ -48,6 +49,7 @@ class Root extends Component {
             <Route path="/documents/:id" component={Documents} />
             <Route exact path='/dailycheckin/appointment' component={DoctorDC} />
             <Route exact path='/dailycheckin/meds' component={MedicationDC} />
+            <Route path='/chart' component={BarChartCondition} />
           </>
         )}
 
