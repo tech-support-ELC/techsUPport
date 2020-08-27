@@ -9,7 +9,7 @@ const db = require("./db");
 const sessionStore = new SequelizeStore({ db });
 const numCPUs = require("os").cpus().length;
 const isDev = process.env.NODE_ENV === "development";
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT
 const cors = require('cors')
 const CLIENT_ORIGIN = require('./CLIENT_ORIGIN')
 
