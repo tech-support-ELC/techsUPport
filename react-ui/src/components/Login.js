@@ -6,6 +6,7 @@ import { API_URL } from '../redux/API_URL';
 
 const Login = (props) => {
   const { handleSubmit } = props
+  console.log('login page')
   return (
     <div>
       <form onSubmit={handleSubmit}>
