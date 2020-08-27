@@ -4,7 +4,18 @@ const Doctor = require('./doctor');
 const Appointment = require('./appointment');
 const Medication = require("./medication");
 const User = require("./user");
+const User_Medication = require("./user_medication");
+const Document = require("./document")
 const DailyMed = require('./dailyMed');
+
+
+// Uploaded documents associations
+User.hasMany(Document)
+Document.belongsTo(User)
+Doctor.hasMany(Document)
+Document.belongsTo(Doctor)
+Document.belongsTo(Condition)
+Condition.hasMany(Document)
 
 Medication.belongsTo(User);
 User.hasMany(Medication);
@@ -60,4 +71,5 @@ module.exports = {
   Medication,
   DailyMed,
   User,
+  Document
 };
