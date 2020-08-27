@@ -9,7 +9,7 @@ export class Documents extends Component {
   }
 
   render() {
-    const { documents } = this.props
+    const { documents } = this.props.currentUser
     return (
       <>
         {
@@ -30,15 +30,15 @@ export class Documents extends Component {
   }
 }
 
-const mapState = ({ documents }, ownProps) => {
-  const paramId = Number(ownProps.match.params.id)
-  let singleDocument = {}
-  if (documents) {
-    singleDocument = documents.find((document, i) => i === paramId)
-  }
+const mapState = ({ currentUser }, ownProps) => {
+  // const paramId = Number(ownProps.match.params.id)
+  // let singleDocument = {}
+  // if (documents) {
+  //   singleDocument = documents.find((document, i) => i === paramId)
+  // }
   return {
-    documents,
-    singleDocument
+    currentUser,
+    // singleDocument,
   }
 }
 

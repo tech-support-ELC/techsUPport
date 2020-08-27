@@ -1,12 +1,12 @@
 const router = require('express').Router()
-const { User } = require('../db/models/')
-const isAdmin = require('../auth/isAdmin')
+const { User, Document } = require('../db/models/')
+const { isAdmin } = require('../auth/authenticateUser')
 
 // for any /users/:id routes, this piece of middleware
 // will be executed, and put the user on `req.requestedUser`
 router.param('id', async (req, res, next, id) => {
   try {
-    const user = await User.findByPk(id)
+    const user = await User.findByPk(id, { include: [Document] })
     if (!user) res.sendStatus(404)
     req.requestedUser = user
     next()

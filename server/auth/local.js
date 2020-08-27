@@ -1,15 +1,18 @@
-require('dotenv').config()
+// require('dotenv').config()
 const router = require('express').Router()
-const { User } = require('../db/models/')
-const jwt = require('jsonwebtoken')
+const { User, Document } = require('../db/models/')
+// const jwt = require('jsonwebtoken')
 
-function generateAccessToken(user) {
-  return jwt.sign({ user }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' })
-}
+// function generateAccessToken(user) {
+//   return jwt.sign({ user }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' })
+// }
 
 router.post('/login', async (req, res, next) => {
   try {
-    const user = await User.findOne({ where: { email: req.body.email } })
+    const user = await User.findOne({
+      where: { email: req.body.email },
+      include: [Document]
+    })
     if (!user) {
       console.log('No such user found:', req.body.email)
       res.status(401).send('Wrong username and/or password')
@@ -17,9 +20,9 @@ router.post('/login', async (req, res, next) => {
       console.log('Incorrect password for user:', req.body.email)
       res.status(401).send('Wrong username and/or password')
     } else {
-      const accessToken = generateAccessToken(user)
-      const refreshToken = jwt.sign({ user }, process.env.REFRESH_TOKEN_SECRET)
-      req.login(user, err => (err ? next(err) : res.json({ accessToken, refreshToken })))
+      // const accessToken = generateAccessToken(user)
+      // const refreshToken = jwt.sign({ user }, process.env.REFRESH_TOKEN_SECRET)
+      req.login(user, err => (err ? next(err) : res.json(user)))
     }
   } catch (err) {
     next(err)

@@ -13,6 +13,8 @@ User.hasMany(Document)
 Document.belongsTo(User)
 Doctor.hasMany(Document)
 Document.belongsTo(Doctor)
+Document.belongsTo(Condition)
+Condition.hasMany(Document)
 
 Medication.belongsTo(User);
 User.hasMany(Medication);

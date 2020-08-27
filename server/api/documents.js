@@ -1,43 +1,56 @@
 const router = require("express").Router();
 const cloudinary = require('cloudinary')
-const authenticateToken = require('../auth/verifyToken')
-const Document = require('../db/models')
+// const authenticateToken = require('../auth/verifyToken')
+const { Document, User } = require('../db/models')
+const { isOwner } = require('../auth/authenticateUser')
 
 
-// need to figure out the get request to get images from Cloudinary
-//only authenticated user himself or admin can view, delete or update images
-router.get('/', authenticateToken, async (req, res, next) => {
+router.get('/', isOwner, async (req, res, next) => {
   try {
-    const documents = await cloudinary.api.resources()
+    const documents = await Document.findAll({
+      where: { userId: req.user.id }
+    })
     if (documents) res.json(documents)
   } catch (err) {
     next(err)
   }
 })
 
-router.get('/:id', authenticateToken, async (req, res, next) => {
+router.get('/:id', isOwner, async (req, res, next) => {
   try {
     const { id } = req.params
-    const document = await Document.findByPk(id)
+    const document = await Document.findByPk(id, { where: { userId: id } })
     if (document) res.json(document)
   } catch (err) {
     next(err)
   }
 })
 
-router.post('/', authenticateToken, async (req, res, next) => {
+router.post('/', isOwner, async (req, res, next) => {
   try {
-    const values = Object.values(req.files)
-    const promises = values.map(image => cloudinary.uploader.upload(image.path, { type: 'private' }))
+    const { description, type, labelDoctor, labelCondition, formData } = req.body
+    // req.files is the formData from frontend
+    const values = Object.values(formData)
+    const promises = values.map(image => cloudinary.uploader.upload(image.path, { type: 'private', upload_preset: 'capstone' }))
     const documents = await Promise.all(promises)
-    if (documents) res.json(documents)
+    documents.forEach(async document => {
+      await Document.create({
+        description,
+        imageUrl: document.secure_url,
+        userId: req.user.id,
+        doctorId:
+          conditionId
+      })
+    })
+    res.json(documents)
+
   } catch (err) {
     next(err)
   }
 })
 
 //replaced the older document
-// router.put('/', authenticateToken, async (req, res, next) => {
+// router.p ut('/', authenticateToken, async (req, res, next) => {
 //   try {
 
 //   } catch (err) {
@@ -45,7 +58,7 @@ router.post('/', authenticateToken, async (req, res, next) => {
 //   }
 // })
 
-router.delete('/:id', authenticateToken, async (req, res, next) => {
+router.delete('/:id', isOwner, async (req, res, next) => {
   try {
     const { id } = req.params
     const document = await Document.findByPk(id)

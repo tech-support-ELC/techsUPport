@@ -11,7 +11,7 @@ const Navbar = () => {
         <Link to="/medications">My Medications</Link>
         <Link to="/doctors">My Doctors</Link>
         <Link to="/conditions">My Conditions</Link>
-        <Link to="/uploadDoc">Add Documents</Link>
+        <Link to="/documents">My Documents</Link>
       </div>
     </nav>
   );

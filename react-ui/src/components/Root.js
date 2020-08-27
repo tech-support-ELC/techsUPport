@@ -10,12 +10,15 @@ import { fetchCurrentUser } from "../redux/auth";
 import ConditionDC from "./ConditionDC";
 import SingleCondition from "./SingleCondition";
 import Documents from "./Documents"
+import SingleDocument from './SingleDocument'
 import Profile from "./Profile"
 import AllDoctors from "./AllDoctors"
 import SingleDoctor from "./SingleDoctor";
 import SingleMedication from "./SingleMedication";
 import Navbar from "./Navbar";
 import DoctorDC from "./DoctorDC";
+
+
 /* -----------------    COMPONENT     ------------------ */
 
 class Root extends Component {
@@ -44,7 +47,8 @@ class Root extends Component {
             <Route path="/doctors" component={AllDoctors} />
             <Route path="/doctors/:id" component={SingleDoctor} />
             <Route exact path="/profile" component={Profile} />
-            <Route path="/documents/:id" component={Documents} />
+            <Route path="/documents" component={Documents} />
+            <Route path="/documents/:id" component={SingleDocument} />
             <Route exact path='/dailycheckin/appointment' component={DoctorDC} />
           </>
         )}
