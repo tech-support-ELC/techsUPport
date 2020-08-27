@@ -55,10 +55,6 @@ class Medications extends React.Component {
                     >
                       {medication.name}
                     </button>
-                    {/* <p onClick={this.handleSelect(medication)}> */}
-                    {/* <Link to={`/medications/${medication.id}`}>
-                      {medication.name}
-                    </Link> */}
 
                     <RemoveMedication medication={medication} remove={remove} />
                   </div>
@@ -87,9 +83,9 @@ class Medications extends React.Component {
                 </button>
 
                 <SingleMedication
-                  medication={this.state.selected}
+                  selected={this.state.selected}
                   remove={remove}
-                  // close={this.handleClose}
+                  // closeModal={this.handleClose}
                 />
 
                 <RemoveMedication

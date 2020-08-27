@@ -1,33 +1,43 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchMedication } from "../redux/singleMedication";
+import { fetchMedication, updateMedication } from "../redux/singleMedication";
 import UpdateMedication from "./UpdateMedication";
 
 export class SingleMedication extends React.Component {
   constructor() {
     super();
-    this.state = { view: true, update: false };
+    this.state = { update: false };
 
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleClose = this.handleClose.bind(this);
-    // this.handleRemove = this.handleRemove.bind(this);
   }
   componentDidMount() {
     try {
-      const id = this.props.medication.id;
+      const id = this.props.selected.id;
       this.props.loadSingleMedication(id);
     } catch (err) {
       console.log(err);
     }
   }
 
-  handleClose() {
+  handleCancel() {
+    this.setState({ update: false });
+  }
+  handleClose(id) {
+    // this.props.loadSingleMedication(id);
     this.setState({ update: false });
   }
 
-  handleUpdate() {
+  handleOpen() {
     this.setState({ update: true });
   }
+
+  handleUpdate(medication, updatedMedication) {
+    this.props.update(medication, updatedMedication);
+  }
+  // handleReload(id) {
+  //   this.props.loadSingleMedication(id);
+  // }
 
   // handleRemove() {
   //   this.setState({ view: false });
@@ -40,33 +50,35 @@ export class SingleMedication extends React.Component {
 
     return (
       <div>
-        {this.state.view && (
-          <>
-            {medication && !this.state.update && (
-              <div>
-                <p>{medication.name}</p>
-                <p>{medication.dosage}</p>
-                <p>{medication.frequency}</p>
-                <p>{rxcui}</p>
-                {/*
+        {/* {this.state.view && (
+          <> */}
+        {medication && !this.state.update && (
+          <div>
+            <p>{medication.name}</p>
+            <p>{medication.dosage}</p>
+            <p>{medication.frequency}</p>
+            <p>{rxcui}</p>
+            {/*
                 <RemoveMedication
                   medication={medication}
                   remove={this.props.remove}
                 /> */}
-                <button type="button" onClick={() => this.handleUpdate()}>
-                  Update Medication Info
-                </button>
-              </div>
-            )}
-            {medication && this.state.update && (
-              <div>
-                <UpdateMedication medication={medication} />
-                <button type="button" onClick={() => this.handleClose()}>
-                  Cancel Update
-                </button>
-              </div>
-            )}
-          </>
+            <button type="button" onClick={() => this.handleOpen()}>
+              Update Medication Info
+            </button>
+          </div>
+        )}
+        {medication && this.state.update && (
+          <div>
+            <UpdateMedication
+              medication={medication}
+              close={this.handleClose}
+              update={this.handleUpdate}
+            />
+            <button type="button" onClick={() => this.handleCancel()}>
+              Cancel Update
+            </button>
+          </div>
         )}
       </div>
     );
@@ -75,7 +87,7 @@ export class SingleMedication extends React.Component {
 
 const mapState = (state) => {
   return {
-    // medication: state.medication.medication,
+    medication: state.medication.medication,
     rxcui: state.medication.rxcui,
   };
 };
@@ -83,6 +95,8 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     loadSingleMedication: (id) => dispatch(fetchMedication(id)),
+    update: (medication, updatedMedication) =>
+      dispatch(updateMedication(medication, updatedMedication)),
   };
 };
 

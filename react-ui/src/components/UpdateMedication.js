@@ -2,10 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import { updateMedication } from "../redux/singleMedication";
 
-class UpdateMedication extends React.Component {
+export default class UpdateMedication extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = { name: "", dosage: "", frequency: "" };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -16,8 +16,12 @@ class UpdateMedication extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    const medication = this.props.medication;
+    const updated = this.state;
+    console.log("SUMBIT", medication, updated);
+    this.props.update(medication, updated);
 
-    this.props.update(this.props.medication, this.state);
+    this.props.close();
   }
 
   render() {
@@ -58,11 +62,9 @@ class UpdateMedication extends React.Component {
   }
 }
 
-const mapDispatch = (dispatch) => {
-  return {
-    update: (medication, updatedMedication) =>
-      dispatch(updateMedication(medication, updatedMedication)),
-  };
-};
-
-export default connect(null, mapDispatch)(UpdateMedication);
+// const mapDispatch = (dispatch) => {
+//   return {
+//     update: (medication, updatedMedication) =>
+//       dispatch(updateMedication(medication, updatedMedication)),
+//   };
+// };
