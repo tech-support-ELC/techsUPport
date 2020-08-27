@@ -5,9 +5,9 @@ import { logout } from '../redux/auth'
 
 
 const Home = (props) => {
+  console.log('home page')
   const { firstName } = props.currentUser
   const { handleClick } = props
-  console.log('home page')
   return (
     <div>
       <h1>Welcome {firstName}!</h1>
