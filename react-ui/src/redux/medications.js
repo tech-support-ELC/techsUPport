@@ -4,6 +4,7 @@ import { API_URL } from "./API_URL";
 const GET_MEDICATIONS = "GET_MEDICATIONS";
 const NEW_MEDICATION = "NEW_MEDICATION";
 const REMOVE_MEDICATION = "REMOVE_MEDICATION";
+const UPDATE_ALL_MEDS = "UPDATE_ALL_MEDS";
 
 const initialState = [];
 
@@ -20,6 +21,12 @@ const newMedication = (medication) => ({
 const removeMedication = (id) => ({
   type: REMOVE_MEDICATION,
   id,
+});
+
+export const updateAllMeds = (id, medication) => ({
+  type: UPDATE_ALL_MEDS,
+  id,
+  medication,
 });
 
 export const fetchMedications = () => {
@@ -64,6 +71,14 @@ export default function (state = initialState, action) {
       return [...state, action.medication];
     case REMOVE_MEDICATION:
       return state.filter((med) => med.id !== action.id);
+    case UPDATE_ALL_MEDS:
+      return [...state].map((medication) => {
+        if (medication.id === action.id) {
+          return action.medication;
+        } else {
+          return medication;
+        }
+      });
     default:
       return state;
   }

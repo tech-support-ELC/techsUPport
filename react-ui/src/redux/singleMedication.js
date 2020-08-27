@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_URL } from "./API_URL";
+import { updateAllMeds } from "./medications";
 
 const GET_MEDICATION = "GET_MEDICATION";
 const UPDATED_MEDICATION = "UPDATED_MEDICATION";
@@ -17,8 +18,9 @@ const getMedId = (medId) => ({
   medId,
 });
 
-const updateSingleMedication = (medication) => ({
+const updateSingleMedication = (id, medication) => ({
   type: UPDATED_MEDICATION,
+  id,
   medication,
 });
 
@@ -55,8 +57,9 @@ export const updateMedication = (medication, updatedMedication) => {
         `${API_URL}/api/medications/${medication.id}`,
         updatedMedication
       );
-
-      dispatch(updateSingleMedication(data));
+      console.log("update", data);
+      dispatch(updateSingleMedication(data.id, data));
+      dispatch(updateAllMeds(data.id, data));
     } catch (error) {
       console.log(error);
     }
@@ -68,7 +71,11 @@ export default function (state = initialState, action) {
     case GET_MEDICATION:
       return { ...state, medication: action.medication };
     case UPDATED_MEDICATION:
-      return { ...state, medication: action.medication };
+      let updated = { ...state };
+      updated.name = action.medication.name;
+      updated.dosage = action.medication.dosage;
+      updated.frequency = action.medication.frequency;
+      return { ...state, medication: updated };
     case GET_ID:
       return { ...state, rxcui: action.medId };
     default:
