@@ -26,13 +26,15 @@ router.get('/:id', isOwnerOrAdmin, async (req, res, next) => {
   }
 })
 
-router.post('/', isOwnerOrAdmin, async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     const { description, type, doctorId, conditionId, formData } = req.body
+    // console.log('formData', formData)
     // req.files is the formData from frontend
     const values = Object.values(formData)
     const promises = values.map(image => cloudinary.uploader.upload(image.path, { type: 'private', upload_preset: 'capstone' }))
     const results = await Promise.all(promises)
+
     const documents = results.map(async result => {
       await Document.create({
         description,
@@ -43,6 +45,8 @@ router.post('/', isOwnerOrAdmin, async (req, res, next) => {
         conditionId
       })
     })
+
+    // console.log('documents', documents)
     res.json(documents)
 
   } catch (err) {
@@ -59,7 +63,7 @@ router.put('/:id', isOwnerOrAdmin, async (req, res, next) => {
 
     const image = formData.key
     const result = await cloudinary.uploader.upload(image.path, { type: 'private', upload_preset: 'capstone' })
-    const document = await Document.update({
+    const updatedDoc = await document.update({
       description,
       type,
       imageUrl: result.secure_url,
@@ -67,7 +71,7 @@ router.put('/:id', isOwnerOrAdmin, async (req, res, next) => {
       doctorId,
       conditionId
     })
-    res.json(document)
+    res.json(updatedDoc)
   } catch (err) {
     next(err)
   }

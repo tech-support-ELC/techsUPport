@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { uploadDocumentsThunk } from '../redux/documents'
 import { connect } from 'react-redux'
-import { currentUser } from '../store'
+
 
 export class UploadDocuments extends Component {
   constructor() {
@@ -11,36 +11,33 @@ export class UploadDocuments extends Component {
       type: '',
       doctorId: 0,
       conditionId: 0,
-      documents: []
+      files: [],
     }
     this.changeHandler = this.changeHandler.bind(this)
     this.uploadHandler = this.uploadHandler.bind(this)
+    this.fileInput = React.createRef()
   }
 
   changeHandler(e) {
     e.preventDefault()
-    // an array of files
-    const files = Array.from(e.target.files)
+    const files = Array.from(this.fileInput.current.files)
     this.setState({
-      description: e.target.description.value,
-      type: e.target.type.value,
-      doctorId: e.target.doctorId.value,
-      conditionId: e.target.conditionId.value,
-      documents: files
+      [e.target.name]: e.target.value,
+      files
     })
+    console.log(this.state.description, this.state.type, this.state.files)
   }
 
   uploadHandler(e) {
     e.preventDefault()
     //formData is an object
+    const files = Array.from(this.fileInput.current.files)
     const formData = new FormData()
-    this.state.documents.forEach((file, i) => {
+    files.forEach((file, i) => {
       formData.append(i, file)
     })
-    const description = e.target.description.value
-    const type = e.target.type.value
-    const doctorId = e.target.labeldoctor.value
-    const conditionId = e.target.labelcondition.value
+    console.log(formData)
+    const { description, type, doctorId, conditionId } = this.state
     const docInfo = {
       description,
       type,
@@ -59,20 +56,22 @@ export class UploadDocuments extends Component {
     return (
       <>
         <form onSubmit={this.uploadHandler} >
-          <label>Enter Description</label>
+          <label>Enter A Short Description</label>
           <input
             name='description'
+            // value={this.state.description}
             type='text'
             placeholder='Description'
+            onChange={this.changeHandler}
           />
           <label>Select Type
           <select
               name='type'
-              value={this.state.type}
+              // value={this.state.type}
               onChange={this.changeHandler}>
-              {types.forEach(type => {
+              {types.map((type, i) => {
                 return (
-                  <option value={type}>{type}</option>
+                  <option key={i} value={type}>{type}</option>
                 )
               })
               }
@@ -80,47 +79,50 @@ export class UploadDocuments extends Component {
           </label>
           <label>Label Doctor
           <select
-              name='labeldoctor'
-              value={this.state.doctorId}
+              name='doctorId'
+              // value={this.state.doctorId}
               onChange={this.changeHandler}>
-              {doctors.forEach(doctor => {
-                const { id, firstName, lastName } = doctor
-                return (
-                  <option value={id}>{firstName} {lastName}</option>
-                )
-              })
+              {!doctors ? 'null' :
+                doctors.map(doctor => {
+                  const { id, firstName, lastName } = doctor
+                  return (
+                    <option key={id} value={id}>{firstName} {lastName}</option>
+                  )
+                })
               }
             </select>
           </label>
           <label>Label Condition
           <select
-              name='labelcondition'
-              value={this.state.conditionId}
+              name='conditionId'
+              // value={this.state.conditionId}
               onChange={this.changeHandler}>
-              {conditions.forEach(condition => {
-                const { id, name } = condition
-                return (
-                  <option value={id}>{name}</option>
-                )
-              })
+              {!conditions ? 'null' :
+                conditions.map(condition => {
+                  const { id, name } = condition
+                  return (
+                    <option key={id} value={id}>{name}</option>
+                  )
+                })
               }
             </select>
           </label>
-          <p>
+          <>
             <label>Choose File</label>
             <input
               type="file"
+              ref={this.fileInput}
               onChange={this.changeHandler}
-            // multiple
+              multiple
             />
-          </p>
+          </>
           <button type="submit">Upload</button>
         </form>
       </>
     );
   };
 }
-const mapState = { currentUser }
+const mapState = ({ currentUser }) => ({ currentUser })
 
 const mapDispatch = { uploadDocumentsThunk }
 
