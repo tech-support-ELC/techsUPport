@@ -5,8 +5,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 import store from "./store";
 import Root from "./components/Root";
 import Footer from "./components/Footer";
-import * as serviceWorker from "./serviceWorker";
-import "./style.scss";
+import * as serviceWorker from './serviceWorker';
+import './style.scss'
 
 ReactDOM.render(
   <Provider store={store}>
