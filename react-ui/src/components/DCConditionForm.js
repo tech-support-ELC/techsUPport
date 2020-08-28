@@ -8,7 +8,7 @@ class DCConditionForm extends Component {
       rate: '',
       date: new Date(),
       notes: '',
-      conditionId: 0
+      conditionId: 0,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -81,7 +81,6 @@ class DCConditionForm extends Component {
           </button>
           </div> : null
         }
-
       </form>
     )
   }

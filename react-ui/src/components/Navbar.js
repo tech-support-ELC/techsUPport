@@ -12,6 +12,7 @@ const Navbar = () => {
         <Link to="/doctors">My Doctors</Link>
         <Link to="/conditions">My Conditions</Link>
         <Link to="/documents">My Documents</Link>
+        <Link to="/dailycheckin">Daily Checkin</Link>
       </div>
     </nav>
   );
