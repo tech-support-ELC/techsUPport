@@ -14,16 +14,23 @@ export class Documents extends Component {
       <>
         {
           !documents ? 'No Documents' :
-            documents.map((doc, i) => (
-              <div key={i}>
-                <Link to={`/documents/${i}`}>
-                  <img src={doc.imageUrl}
-                    alt='document' width="200" height="200"
-                  // onError={() => props.onError(doc.public_id)}
-                  />
-                </Link>
-              </div>
-            ))
+            documents.map((doc, i) => {
+              const { type } = doc
+              return (
+                <div key={i}>
+                  {type === 'Proof of Identity' &&
+                    <Link to={`/documents/${i}`}>
+                      <img src={doc.imageUrl}
+                        alt='document'
+                        width="50%" height="50%"
+                      // onError={() => props.onError(doc.public_id)}
+                      />
+                    </Link>
+                  }
+                </div>
+              )
+            }
+            )
         }
       </>
     )

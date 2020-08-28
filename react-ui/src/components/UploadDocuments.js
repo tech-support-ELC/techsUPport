@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { uploadDocumentsThunk } from '../redux/documents'
-import { getAllConditionsThunk } from '../redux/conditions'
-import { getAllDoctorsThunk } from '../redux/doctors'
 import { connect } from 'react-redux'
 import axios from 'axios'
 
@@ -19,10 +17,10 @@ export class UploadDocuments extends Component {
   handleFileRead(e) {
     if (e.target.files[0]) {
       let reader = new FileReader()
+      reader.readAsDataURL(e.target.files[0])
       reader.onload = () => {
         this.setState({ selectedFile: reader.result })
       }
-      reader.readAsDataURL(e.target.files[0])
     }
   }
 
@@ -39,8 +37,8 @@ export class UploadDocuments extends Component {
 
     const description = e.target.description.value
     const type = e.target.type.value
-    const doctorId = e.target.value || null
-    const conditionId = e.target.value || null
+    const doctorId = e.target.doctorId.value || null
+    const conditionId = e.target.conditionId.value || null
     const imageUrl = await this.sendFile()
 
     const formData = {
@@ -54,11 +52,10 @@ export class UploadDocuments extends Component {
   }
 
   render() {
-    const conditions = this.props.conditions;
-    const doctors = this.props.doctors;
+    const { doctors, conditions } = this.props
     const types = ['Proof of Identity', 'Lab Result', 'Surgical Report', 'Pathology Report', 'Imaging', 'Visit Summary']
     return (
-      <form onSubmit={this.uploadHandler} >
+      <form onSubmit={this.uploadHandler}>
         <label>Enter a short description of what this document contains:</label>
         <input
           name='description'
@@ -81,7 +78,8 @@ export class UploadDocuments extends Component {
           <select
             name='doctorId'
           >
-            {!doctors ? 'null' :
+            <option>Select Doctor</option>
+            {doctors &&
               doctors.map(doctor => {
                 const { id, firstName, lastName } = doctor
                 return (
@@ -95,7 +93,8 @@ export class UploadDocuments extends Component {
           <select
             name='conditionId'
           >
-            {!conditions ? 'null' :
+            <option>Select Condition</option>
+            {conditions &&
               conditions.map(condition => {
                 const { id, name } = condition
                 return (
@@ -116,9 +115,9 @@ export class UploadDocuments extends Component {
     );
   };
 }
-const mapState = ({ currentUser, conditions, doctors }) => ({ currentUser, conditions, doctors })
+const mapState = ({ currentUser, doctors, conditions }) => ({ currentUser, doctors, conditions })
 
-const mapDispatch = { uploadDocumentsThunk, getAllConditionsThunk, getAllDoctorsThunk }
+const mapDispatch = { uploadDocumentsThunk }
 
 export default connect(mapState, mapDispatch)(UploadDocuments);
 

@@ -10,8 +10,7 @@ const { User, Doctor, Condition, Document } = require('../db/models/')
 router.post('/login', async (req, res, next) => {
   try {
     const user = await User.findOne({
-      where: { email: req.body.email },
-      include: [Doctor, Condition, Document]
+      where: { email: req.body.email }
     })
     if (!user) {
       console.log('No such user found:', req.body.email)
@@ -49,8 +48,11 @@ router.delete('/logout', (req, res) => {
   res.sendStatus(204)
 })
 
-router.get('/me', (req, res) => {
-  res.json(req.user)
+router.get('/me', async (req, res) => {
+  const { id } = req.user
+  const user = await User.findByPk(id, { include: [Document, Doctor, Condition] })
+  console.log(user)
+  res.json(user)
 })
 
 
