@@ -19,11 +19,9 @@ export class UploadDocuments extends Component {
   }
 
   changeHandler(e) {
-    e.preventDefault()
     const files = Array.from(this.fileInput.current.files)
     this.setState({
-      [e.target.name]: e.target.value,
-      files
+      [e.target.name]: e.target.value, files
     })
     console.log(this.state.description, this.state.type, this.state.files)
   }
@@ -31,12 +29,11 @@ export class UploadDocuments extends Component {
   uploadHandler(e) {
     e.preventDefault()
     //formData is an object
-    const files = Array.from(this.fileInput.current.files)
     const formData = new FormData()
-    files.forEach((file, i) => {
+    this.state.files.forEach((file, i) => {
       formData.append(i, file)
     })
-    console.log(formData)
+    console.log('why am I an empty object?', formData)
     const { description, type, doctorId, conditionId } = this.state
     const docInfo = {
       description,
@@ -45,6 +42,7 @@ export class UploadDocuments extends Component {
       conditionId,
       formData
     }
+    console.log(docInfo)
     //post data will need to be an object
     this.props.uploadDocumentsThunk(docInfo)
   }
@@ -59,7 +57,7 @@ export class UploadDocuments extends Component {
           <label>Enter A Short Description</label>
           <input
             name='description'
-            // value={this.state.description}
+            value={this.state.description}
             type='text'
             placeholder='Description'
             onChange={this.changeHandler}
@@ -67,7 +65,7 @@ export class UploadDocuments extends Component {
           <label>Select Type
           <select
               name='type'
-              // value={this.state.type}
+              value={this.state.type}
               onChange={this.changeHandler}>
               {types.map((type, i) => {
                 return (
@@ -80,7 +78,7 @@ export class UploadDocuments extends Component {
           <label>Label Doctor
           <select
               name='doctorId'
-              // value={this.state.doctorId}
+              value={this.state.doctorId}
               onChange={this.changeHandler}>
               {!doctors ? 'null' :
                 doctors.map(doctor => {
@@ -95,7 +93,7 @@ export class UploadDocuments extends Component {
           <label>Label Condition
           <select
               name='conditionId'
-              // value={this.state.conditionId}
+              value={this.state.conditionId}
               onChange={this.changeHandler}>
               {!conditions ? 'null' :
                 conditions.map(condition => {
@@ -107,16 +105,17 @@ export class UploadDocuments extends Component {
               }
             </select>
           </label>
+
           <>
             <label>Choose File</label>
             <input
-              type="file"
+              type='file'
               ref={this.fileInput}
               onChange={this.changeHandler}
               multiple
             />
           </>
-          <button type="submit">Upload</button>
+          <button type="submit" >Upload</button>
         </form>
       </>
     );
