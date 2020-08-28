@@ -8,28 +8,27 @@ export class UploadDocuments extends Component {
   constructor() {
     super()
     this.state = {
-      selectedFiles: []
+      selectedFile: null,
     }
-    this.changeHandler = this.changeHandler.bind(this)
     this.uploadHandler = this.uploadHandler.bind(this)
+    this.handleFileRead = this.handleFileRead.bind(this)
+    this.sendFile = this.sendFile.bind(this)
   }
 
-  changeHandler(e) {
-    // FileList, an array like iterable data structure
-    const selectedFiles = Array.from(e.target.files)
-    this.setState({ selectedFiles })
+  handleFileRead(e) {
+    if (e.target.files[0]) {
+      let reader = new FileReader()
+      reader.onload = () => {
+        this.setState({ selectedFile: reader.result })
+      }
+      reader.readAsDataURL(e.target.files[0])
+    }
   }
 
   async sendFile() {
-    const files = new FormData();
-    this.state.selectedFiles.forEach((file, i) => {
-      files.append(i, file)
-      console.log(files.get(i))
-    })
-
     const file = await axios.post(
       `https://api.cloudinary.com/v1_1/elementhealth/image/upload`,
-      { type: 'private', upload_preset: 'capstone' }
+      { file: this.state.selectedFile, upload_preset: 'capstone' }
     )
     return file.data.secure_url
   }
@@ -39,8 +38,8 @@ export class UploadDocuments extends Component {
 
     const description = e.target.description.value
     const type = e.target.type.value
-    const doctorId = e.target.doctorId.value
-    const conditionId = e.target.conditionId.value
+    const doctorId = e.target.value || null
+    const conditionId = e.target.value || null
     const imageUrl = await this.sendFile()
 
     const formData = {
@@ -108,8 +107,8 @@ export class UploadDocuments extends Component {
         <label>Choose File</label>
         <input
           type='file'
-          onChange={this.changeHandler}
-          multiple
+          onChange={this.handleFileRead}
+        // multiple
         />
         <button type="submit" >Upload</button>
       </form>

@@ -25,25 +25,14 @@ router.get('/:id', isOwnerOrAdmin, async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', isOwnerOrAdmin, async (req, res, next) => {
   try {
-    const { description, type, doctorId, conditionId } = req.body
-    // req.files is the formData from frontend
-    const values = Object.values(req.files)
-    const promises = values.map(image => cloudinary.uploader.upload(image.path, { type: 'private', upload_preset: 'capstone' }))
-    const results = await Promise.all(promises)
-
-    const documents = results.map(async result => {
-      await Document.create({
-        description, type, doctorId, conditionId,
-        imageUrl: result.secure_url,
-        userId: req.user.id,
-      })
+    const { description, type, doctorId, conditionId, imageUrl } = req.body
+    const document = await Document.create({
+      description, type, doctorId, conditionId, imageUrl,
+      userId: req.user.id
     })
-
-    // console.log('documents', documents)
-    res.json(documents)
-
+    res.json(document)
   } catch (err) {
     next(err)
   }
@@ -52,19 +41,12 @@ router.post('/', async (req, res, next) => {
 // replaced the older document
 router.put('/:id', isOwnerOrAdmin, async (req, res, next) => {
   try {
-    const { description, type, doctorId, conditionId, formData } = req.body
+    const { description, type, doctorId, conditionId, imageUrl } = req.body
     const { id } = req.params
     const document = await Document.findByPk(id)
-
-    const image = formData.key
-    const result = await cloudinary.uploader.upload(image.path, { type: 'private', upload_preset: 'capstone' })
     const updatedDoc = await document.update({
-      description,
-      type,
-      imageUrl: result.secure_url,
+      description, type, doctorId, conditionId, imageUrl,
       userId: req.user.id,
-      doctorId,
-      conditionId
     })
     res.json(updatedDoc)
   } catch (err) {
