@@ -79,6 +79,7 @@ export const fetchCurrentUser = () => {
 
 function setUserAndRedirect(user, history, dispatch) {
   console.log('setUserAndRedirect')
+  console.log(user)
   dispatch(setCurrentUser(user))
   history.push(`/profile`)
 }

@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { login } from '../redux/auth'
 import { API_URL } from '../redux/API_URL';
+import { Link } from 'react-router-dom'
+
 /* -----------------    COMPONENT     ------------------ */
 
 const Login = (props) => {
@@ -43,6 +45,13 @@ const Login = (props) => {
           <i />
           <span>Log in with Facebook</span>
         </a>
+      </p>
+
+
+      <p>
+        <Link to='/signup'>
+          Sign up here
+        </Link>
       </p>
     </div>
   )
