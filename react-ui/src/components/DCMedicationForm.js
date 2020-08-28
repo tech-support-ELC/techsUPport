@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-class DCDoctorForm extends Component {
+class DCMedicationForm extends Component {
   constructor() {
     super();
     this.state = {
       isClicked: false,
-      time: '',
-      doctorId: 0
+      notes: '',
+      medicationId: 0
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(evt) {
-    const doctorId = this.props.doctor.id;
-    this.setState({ doctorId });
+    const medicationId = this.props.eachMed.id;
+    this.setState({ medicationId });
     const target = evt.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
@@ -22,19 +22,19 @@ class DCDoctorForm extends Component {
   }
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.addAppointment(this.state);
+    this.props.addMedication(this.state);
     this.setState({
       isClicked: false,
-      time: '',
-      doctorId: 0
+      notes: '',
+      conditionId: 0
     })
   }
   render() {
-    const doctor = this.props.doctor;
+    const med = this.props.eachMed;
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
-          {doctor.firstName} {doctor.lastName}
+          {med.name}
           <input
             type='checkbox'
             name='isClicked'
@@ -46,14 +46,14 @@ class DCDoctorForm extends Component {
             <div>
               <div>
                 <label>
-                  Time of your appointment
-              <input
+                  Any notes on how this medication is making you feel?
+            <input
                     className='input'
-                    placeholder='HH:MM'
+                    placeholder='notes'
                     type='text'
-                    name='time'
+                    name='notes'
                     onChange={this.handleChange}
-                    value={this.state.time}
+                    value={this.state.notes}
                   />
                 </label>
               </div>
@@ -62,8 +62,9 @@ class DCDoctorForm extends Component {
           </button>
             </div> : null
         }
+
       </form>
     )
   }
 }
-export default DCDoctorForm;
+export default DCMedicationForm;

@@ -13,23 +13,6 @@ const UPLOAD_DOCUMENTS = "UPLOAD_DOCUMENTS"
 const getDocuments = (documents) => ({ type: GET_DOCUMENTS, documents });
 const uploadDocuments = (documents) => ({ type: UPLOAD_DOCUMENTS, documents });
 
-
-/* ------------          REDUCER         ------------------ */
-
-export default function (state = [], action) {
-  switch (action.type) {
-
-    case GET_DOCUMENTS:
-      return action.documents;
-
-    case UPLOAD_DOCUMENTS:
-      return state.concat(action.documents);
-
-    default:
-      return state;
-  }
-}
-
 /* ------------       THUNK CREATORS     ------------------ */
 export const fetchDocuments = () => {
   return async (dispatch) => {
@@ -54,5 +37,20 @@ export const uploadDocumentsThunk = (formData) => {
   }
 }
 
+/* ------------          REDUCER         ------------------ */
+
+export default function (state = [], action) {
+  switch (action.type) {
+
+    case GET_DOCUMENTS:
+      return action.documents;
+
+    case UPLOAD_DOCUMENTS:
+      return state.concat(action.documents);
+
+    default:
+      return state;
+  }
+}
 
 

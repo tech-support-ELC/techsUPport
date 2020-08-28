@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { uploadDocumentsThunk } from '../redux/documents'
+import { getAllConditionsThunk } from '../redux/conditions'
+import { getAllDoctorsThunk } from '../redux/doctors'
 import { connect } from 'react-redux'
 import axios from 'axios'
-
 
 export class UploadDocuments extends Component {
   constructor() {
@@ -53,9 +54,9 @@ export class UploadDocuments extends Component {
   }
 
   render() {
-    const { doctors, conditions } = this.props.currentUser
+    const conditions = this.props.conditions;
+    const doctors = this.props.doctors;
     const types = ['Proof of Identity', 'Lab Result', 'Surgical Report', 'Pathology Report', 'Imaging', 'Visit Summary']
-
     return (
       <form onSubmit={this.uploadHandler} >
         <label>Enter A Short Description</label>
@@ -115,9 +116,9 @@ export class UploadDocuments extends Component {
     );
   };
 }
-const mapState = ({ currentUser }) => ({ currentUser })
+const mapState = ({ currentUser, conditions, doctors }) => ({ currentUser, conditions, doctors })
 
-const mapDispatch = { uploadDocumentsThunk }
+const mapDispatch = { uploadDocumentsThunk, getAllConditionsThunk, getAllDoctorsThunk }
 
 export default connect(mapState, mapDispatch)(UploadDocuments);
 

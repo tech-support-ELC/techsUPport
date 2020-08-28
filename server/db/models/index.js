@@ -4,8 +4,8 @@ const Doctor = require('./doctor');
 const Appointment = require('./appointment');
 const Medication = require("./medication");
 const User = require("./user");
-const User_Medication = require("./user_medication");
 const Document = require("./document")
+const DailyMed = require('./dailyMed');
 
 
 // Uploaded documents associations
@@ -18,18 +18,20 @@ Condition.hasMany(Document)
 
 Medication.belongsTo(User);
 User.hasMany(Medication);
+Medication.belongsToMany(User, {
+  through: {
+    model: "dailyMed",
+    unique: false
+  },
+});
 
-// Medication.belongsToMany(User, {
-//   through: {
-//     model: "user_medication",
-//   },
-// });
+User.belongsToMany(Medication, {
+  through: {
+    model: "dailyMed",
+    unique: false
+  },
+});
 
-// User.belongsToMany(Medication, {
-//   through: {
-//     model: "user_medication",
-//   },
-// });
 Condition.belongsTo(User);
 User.hasMany(Condition);
 Condition.belongsToMany(User, {
@@ -66,7 +68,7 @@ module.exports = {
   Doctor,
   Appointment,
   Medication,
-  // User_Medication,
+  DailyMed,
   User,
   Document
 };

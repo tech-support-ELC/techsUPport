@@ -14,21 +14,27 @@ class Medications extends React.Component {
     this.handleSelect = this.handleSelect.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
   componentDidMount() {
     this.props.fetchMedications();
   }
 
   handleSelect(medication) {
-    this.setState({ selected: medication });
+    this.setState({ selected: medication, add: false });
   }
 
   handleAdd() {
-    this.setState({ add: true });
+    this.setState({ selected: null, add: true });
   }
 
   handleClose() {
     this.setState({ selected: null, add: false });
+  }
+
+  handleRemove(id) {
+    this.props.remove(id);
+    this.handleClose();
   }
 
   render() {
@@ -42,18 +48,16 @@ class Medications extends React.Component {
             {medications &&
               medications.map((medication) => {
                 return (
-                  <div key={medication.id} className="listItem">
-                    <button
-                      type="button"
-                      onClick={() => this.handleSelect(medication)}
-                    >
-                      {medication.name}
-                    </button>
-                    {/* <p onClick={this.handleSelect(medication)}> */}
-                    {/* <Link to={`/medications/${medication.id}`}>
-                      {medication.name}
-                    </Link> */}
-
+                  <div className="listItem" key={medication.id}>
+                    <>
+                      <button
+                        className="medName"
+                        type="button"
+                        onClick={() => this.handleSelect(medication)}
+                      >
+                        {medication.name}
+                      </button>
+                    </>
                     <RemoveMedication medication={medication} remove={remove} />
                   </div>
                 );
@@ -76,10 +80,21 @@ class Medications extends React.Component {
 
             {this.state.selected && (
               <>
-                <SingleMedication medication={this.state.selected} />
                 <button type="button" onClick={() => this.handleClose()}>
                   X
                 </button>
+
+                <SingleMedication
+                  selected={this.state.selected}
+                  remove={remove}
+                  // closeModal={this.handleClose}
+                />
+
+                <RemoveMedication
+                  medication={this.state.selected}
+                  remove={this.handleRemove}
+                  // close={this.handleClose}
+                />
               </>
             )}
           </div>

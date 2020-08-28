@@ -44,26 +44,34 @@ class UpdateCondition extends Component {
         <br />
 
         <div>
-          <input
-            className="input"
-            placeholder="Is diagnosed"
-            type="text"
-            name="diagnosed"
+        <label>
+          Is it diagnosed?
+          <select
             onChange={this.handleChange}
             value={this.state.diagnosed}
-          />
+            name="diagnosed"
+          >
+            <option value=""></option>
+            <option value="yes">yes</option>
+            <option value="no">no</option>
+          </select>
+        </label>
         </div>
         <br />
 
         <div>
-          <input
-            className="input"
-            placeholder="Update Type Of Pain"
-            type="text"
-            name="typeOfPain"
+        <label>
+          Type of pain?
+          <select
             onChange={this.handleChange}
             value={this.state.typeOfPain}
-          />
+            name="typeOfPain"
+          >
+            <option value=""></option>
+            <option value="mental health">mental health</option>
+            <option value="physical">physical</option>
+          </select>
+        </label>
         </div>
         <br />
         <button type="submit">
