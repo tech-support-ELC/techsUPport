@@ -4,7 +4,6 @@ const Doctor = require('./doctor');
 const Appointment = require('./appointment');
 const Medication = require("./medication");
 const User = require("./user");
-const User_Medication = require("./user_medication");
 const Document = require("./document")
 const DailyMed = require('./dailyMed');
 
