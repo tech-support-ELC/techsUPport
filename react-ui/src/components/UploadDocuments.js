@@ -30,7 +30,7 @@ export class UploadDocuments extends Component {
       [e.target.name]: e.target.value,
       files
     })
-    console.log('state',this.state)
+    console.log('state', this.state)
   }
 
   uploadHandler(e) {
@@ -53,11 +53,11 @@ export class UploadDocuments extends Component {
     // })
     const formData = new FormData();
     console.log(Object.values(files[0]))
-    for (let i=0; i<files.length; i++) {
-      console.log(typeof(files[i]), i)
+    for (let i = 0; i < files.length; i++) {
+      console.log(typeof (files[i]), i)
       formData.append(i, files[i])
     }
-    console.log('formdata',formData)
+    console.log('formdata', formData)
     const { description, type, doctorId, conditionId } = this.state
     const docInfo = {
       description,
@@ -77,7 +77,7 @@ export class UploadDocuments extends Component {
     return (
       <>
         <form onSubmit={this.uploadHandler} >
-          <label>Enter A Short Description</label>
+          <label>Enter a short description of what this document contains: </label>
           <input
             name='description'
             // value={this.state.description}
@@ -85,7 +85,7 @@ export class UploadDocuments extends Component {
             placeholder='Description'
             onChange={this.changeHandler}
           />
-          <label>Select Type
+          <label>Select what type of document this is:
           <select
               name='type'
               // value={this.state.type}
@@ -98,7 +98,7 @@ export class UploadDocuments extends Component {
               }
             </select>
           </label>
-          <label>Label Doctor
+          <label>Which doctor is this document associated with?
           <select
               name='doctorId'
               // value={this.state.doctorId}
@@ -113,7 +113,7 @@ export class UploadDocuments extends Component {
               }
             </select>
           </label>
-          <label>Label Condition
+          <label>What condition does this document relate to?
           <select
               name='conditionId'
               // value={this.state.conditionId}
@@ -129,7 +129,7 @@ export class UploadDocuments extends Component {
             </select>
           </label>
           <>
-            <label>Choose File</label>
+            <label>Choose a File</label>
             <input
               type="file"
               ref={this.fileInput}

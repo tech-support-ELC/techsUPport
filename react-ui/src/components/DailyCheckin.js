@@ -6,15 +6,16 @@ import { getMedicationThunk, addMedicationThunk } from '../redux/dcMedication';
 import DCMedicationForm from './DCMedicationForm';
 import DCConditionForm from './DCConditionForm';
 import DCDoctorForm from './DCDoctorForm';
+import { getAllDoctorsThunk } from '../redux/doctors'
 class DailyCheckin extends Component {
   componentDidMount() {
     this.props.getScore();
-    this.props.getAppointment();
+    this.props.getAllDoctors();
     this.props.getMedication();
   }
   render() {
     const score = this.props.score;
-    const appointment = this.props.appointment;
+    const doctors = this.props.doctors;
     const med = this.props.med;
     return (
       <div>
@@ -31,7 +32,7 @@ class DailyCheckin extends Component {
         }
         <h3>Do you have an appointment with a doctor today?</h3>
         {
-          appointment && appointment.map(doctor => {
+          doctors && doctors.map(doctor => {
             return (
               <div key={doctor.id}>
                 <DCDoctorForm doctor={doctor} addAppointment={this.props.addAppointment} />
@@ -57,6 +58,7 @@ const mapStateToProps = state => {
   return {
     score: state.score,
     appointment: state.appointment,
+    doctors: state.doctors,
     med: state.med
   }
 }
@@ -64,7 +66,7 @@ const mapDispatchToProps = dispatch => {
   return {
     getScore: () => dispatch(getScoreThunk()),
     addScore: (score) => dispatch(addScoreThunk(score)),
-    getAppointment: () => dispatch(getAppointmentThunk()),
+    getAllDoctors: () => dispatch(getAllDoctorsThunk()),
     addAppointment: (appointment) => dispatch(addAppointmentThunk(appointment)),
     getMedication: () => dispatch(getMedicationThunk()),
     addMedication: (med) => dispatch(addMedicationThunk(med))
