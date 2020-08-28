@@ -27,7 +27,7 @@ router.post('/score', async (req, res, next) => {
     const notes = req.body.rate.notes;
     const conditionId = req.body.rate.conditionId;
     // console.log(req.body);
-    const newScore = await Score.create({rate, date, notes, conditionId, userId});
+    const newScore = await Score.create({ rate, date, notes, conditionId, userId });
     res.json(newScore);
   } catch (error) {
     next(error);
@@ -36,7 +36,7 @@ router.post('/score', async (req, res, next) => {
 
 router.get('/appointment', async (req, res, next) => {
   try {
-    const appointments = await Doctor.findAll({
+    const appointments = await Appointment.findAll({
       where: {
         userId: req.user.id,
       }
@@ -52,7 +52,7 @@ router.post('/appointment', async (req, res, next) => {
     const time = req.body.appointmentDate.time;
     const doctorId = req.body.appointmentDate.doctorId;
     console.log(req.body);
-    const newAppointment = await Appointment.create({time, doctorId, userId});
+    const newAppointment = await Appointment.create({ time, doctorId, userId });
     res.json(newAppointment);
   } catch (error) {
     next(error);
@@ -77,7 +77,7 @@ router.post('/meds', async (req, res, next) => {
     const notes = req.body.notes.notes;
     const medicationId = req.body.notes.medicationId;
     console.log(req.body);
-    const newDailyMed = await DailyMed.create({notes, medicationId, userId});
+    const newDailyMed = await DailyMed.create({ notes, medicationId, userId });
     res.json(newDailyMed);
   } catch (error) {
     next(error);
