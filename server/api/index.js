@@ -7,7 +7,9 @@ router.use('/users', require('./users'));
 router.use('/doctors', require('./doctors'));
 router.use("/medications", require("./medications"));
 router.use('/dailycheckin', require('./dailyCheckin'));
+router.use('/score', require('./score'));
 router.use("/documents", require("./documents"));
+
 
 
 
