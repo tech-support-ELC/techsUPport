@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { uploadDocumentsThunk } from '../redux/documents'
+import { getAllConditionsThunk } from '../redux/conditions'
+import { getAllDoctorsThunk } from '../redux/doctors'
 import { connect } from 'react-redux'
-
 
 export class UploadDocuments extends Component {
   constructor() {
@@ -17,42 +18,62 @@ export class UploadDocuments extends Component {
     this.uploadHandler = this.uploadHandler.bind(this)
     this.fileInput = React.createRef()
   }
-
+  async componentDidMount() {
+    await this.props.getAllConditionsThunk();
+    await this.props.getAllDoctorsThunk();
+  }
   changeHandler(e) {
-    e.preventDefault()
+    // e.preventDefault()
+    console.log('fileinput', this.fileInput)
     const files = Array.from(this.fileInput.current.files)
     this.setState({
       [e.target.name]: e.target.value,
       files
     })
-    console.log(this.state.description, this.state.type, this.state.files)
+    console.log('state',this.state)
   }
 
   uploadHandler(e) {
     e.preventDefault()
     //formData is an object
     const files = Array.from(this.fileInput.current.files)
-    const formData = new FormData()
-    files.forEach((file, i) => {
-      formData.append(i, file)
-    })
-    console.log(formData)
+    // const files = this.fileInput.current.files
+    console.log('files', this.fileInput.current.files)
+    const test = this.fileInput.current.files
+    const formData = {
+      lastModified: files[0].lastModified,
+      lastModifiedDate:files[0].lastModifiedDate,
+      name: files[0].name,
+      size: files[0].size,
+      type: files[0].type,
+      webkitRelativePath: files[0].webkitRelativePath,
+    }
+    // files.forEach((file, i) => {
+    //   console.log(file, i)
+    //   formData[i] = file;
+    // })
+    // console.log(Object.values(files[0]))
+    // for (let i=0; i<files.length; i++) {
+    //   console.log(typeof(files[i]), i)
+    //   formData.append(i, files[i])
+    // }
+    console.log('formdata',formData)
     const { description, type, doctorId, conditionId } = this.state
     const docInfo = {
       description,
       type,
       doctorId,
       conditionId,
-      formData
+      formData,
     }
     //post data will need to be an object
     this.props.uploadDocumentsThunk(docInfo)
   }
 
   render() {
-    const { doctors, conditions } = this.props.currentUser
+    const conditions = this.props.conditions;
+    const doctors = this.props.doctors;
     const types = ['Proof of Identity', 'Lab Result', 'Surgical Report', 'Pathology Report', 'Imaging', 'Visit Summary']
-
     return (
       <>
         <form onSubmit={this.uploadHandler} >
@@ -122,9 +143,9 @@ export class UploadDocuments extends Component {
     );
   };
 }
-const mapState = ({ currentUser }) => ({ currentUser })
+const mapState = ({ currentUser, conditions, doctors }) => ({ currentUser, conditions, doctors })
 
-const mapDispatch = { uploadDocumentsThunk }
+const mapDispatch = { uploadDocumentsThunk, getAllConditionsThunk, getAllDoctorsThunk }
 
 export default connect(mapState, mapDispatch)(UploadDocuments);
 

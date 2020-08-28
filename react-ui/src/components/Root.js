@@ -7,7 +7,7 @@ import Login from "./Login";
 import Conditions from "./Conditions";
 import Medications from "./Medications";
 import { fetchCurrentUser } from "../redux/auth";
-import ConditionDC from "./ConditionDC";
+import DailyCheckin from "./DailyCheckin";
 import SingleCondition from "./SingleCondition";
 import Documents from "./Documents"
 // import SingleDocument from './SingleDocument'
@@ -16,9 +16,8 @@ import AllDoctors from "./AllDoctors"
 import SingleDoctor from "./SingleDoctor";
 import SingleMedication from "./SingleMedication";
 import Navbar from "./Navbar";
-import DoctorDC from "./DoctorDC";
-import MedicationDC from './MedicationDC';
 import BarChartCondition from './BarChartCondition'
+
 /* -----------------    COMPONENT     ------------------ */
 
 class Root extends Component {
@@ -39,7 +38,7 @@ class Root extends Component {
             <Navbar />
 
             <Route exact path='/' component={Home} />
-            <Route exact path='/dailycheckin/score' component={ConditionDC} />
+            <Route exact path='/dailycheckin' component={DailyCheckin} />
             <Route exact path='/conditions' component={Conditions} />
             <Route path='/conditions/:id' component={SingleCondition} />
             <Route path="/medications" component={Medications} />
@@ -49,8 +48,6 @@ class Root extends Component {
             <Route exact path="/profile" component={Profile} />
             <Route path="/documents" component={Documents} />
             {/* <Route path="/documents/:id" component={SingleDocument} /> */}
-            <Route exact path='/dailycheckin/appointment' component={DoctorDC} />
-            <Route exact path='/dailycheckin/meds' component={MedicationDC} />
             <Route path='/chart' component={BarChartCondition} />
           </>
         )}
