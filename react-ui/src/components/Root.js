@@ -16,7 +16,7 @@ import AllDoctors from "./AllDoctors"
 import SingleDoctor from "./SingleDoctor";
 import SingleMedication from "./SingleMedication";
 import Navbar from "./Navbar";
-
+import BarChartCondition from './BarChartCondition'
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -48,6 +48,7 @@ class Root extends Component {
             <Route exact path="/profile" component={Profile} />
             <Route path="/documents" component={Documents} />
             {/* <Route path="/documents/:id" component={SingleDocument} /> */}
+            <Route path='/chart' component={BarChartCondition} />
           </>
         )}
 
