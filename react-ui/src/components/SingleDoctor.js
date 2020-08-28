@@ -40,10 +40,9 @@ export class SingleDoctor extends React.Component {
         } else {
             return (
                 <div>
-                    <div>{doctor.firstName}</div>
-                    <div>{doctor.lastName}</div>
-                    <div>{doctor.doctorType}</div>
-                    <div>{doctor.address}</div>
+                    <div>Doctor: {doctor.firstName} {doctor.lastName}</div>
+                    <div>Specialty: {doctor.doctorType}</div>
+                    <div>Address: {doctor.address}</div>
                     <div>
                         {this.state.clicked === true && <UpdateDoctor />}
                     </div>
