@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 class DCDoctorForm extends Component {
   constructor() {
     super();
@@ -12,7 +12,7 @@ class DCDoctorForm extends Component {
   }
   handleChange(evt) {
     const doctorId = this.props.doctor.id;
-    this.setState({doctorId});
+    this.setState({ doctorId });
     const target = evt.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
@@ -34,33 +34,33 @@ class DCDoctorForm extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
-          {doctor.firstName}{doctor.lastName}
+          {doctor.firstName} {doctor.lastName}
           <input
-          type='checkbox'
-          name='isClicked'
-          onChange={this.handleChange}
+            type='checkbox'
+            name='isClicked'
+            onChange={this.handleChange}
           />
         </label>
         {
           this.state.isClicked ?
-          <div>
-          <div>
-            <label>
-              Time of your appointment
+            <div>
+              <div>
+                <label>
+                  Time of your appointment
               <input
-                className='input'
-                placeholder='HH:MM'
-                type='text'
-                name='time'
-                onChange={this.handleChange}
-                value={this.state.time}
-              />
-            </label>
-          </div>
-          <button type="submit">
-            Submit
+                    className='input'
+                    placeholder='HH:MM'
+                    type='text'
+                    name='time'
+                    onChange={this.handleChange}
+                    value={this.state.time}
+                  />
+                </label>
+              </div>
+              <button type="submit">
+                Submit
           </button>
-          </div> : null
+            </div> : null
         }
       </form>
     )

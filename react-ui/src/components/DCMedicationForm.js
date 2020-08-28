@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 class DCMedicationForm extends Component {
   constructor() {
     super();
@@ -12,7 +12,7 @@ class DCMedicationForm extends Component {
   }
   handleChange(evt) {
     const medicationId = this.props.eachMed.id;
-    this.setState({medicationId});
+    this.setState({ medicationId });
     const target = evt.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
@@ -36,31 +36,31 @@ class DCMedicationForm extends Component {
         <label>
           {med.name}
           <input
-          type='checkbox'
-          name='isClicked'
-          onChange={this.handleChange}
+            type='checkbox'
+            name='isClicked'
+            onChange={this.handleChange}
           />
         </label>
         {
           this.state.isClicked ?
-          <div>
-          <div>
-          <label>
-            Any notes?
+            <div>
+              <div>
+                <label>
+                  Any notes on how this medication is making you feel?
             <input
-              className='input'
-              placeholder='notes'
-              type='text'
-              name='notes'
-              onChange={this.handleChange}
-              value={this.state.notes}
-            />
-          </label>
-        </div>
-          <button type="submit">
-            Submit
+                    className='input'
+                    placeholder='notes'
+                    type='text'
+                    name='notes'
+                    onChange={this.handleChange}
+                    value={this.state.notes}
+                  />
+                </label>
+              </div>
+              <button type="submit">
+                Submit
           </button>
-          </div> : null
+            </div> : null
         }
 
       </form>

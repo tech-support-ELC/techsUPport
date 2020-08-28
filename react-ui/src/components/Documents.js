@@ -9,7 +9,7 @@ export class Documents extends Component {
   }
 
   render() {
-    const { documents } = this.props
+    const { documents } = this.props.currentUser
     return (
       <>
         {
@@ -17,7 +17,10 @@ export class Documents extends Component {
             documents.map((doc, i) => (
               <div key={i}>
                 <Link to={`/documents/${i}`}>
-                  <img src={doc.secure_url} alt='document' width="200" height="200" />
+                  <img src={doc.imageUrl}
+                    alt='document' width="200" height="200"
+                  // onError={() => props.onError(doc.public_id)}
+                  />
                 </Link>
               </div>
             ))
@@ -27,15 +30,15 @@ export class Documents extends Component {
   }
 }
 
-const mapState = ({ documents }, ownProps) => {
-  const paramId = Number(ownProps.match.params.id)
-  let singleDocument = {}
-  if (documents) {
-    singleDocument = documents.find((document, i) => i === paramId)
-  }
+const mapState = ({ currentUser }, ownProps) => {
+  // const paramId = Number(ownProps.match.params.id)
+  // let singleDocument = {}
+  // if (documents) {
+  //   singleDocument = documents.find((document, i) => i === paramId)
+  // }
   return {
-    documents,
-    singleDocument
+    currentUser,
+    // singleDocument,
   }
 }
 

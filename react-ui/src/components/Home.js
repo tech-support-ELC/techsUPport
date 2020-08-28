@@ -11,8 +11,6 @@ const Home = (props) => {
   return (
     <div>
       <h1>Welcome {firstName}!</h1>
-      <h2>Onboarding</h2>
-      <Link to="/doctors">Click to follow our onboarding</Link>
       <p>
         <button type='submit' onClick={handleClick}>Log out</button>
       </p>

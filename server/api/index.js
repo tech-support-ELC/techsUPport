@@ -6,8 +6,10 @@ router.use('/conditions', require('./conditions'));
 router.use('/users', require('./users'));
 router.use('/doctors', require('./doctors'));
 router.use("/medications", require("./medications"));
-router.use('/dailycheckin', require('./dailycheckin'));
-router.use("/uploadDocuments", require("./uploadDocuments"));
+router.use('/dailycheckin', require('./dailyCheckin'));
+router.use('/score', require('./score'));
+router.use("/documents", require("./documents"));
+
 
 
 

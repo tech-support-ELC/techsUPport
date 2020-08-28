@@ -1,45 +1,151 @@
 import React, { Component } from "react";
 import { uploadDocumentsThunk } from '../redux/documents'
+import { getAllConditionsThunk } from '../redux/conditions'
+import { getAllDoctorsThunk } from '../redux/doctors'
 import { connect } from 'react-redux'
 
 export class UploadDocuments extends Component {
   constructor() {
     super()
     this.state = {
-      documents: []
+      description: 'null',
+      type: '',
+      doctorId: 0,
+      conditionId: 0,
+      files: [],
     }
     this.changeHandler = this.changeHandler.bind(this)
     this.uploadHandler = this.uploadHandler.bind(this)
+    this.fileInput = React.createRef()
   }
-
+  async componentDidMount() {
+    await this.props.getAllConditionsThunk();
+    await this.props.getAllDoctorsThunk();
+  }
   changeHandler(e) {
-    e.preventDefault()
-    const files = Array.from(e.target.files)
+    // e.preventDefault()
+    console.log('fileinput', this.fileInput)
+    const files = Array.from(this.fileInput.current.files)
     this.setState({
-      documents: files
+      [e.target.name]: e.target.value,
+      files
     })
+    console.log('state', this.state)
   }
 
   uploadHandler(e) {
     e.preventDefault()
-    const formData = new FormData()
-    this.state.documents.forEach((file, i) => {
-      formData.append(i, file)
-    })
-    this.props.uploadDocumentsThunk(formData)
+    //formData is an object
+    const files = Array.from(this.fileInput.current.files)
+    // const files = this.fileInput.current.files
+    console.log('files', this.fileInput.current.files)
+    // const formData = {
+    //   lastModified: files[0].lastModified,
+    //   lastModifiedDate:files[0].lastModifiedDate,
+    //   name: files[0].name,
+    //   size: files[0].size,
+    //   type: files[0].type,
+    //   webkitRelativePath: files[0].webkitRelativePath,
+    // }
+    // files.forEach((file, i) => {
+    //   console.log(file, i)
+    //   formData[i] = file;
+    // })
+    const formData = new FormData();
+    console.log(Object.values(files[0]))
+    for (let i = 0; i < files.length; i++) {
+      console.log(typeof (files[i]), i)
+      formData.append(i, files[i])
+    }
+    console.log('formdata', formData)
+    const { description, type, doctorId, conditionId } = this.state
+    const docInfo = {
+      description,
+      type,
+      doctorId,
+      conditionId,
+      formData,
+    }
+    //post data will need to be an object
+    this.props.uploadDocumentsThunk(docInfo)
   }
 
   render() {
+    const conditions = this.props.conditions;
+    const doctors = this.props.doctors;
+    const types = ['Proof of Identity', 'Lab Result', 'Surgical Report', 'Pathology Report', 'Imaging', 'Visit Summary']
     return (
       <>
-        <input type="file" onChange={this.changeHandler} multiple />
-        <button type="submit" onClick={this.uploadHandler}>Upload</button>
+        <form onSubmit={this.uploadHandler} >
+          <label>Enter a short description of what this document contains: </label>
+          <input
+            name='description'
+            // value={this.state.description}
+            type='text'
+            placeholder='Description'
+            onChange={this.changeHandler}
+          />
+          <label>Select what type of document this is:
+          <select
+              name='type'
+              // value={this.state.type}
+              onChange={this.changeHandler}>
+              {types.map((type, i) => {
+                return (
+                  <option key={i} value={type}>{type}</option>
+                )
+              })
+              }
+            </select>
+          </label>
+          <label>Which doctor is this document associated with?
+          <select
+              name='doctorId'
+              // value={this.state.doctorId}
+              onChange={this.changeHandler}>
+              {!doctors ? 'null' :
+                doctors.map(doctor => {
+                  const { id, firstName, lastName } = doctor
+                  return (
+                    <option key={id} value={id}>{firstName} {lastName}</option>
+                  )
+                })
+              }
+            </select>
+          </label>
+          <label>What condition does this document relate to?
+          <select
+              name='conditionId'
+              // value={this.state.conditionId}
+              onChange={this.changeHandler}>
+              {!conditions ? 'null' :
+                conditions.map(condition => {
+                  const { id, name } = condition
+                  return (
+                    <option key={id} value={id}>{name}</option>
+                  )
+                })
+              }
+            </select>
+          </label>
+          <>
+            <label>Choose a File</label>
+            <input
+              type="file"
+              ref={this.fileInput}
+              onChange={this.changeHandler}
+              multiple
+            />
+          </>
+          <button type="submit">Upload</button>
+        </form>
       </>
     );
   };
 }
+const mapState = ({ currentUser, conditions, doctors }) => ({ currentUser, conditions, doctors })
 
-const mapDispatchToProps = { uploadDocumentsThunk }
+const mapDispatch = { uploadDocumentsThunk, getAllConditionsThunk, getAllDoctorsThunk }
 
-export default connect(null, mapDispatchToProps)(UploadDocuments);
+export default connect(mapState, mapDispatch)(UploadDocuments);
 

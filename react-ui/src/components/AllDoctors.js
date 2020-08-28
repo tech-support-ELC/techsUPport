@@ -53,10 +53,10 @@ export class AllDoctors extends React.Component {
         const doctors = this.props.doctors;
         return (
             <div>
-                <h1>All Doctors</h1>
 
                 <div>
                     <button onClick={this.openModal}>Add a Doctor</button>
+                    <h1>My Doctors</h1>
                     <ReactModal
                         isOpen={this.state.showModal}
                         contentLabel="Example Modal"

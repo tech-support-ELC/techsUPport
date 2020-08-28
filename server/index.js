@@ -6,13 +6,27 @@ const passport = require("passport");
 const session = require("express-session");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const db = require("./db");
+const { User } = require('./db/models')
 const sessionStore = new SequelizeStore({ db });
 const numCPUs = require("os").cpus().length;
 const isDev = process.env.NODE_ENV === "development";
 const PORT = process.env.PORT
 const cors = require('cors')
 const CLIENT_ORIGIN = require('./CLIENT_ORIGIN')
+const app = express();
+module.exports = app;
 
+// passport registration
+passport.serializeUser((user, done) => done(null, user.id));
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findByPk(id);
+    done(null, user);
+  } catch (err) {
+    done(err);
+  }
+});
 
 // Multi-process to utilize all CPU cores.
 if (!isDev && cluster.isMaster) {
@@ -29,20 +43,7 @@ if (!isDev && cluster.isMaster) {
     );
   });
 } else {
-  const app = express();
-  module.exports = app;
-
-  // passport registration
-  passport.serializeUser((user, done) => done(null, user.id));
-
-  passport.deserializeUser(async (id, done) => {
-    try {
-      const user = await db.models.user.findByPk(id);
-      done(null, user);
-    } catch (err) {
-      done(err);
-    }
-  });
+  require('dotenv').config()
 
   // logging middleware
   app.use(morgan("dev"));
@@ -60,6 +61,7 @@ if (!isDev && cluster.isMaster) {
       saveUninitialized: false,
     })
   );
+
   app.use(passport.initialize());
   app.use(passport.session());
 
@@ -100,6 +102,7 @@ if (!isDev && cluster.isMaster) {
       isDev ? "dev server" : "cluster worker " + process.pid
       }: listening on port ${PORT}`
     );
+    await sessionStore.sync()
     await db.sync();
     console.log("db synced");
   });

@@ -13,7 +13,10 @@ const Home = (props) => {
       <h4>Name: {firstName} {lastName}</h4>
       <h4>Email: {email}</h4>
       <span><Documents {...props} /></span>
-      <p><UploadDocuments userid={id} /></p>
+      <div>
+        Upload your insurance card and ID card:
+      </div>
+      <span><UploadDocuments userid={id} /></span>
       <p>
         <button type='submit' onClick={handleClick}>Log out</button>
       </p>

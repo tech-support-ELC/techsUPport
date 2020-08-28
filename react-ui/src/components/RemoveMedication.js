@@ -1,8 +1,5 @@
 import React from "react";
 
-// function handleRemove(){
-
-// }
 const RemoveMedication = (props) => {
   const { medication, remove } = props;
 
@@ -11,11 +8,6 @@ const RemoveMedication = (props) => {
       <button type="sumbit" onClick={() => remove(medication.id)}>
         Delete
       </button>
-
-      {/* <button type="sumbit" onClick={() => (remove(medication.id)
-   )}>
-        Delete
-      </button> */}
     </div>
   );
 };
