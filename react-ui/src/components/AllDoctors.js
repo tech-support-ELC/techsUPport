@@ -6,6 +6,7 @@ import { AddDoctor } from "./AddDoctor";
 import { Link } from 'react-router-dom'
 import ReactModal from 'react-modal'
 import SingleDoctor from './SingleDoctor'
+import { getAppointmentThunk } from "../redux/dcDoctor"
 
 const customStyles = {
     content: {
@@ -31,6 +32,7 @@ export class AllDoctors extends React.Component {
         this.closeDocModal = this.closeDocModal.bind(this)
     }
     componentDidMount() {
+        ReactModal.setAppElement('body')
         this.props.getAllDoctors()
     }
 
@@ -40,7 +42,9 @@ export class AllDoctors extends React.Component {
 
     openDocModal(id) {
         this.setState({ showDocModal: true })
+        console.log("im inside ALL DOCTORS OPEN DOC MODAL")
         this.props.fetchSingleDoctor(id)
+        this.props.getAppointments()
     }
 
     closeModal() {
@@ -56,7 +60,7 @@ export class AllDoctors extends React.Component {
             <div>
 
                 <div>
-                    <button onClick={this.openModal}>Add a Doctor</button>
+                    <button onClick={() => this.openModal}>Add a Doctor</button>
                     <h1>My Doctors</h1>
                     <ReactModal
                         isOpen={this.state.showModal}
@@ -92,14 +96,16 @@ const mapStateToProps = (state) => {
     return {
         doctor: state.doctor,
         doctors: state.doctors,
-        currentUser: state.currentUser
+        currentUser: state.currentUser,
+        appointment: state.appointment
     };
 };
 const mapDispatchToProps = (dispatch) => {
     return {
         getAllDoctors: () => dispatch(getAllDoctorsThunk()),
         addNewDoctor: (newDoctor) => dispatch(addDoctorThunk(newDoctor)),
-        fetchSingleDoctor: (id) => dispatch(fetchSingleDoctor(id))
+        fetchSingleDoctor: (id) => dispatch(fetchSingleDoctor(id)),
+        getAppointments: () => dispatch(getAppointmentThunk())
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AllDoctors);
