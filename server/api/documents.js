@@ -4,7 +4,6 @@ const cloudinary = require('cloudinary')
 const { Document, User } = require('../db/models')
 const { isOwnerOrAdmin } = require('../auth/authenticateUser')
 
-
 router.get('/', isOwnerOrAdmin, async (req, res, next) => {
   try {
     const documents = await Document.findAll({
@@ -28,21 +27,17 @@ router.get('/:id', isOwnerOrAdmin, async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const { description, type, doctorId, conditionId, formData } = req.body
-    // console.log('formData', formData)
+    const { description, type, doctorId, conditionId } = req.body
     // req.files is the formData from frontend
-    const values = Object.values(formData)
+    const values = Object.values(req.files)
     const promises = values.map(image => cloudinary.uploader.upload(image.path, { type: 'private', upload_preset: 'capstone' }))
     const results = await Promise.all(promises)
 
     const documents = results.map(async result => {
       await Document.create({
-        description,
-        type,
+        description, type, doctorId, conditionId,
         imageUrl: result.secure_url,
         userId: req.user.id,
-        doctorId,
-        conditionId
       })
     })
 

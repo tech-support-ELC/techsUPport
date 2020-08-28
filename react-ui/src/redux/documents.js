@@ -43,10 +43,10 @@ export const fetchDocuments = () => {
   }
 }
 
-export const uploadDocumentsThunk = (docInfo) => {
+export const uploadDocumentsThunk = (files) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post(`${API_URL}/api/documents`, docInfo)
+      const { data } = await axios.post(`${API_URL}/api/documents`, files)
       dispatch(uploadDocuments(data));
     } catch (error) {
       console.log(error);
