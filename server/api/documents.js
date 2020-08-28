@@ -28,13 +28,15 @@ router.get('/:id', isOwnerOrAdmin, async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const { description, type, doctorId, conditionId, formData } = req.body
-    // console.log('formData', formData)
+    console.log('formData', req.body)
+    const { description, type, doctorId, conditionId, formData } = req.body;
+    console.log('formData', formData)
     // req.files is the formData from frontend
     const values = Object.values(formData)
     const promises = values.map(image => cloudinary.uploader.upload(image.path, { type: 'private', upload_preset: 'capstone' }))
     const results = await Promise.all(promises)
-
+    console.log('values', values)
+    console.log('promises', promises)
     const documents = results.map(async result => {
       await Document.create({
         description,
@@ -45,7 +47,14 @@ router.post('/', async (req, res, next) => {
         conditionId
       })
     })
-
+    // const newDoc = await Document.create({
+    //   description,
+    //   type,
+    //   imageUrl: 'result.secure_url',
+    //   userId: req.user.id,
+    //   doctorId,
+    //   conditionId
+    // })
     // console.log('documents', documents)
     res.json(documents)
 
