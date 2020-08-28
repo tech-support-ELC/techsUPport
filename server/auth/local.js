@@ -1,6 +1,6 @@
 // require('dotenv').config()
 const router = require('express').Router()
-const { User, Document } = require('../db/models/')
+const { User, Doctor, Condition, Document } = require('../db/models/')
 // const jwt = require('jsonwebtoken')
 
 // function generateAccessToken(user) {
@@ -11,7 +11,7 @@ router.post('/login', async (req, res, next) => {
   try {
     const user = await User.findOne({
       where: { email: req.body.email },
-      include: [Document]
+      include: [Doctor, Condition, Document]
     })
     if (!user) {
       console.log('No such user found:', req.body.email)

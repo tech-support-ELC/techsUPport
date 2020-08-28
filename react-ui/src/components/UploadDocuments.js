@@ -59,13 +59,13 @@ export class UploadDocuments extends Component {
     const types = ['Proof of Identity', 'Lab Result', 'Surgical Report', 'Pathology Report', 'Imaging', 'Visit Summary']
     return (
       <form onSubmit={this.uploadHandler} >
-        <label>Enter A Short Description</label>
+        <label>Enter a short description of what this document contains:</label>
         <input
           name='description'
           type='text'
           placeholder='Description'
         />
-        <label>Select Type
+        <label>Select what type of document this is:
           <select
             name='type'
           >
@@ -77,7 +77,7 @@ export class UploadDocuments extends Component {
             }
           </select>
         </label>
-        <label>Label Doctor
+        <label>Which doctor is this document associated with?
           <select
             name='doctorId'
           >
@@ -91,7 +91,7 @@ export class UploadDocuments extends Component {
             }
           </select>
         </label>
-        <label>Label Condition
+        <label>What condition does this document relate to?
           <select
             name='conditionId'
           >
