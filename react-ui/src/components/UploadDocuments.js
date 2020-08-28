@@ -39,24 +39,24 @@ export class UploadDocuments extends Component {
     const files = Array.from(this.fileInput.current.files)
     // const files = this.fileInput.current.files
     console.log('files', this.fileInput.current.files)
-    const test = this.fileInput.current.files
-    const formData = {
-      lastModified: files[0].lastModified,
-      lastModifiedDate:files[0].lastModifiedDate,
-      name: files[0].name,
-      size: files[0].size,
-      type: files[0].type,
-      webkitRelativePath: files[0].webkitRelativePath,
-    }
+    // const formData = {
+    //   lastModified: files[0].lastModified,
+    //   lastModifiedDate:files[0].lastModifiedDate,
+    //   name: files[0].name,
+    //   size: files[0].size,
+    //   type: files[0].type,
+    //   webkitRelativePath: files[0].webkitRelativePath,
+    // }
     // files.forEach((file, i) => {
     //   console.log(file, i)
     //   formData[i] = file;
     // })
-    // console.log(Object.values(files[0]))
-    // for (let i=0; i<files.length; i++) {
-    //   console.log(typeof(files[i]), i)
-    //   formData.append(i, files[i])
-    // }
+    const formData = new FormData();
+    console.log(Object.values(files[0]))
+    for (let i=0; i<files.length; i++) {
+      console.log(typeof(files[i]), i)
+      formData.append(i, files[i])
+    }
     console.log('formdata',formData)
     const { description, type, doctorId, conditionId } = this.state
     const docInfo = {
