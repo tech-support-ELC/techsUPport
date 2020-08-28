@@ -2,18 +2,18 @@ import axios from 'axios';
 import { API_URL } from './API_URL';
 const initialState = [];
 
-const GET_MEDICATION = 'GET_MEDICATION';
-const ADD_MEDICATION = 'ADD_MEDICATION';
+const GET_MEDS = 'GET_MEDS';
+const ADD_MEDS = 'ADD_MEDS';
 
 const getMedication = med => {
   return {
-    type: GET_MEDICATION,
+    type: GET_MEDS,
     med
   }
 }
 const addMedication = med => {
   return {
-    type: ADD_MEDICATION,
+    type: ADD_MEDS,
     med
   }
 }
@@ -41,9 +41,9 @@ export const addMedicationThunk = (notes) => {
 }
 export default function(state = initialState, action) {
   switch (action.type) {
-    case GET_MEDICATION:
+    case GET_MEDS:
       return action.med
-    case ADD_MEDICATION:
+    case ADD_MEDS:
       return [
         ...state,
         action.med
