@@ -29,6 +29,7 @@ class Conditions extends Component {
   }
   componentDidMount() {
     this.props.getAllConditions();
+    ReactModal.setAppElement('body');
   }
   openModal() {
     this.setState({ showModal: true })
