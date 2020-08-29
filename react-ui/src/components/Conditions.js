@@ -5,16 +5,16 @@ import { getSingleConditionThunk } from '../redux/singleCondition';
 import AddConditionForm from './AddConditionForm';
 import SingleCondition from './SingleCondition';
 import ReactModal from 'react-modal';
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
-  }
-};
+// const customStyles = {
+//   content: {
+//     top: '50%',
+//     left: '50%',
+//     right: 'auto',
+//     bottom: 'auto',
+//     marginRight: '-50%',
+//     transform: 'translate(-50%, -50%)'
+//   }
+// };
 class Conditions extends Component {
   constructor() {
     super();

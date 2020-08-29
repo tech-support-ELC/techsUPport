@@ -3,20 +3,19 @@ import { connect } from "react-redux";
 import { getAllDoctorsThunk, addDoctorThunk } from "../redux/doctors";
 import { fetchSingleDoctor } from '../redux/singleDoctor'
 import { AddDoctor } from "./AddDoctor";
-import { Link } from 'react-router-dom'
 import ReactModal from 'react-modal'
 import SingleDoctor from './SingleDoctor'
 
-const customStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)'
-    }
-};
+// const customStyles = {
+//     content: {
+//         top: '50%',
+//         left: '50%',
+//         right: 'auto',
+//         bottom: 'auto',
+//         marginRight: '-50%',
+//         transform: 'translate(-50%, -50%)'
+//     }
+// };
 
 export class AllDoctors extends React.Component {
     constructor() {
@@ -79,7 +78,6 @@ export class AllDoctors extends React.Component {
                                     <SingleDoctor closeTheModal={this.closeDocModal} />
                                     <button onClick={this.closeDocModal}>close</button>
                                 </ReactModal>
-                                {/* <Link to={`/doctors/${doctor.id}`}></Link> */}
                             </div>
                         )
                     })}

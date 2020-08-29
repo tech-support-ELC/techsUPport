@@ -9,6 +9,7 @@ import users from "./redux/users";
 import medications from "./redux/medications";
 import medication from "./redux/singleMedication";
 import documents from "./redux/documents";
+import singleDocument from "./redux/singleDocument";
 import doctors from "./redux/doctors";
 import doctor from './redux/singleDoctor';
 import score from './redux/dcCondition';
@@ -23,6 +24,7 @@ const reducer = combineReducers({
   medications,
   medication,
   documents,
+  singleDocument,
   doctors,
   doctor,
   score,

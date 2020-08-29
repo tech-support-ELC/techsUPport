@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { logout } from '../redux/auth'
 import UploadDocuments from './UploadDocuments'
-import Documents from './Documents'
+import ProofOfIdentity from './ProofOfIdentity'
 import { getAllConditionsThunk } from '../redux/conditions'
 import { getAllDoctorsThunk } from '../redux/doctors'
 
@@ -22,7 +22,7 @@ class Profile extends Component {
         <div>
           Your insurance card and ID card:
       </div>
-        <span><Documents {...this.props} /></span>
+        <span><ProofOfIdentity {...this.props} /></span>
         <span><UploadDocuments /></span>
         <p>
           <button type='submit' onClick={handleClick}>Log out</button>

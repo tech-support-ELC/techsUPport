@@ -3,7 +3,7 @@ import { uploadDocumentThunk } from '../redux/documents'
 import { connect } from 'react-redux'
 import axios from 'axios'
 
-export class UploadDocuments extends Component {
+export class UploadDocument extends Component {
   constructor() {
     super()
     this.state = {
@@ -37,12 +37,8 @@ export class UploadDocuments extends Component {
 
     const description = e.target.description.value
     const type = e.target.type.value
-    let doctorId = null
-    if (typeof (e.target.doctorId.value) === 'number') doctorId = e.target.doctorId.value
-
-    let conditionId = null
-    if (typeof (e.target.conditionId.value) === 'number') conditionId = e.target.doctorId.value
-
+    const doctorId = e.target.doctorId.value || null
+    const conditionId = e.target.conditionId.value || null
     const imageUrl = await this.sendFile()
 
     const formData = {
@@ -53,7 +49,6 @@ export class UploadDocuments extends Component {
       imageUrl
     }
     this.props.uploadDocumentThunk(formData)
-    this.props.closeUploadModal()
   }
 
   render() {
@@ -124,5 +119,5 @@ const mapState = ({ currentUser, doctors, conditions }) => ({ currentUser, docto
 
 const mapDispatch = { uploadDocumentThunk }
 
-export default connect(mapState, mapDispatch)(UploadDocuments);
+export default connect(mapState, mapDispatch)(UploadDocument);
 

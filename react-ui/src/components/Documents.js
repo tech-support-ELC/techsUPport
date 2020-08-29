@@ -1,54 +1,87 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchDocuments } from '../redux/documents'
-import { Link } from 'react-router-dom'
+import ReactModal from 'react-modal'
+import SingleDocument from './SingleDocument'
+import UploadDocuments from './UploadDocuments'
+
 
 export class Documents extends Component {
+  constructor() {
+    super()
+    this.state = {
+      showDocumentModal: false,
+      showUploadModal: false
+    }
+    this.openUploadModal = this.openUploadModal.bind(this)
+    this.closeUploadModal = this.closeUploadModal.bind(this)
+    this.openDocumentModal = this.openDocumentModal.bind(this)
+    this.closeDocumentModal = this.closeDocumentModal.bind(this)
+  }
+
   componentDidMount() {
-    this.props.fetchDocuments()
+    ReactModal.setAppElement('body');
+  }
+
+  openUploadModal() {
+    this.setState({ showUploadModal: true })
+  }
+
+  closeUploadModal() {
+    this.setState({ showUploadModal: false })
+  }
+
+  openDocumentModal() {
+    this.setState({ showDocumentModal: true })
+  }
+
+  closeDocumentModal() {
+    this.setState({ showDocumentModal: false })
   }
 
   render() {
-    const { documents } = this.props.currentUser
+    const { currentUser } = this.props
+    const { documents } = currentUser
+    if (!documents) {
+      return 'No Documents'
+    }
     return (
-      <>
-        {
-          !documents ? 'No Documents' :
-            documents.map((doc, i) => {
-              const { type } = doc
-              return (
-                <div key={i}>
-                  {type === 'Proof of Identity' &&
-                    <Link to={`/documents/${i}`}>
-                      <img src={doc.imageUrl}
-                        alt='document'
-                        width="50%" height="50%"
-                      // onError={() => props.onError(doc.public_id)}
-                      />
-                    </Link>
-                  }
+      <div>
+
+        <button onClick={() => this.openUploadModal()}>Upload a Document</button>
+        <ReactModal
+          isOpen={this.state.showUploadModal}
+          contentLabel="Upload Documents"
+        >
+          <UploadDocuments closeUploadModal={this.closeUploadModal} />
+          <button onClick={() => this.closeUploadModal()}>close</button>
+        </ReactModal>
+
+        <h1>My Documents</h1>
+        {documents && documents.map((doc) => {
+          const { type, id, description } = doc
+          return (
+            <div key={id} >
+              {type !== 'Proof of Identity' &&
+                <div >
+                  <button onClick={() => this.openDocumentModal()}>{description}</button>
+                  <ReactModal
+                    isOpen={this.state.showDocumentModal}
+                    contentLabel="Single Document"
+                  >
+                    <SingleDocument {...this.props} closeDocumentModal={this.closeDocumentModal} id={id} />
+                    <button onClick={() => this.closeDocumentModal()}>close</button>
+                  </ReactModal>
                 </div>
-              )
-            }
-            )
+              }
+            </div>
+          )
+        })
         }
-      </>
+      </div >
     )
   }
 }
 
-const mapState = ({ currentUser }, ownProps) => {
-  // const paramId = Number(ownProps.match.params.id)
-  // let singleDocument = {}
-  // if (documents) {
-  //   singleDocument = documents.find((document, i) => i === paramId)
-  // }
-  return {
-    currentUser,
-    // singleDocument,
-  }
-}
+const mapState = ({ currentUser }) => ({ currentUser })
 
-const mapDispatch = { fetchDocuments }
-
-export default connect(mapState, mapDispatch)(Documents)
+export default connect(mapState)(Documents)
