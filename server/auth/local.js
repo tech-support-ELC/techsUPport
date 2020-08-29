@@ -51,7 +51,6 @@ router.delete('/logout', (req, res) => {
 router.get('/me', async (req, res) => {
   const { id } = req.user
   const user = await User.findByPk(id, { include: [Document, Doctor, Condition] })
-  console.log(user)
   res.json(user)
 })
 

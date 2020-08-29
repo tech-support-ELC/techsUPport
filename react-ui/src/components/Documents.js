@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import ReactModal from 'react-modal'
 import SingleDocument from './SingleDocument'
 import UploadDocuments from './UploadDocuments'
+import { fetchDocuments } from '../redux/documents'
 
 
 export class Documents extends Component {
@@ -20,6 +21,7 @@ export class Documents extends Component {
 
   componentDidMount() {
     ReactModal.setAppElement('body');
+    this.props.fetchDocuments()
   }
 
   openUploadModal() {
@@ -39,8 +41,7 @@ export class Documents extends Component {
   }
 
   render() {
-    const { currentUser } = this.props
-    const { documents } = currentUser
+    const { documents } = this.props
     if (!documents) {
       return 'No Documents'
     }
@@ -82,6 +83,7 @@ export class Documents extends Component {
   }
 }
 
-const mapState = ({ currentUser }) => ({ currentUser })
+const mapState = ({ documents }) => ({ documents })
+const mapDispatch = { fetchDocuments }
 
-export default connect(mapState)(Documents)
+export default connect(mapState, mapDispatch)(Documents)

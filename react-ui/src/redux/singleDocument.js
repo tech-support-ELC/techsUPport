@@ -5,15 +5,14 @@ import { API_URL } from './API_URL'
 /* -----------------    ACTION TYPES    ------------------ */
 
 
-const UPDATE_DOCUMENT = "UPDATE_DOCUMENT"
-const DELETE_DOCUMENT = "DELETE_DOCUMENT"
+export const UPDATE_DOCUMENT = "UPDATE_DOCUMENT"
 const GET_DOCUMENT = "GET_DOCUMENT"
 
 /* ------------     ACTION CREATORS      ------------------ */
 
 const getDocument = (document) => ({ type: GET_DOCUMENT, document });
-const updateDocument = (document) => ({ type: UPDATE_DOCUMENT, document });
-const deleteDocument = () => ({ type: DELETE_DOCUMENT });
+const updateDocument = (id, document) => ({ type: UPDATE_DOCUMENT, id, document });
+
 
 
 /* ------------          REDUCER         ------------------ */
@@ -25,9 +24,6 @@ export default function (state = {}, action) {
 
     case UPDATE_DOCUMENT:
       return action.document;
-
-    case DELETE_DOCUMENT:
-      return {}
 
     default:
       return state;
@@ -57,16 +53,6 @@ export const updateDocumentThunk = (id, formData) => {
   }
 }
 
-export const deleteDocumentsThunk = (id) => {
-  return async (dispatch) => {
-    try {
-      await axios.delete(`${API_URL}/api/documents/${id}`)
-      dispatch(deleteDocument());
-    } catch (error) {
-      console.log(error);
-    }
-  }
-}
 
 
 

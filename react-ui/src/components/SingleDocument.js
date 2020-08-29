@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { updateDocumentThunk, fetchSingleDocument, deleteDocumentsThunk } from '../redux/singleDocument'
+import { updateDocumentThunk, fetchSingleDocument } from '../redux/singleDocument'
+import { deleteDocumentsThunk } from '../redux/documents'
 import { connect } from 'react-redux'
 import UpdateDocument from './UpdateDocument'
 

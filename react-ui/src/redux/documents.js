@@ -1,17 +1,47 @@
 import axios from "axios";
 import { API_URL } from './API_URL'
+import { UPDATE_DOCUMENT as UPDATE_DOCUMENT_LIST } from './singleDocument'
 
 
 /* -----------------    ACTION TYPES    ------------------ */
 
 const GET_DOCUMENTS = "GET_DOCUMENTS";
 const UPLOAD_DOCUMENT = "UPLOAD_DOCUMENT"
+const DELETE_DOCUMENT = "DELETE_DOCUMENT"
 
 
 /* ------------     ACTION CREATORS      ------------------ */
 
 const getDocuments = (documents) => ({ type: GET_DOCUMENTS, documents });
 const uploadDocument = (document) => ({ type: UPLOAD_DOCUMENT, document });
+const deleteDocument = (id) => ({ type: DELETE_DOCUMENT, id });
+
+/* ------------          REDUCER         ------------------ */
+
+export default function (state = [], action) {
+  switch (action.type) {
+
+    case GET_DOCUMENTS:
+      return action.documents;
+
+    case UPLOAD_DOCUMENT:
+      return [...state, action.document]
+
+    case DELETE_DOCUMENT:
+      return state.filter(document => document.id !== action.id)
+
+    case UPDATE_DOCUMENT_LIST:
+      return [...state].map((document) => {
+        if (document.id === action.id) {
+          return action.document
+        } else {
+          return document
+        }
+      })
+    default:
+      return state;
+  }
+}
 
 /* ------------       THUNK CREATORS     ------------------ */
 export const fetchDocuments = () => {
@@ -36,19 +66,14 @@ export const uploadDocumentThunk = (formData) => {
   }
 }
 
-/* ------------          REDUCER         ------------------ */
-
-export default function (state = [], action) {
-  switch (action.type) {
-
-    case GET_DOCUMENTS:
-      return action.documents;
-
-    case UPLOAD_DOCUMENT:
-      return [...state, action.document]
-
-    default:
-      return state;
+export const deleteDocumentsThunk = (id) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(`${API_URL}/api/documents/${id}`)
+      dispatch(deleteDocument(id));
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 

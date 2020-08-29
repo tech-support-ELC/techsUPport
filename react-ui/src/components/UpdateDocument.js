@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { uploadDocumentThunk } from '../redux/documents'
+import { updateDocumentThunk } from '../redux/singleDocument'
 import { connect } from 'react-redux'
 import axios from 'axios'
 
@@ -25,30 +25,45 @@ export class UploadDocument extends Component {
   }
 
   async sendFile() {
-    const file = await axios.post(
-      `https://api.cloudinary.com/v1_1/elementhealth/image/upload`,
-      { file: this.state.selectedFile, upload_preset: 'capstone' }
-    )
-    return file.data.secure_url
+    if (this.state.selectedFile) {
+      const file = await axios.post(
+        `https://api.cloudinary.com/v1_1/elementhealth/image/upload`,
+        { file: this.state.selectedFile, upload_preset: 'capstone' }
+      )
+      return file.data.secure_url
+    }
   }
 
   async uploadHandler(e) {
     e.preventDefault()
-
+    const { id } = this.props
     const description = e.target.description.value
     const type = e.target.type.value
-    const doctorId = e.target.doctorId.value || null
-    const conditionId = e.target.conditionId.value || null
-    const imageUrl = await this.sendFile()
+    let doctorId = null
+    if (typeof (e.target.doctorId.value) === 'number') doctorId = e.target.doctorId.value
 
-    const formData = {
-      description,
-      type,
-      doctorId,
-      conditionId,
-      imageUrl
+    let conditionId = null
+    if (typeof (e.target.conditionId.value) === 'number') conditionId = e.target.doctorId.value
+
+    if (this.state.selectedFile) {
+      const imageUrl = await this.sendFile()
+      const formData = {
+        description,
+        type,
+        doctorId,
+        conditionId,
+        imageUrl
+      }
+      this.props.updateDocumentThunk(id, formData)
+    } else {
+      const formData = {
+        description,
+        type,
+        doctorId,
+        conditionId
+      }
+      this.props.updateDocumentThunk(id, formData)
     }
-    this.props.uploadDocumentThunk(formData)
   }
 
   render() {
@@ -104,20 +119,20 @@ export class UploadDocument extends Component {
             }
           </select>
         </label>
-        <label>Choose File</label>
+        <label>Choose File to Replace Current File</label>
         <input
           type='file'
           onChange={this.handleFileRead}
         // multiple
         />
-        <button type="submit" >Upload</button>
+        <button type="submit" >Update</button>
       </form>
     );
   };
 }
-const mapState = ({ currentUser, doctors, conditions }) => ({ currentUser, doctors, conditions })
+const mapState = ({ doctors, conditions }) => ({ doctors, conditions })
 
-const mapDispatch = { uploadDocumentThunk }
+const mapDispatch = { updateDocumentThunk }
 
 export default connect(mapState, mapDispatch)(UploadDocument);
 
