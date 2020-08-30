@@ -1,7 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-
 import { fetchMedications, deleteMedication } from "../redux/medications";
 import AddMedication from "./AddMedication";
 import RemoveMedication from "./RemoveMedication";
@@ -87,13 +85,13 @@ class Medications extends React.Component {
                 <SingleMedication
                   selected={this.state.selected}
                   remove={remove}
-                  // closeModal={this.handleClose}
+                // closeModal={this.handleClose}
                 />
 
                 <RemoveMedication
                   medication={this.state.selected}
                   remove={this.handleRemove}
-                  // close={this.handleClose}
+                // close={this.handleClose}
                 />
               </>
             )}
