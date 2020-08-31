@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAllConditionsThunk, addConditionThunk } from '../redux/conditions';
@@ -31,6 +30,7 @@ class Conditions extends Component {
   }
   componentDidMount() {
     this.props.getAllConditions();
+    ReactModal.setAppElement('body');
   }
   openModal() {
     this.setState({ showModal: true });

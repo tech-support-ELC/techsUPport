@@ -5,8 +5,8 @@ import * as d3 from 'd3';
 class BarChart extends Component {
     async componentDidMount() {
         await this.props.getChart();
-        const info = this.props.chart.map(eachScore => eachScore.rate)
-        this.drawBarChart(info)
+        const rate = this.props.chart.map(eachScore => eachScore.rate)
+        this.drawBarChart(rate)
     }
     drawBarChart(data) {
       const canvasHeight = 400

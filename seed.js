@@ -882,7 +882,7 @@ async function seed() {
       date: "2020-08-29",
       notes:
         "quis diam. Pellentesque habitant morbi tristique senectus et netus et",
-      rate: 4,
+      rate: 8,
       conditionId: 1,
       userId: 1,
     },
@@ -907,6 +907,154 @@ async function seed() {
   const scores = await Promise.all([
     Score.bulkCreate(scoreData, { validate: true }),
   ]);
+  const medicationData = [
+    {
+      name: "Advil",
+      dosage: "400 mg",
+      frequency: "once per day",
+      userId: 1
+    },
+    {
+      name: "Ibuprofen",
+      dosage: "400 mg",
+      frequency: "once per day",
+      userId: 1
+    },
+    {
+      name: "Synthroid",
+      dosage: "25 mg",
+      frequency: "once per day",
+      userId: 1
+    },
+    {
+      name: "Crestor",
+      dosage: "25 mg",
+      frequency: "once per day",
+      userId: 1
+    },
+    {
+      name: "Ventolin",
+      dosage: "25 mg",
+      frequency: "once per day",
+      userId: 1
+    },
+    {
+      name: "Nexium",
+      dosage: "25 mg",
+      frequency: "once per day",
+      userId: 1
+    },
+    {
+      name: "Advair Diskus",
+      dosage: "25 mg",
+      frequency: "once per day",
+      userId: 1
+    },
+    {
+      name: "Lantus",
+      dosage: "25 mg",
+      frequency: "once per day",
+      userId: 1
+    },
+    {
+      name: "Vyvanse",
+      dosage: "25 mg",
+      frequency: "once per day",
+      userId: 1
+    },
+    {
+      name: "Lyrica",
+      dosage: "25 mg",
+      frequency: "once per day",
+      userId: 1
+    },
+    {
+      name: "Spiriva",
+      dosage: "25 mg",
+      frequency: "once per day",
+      userId: 1
+    },
+    {
+      name: "Januvia",
+      dosage: "25 mg",
+      frequency: "once per day",
+      userId: 1
+    },
+    {
+      name: "Ibuprofen",
+      dosage: "25 mg",
+      frequency: "once per day",
+      userId: 2
+    },
+    {
+      name: "Ibuprofen",
+      dosage: "25 mg",
+      frequency: "once per day",
+      userId: 3
+    },
+    {
+      name: "Ibuprofen",
+      dosage: "25 mg",
+      frequency: "once per day",
+      userId: 4
+    },
+    {
+      name: "Ibuprofen",
+      dosage: "25 mg",
+      frequency: "once per day",
+      userId: 5
+    },
+    {
+      name: "Ibuprofen",
+      dosage: "25 mg",
+      frequency: "once per day",
+      userId: 6
+    },
+    {
+      name: "Ibuprofen",
+      dosage: "25 mg",
+      frequency: "once per day",
+      userId: 7
+    },
+    {
+      name: "Ibuprofen",
+      dosage: "25 mg",
+      frequency: "once per day",
+      userId: 8
+    },
+    {
+      name: "Ibuprofen",
+      dosage: "25 mg",
+      frequency: "once per day",
+      userId: 9
+    },
+    {
+      name: "Lantus",
+      dosage: "25 mg",
+      frequency: "once per day",
+      userId: 2
+    },
+    {
+      name: "Lantus",
+      dosage: "25 mg",
+      frequency: "once per day",
+      userId: 3
+    },
+    {
+      name: "Lantus",
+      dosage: "25 mg",
+      frequency: "once per day",
+      userId: 4
+    },
+    {
+      name: "Lantus",
+      dosage: "25 mg",
+      frequency: "once per day",
+      userId: 5
+    },
+  ];
+  const medications = await Promise.all([
+    Medication.bulkCreate(medicationData, { validate: true }),
 
   const appointmentData = [{
     id: 1,
@@ -1032,6 +1180,7 @@ async function seed() {
 
   const appointments = await Promise.all([
     Appointment.bulkCreate(appointmentData, { validate: true }),
+
   ]);
 
   console.log(`seeded successfully`);

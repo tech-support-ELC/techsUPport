@@ -21,9 +21,9 @@ router.get('/', isAdmin, async (req, res, next) => {
   // after jwt, we have our req.user as the authenticated user
   try {
     const users = await User.findAll(
-      { attributes: ['firstName', 'lastName', 'id', 'email', 'imageUrl', 'summary'] })
+      { attributes: ['firstName', 'lastName', 'id', 'email'] })
     if (users) res.json(users)
-    res.sendStatus(404)
+    else res.sendStatus(404)
   } catch (err) {
     next(err)
   }

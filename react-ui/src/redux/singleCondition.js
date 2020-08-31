@@ -54,7 +54,7 @@ export default function(state = initialState, action) {
       let updated = { ...state.condition }
       updated.name = action.condition.name
       updated.diagnosed = action.condition.diagnosed
-      updated.typeOfPain = action.condition.address
+      updated.typeOfPain = action.condition.typeOfPain
       return updated
     default:
       return state
