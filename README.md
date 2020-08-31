@@ -1,3 +1,101 @@
+# Survive COVID!
+
+We have everything you need to survive the 2020 pandemic!
+
+Visit [Our PPE Shop](https://graceshopper2020.herokuapp.com/) to get what you need!
+
+## Table of Contents
+
+* [Setup](#Setup)
+* [Team](#Team)
+  * [Lu Wang](#Lu-Wang)
+  * [Ariel Weiner](#Ariel-Weiner)
+  * [Sara Culhane](#Sara-Culhane)
+* [Tech Stack](#Tech-Stack)
+  * [React](#React)
+  * [Redux](#Redux)
+  * [Node.js](#Node.js)
+  * [Express](#Express)
+  * [PostgreSQL](#PostgreSQL)
+* [Examples](#Examples)
+
+## Setup
+
+* Run the following commands:
+
+```
+cd <directory you want to clone this project>
+git clone https://github.com/Grace-Shopper-PPE/Grace-Shopper
+npm install
+npm run start-dev
+Go to http://localhost:8080 to use PPE Shop!
+```
+
+## Team
+
+### Lu Wang
+
+[Github](https://github.com/LuWang1983)
+[LinkedIn](https://www.linkedin.com/in/loowang)
+
+### Megan Leaf
+
+[Github](https://github.com/arielwainer4)
+[LinkedIn](https://www.linkedin.com/in/arielwainer/)
+
+### Biligma Oyola
+
+[Github](https://github.com/sarajculhane)
+[LinkedIn](https://www.linkedin.com/in/saraculhane/)
+
+### Emma Katz
+
+[Github](https://github.com/sarajculhane)
+[LinkedIn](https://www.linkedin.com/in/saraculhane/)
+
+## Tech Stack
+
+### React
+
+https://reactjs.org/
+
+* React is a JavaScript library for building user interfaces.
+
+* React will efficiently update and render only the components that need to be rerendered.
+
+* React is component-based and allows for each component to manage their own state.
+
+### Redux
+
+https://redux.js.org/
+
+* Redux is an open-source JavaScript library for state management.
+
+* Redux works together with React Native and Node to build complex user interfaces and retrieve data from the database, while easily managing state.
+
+### Node.js
+
+https://nodejs.org/en/
+
+* Node is a JavaScript runtime environment built on Chrome's V8 JavaScript engine
+
+### Express
+
+https://expressjs.com/
+
+* Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.
+
+### PostgreSQL
+
+https://www.postgresql.org/
+
+* PostgreSQL is an open source object-relational database system that uses and extends the SQL language
+
+## Examples
+
+<img alt="Grace Shopper PPE" src="./public/GraceShopperReadMeExample.png">
+
+
 # create-react-app with a Node server on Heroku
 
 A minimal example of using a Node backend (server for API, proxy, & routing) with a [React frontend](https://github.com/facebookincubator/create-react-app).
@@ -9,7 +107,7 @@ A minimal example of using a Node backend (server for API, proxy, & routing) wit
 * 🎛 [Runtime Config](#user-content-runtime-config)
 * 💻 [Local Development](#user-content-local-development)
 
-To deploy a frontend-only React app, use the static-site optimized  
+To deploy a frontend-only React app, use the static-site optimized
 ▶️ [create-react-app-buildpack](https://github.com/mars/create-react-app-buildpack)
 
 
@@ -60,7 +158,7 @@ This deployment will automatically:
 If an app was previously deployed with [create-react-app-buildpack](https://github.com/mars/create-react-app-buildpack), then a few steps are required to migrate the app to this architecture:
 
 1. Remove **create-react-app-buildpack** from the app; [heroku/nodejs buildpack](https://devcenter.heroku.com/articles/nodejs-support#activation) will be automatically activated
-  
+
     ```bash
     heroku buildpacks:clear
     ```
@@ -70,14 +168,14 @@ If an app was previously deployed with [create-react-app-buildpack](https://gith
     mkdir react-ui
     git mv -k [!react-ui]* react-ui/
     mv node_modules react-ui/
-    
+
     # If you see "fatal: Not a git repository", then fix that error
     mv react-ui/.git ./
     ```
     ⚠️ *Some folks have reported problems with these commands. Using the `bash` shell will probably allow them to work. Sorry if they do not work for you, know that the point is to move **everything** in the repo into the `react-ui/` subdirectory. Except for `.git/` which should remain at the root level.* 
 1. Create a root [`package.json`](package.json), [`server/`](server/), & [`.gitignore`](.gitignore) modeled after the code in this repo
 1. Commit and deploy ♻️
-  
+
     ```bash
     git add -A
     git commit -m 'Migrate from create-react-app-buildpack to Node server'
@@ -95,7 +193,7 @@ create-react-app itself supports [configuration with environment variables](http
 
    ```bash
    heroku buildpacks:add -i 1 https://github.com/mars/create-react-app-inner-buildpack
-   
+
    # Verify that create-react-app-inner-buildpack comes before nodejs
    heroku buildpacks
    ```
