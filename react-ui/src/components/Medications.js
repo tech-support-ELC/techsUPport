@@ -1,5 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import ReactModal from "react-modal";
 import { fetchMedications, deleteMedication } from "../redux/medications";
 import AddMedication from "./AddMedication";
 import RemoveMedication from "./RemoveMedication";
@@ -49,14 +51,14 @@ class Medications extends React.Component {
                   <div className="listItem" key={medication.id}>
                     <>
                       <button
-                        className="medName"
+                        className="bigButton"
                         type="button"
                         onClick={() => this.handleSelect(medication)}
                       >
                         {medication.name}
                       </button>
                     </>
-                    <RemoveMedication medication={medication} remove={remove} />
+                    {/* <RemoveMedication medication={medication} remove={remove} /> */}
                   </div>
                 );
               })}
@@ -64,38 +66,35 @@ class Medications extends React.Component {
           <button type="button" onClick={() => this.handleAdd()}>
             Add a Medication
           </button>
-        </div>
-        <div className="column">
-          <div className="modal">
-            {this.state.add && (
-              <>
-                <AddMedication />
-                <button type="button" onClick={() => this.handleClose()}>
-                  X
-                </button>
-              </>
-            )}
+          <ReactModal isOpen={this.state.add} contentLabel="Single Document">
+            (
+            <>
+              <AddMedication />
+              <button type="button" onClick={() => this.handleClose()}>
+                Close
+              </button>
+            </>
+            )
+          </ReactModal>
+          <ReactModal
+            isOpen={this.state.selected}
+            contentLabel="Single Document"
+          >
+            <SingleMedication
+              selected={this.state.selected}
+              remove={remove}
+              // closeModal={this.handleClose}
+            />
 
-            {this.state.selected && (
-              <>
-                <button type="button" onClick={() => this.handleClose()}>
-                  X
-                </button>
-
-                <SingleMedication
-                  selected={this.state.selected}
-                  remove={remove}
-                // closeModal={this.handleClose}
-                />
-
-                <RemoveMedication
-                  medication={this.state.selected}
-                  remove={this.handleRemove}
-                // close={this.handleClose}
-                />
-              </>
-            )}
-          </div>
+            <RemoveMedication
+              medication={this.state.selected}
+              remove={this.handleRemove}
+              // close={this.handleClose}
+            />
+            <button type="button" onClick={() => this.handleClose()}>
+              Close
+            </button>
+          </ReactModal>
         </div>
       </div>
     );
