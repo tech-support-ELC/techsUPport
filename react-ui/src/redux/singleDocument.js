@@ -11,7 +11,7 @@ const GET_DOCUMENT = "GET_DOCUMENT"
 /* ------------     ACTION CREATORS      ------------------ */
 
 const getDocument = (document) => ({ type: GET_DOCUMENT, document });
-const updateDocument = (id, document) => ({ type: UPDATE_DOCUMENT, id, document });
+const updateDocument = (document) => ({ type: UPDATE_DOCUMENT, document });
 
 
 
