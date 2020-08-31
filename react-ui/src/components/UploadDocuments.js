@@ -3,16 +3,21 @@ import { uploadDocumentThunk } from '../redux/documents'
 import { connect } from 'react-redux'
 import axios from 'axios'
 
+
 export class UploadDocuments extends Component {
   constructor() {
     super()
     this.state = {
       selectedFile: null,
+      type: 'Proof of Identity'
     }
     this.uploadHandler = this.uploadHandler.bind(this)
     this.handleFileRead = this.handleFileRead.bind(this)
     this.sendFile = this.sendFile.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
+
+
 
   handleFileRead(e) {
     if (e.target.files[0]) {
@@ -36,12 +41,15 @@ export class UploadDocuments extends Component {
     e.preventDefault()
 
     const description = e.target.description.value
-    const type = e.target.type.value
+    const type = this.state.type
+
     let doctorId = null
-    if (typeof (e.target.doctorId.value) === 'number') doctorId = e.target.doctorId.value
+    if (e.target.doctorId) doctorId = e.target.doctorId.value
+    doctorId = null
 
     let conditionId = null
-    if (typeof (e.target.conditionId.value) === 'number') conditionId = e.target.doctorId.value
+    if (e.target.conditionId) conditionId = e.target.conditionId.value
+    conditionId = null
 
     const imageUrl = await this.sendFile()
 
@@ -70,6 +78,8 @@ export class UploadDocuments extends Component {
         <label>Select what type of document this is:
           <select
             name='type'
+            value={this.state.type}
+            onChange={this.handleChange}
           >
             {types.map((type, i) => {
               return (
@@ -79,36 +89,40 @@ export class UploadDocuments extends Component {
             }
           </select>
         </label>
-        <label>Which doctor is this document associated with?
+        {this.state.type !== 'Proof of Identity' && (
+          <div>
+            <label>Which doctor is this document associated with?
           <select
-            name='doctorId'
-          >
-            <option>Select Doctor</option>
-            {doctors &&
-              doctors.map(doctor => {
-                const { id, firstName, lastName } = doctor
-                return (
-                  <option key={id} value={id}>{firstName} {lastName}</option>
-                )
-              })
-            }
-          </select>
-        </label>
-        <label>What condition does this document relate to?
+                name='doctorId'
+              >
+                <option >Select Doctor</option>
+                {doctors &&
+                  doctors.map(doctor => {
+                    const { id, firstName, lastName } = doctor
+                    return (
+                      <option key={id} value={id}>{firstName} {lastName}</option>
+                    )
+                  })
+                }
+              </select>
+            </label>
+            <label>What condition does this document relate to?
           <select
-            name='conditionId'
-          >
-            <option>Select Condition</option>
-            {conditions &&
-              conditions.map(condition => {
-                const { id, name } = condition
-                return (
-                  <option key={id} value={id}>{name}</option>
-                )
-              })
-            }
-          </select>
-        </label>
+                name='conditionId'
+              >
+                <option >Select Condition</option>
+                {conditions &&
+                  conditions.map(condition => {
+                    const { id, name } = condition
+                    return (
+                      <option key={id} value={id}>{name}</option>
+                    )
+                  })
+                }
+              </select>
+            </label>
+          </div>
+        )}
         <label>Choose File</label>
         <input
           type='file'
@@ -120,7 +134,7 @@ export class UploadDocuments extends Component {
     );
   };
 }
-const mapState = ({ currentUser, doctors, conditions }) => ({ currentUser, doctors, conditions })
+const mapState = ({ doctors, conditions }) => ({ doctors, conditions })
 
 const mapDispatch = { uploadDocumentThunk }
 

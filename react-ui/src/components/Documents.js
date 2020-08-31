@@ -5,6 +5,9 @@ import ReactModal from "react-modal";
 import SingleDocument from "./SingleDocument";
 import UploadDocuments from "./UploadDocuments";
 import { fetchDocuments } from "../redux/documents";
+import { fetchSingleDocument } from '../redux/singleDocument'
+import { getAllConditionsThunk } from '../redux/conditions'
+import { getAllDoctorsThunk } from '../redux/doctors'
 
 export class Documents extends Component {
   constructor() {
@@ -22,6 +25,8 @@ export class Documents extends Component {
   componentDidMount() {
     ReactModal.setAppElement("body");
     this.props.fetchDocuments();
+    this.props.getAllConditionsThunk();
+    this.props.getAllDoctorsThunk();
   }
 
   openUploadModal() {
@@ -32,8 +37,9 @@ export class Documents extends Component {
     this.setState({ showUploadModal: false });
   }
 
-  openDocumentModal() {
+  openDocumentModal(id) {
     this.setState({ showDocumentModal: true });
+    this.props.fetchSingleDocument(id)
   }
 
   closeDocumentModal() {
@@ -50,14 +56,14 @@ export class Documents extends Component {
       <div className="main">
         <div className="column">
           <h3>My Documents</h3>
-          {documents &&
+          {
             documents.map((doc) => {
               const { type, id, description } = doc;
               return (
                 <div key={id}>
                   {type !== "Proof of Identity" && (
                     <div>
-                      <button onClick={() => this.openDocumentModal()}>
+                      <button onClick={() => this.openDocumentModal(id)}>
                         {description}
                       </button>
                       <ReactModal
@@ -98,6 +104,6 @@ export class Documents extends Component {
 }
 
 const mapState = ({ documents }) => ({ documents });
-const mapDispatch = { fetchDocuments };
+const mapDispatch = { fetchDocuments, fetchSingleDocument, getAllConditionsThunk, getAllDoctorsThunk };
 
 export default connect(mapState, mapDispatch)(Documents);
