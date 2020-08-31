@@ -12,6 +12,7 @@
     "d3-shape": "^2.0.0",
     "d3-transition": "^2.0.0",
     "react": "^16.8.6",
+    "react-d3-donut": "^1.1.2",
     "react-dom": "^16.8.6",
     "react-icons": "^3.11.0",
     "react-modal": "^3.11.2",

@@ -26,7 +26,7 @@ export const updateDoctor = (doctor) => {
 
 
 export const fetchSingleDoctor = (id) => {
-    console.log('inside the thunk')
+    console.log('inside the thunk FETCH SINGLE DOCTOR')
     return async (dispatch) => {
         try {
             const { data } = await axios.get(`/api/doctors/${id}`)

@@ -1,12 +1,13 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getScoreThunk, addScoreThunk } from "../redux/dcCondition";
-import { addAppointmentThunk } from "../redux/dcDoctor";
-import { getMedicationThunk, addMedicationThunk } from "../redux/dcMedication";
-import DCMedicationForm from "./DCMedicationForm";
-import DCConditionForm from "./DCConditionForm";
-import DCDoctorForm from "./DCDoctorForm";
-import { getAllDoctorsThunk } from "../redux/doctors";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getScoreThunk, addScoreThunk } from '../redux/dcCondition';
+import { addAppointmentThunk } from '../redux/dcDoctor';
+import { getMedicationThunk, addMedicationThunk } from '../redux/dcMedication';
+import DCMedicationForm from './DCMedicationForm';
+import DCConditionForm from './DCConditionForm';
+import DCDoctorForm from './DCDoctorForm';
+import { getAllDoctorsThunk } from '../redux/doctors'
+
 class DailyCheckin extends Component {
   componentDidMount() {
     this.props.getScore();
