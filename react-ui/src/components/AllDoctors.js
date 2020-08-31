@@ -68,7 +68,7 @@ export class AllDoctors extends React.Component {
                     </button>
                     <ReactModal
                       isOpen={this.state.showDocModal}
-                      contentLabel="Example Modal"
+                      contentLabel="Single Document"
                     >
                       <SingleDoctor closeTheModal={this.closeDocModal} />
                       <button onClick={this.closeDocModal}>close</button>
