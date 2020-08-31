@@ -2,9 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 // import { getSingleDoctor } from "../redux/onedoctor";
 import UpdateDoctor from './UpdateDoctor'
-import { fetchSingleDoctor } from "../redux/singleDoctor";
 import { deleteDoctorThunk } from "../redux/doctors"
-import { getAppointmentThunk } from "../redux/dcDoctor"
 
 export class SingleDoctor extends React.Component {
     constructor() {
@@ -14,11 +12,7 @@ export class SingleDoctor extends React.Component {
         }
         this.updateDoctor = this.updateDoctor.bind(this)
         this.handleDelete = this.handleDelete.bind(this)
-    }
-    componentDidMount() {
-        const id = this.props.doctor.id
-        this.props.fetchSingleDoctor(id)
-        this.props.getAppointments()
+
     }
 
     updateDoctor = () => {
@@ -35,8 +29,8 @@ export class SingleDoctor extends React.Component {
     }
 
 
-
     render() {
+
         const doctor = this.props.doctor
         const appointments = this.props.appointment
         const filterApps = (appointmentArray) => {
@@ -98,9 +92,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchSingleDoctor: (id) => dispatch(fetchSingleDoctor(id)),
-        deleteDoctor: (id) => dispatch(deleteDoctorThunk(id)),
-        getAppointments: () => dispatch(getAppointmentThunk())
+        deleteDoctor: (id) => dispatch(deleteDoctorThunk(id))
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SingleDoctor);

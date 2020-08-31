@@ -1,10 +1,12 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { getAllConditionsThunk, addConditionThunk } from "../redux/conditions";
-import { getSingleConditionThunk } from "../redux/singleCondition";
-import AddConditionForm from "./AddConditionForm";
-import SingleCondition from "./SingleCondition";
-import ReactModal from "react-modal";
+
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getAllConditionsThunk, addConditionThunk } from '../redux/conditions';
+import { getSingleConditionThunk } from '../redux/singleCondition';
+import AddConditionForm from './AddConditionForm';
+import SingleCondition from './SingleCondition';
+import ReactModal from 'react-modal';
+
 // const customStyles = {
 //   content: {
 //     top: '50%',

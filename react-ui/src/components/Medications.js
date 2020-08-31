@@ -95,6 +95,7 @@ class Medications extends React.Component {
               Close
             </button>
           </ReactModal>
+
         </div>
       </div>
     );

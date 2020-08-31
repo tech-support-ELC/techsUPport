@@ -301,53 +301,25 @@ async function seed() {
       userId: 1,
     },
     {
-      firstName: "Aretha",
-      lastName: "Magill",
-      address: "05171 1st Lane",
-      doctorType: "Cardiologist",
-      userId: 3,
-    },
-    {
       firstName: "Glynn",
       lastName: "Kleinmann",
       address: "6867 Tennessee Crossing",
       doctorType: "Cardiologist",
-      userId: 8,
-    },
-    {
-      firstName: "Glynn",
-      lastName: "Kleinmann",
-      address: "6867 Tennessee Crossing",
-      doctorType: "Cardiologist",
-      userId: 11,
+      userId: 1,
     },
     {
       firstName: "Bernice",
       lastName: "Bannell",
       address: "37 Goodland Junction",
       doctorType: "Cardiologist",
-      userId: 7,
-    },
-    {
-      firstName: "Bernice",
-      lastName: "Bannell",
-      address: "37 Goodland Junction",
-      doctorType: "Cardiologist",
-      userId: 2,
+      userId: 1,
     },
     {
       firstName: "Lorine",
       lastName: "Bardnam",
       address: "4 Reindahl Alley",
       doctorType: "Cardiologist",
-      userId: 13,
-    },
-    {
-      firstName: "Lorine",
-      lastName: "Bardnam",
-      address: "4 Reindahl Alley",
-      doctorType: "Cardiologist",
-      userId: 5,
+      userId: 1,
     },
     {
       firstName: "Ches",
@@ -357,32 +329,18 @@ async function seed() {
       userId: 1,
     },
     {
-      firstName: "Ches",
-      lastName: "Milius",
-      address: "64936 Bay Lane",
-      doctorType: "Psychiatrist",
-      userId: 11,
-    },
-    {
       firstName: "Finn",
       lastName: "Lujan",
       address: "1340 Barnett Road",
       doctorType: "Psychiatrist",
-      userId: 5,
-    },
-    {
-      firstName: "Finn",
-      lastName: "Lujan",
-      address: "1340 Barnett Road",
-      doctorType: "Psychiatrist",
-      userId: 8,
+      userId: 1,
     },
     {
       firstName: "Delphine",
       lastName: "Adne",
       address: "162 Debra Point",
       doctorType: "Psychiatrist",
-      userId: 2,
+      userId: 1,
     },
     {
       firstName: "Delphine",
@@ -452,7 +410,7 @@ async function seed() {
       lastName: "O'Carmody",
       address: "46 Graedel Street",
       doctorType: "Psychologist",
-      userId: 1,
+      userId: 7,
     },
     {
       firstName: "Pat",
@@ -950,6 +908,131 @@ async function seed() {
     Score.bulkCreate(scoreData, { validate: true }),
   ]);
 
+  const appointmentData = [{
+    id: 1,
+    appointmentDate: "2020-03-25",
+    time: "03:33",
+    userId: 1,
+    doctorId: 2
+  }, {
+    id: 2,
+    appointmentDate: "2020-03-24",
+    time: "17:07",
+    userId: 1,
+    doctorId: 4
+  }, {
+    id: 3,
+    appointmentDate: "2020-03-05",
+    time: "02:54",
+    userId: 1,
+    doctorId: 6
+  }, {
+    id: 4,
+    appointmentDate: "2020-01-21",
+    time: "09:06",
+    userId: 1,
+    doctorId: 5
+  }, {
+    id: 5,
+    appointmentDate: "2020-01-13",
+    time: "01:35",
+    userId: 1,
+    doctorId: 7
+  }, {
+    id: 6,
+    appointmentDate: "2020-05-18",
+    time: "11:22",
+    userId: 1,
+    doctorId: 1
+  }, {
+    id: 7,
+    appointmentDate: "2020-08-07",
+    time: "07:13",
+    userId: 1,
+    doctorId: 1
+  }, {
+    id: 8,
+    appointmentDate: "2020-08-15",
+    time: "01:08",
+    userId: 1,
+    doctorId: 5
+  }, {
+    id: 9,
+    appointmentDate: "2020-01-10",
+    time: "21:52",
+    userId: 1,
+    doctorId: 5
+  }, {
+    id: 10,
+    appointmentDate: "2020-03-02",
+    time: "05:34",
+    userId: 1,
+    doctorId: 4
+  }, {
+    id: 11,
+    appointmentDate: "2020-02-23",
+    time: "21:36",
+    userId: 1,
+    doctorId: 5
+  }, {
+    id: 12,
+    appointmentDate: "2020-04-24",
+    time: "20:05",
+    userId: 1,
+    doctorId: 3
+  }, {
+    id: 13,
+    appointmentDate: "2020-03-16",
+    time: "18:40",
+    userId: 1,
+    doctorId: 6
+  }, {
+    id: 14,
+    appointmentDate: "2020-01-28",
+    time: "05:21",
+    userId: 1,
+    doctorId: 2
+  }, {
+    id: 15,
+    appointmentDate: "2020-06-03",
+    time: "15:49",
+    userId: 1,
+    doctorId: 7
+  }, {
+    id: 16,
+    appointmentDate: "2020-06-17",
+    time: "23:05",
+    userId: 1,
+    doctorId: 7
+  }, {
+    id: 17,
+    appointmentDate: "2020-08-25",
+    time: "15:28",
+    userId: 1,
+    doctorId: 6
+  }, {
+    id: 18,
+    appointmentDate: "2020-08-03",
+    time: "03:23",
+    userId: 1,
+    doctorId: 3
+  }, {
+    id: 19,
+    appointmentDate: "2020-04-30",
+    time: "02:30",
+    userId: 1,
+    doctorId: 6
+  }, {
+    id: 20,
+    appointmentDate: "2020-03-14",
+    time: "02:43",
+    userId: 1,
+    doctorId: 1
+  }]
+
+  const appointments = await Promise.all([
+    Appointment.bulkCreate(appointmentData, { validate: true }),
+  ]);
 
   console.log(`seeded successfully`);
 }

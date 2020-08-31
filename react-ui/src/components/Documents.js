@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import ReactModal from "react-modal";
@@ -37,6 +38,7 @@ export class Documents extends Component {
 
   closeDocumentModal() {
     this.setState({ showDocumentModal: false });
+
   }
 
   render() {
