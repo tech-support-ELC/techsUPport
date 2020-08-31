@@ -12,6 +12,7 @@ import AddDoctor from '../components/AddDoctor'
 import AddConditionForm from '../components/AddConditionForm'
 import AddMedication from '../components/AddMedication'
 import { fetchMedications } from "../redux/medications";
+import { getChartThunk } from '../redux/score'
 
 
 export class Home extends React.Component {
@@ -56,6 +57,7 @@ export class Home extends React.Component {
     this.props.getAppointments()
     this.props.getAllConditions()
     this.props.getMedications()
+    this.props.getChart()
   }
 
   render() {
@@ -63,6 +65,9 @@ export class Home extends React.Component {
     const { handleClick } = this.props
     const appointments = this.props.appointment
     const doctors = this.props.doctors
+    const conditions = this.props.conditions
+    const medications = this.props.medications
+    const chart = this.props.chart
     return (
       <div>
         <h1>Welcome {firstName}!</h1>
@@ -111,7 +116,7 @@ export class Home extends React.Component {
               )
               : (doctors && doctors.length > 0 && appointments && appointments.length > 0) ?
                 <DoctorDonut appointment={appointments} doctors={doctors} /> :
-                (conditions && conditions.length > 0) ?
+                (chart && chart.length > 0) ?
                   <LineChart />
                   : null
           }
@@ -136,7 +141,8 @@ const mapState = (state) => {
     conditions: state.conditions,
     currentUser: state.currentUser,
     appointment: state.appointment,
-    medications: state.medications
+    medications: state.medications,
+    chart: state.chart
   }
 }
 
@@ -149,7 +155,8 @@ const mapDispatch = (dispatch, ownProps) => ({
   getAllConditions: () => dispatch(getAllConditionsThunk()),
   addCondition: (condition) => dispatch(addConditionThunk(condition)),
   addNewDoctor: (newDoctor) => dispatch(addDoctorThunk(newDoctor)),
-  getMedications: () => dispatch(fetchMedications())
+  getMedications: () => dispatch(fetchMedications()),
+  getChart: () => dispatch(getChartThunk())
 })
 
 export default connect(mapState, mapDispatch)(Home)
