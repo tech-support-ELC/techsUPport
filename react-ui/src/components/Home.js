@@ -4,7 +4,7 @@ import { logout } from '../redux/auth'
 import DoctorDonut from './datavis/doctor-appointment-donut'
 import { getAppointmentThunk } from '../redux/dcDoctor'
 import { getAllDoctorsThunk } from '../redux/doctors'
-
+import LineChart from './lineChart/LineChartCondition'
 
 
 
@@ -31,6 +31,9 @@ export class Home extends React.Component {
             (doctors && doctors.length > 0 && appointments && appointments.length > 0) ?
               <DoctorDonut appointment={appointments} doctors={doctors} /> : null
           }
+        </div>
+        <div>
+          <LineChart />
         </div>
 
       </div >

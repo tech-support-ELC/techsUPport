@@ -117,6 +117,7 @@ class LineChart extends Component {
 
     return (
       <div>
+        <h4>How I've Felt Over Time</h4>
         <button onClick={this.weeklyData}>Weekly data</button>
         <button onClick={this.monthlyData}>Monthly data</button>
         <svg

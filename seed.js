@@ -1055,6 +1055,7 @@ async function seed() {
   ];
   const medications = await Promise.all([
     Medication.bulkCreate(medicationData, { validate: true }),
+  ]);
 
   const appointmentData = [{
     id: 1,
