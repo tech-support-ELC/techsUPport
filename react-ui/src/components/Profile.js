@@ -1,17 +1,19 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import UploadDocuments from './UploadDocuments'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { logout } from "../redux/auth";
+import UploadDocuments from "./UploadDocuments";
+import ProofOfIdentity from "./ProofOfIdentity";
+import { getAllConditionsThunk } from "../redux/conditions";
+import { getAllDoctorsThunk } from "../redux/doctors";
 import ReactModal from "react-modal";
-import ProofOfIdentity from './ProofOfIdentity'
-import { getAllConditionsThunk } from '../redux/conditions'
-import { getAllDoctorsThunk } from '../redux/doctors'
-import { Link } from 'react-router-dom'
+
+import { Link } from "react-router-dom";
 
 class Profile extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
-      showUploadModal: false
+      showUploadModal: false,
     };
     this.openUploadModal = this.openUploadModal.bind(this);
     this.closeUploadModal = this.closeUploadModal.bind(this);
@@ -19,7 +21,7 @@ class Profile extends Component {
 
   componentDidMount() {
     ReactModal.setAppElement("body");
-    this.props.loadUserInfo()
+    this.props.loadUserInfo();
   }
 
   openUploadModal() {
@@ -31,18 +33,20 @@ class Profile extends Component {
   }
 
   render() {
-    const { firstName, lastName, email } = this.props.currentUser
+    const { firstName, lastName, email } = this.props.currentUser;
     return (
-      <div>
+      <div className="loginSignup">
         <h1>User Profile</h1>
-        <h4>Name: {firstName} {lastName}</h4>
+        <h4>
+          Name: {firstName} {lastName}
+        </h4>
         <h4>Email: {email}</h4>
 
         <ProofOfIdentity {...this.props} />
 
-        <Link to='#' onClick={() => this.openUploadModal()}>
+        <Link to="#" onClick={() => this.openUploadModal()}>
           Upload your insurance card and ID card here.
-          </Link>
+        </Link>
         <div className="popup">
           <ReactModal
             isOpen={this.state.showUploadModal}
@@ -52,21 +56,19 @@ class Profile extends Component {
             <button onClick={() => this.closeUploadModal()}>close</button>
           </ReactModal>
         </div>
-        <Link to='documents'>Upload your medical documents here.</Link>
-
-      </div >
-    )
+        <Link to="documents">Upload your medical documents here.</Link>
+      </div>
+    );
   }
 }
 
-const mapState = ({ currentUser }) => ({ currentUser })
+const mapState = ({ currentUser }) => ({ currentUser });
 
 const mapDispatch = (dispatch) => ({
   loadUserInfo: () => {
-    dispatch(getAllConditionsThunk())
-    dispatch(getAllDoctorsThunk())
-  }
-})
+    dispatch(getAllConditionsThunk());
+    dispatch(getAllDoctorsThunk());
+  },
+});
 
-
-export default connect(mapState, mapDispatch)(Profile)
+export default connect(mapState, mapDispatch)(Profile);

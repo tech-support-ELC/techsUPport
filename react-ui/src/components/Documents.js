@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import ReactModal from "react-modal";
@@ -44,7 +43,6 @@ export class Documents extends Component {
 
   closeDocumentModal() {
     this.setState({ showDocumentModal: false });
-
   }
 
   render() {
@@ -69,6 +67,7 @@ export class Documents extends Component {
                       <ReactModal
                         isOpen={this.state.showDocumentModal}
                         contentLabel="Single Document"
+                        className="popup"
                       >
                         <SingleDocument
                           {...this.props}
@@ -89,15 +88,14 @@ export class Documents extends Component {
           </button>
         </div>
 
-        <div className="popup">
-          <ReactModal
-            isOpen={this.state.showUploadModal}
-            contentLabel="Upload Documents"
-          >
-            <UploadDocuments closeUploadModal={this.closeUploadModal} />
-            <button onClick={() => this.closeUploadModal()}>close</button>
-          </ReactModal>
-        </div>
+        <ReactModal
+          isOpen={this.state.showUploadModal}
+          contentLabel="Upload Documents"
+          className="popup"
+        >
+          <UploadDocuments closeUploadModal={this.closeUploadModal} />
+          <button onClick={() => this.closeUploadModal()}>close</button>
+        </ReactModal>
       </div>
     );
   }

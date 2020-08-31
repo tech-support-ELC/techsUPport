@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getAllConditionsThunk, addConditionThunk } from '../redux/conditions';
-import { getSingleConditionThunk } from '../redux/singleCondition';
-import AddConditionForm from './AddConditionForm';
-import SingleCondition from './SingleCondition';
-import ReactModal from 'react-modal';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getAllConditionsThunk, addConditionThunk } from "../redux/conditions";
+import { getSingleConditionThunk } from "../redux/singleCondition";
+import AddConditionForm from "./AddConditionForm";
+import SingleCondition from "./SingleCondition";
+import ReactModal from "react-modal";
 
 // const customStyles = {
 //   content: {
@@ -30,7 +30,7 @@ class Conditions extends Component {
   }
   componentDidMount() {
     this.props.getAllConditions();
-    ReactModal.setAppElement('body');
+    ReactModal.setAppElement("body");
   }
   openModal() {
     this.setState({ showModal: true });
@@ -69,6 +69,7 @@ class Conditions extends Component {
                     <ReactModal
                       isOpen={this.state.showCondModal}
                       contentLabel="Single Document"
+                      className="popup"
                     >
                       <SingleCondition closeTheModal={this.closeCondModal} />
                       <button onClick={this.closeCondModal}>Close</button>
@@ -84,6 +85,7 @@ class Conditions extends Component {
           <ReactModal
             isOpen={this.state.showModal}
             contentLabel="Single Document"
+            className="popup"
           >
             <AddConditionForm
               currentUser={this.props.currentUser}
