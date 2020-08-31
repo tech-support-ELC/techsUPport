@@ -11,7 +11,7 @@ const XYAxis = ({ xScale, yScale, height }) => {
     scale: yScale,
     orient: 'left',
     transform: 'translate(0, 0)',
-    ticks: 6,
+    ticks: 9,
   };
   return (
     <g className="axis-group">
