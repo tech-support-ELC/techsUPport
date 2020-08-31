@@ -1,9 +1,6 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import {
-  getSingleConditionThunk,
-} from '../redux/singleCondition';
-import { deleteConditionThunk } from '../redux/conditions';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {deleteConditionThunk} from '../redux/conditions';
 import UpdateCondition from './UpdateCondition';
 class SingleCondition extends Component {
   constructor() {
@@ -13,11 +10,7 @@ class SingleCondition extends Component {
     }
     this.updateCondition = this.updateCondition.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
-  }
-  componentDidMount() {
-    const id = this.props.condition.id;
-    this.props.getSingleCondition(id);
-  }
+}
   updateCondition = () => {
     this.setState({ clicked: true })
   }
@@ -67,7 +60,6 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    getSingleCondition: id => dispatch(getSingleConditionThunk(id)),
     removeCondition: id => dispatch(deleteConditionThunk(id))
   }
 }

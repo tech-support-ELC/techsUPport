@@ -15,7 +15,7 @@ export const getChartThunk = () => {
   return async dispatch => {
     try {
       const {data} = await axios.get(`${API_URL}/api/score`)
-      dispatch(getChart(data.slice(-60)))
+      dispatch(getChart(data));
     } catch (error) {
       console.error(error)
     }
