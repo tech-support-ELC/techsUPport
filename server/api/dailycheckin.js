@@ -35,7 +35,7 @@ router.post('/score', async (req, res, next) => {
 
 router.get('/appointment', async (req, res, next) => {
   try {
-    const appointments = await Doctor.findAll({
+    const appointments = await Appointment.findAll({
       where: {
         userId: req.user.id,
       }

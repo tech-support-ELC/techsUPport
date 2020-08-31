@@ -21,8 +21,8 @@ const addAppointment = appointment => {
 export const getAppointmentThunk = () => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`${API_URL}/api/dailycheckin/appointment`)
-      console.log(data)
+      const { data } = await axios.get(`${API_URL}/api/dailycheckin/appointment`)
+      console.log('data inside get appointment thunk', data)
       dispatch(getAppointment(data))
     } catch (error) {
       console.error(error)
@@ -32,14 +32,14 @@ export const getAppointmentThunk = () => {
 export const addAppointmentThunk = (appointmentDate) => {
   return async dispatch => {
     try {
-      const {data} = await axios.post(`${API_URL}/api/dailycheckin/appointment`, {appointmentDate})
+      const { data } = await axios.post(`${API_URL}/api/dailycheckin/appointment`, { appointmentDate })
       dispatch(addAppointment(data))
     } catch (error) {
       console.error(error)
     }
   }
 }
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case GET_APPOINTMENT:
       return action.appointment

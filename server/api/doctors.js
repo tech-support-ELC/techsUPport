@@ -1,6 +1,7 @@
 const router = require('express').Router()
 module.exports = router
 const Doctor = require('../db/models/doctor')
+const Appointment = require('../db/models/appointment')
 
 router.post('/', async (req, res, next) => {
     try {
@@ -23,7 +24,9 @@ router.get('/', async (req, res, next) => {
 })
 router.get('/:id', async (req, res, next) => {
     try {
-        const oneDoctor = await Doctor.findOne({ where: { id: req.params.id, userId: req.user.id } })
+        const oneDoctor = await Doctor.findOne({
+            where: { id: req.params.id, userId: req.user.id }
+        })
         if (oneDoctor) {
             res.json(oneDoctor)
         }
