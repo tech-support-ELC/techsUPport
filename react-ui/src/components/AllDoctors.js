@@ -5,17 +5,18 @@ import { fetchSingleDoctor } from '../redux/singleDoctor'
 import { AddDoctor } from "./AddDoctor";
 import ReactModal from 'react-modal'
 import SingleDoctor from './SingleDoctor'
+import { getAppointmentThunk } from "../redux/dcDoctor"
 
-const customStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)'
-    }
-};
+// const customStyles = {
+//     content: {
+//         top: '50%',
+//         left: '50%',
+//         right: 'auto',
+//         bottom: 'auto',
+//         marginRight: '-50%',
+//         transform: 'translate(-50%, -50%)'
+//     }
+// };
 
 export class AllDoctors extends React.Component {
     constructor() {
@@ -30,6 +31,7 @@ export class AllDoctors extends React.Component {
         this.closeDocModal = this.closeDocModal.bind(this)
     }
     componentDidMount() {
+        ReactModal.setAppElement('body')
         this.props.getAllDoctors()
     }
 
@@ -40,6 +42,7 @@ export class AllDoctors extends React.Component {
     openDocModal(id) {
         this.setState({ showDocModal: true })
         this.props.fetchSingleDoctor(id)
+        this.props.getAppointments()
     }
 
     closeModal() {
@@ -78,7 +81,6 @@ export class AllDoctors extends React.Component {
                                     <SingleDoctor closeTheModal={this.closeDocModal} />
                                     <button onClick={this.closeDocModal}>close</button>
                                 </ReactModal>
-                                {/* <Link to={`/doctors/${doctor.id}`}></Link> */}
                             </div>
                         )
                     })}
@@ -91,14 +93,16 @@ const mapStateToProps = (state) => {
     return {
         doctor: state.doctor,
         doctors: state.doctors,
-        currentUser: state.currentUser
+        currentUser: state.currentUser,
+        appointment: state.appointment
     };
 };
 const mapDispatchToProps = (dispatch) => {
     return {
         getAllDoctors: () => dispatch(getAllDoctorsThunk()),
         addNewDoctor: (newDoctor) => dispatch(addDoctorThunk(newDoctor)),
-        fetchSingleDoctor: (id) => dispatch(fetchSingleDoctor(id))
+        fetchSingleDoctor: (id) => dispatch(fetchSingleDoctor(id)),
+        getAppointments: () => dispatch(getAppointmentThunk())
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AllDoctors);

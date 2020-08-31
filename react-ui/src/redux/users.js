@@ -1,19 +1,47 @@
 import axios from 'axios'
-
+import { API_URL } from './API_URL';
 /* -----------------    ACTION TYPES    ------------------ */
 
 const INITIALIZE = 'INITIALIZE_USERS'
 const CREATE = 'CREATE_USER'
 export const REMOVE = 'REMOVE_USER'
 const UPDATE = 'UPDATE_USER'
-
+const GET_USERS = 'GET_USERS'
 /* ------------     ACTION CREATORS      ------------------ */
 
 const init = users => ({ type: INITIALIZE, users })
 export const create = user => ({ type: CREATE, user })
 const remove = id => ({ type: REMOVE, id })
 const update = user => ({ type: UPDATE, user })
-
+const getAllUsers = users => {
+  return {
+    type: GET_USERS,
+    users
+  }
+}
+export const getUsersThunk = () => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.get(`${API_URL}/api/users`);
+      console.log(data)
+      dispatch(getAllUsers(data));
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+export const deleteUserThunk = (id) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(`/api/users/${id}`);
+      dispatch(remove(id));
+      const {data} = await axios.get(`${API_URL}/api/users`);
+      dispatch(getAllUsers(data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
 /* ------------          REDUCER         ------------------ */
 
 export default function reducer(users = [], action) {
@@ -31,6 +59,8 @@ export default function reducer(users = [], action) {
       return users.map(user => (
         action.user.id === user.id ? action.user : user
       ))
+    case GET_USERS:
+      return action.users
 
     default:
       return users

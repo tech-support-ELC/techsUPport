@@ -10,14 +10,15 @@ import { fetchCurrentUser } from "../redux/auth";
 import DailyCheckin from "./DailyCheckin";
 import SingleCondition from "./SingleCondition";
 import Documents from "./Documents"
-// import SingleDocument from './SingleDocument'
+import SingleDocument from './SingleDocument'
 import Profile from "./Profile"
 import AllDoctors from "./AllDoctors"
 import SingleDoctor from "./SingleDoctor";
 import SingleMedication from "./SingleMedication";
 import Navbar from "./Navbar";
 import BarChartCondition from './BarChartCondition'
-
+import LineChart from '../components/lineChart/LineChartCondition';
+import AdminDashboard from './AdminDashboard';
 /* -----------------    COMPONENT     ------------------ */
 
 class Root extends Component {
@@ -25,7 +26,7 @@ class Root extends Component {
     this.props.fetchInitialData();
   }
   render() {
-    const { isLoggedIn } = this.props;
+    const { isLoggedIn, currentUser } = this.props;
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
@@ -47,8 +48,13 @@ class Root extends Component {
             <Route path="/doctors/:id" component={SingleDoctor} />
             <Route exact path="/profile" component={Profile} />
             <Route path="/documents" component={Documents} />
-            {/* <Route path="/documents/:id" component={SingleDocument} /> */}
+            <Route path="/documents/:id" component={SingleDocument} />
             <Route path='/chart' component={BarChartCondition} />
+            <Route path='/linechart' component={LineChart} />
+            {
+              currentUser.isAdmin &&
+              <Route path='/admindashboard' component={AdminDashboard} />
+            }
           </>
         )}
 
@@ -66,6 +72,7 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.currentUser.id,
+    currentUser: state.currentUser
   };
 };
 const mapDispatch = (dispatch) => ({

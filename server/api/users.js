@@ -1,12 +1,13 @@
 const router = require('express').Router()
-const { User, Document } = require('../db/models/')
+const { User, Document, Doctor, Condition } = require('../db/models/')
 const { isAdmin } = require('../auth/authenticateUser')
 
 // for any /users/:id routes, this piece of middleware
 // will be executed, and put the user on `req.requestedUser`
 router.param('id', async (req, res, next, id) => {
   try {
-    const user = await User.findByPk(id, { include: [Document] })
+    id = req.user.id
+    const user = await User.findByPk(id, { include: [Doctor, Condition, Document] })
     if (!user) res.sendStatus(404)
     req.requestedUser = user
     next()
@@ -20,9 +21,9 @@ router.get('/', isAdmin, async (req, res, next) => {
   // after jwt, we have our req.user as the authenticated user
   try {
     const users = await User.findAll(
-      { attributes: ['firstName', 'lastName', 'id', 'email', 'imageUrl', 'summary'] })
+      { attributes: ['firstName', 'lastName', 'id', 'email'] })
     if (users) res.json(users)
-    res.sendStatus(404)
+    else res.sendStatus(404)
   } catch (err) {
     next(err)
   }
