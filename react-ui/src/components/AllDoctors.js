@@ -41,7 +41,6 @@ export class AllDoctors extends React.Component {
 
     openDocModal(id) {
         this.setState({ showDocModal: true })
-        console.log("im inside ALL DOCTORS OPEN DOC MODAL")
         this.props.fetchSingleDoctor(id)
         this.props.getAppointments()
     }
@@ -59,7 +58,7 @@ export class AllDoctors extends React.Component {
             <div>
 
                 <div>
-                    <button onClick={() => this.openModal}>Add a Doctor</button>
+                    <button onClick={this.openModal}>Add a Doctor</button>
                     <h1>My Doctors</h1>
                     <ReactModal
                         isOpen={this.state.showModal}
