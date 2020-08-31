@@ -24,38 +24,38 @@ export default class UpdateMedication extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="name">Updated Name:</label>
-          <input
-            type="text"
-            name="name"
-            value={this.state.name}
-            onChange={this.handleChange}
-            placeholder="Required"
-          />
 
-          <label htmlFor="dosage">Updated Dosage:</label>
-          <input
-            type="text"
-            name="dosage"
-            value={this.state.dosage}
-            onChange={this.handleChange}
-          />
+      <form onSubmit={this.handleSubmit}>
+        <label htmlFor="name">Updated Name:</label>
+        <input
+          type="text"
+          name="name"
+          value={this.state.name}
+          onChange={this.handleChange}
+          placeholder="Required"
+        />
 
-          <label htmlFor="frequency">Updated Frequency:</label>
-          <input
-            type="text"
-            name="frequency"
-            value={this.state.frequency}
-            onChange={this.handleChange}
-          />
+        <label htmlFor="dosage">Updated Dosage:</label>
+        <input
+          type="text"
+          name="dosage"
+          value={this.state.dosage}
+          onChange={this.handleChange}
+        />
 
-          <br />
-          <br />
-          <button type="submit">Submit</button>
-        </form>
-      </div>
+        <label htmlFor="frequency">Updated Frequency:</label>
+        <input
+          type="text"
+          name="frequency"
+          value={this.state.frequency}
+          onChange={this.handleChange}
+        />
+
+        <br />
+        <br />
+        <button type="submit">Submit</button>
+      </form>
+
     );
   }
 }

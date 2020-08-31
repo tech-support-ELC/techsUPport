@@ -14,10 +14,6 @@ export class SingleDocument extends Component {
     this.updateDocument = this.updateDocument.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
   }
-  componentDidMount() {
-    const { id } = this.props
-    this.props.fetchSingleDocument(id)
-  }
 
   updateDocument = () => {
     this.setState({ clicked: true })
@@ -29,29 +25,25 @@ export class SingleDocument extends Component {
   }
 
   render() {
-    const { id, imageUrl } = this.props.singleDocument
+    const { id, imageUrl, description } = this.props.singleDocument
 
     return (
       <>
         <img src={imageUrl} alt='' />
-
-        {this.state.clicked ?
-          <UpdateDocument id={id} />
-          : <button onClick={() => this.updateDocument()}>Update Document</button>
-        }
-        <button onClick={() => this.handleDelete(id)}>Delete Document</button>
+        <p>{description}</p>
+        <div>
+          {this.state.clicked ?
+            <UpdateDocument id={id} />
+            : <button onClick={() => this.updateDocument()}>Update Document</button>
+          }
+          <button onClick={() => this.handleDelete(id)}>Delete Document</button>
+        </div>
       </>
     )
   }
 }
 
-const mapState = ({ currentUser, singleDocument }, ownProps) => {
-  // const { id } = ownProps
-  return {
-    // singleDocument: currentUser.documents.find(document => document.id = id)
-    singleDocument
-  }
-}
+const mapState = ({ singleDocument }) => ({ singleDocument })
 
 const mapDispatch = { updateDocumentThunk, fetchSingleDocument, deleteDocumentsThunk }
 
