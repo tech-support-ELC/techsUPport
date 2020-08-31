@@ -1,12 +1,22 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getAllDoctorsThunk, addDoctorThunk } from "../redux/doctors";
-import { fetchSingleDoctor } from "../redux/singleDoctor";
+import { fetchSingleDoctor } from '../redux/singleDoctor'
 import { AddDoctor } from "./AddDoctor";
 import ReactModal from 'react-modal'
 import SingleDoctor from './SingleDoctor'
 import { getAppointmentThunk } from "../redux/dcDoctor"
 
+// const customStyles = {
+//     content: {
+//         top: '50%',
+//         left: '50%',
+//         right: 'auto',
+//         bottom: 'auto',
+//         marginRight: '-50%',
+//         transform: 'translate(-50%, -50%)'
+//     }
+// };
 
 export class AllDoctors extends React.Component {
     constructor() {
@@ -35,36 +45,28 @@ export class AllDoctors extends React.Component {
         this.props.getAppointments()
     }
 
-  closeModal() {
-    this.setState({ showModal: false });
-  }
+    closeModal() {
+        this.setState({ showModal: false })
+    }
 
-  closeDocModal() {
-    this.setState({ showDocModal: false });
-  }
-  render() {
-    const doctors = this.props.doctors;
-    return (
-      <div className="main">
-        <div className="column">
-          <h3>My Doctors</h3>
-          <div className="scroll">
-            {doctors &&
-              doctors.map((doctor) => {
-                return (
-                  <div className="listItem" key={doctor.id}>
-                    <button
-                      className="bigButton"
-                      onClick={() => this.openDocModal(doctor.id)}
-                    >
-                      {doctor.firstName} {doctor.lastName}
-                    </button>
+    closeDocModal() {
+        this.setState({ showDocModal: false })
+    }
+    render() {
+        const doctors = this.props.doctors;
+        return (
+            <div>
+
+                <div>
+                    <button onClick={this.openModal}>Add a Doctor</button>
+                    <h1>My Doctors</h1>
                     <ReactModal
-                      isOpen={this.state.showDocModal}
-                      contentLabel="Single Document"
+                        isOpen={this.state.showModal}
+                        contentLabel="Example Modal"
                     >
-                      <SingleDoctor closeTheModal={this.closeDocModal} />
-                      <button onClick={this.closeDocModal}>close</button>
+                        <AddDoctor currentUser={this.props.currentUser} addNewDoctor={this.props.addNewDoctor} />
+
+                        <button onClick={this.closeModal}>close</button>
                     </ReactModal>
                 </div>
                 <div>
@@ -102,6 +104,5 @@ const mapDispatchToProps = (dispatch) => {
         fetchSingleDoctor: (id) => dispatch(fetchSingleDoctor(id)),
         getAppointments: () => dispatch(getAppointmentThunk())
     };
-
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AllDoctors);
