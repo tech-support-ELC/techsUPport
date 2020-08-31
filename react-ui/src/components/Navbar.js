@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux'
+import { logout } from '../redux/auth'
+import history from '../utils/history'
 
-const Navbar = () => {
+const Navbar = (props) => {
+  const { handleClick } = props
+
   return (
     <nav>
       <div>
@@ -20,9 +25,15 @@ const Navbar = () => {
 
         <Link to="/dailycheckin">Daily Checkin</Link>
         <Link to="/profile">Profile</Link>
+        <Link to='#' onClick={handleClick}>Log out</Link>
       </div>
     </nav>
   );
 };
 
-export default Navbar;
+const mapDispatch = (dispatch) => ({
+  handleClick: () => {
+    dispatch(logout(history))
+  }
+})
+export default connect(null, mapDispatch)(Navbar);
