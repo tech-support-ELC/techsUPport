@@ -1,5 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+
 import { fetchMedications, deleteMedication } from "../redux/medications";
 import AddMedication from "./AddMedication";
 import RemoveMedication from "./RemoveMedication";
@@ -49,7 +51,7 @@ class Medications extends React.Component {
                   <div className="listItem" key={medication.id}>
                     <>
                       <button
-                        className="medName"
+                        className="bigButton"
                         type="button"
                         onClick={() => this.handleSelect(medication)}
                       >
@@ -71,28 +73,27 @@ class Medications extends React.Component {
               <>
                 <AddMedication />
                 <button type="button" onClick={() => this.handleClose()}>
-                  X
+                  Close
                 </button>
               </>
             )}
 
             {this.state.selected && (
               <>
-                <button type="button" onClick={() => this.handleClose()}>
-                  X
-                </button>
-
                 <SingleMedication
                   selected={this.state.selected}
                   remove={remove}
-                // closeModal={this.handleClose}
+                  // closeModal={this.handleClose}
                 />
 
                 <RemoveMedication
                   medication={this.state.selected}
                   remove={this.handleRemove}
-                // close={this.handleClose}
+                  // close={this.handleClose}
                 />
+                <button type="button" onClick={() => this.handleClose()}>
+                  Close
+                </button>
               </>
             )}
           </div>

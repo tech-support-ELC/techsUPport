@@ -6,6 +6,7 @@
 
 $padding: 1.25em;
 $rubik: "Rubik", sans-serif;
+$small-font: 12pt;
 
 html {
   height: 100vh;
@@ -35,24 +36,62 @@ button {
 
 nav {
   // background: #56abcb;
+  max-height: 10vh;
   padding: 2em 2em 0;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   a {
     font-size: 16pt;
     color: #022ea8;
     &:hover {
-      color: #339e66;
+      color: #ec360d;
     }
   }
   div {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
   }
   #upperRight {
-    max-width: 80%;
+    max-width: 90%;
+    min-width: 40%;
     a {
       padding-left: 1em;
+    }
+    .navDropdown {
+      position: relative;
+      font-size: 16pt;
+      color: #022ea8;
+      z-index: 1;
+      display: flex;
+
+      flex-direction: column;
+      &:hover {
+        color: #ec360d;
+      }
+      .navDropContent {
+        display: none;
+        z-index: 1;
+        position: absolute;
+        top: 1.2em;
+        a {
+          display: block;
+          padding: 5px 0;
+          font-size: 12pt;
+        }
+      }
+      &:hover {
+        .navDropContent {
+          z-index: 1;
+          display: flex;
+          flex-direction: column;
+          background: #f8f8f0;
+          border: 2px solid #ec360d;
+          border-radius: 10px;
+          padding: 3px;
+          color: #ec360d;
+        }
+      }
     }
   }
 }
@@ -105,6 +144,7 @@ form {
 }
 
 .main {
+  z-index: 0;
   display: flex;
   flex: 1 0 auto;
   justify-content: space-evenly;
@@ -139,7 +179,7 @@ form {
   }
 }
 
-.medName {
+.bigButton {
   font-size: 20pt;
   background: #5ccc92;
   border: none;
@@ -174,6 +214,71 @@ form {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
     &:window-inactive {
       background: rgba(255, 0, 0, 0.4);
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  footer {
+    height: 12vh;
+    max-height: 240px;
+    a {
+      font-size: $small-font;
+    }
+    #bottomRight {
+      // max-width: 50%;
+      a {
+        font-size: 14pt;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    height: 95vh;
+    #root {
+      justify-content: space-between;
+    }
+  }
+  nav {
+    justify-content: space-around;
+    padding: 1em 0.5em 0;
+    a {
+      font-size: 10pt;
+    }
+
+    #upperRight {
+      .navDropdown {
+        font-size: 10pt;
+        .navDropContent {
+          a {
+            font-size: 8pt;
+          }
+        }
+      }
+    }
+  }
+  .column {
+    h3 {
+      font-size: $small-font;
+    }
+  }
+
+  .bigButton {
+    font-size: 16pt;
+  }
+  footer {
+    height: 15vh;
+    max-height: 240px;
+    // a {
+    //   font-size: $small-font;
+    // }
+    #bottomRight {
+      max-width: 50%;
+      a {
+        font-size: 10pt;
+      }
     }
   }
 }
