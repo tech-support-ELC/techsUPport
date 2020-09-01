@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const db = require('../db');
+const db = require("../db");
 
 const Medication = db.define("medication", {
   name: {
@@ -8,10 +8,25 @@ const Medication = db.define("medication", {
     validate: { notEmpty: true },
   },
   dosage: {
-    type: Sequelize.STRING,
+    type: Sequelize.FLOAT,
+  },
+  dosageUnit: {
+    type: Sequelize.ENUM(
+      "g",
+      "mg",
+      "mg/kg",
+      "mL",
+      "pills",
+      "capsules",
+      "tablets",
+      "drops"
+    ),
   },
   frequency: {
-    type: Sequelize.STRING,
+    type: Sequelize.INTEGER,
+  },
+  frequencyUnit: {
+    type: Sequelize.ENUM("day", "hour", "week", "as needed"),
   },
 });
 module.exports = Medication;

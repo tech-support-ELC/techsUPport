@@ -3,7 +3,13 @@ import React from "react";
 export default class UpdateMedication extends React.Component {
   constructor() {
     super();
-    this.state = { name: "", dosage: "", frequency: "" };
+    this.state = {
+      name: "",
+      dosage: 0,
+      dosageUnit: "",
+      frequency: 0,
+      frequencyUnit: "",
+    };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -24,7 +30,6 @@ export default class UpdateMedication extends React.Component {
 
   render() {
     return (
-
       <form onSubmit={this.handleSubmit}>
         <label htmlFor="name">Updated Name:</label>
         <input
@@ -32,7 +37,7 @@ export default class UpdateMedication extends React.Component {
           name="name"
           value={this.state.name}
           onChange={this.handleChange}
-          placeholder="Required"
+          placeholder={this.props.medication.name}
         />
 
         <label htmlFor="dosage">Updated Dosage:</label>
@@ -41,7 +46,23 @@ export default class UpdateMedication extends React.Component {
           name="dosage"
           value={this.state.dosage}
           onChange={this.handleChange}
+          placeholder={this.props.medication.dosage || "Dosage"}
         />
+        <select
+          onChange={this.handleChange}
+          value={this.state.dosageUnit}
+          name="dosageUnit"
+        >
+          <option value=""></option>
+          <option value="g">g</option>
+          <option value="mg">mg</option>
+          <option value="mg/kg">mg/kg</option>
+          <option value="mL">mL</option>
+          <option value="pills">pills</option>
+          <option value="capsules">capsules</option>
+          <option value="tablets">tablets</option>
+          <option value="drops">drops</option>
+        </select>
 
         <label htmlFor="frequency">Updated Frequency:</label>
         <input
@@ -49,13 +70,13 @@ export default class UpdateMedication extends React.Component {
           name="frequency"
           value={this.state.frequency}
           onChange={this.handleChange}
+          placeholder={this.props.medication.frequency || "Frequency"}
         />
 
         <br />
         <br />
         <button type="submit">Submit</button>
       </form>
-
     );
   }
 }
