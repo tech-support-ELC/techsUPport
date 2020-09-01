@@ -22,7 +22,10 @@ export function UpdateDoctor(props) {
         props.updateDoctor(id, payload)
     }
 
-
+    const doctorFirstName = props.doctor.firstName
+    const doctorLastName = props.doctor.lastName
+    const doctorAddress = props.doctor.address
+    const firstDoctorType = props.doctor.doctorType
     return (
         <div>
             <form onSubmit={(event) => handleSubmit(event)}>
@@ -30,7 +33,7 @@ export function UpdateDoctor(props) {
                 <div>
                     <input
                         type="text"
-                        placeholder="first name or title"
+                        placeholder={doctorFirstName}
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
                     />
@@ -40,7 +43,7 @@ export function UpdateDoctor(props) {
                 <div>
                     <input
                         type="text"
-                        placeholder="last name"
+                        placeholder={doctorLastName}
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
                     />
@@ -50,7 +53,7 @@ export function UpdateDoctor(props) {
                 <div>
                     <input
                         type="text"
-                        placeholder="office address"
+                        placeholder={doctorAddress}
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
                     />
@@ -60,7 +63,7 @@ export function UpdateDoctor(props) {
                 <div>
                     <input
                         type="text"
-                        placeholder="specialty"
+                        placeholder={firstDoctorType}
                         value={doctorType}
                         onChange={(e) => setDoctorType(e.target.value)}
                     />
