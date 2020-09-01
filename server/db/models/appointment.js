@@ -4,7 +4,8 @@ const db = require('../db');
 
 const Appointment = db.define('appointment', {
   id: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.UUID,
+    defaultValue: Sequelize.UUIDV1,
     primaryKey: true,
     autoIncrement: true
   },

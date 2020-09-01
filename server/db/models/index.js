@@ -47,8 +47,8 @@ User.belongsToMany(Condition, {
   }
 });
 
-Doctor.belongsTo(User);
-User.hasMany(Doctor);
+// Doctor.belongsTo(User);
+// User.hasMany(Doctor);
 Doctor.belongsToMany(User, {
   through: {
     model: 'appointment',
