@@ -2,18 +2,15 @@ import React, { Component } from "react";
 import { uploadDocumentThunk } from '../redux/documents'
 import { connect } from 'react-redux'
 import axios from 'axios'
-import UploadForm from "./UploadForm";
+import IdentityUploadForm from './IdentityUploadForm'
 
 
-export class UploadDocuments extends Component {
+export class UploadProofOfIdentity extends Component {
   constructor() {
     super()
     this.state = {
       selectedFile: null,
-      description: '',
-      type: '',
-      doctorId: '',
-      conditionId: ''
+      description: ''
     }
     this.uploadHandler = this.uploadHandler.bind(this)
     this.handleFileRead = this.handleFileRead.bind(this)
@@ -22,7 +19,7 @@ export class UploadDocuments extends Component {
   }
 
   handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value })
+    this.setState({ description: e.target.value })
   }
 
   handleFileRead(e) {
@@ -45,35 +42,27 @@ export class UploadDocuments extends Component {
 
   async uploadHandler(e) {
     e.preventDefault()
-
     const description = e.target.description.value
-    const type = e.target.type.value
-    const doctorId = e.target.doctorId.value
-    const conditionId = e.target.conditionId.value
+    const type = 'Proof of Identity'
     const imageUrl = await this.sendFile()
-
-    console.log(typeof (doctorId), conditionId)
 
     const formData = {
       description,
       type,
-      doctorId,
-      conditionId,
       imageUrl
     }
-
     this.props.uploadDocumentThunk(formData)
     this.props.closeUploadModal()
   }
 
   render() {
     return (
-      <UploadForm {...this.state} uploadHandler={this.uploadHandler} handleFileRead={this.handleFileRead} handleChange={this.handleChange} />
+      <IdentityUploadForm {...this.state} uploadHandler={this.uploadHandler} handleFileRead={this.handleFileRead} handleChange={this.handleChange} />
     );
   };
 }
 
 const mapDispatch = { uploadDocumentThunk }
 
-export default connect(null, mapDispatch)(UploadDocuments);
+export default connect(null, mapDispatch)(UploadProofOfIdentity);
 

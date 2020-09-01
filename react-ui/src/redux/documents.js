@@ -31,7 +31,7 @@ export default function (state = [], action) {
       return state.filter(document => document.id !== action.id)
 
     case UPDATE_DOCUMENT_LIST:
-      return [...state].map((document) => {
+      return [...state].map(document => {
         if (document.id === action.id) {
           return action.document
         } else {
