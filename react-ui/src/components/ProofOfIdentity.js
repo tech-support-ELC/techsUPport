@@ -1,46 +1,57 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchDocuments, deleteDocumentsThunk } from '../redux/documents'
+import { deleteDocumentsThunk } from '../redux/documents'
+import { fetchSingleDocument } from '../redux/singleDocument'
+import ReactModal from "react-modal";
+import UpdateProofOfIdentity from './UpdateProofOfIdentity';
 
 export class ProofOfIdentity extends Component {
+  constructor() {
+    super()
+    this.state = {
+      showUpdateModal: false
+    };
+    this.openUpdateModal = this.openUpdateModal.bind(this);
+    this.closeUpdateModal = this.closeUpdateModal.bind(this);
+  }
+
   componentDidMount() {
-    this.props.fetchDocuments()
+    ReactModal.setAppElement("body");
+  }
+
+  openUpdateModal(id) {
+    this.setState({ showUpdateModal: true });
+    this.props.fetchSingleDocument(id)
+  }
+
+  closeUpdateModal() {
+    this.setState({ showUpdateModal: false });
   }
 
   render() {
-    const { documents, deleteDocumentsThunk } = this.props
-    if (!documents) {
-      return "No Documents";
-    }
+    const { deleteDocumentsThunk, imageUrl, description, id } = this.props
+
     return (
-      <>
-        {
-          documents.map((doc) => {
-            const { type, id, imageUrl } = doc
-            return (
-              <div key={id}>
-                {
-                  type === 'Proof of Identity' && (
-                    <div>
-                      <img src={imageUrl}
-                        alt='document'
-                        width="50%" height="50%"
-                      />
-                      <><button onClick={() => deleteDocumentsThunk(id)}>Delete Document</button></>
-                    </div>
-                  )}
-              </div>
-            )
-          }
-          )
-        }
-      </>
+      <div>
+        <img src={imageUrl}
+          alt='Proof of Identity'
+          width="25%" height="25%"
+        />
+        <p>{`This is my ${description}`}</p>
+        <button onClick={() => this.openUpdateModal(id)}>Update My Document</button>
+        <ReactModal
+          isOpen={this.state.showUpdateModal}
+          contentLabel="Update Document"
+        >
+          <UpdateProofOfIdentity id={id} closeUpdateModal={this.closeUpdateModal} description={description} imageUrl={imageUrl} />
+          <button onClick={() => this.closeUpdateModal()}>close</button>
+        </ReactModal>
+        <button onClick={() => deleteDocumentsThunk(id)}>Delete My Document</button>
+      </div>
     )
   }
 }
 
-const mapState = ({ documents }) => ({ documents })
+const mapDispatch = { deleteDocumentsThunk, fetchSingleDocument }
 
-const mapDispatch = { fetchDocuments, deleteDocumentsThunk }
-
-export default connect(mapState, mapDispatch)(ProofOfIdentity)
+export default connect(null, mapDispatch)(ProofOfIdentity)

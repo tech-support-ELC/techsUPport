@@ -4,6 +4,7 @@ const db = require('../db')
 const Document = db.define('documents', {
   description: {
     type: Sequelize.STRING,
+    defaultValue: 'Undefined',
   },
   type: {
     type: Sequelize.ENUM('Proof of Identity', 'Lab Result', 'Surgical Report', 'Pathology Report', 'Imaging', 'Visit Summary'),
@@ -14,6 +15,14 @@ const Document = db.define('documents', {
     valideat: {
       notEmpty: true
     }
+  },
+  doctorId: {
+    type: Sequelize.INTEGER,
+    defaultValue: null
+  },
+  conditionId: {
+    type: Sequelize.INTEGER,
+    defaultValue: null
   },
   timestamp: {
     type: Sequelize.DATE,

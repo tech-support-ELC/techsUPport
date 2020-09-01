@@ -1,17 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import UploadDocuments from './UploadDocuments'
+import UploadProofOfIdentity from './UploadProofOfIdentity'
 import ReactModal from "react-modal";
 import ProofOfIdentity from './ProofOfIdentity'
 import { getAllConditionsThunk } from '../redux/conditions'
 import { getAllDoctorsThunk } from '../redux/doctors'
 import { Link } from 'react-router-dom'
+import { fetchDocuments } from '../redux/documents';
+
 
 class Profile extends Component {
   constructor() {
     super()
     this.state = {
-      showUploadModal: false
+      showUploadModal: false,
+
     };
     this.openUploadModal = this.openUploadModal.bind(this);
     this.closeUploadModal = this.closeUploadModal.bind(this);
@@ -20,6 +23,7 @@ class Profile extends Component {
   componentDidMount() {
     ReactModal.setAppElement("body");
     this.props.loadUserInfo()
+    this.props.fetchDocuments()
   }
 
   openUploadModal() {
@@ -32,13 +36,29 @@ class Profile extends Component {
 
   render() {
     const { firstName, lastName, email } = this.props.currentUser
+    const { documents } = this.props
+    if (!documents) {
+      return "No Documents";
+    }
     return (
       <div>
         <h1>User Profile</h1>
         <h4>Name: {firstName} {lastName}</h4>
         <h4>Email: {email}</h4>
 
-        <ProofOfIdentity {...this.props} />
+        {
+          documents.map((doc) => {
+            const { type, id, imageUrl, description } = doc
+            return (
+              <div key={id}>
+                {
+                  type === 'Proof of Identity' &&
+                  <ProofOfIdentity id={id} imageUrl={imageUrl} description={description} />
+                }
+              </div>
+            )
+          })
+        }
 
         <Link to='#' onClick={() => this.openUploadModal()}>
           Upload your insurance card and ID card here.
@@ -48,7 +68,7 @@ class Profile extends Component {
             isOpen={this.state.showUploadModal}
             contentLabel="Upload Documents"
           >
-            <UploadDocuments closeUploadModal={this.closeUploadModal} />
+            <UploadProofOfIdentity closeUploadModal={this.closeUploadModal} />
             <button onClick={() => this.closeUploadModal()}>close</button>
           </ReactModal>
         </div>
@@ -59,13 +79,14 @@ class Profile extends Component {
   }
 }
 
-const mapState = ({ currentUser }) => ({ currentUser })
+const mapState = ({ currentUser, documents }) => ({ currentUser, documents })
 
 const mapDispatch = (dispatch) => ({
   loadUserInfo: () => {
     dispatch(getAllConditionsThunk())
     dispatch(getAllDoctorsThunk())
-  }
+  },
+  fetchDocuments: () => dispatch(fetchDocuments()),
 })
 
 

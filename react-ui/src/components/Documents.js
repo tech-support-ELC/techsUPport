@@ -37,9 +37,9 @@ export class Documents extends Component {
     this.setState({ showUploadModal: false });
   }
 
-  openDocumentModal(id) {
+  async openDocumentModal(id) {
     this.setState({ showDocumentModal: true });
-    this.props.fetchSingleDocument(id)
+    await this.props.fetchSingleDocument(id)
   }
 
   closeDocumentModal() {
