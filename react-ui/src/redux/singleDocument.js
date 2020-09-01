@@ -11,7 +11,7 @@ const GET_DOCUMENT = "GET_DOCUMENT"
 /* ------------     ACTION CREATORS      ------------------ */
 
 const getDocument = (document) => ({ type: GET_DOCUMENT, document });
-const updateDocument = (document) => ({ type: UPDATE_DOCUMENT, document });
+const updateDocument = (id, document) => ({ type: UPDATE_DOCUMENT, id, document });
 
 
 
@@ -46,7 +46,7 @@ export const updateDocumentThunk = (id, formData) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.put(`${API_URL}/api/documents/${id}`, formData);
-      dispatch(updateDocument(data));
+      dispatch(updateDocument(id, data));
     } catch (error) {
       console.log(error);
     }

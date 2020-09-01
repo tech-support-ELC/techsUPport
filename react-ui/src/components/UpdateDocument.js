@@ -2,13 +2,18 @@ import React, { Component } from "react";
 import { updateDocumentThunk } from '../redux/singleDocument'
 import { connect } from 'react-redux'
 import axios from 'axios'
+import UploadForm from "./UploadForm";
 
-export class UploadDocument extends Component {
+
+export class UpdateDocument extends Component {
   constructor() {
     super()
     this.state = {
       selectedFile: null,
-      type: 'Proof of Identity'
+      description: '',
+      type: '',
+      doctorId: '',
+      conditionId: ''
     }
     this.uploadHandler = this.uploadHandler.bind(this)
     this.handleFileRead = this.handleFileRead.bind(this)
@@ -16,8 +21,21 @@ export class UploadDocument extends Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
+  componentDidMount() {
+    let { description, type, doctorId, conditionId } = this.props.singleDocument
+    if (!doctorId) doctorId = 'Select Doctor'
+    if (!conditionId) conditionId = 'Select Condition'
+    this.setState({
+      description,
+      type,
+      doctorId,
+      conditionId
+    })
+    console.log(this.props.singleDocument)
+  }
+
   handleChange(e) {
-    this.setState({ type: e.target.value })
+    this.setState({ [e.target.name]: e.target.value })
   }
 
   handleFileRead(e) {
@@ -43,111 +61,39 @@ export class UploadDocument extends Component {
   async uploadHandler(e) {
     e.preventDefault()
     const { id } = this.props
-    const description = e.target.description.value
-    const type = this.state.type
+    const { description, type, doctorId, conditionId } = this.state
 
-    let doctorId = null
-    if (e.target.doctorId) doctorId = e.target.doctorId.value
-    doctorId = null
-
-    let conditionId = null
-    if (e.target.conditionId) conditionId = e.target.conditionId.value
-    conditionId = null
-
+    let formData = {}
     if (this.state.selectedFile) {
       const imageUrl = await this.sendFile()
-      const formData = {
+      formData = {
         description,
         type,
         doctorId,
         conditionId,
         imageUrl
       }
-      this.props.updateDocumentThunk(id, formData)
     } else {
-      const formData = {
+      formData = {
         description,
         type,
         doctorId,
         conditionId
       }
-      this.props.updateDocumentThunk(id, formData)
     }
+    this.props.updateDocumentThunk(id, formData)
   }
 
   render() {
-    const { doctors, conditions } = this.props
-    const types = ['Proof of Identity', 'Lab Result', 'Surgical Report', 'Pathology Report', 'Imaging', 'Visit Summary']
     return (
-      <form onSubmit={this.uploadHandler}>
-        <label>Enter a short description of what this document contains:</label>
-        <input
-          name='description'
-          type='text'
-          placeholder='Description'
-        />
-        <label>Select what type of document this is:
-          <select
-            name='type'
-            value={this.state.type}
-            onChange={this.handleChange}
-          >
-            {types.map((type, i) => {
-              return (
-                <option key={i} value={type}>{type}</option>
-              )
-            })
-            }
-          </select>
-        </label>
-        {this.state.type !== 'Proof of Identity' && (
-          <div>
-            <label>Which doctor is this document associated with?
-          <select
-                name='doctorId'
-              >
-                <option>Select Doctor</option>
-                {doctors &&
-                  doctors.map(doctor => {
-                    const { id, firstName, lastName } = doctor
-                    return (
-                      <option key={id} value={id}>{firstName} {lastName}</option>
-                    )
-                  })
-                }
-              </select>
-            </label>
-            <label>What condition does this document relate to?
-          <select
-                name='conditionId'
-              >
-                <option>Select Condition</option>
-                {conditions &&
-                  conditions.map(condition => {
-                    const { id, name } = condition
-                    return (
-                      <option key={id} value={id}>{name}</option>
-                    )
-                  })
-                }
-              </select>
-            </label>
-          </div>
-        )}
-        <label>Choose File to Replace Current File</label>
-        <input
-          type='file'
-          onChange={this.handleFileRead}
-        // multiple
-        />
-        <button type="submit" >Update</button>
-      </form>
+      <UploadForm {...this.state} uploadHandler={this.uploadHandler} handleFileRead={this.handleFileRead} handleChange={this.handleChange} />
     );
   };
 }
-const mapState = ({ doctors, conditions }) => ({ doctors, conditions })
+
+const mapState = ({ singleDocument }) => ({ singleDocument })
 
 const mapDispatch = { updateDocumentThunk }
 
-export default connect(mapState, mapDispatch)(UploadDocument);
+export default connect(mapState, mapDispatch)(UpdateDocument);
 
