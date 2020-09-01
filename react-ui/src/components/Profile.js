@@ -8,13 +8,11 @@ import { getAllDoctorsThunk } from '../redux/doctors'
 import { Link } from 'react-router-dom'
 import { fetchDocuments } from '../redux/documents';
 
-
 class Profile extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
       showUploadModal: false,
-
     };
     this.openUploadModal = this.openUploadModal.bind(this);
     this.closeUploadModal = this.closeUploadModal.bind(this);
@@ -41,9 +39,11 @@ class Profile extends Component {
       return "No Documents";
     }
     return (
-      <div>
+      <div className="loginSignup">
         <h1>User Profile</h1>
-        <h4>Name: {firstName} {lastName}</h4>
+        <h4>
+          Name: {firstName} {lastName}
+        </h4>
         <h4>Email: {email}</h4>
 
         {
@@ -60,9 +60,9 @@ class Profile extends Component {
           })
         }
 
-        <Link to='#' onClick={() => this.openUploadModal()}>
+        <Link to="#" onClick={() => this.openUploadModal()}>
           Upload your insurance card and ID card here.
-          </Link>
+        </Link>
         <div className="popup">
           <ReactModal
             isOpen={this.state.showUploadModal}
@@ -72,10 +72,9 @@ class Profile extends Component {
             <button onClick={() => this.closeUploadModal()}>close</button>
           </ReactModal>
         </div>
-        <Link to='documents'>Upload your medical documents here.</Link>
-
-      </div >
-    )
+        <Link to="documents">Upload your medical documents here.</Link>
+      </div>
+    );
   }
 }
 
@@ -90,4 +89,4 @@ const mapDispatch = (dispatch) => ({
 })
 
 
-export default connect(mapState, mapDispatch)(Profile)
+export default connect(mapState, mapDispatch)(Profile);

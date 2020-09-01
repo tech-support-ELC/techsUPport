@@ -17,6 +17,7 @@ class Medications extends React.Component {
     this.handleRemove = this.handleRemove.bind(this);
   }
   componentDidMount() {
+    ReactModal.setAppElement("body");
     this.props.fetchMedications();
   }
 
@@ -58,7 +59,6 @@ class Medications extends React.Component {
                         {medication.name}
                       </button>
                     </>
-                    {/* <RemoveMedication medication={medication} remove={remove} /> */}
                   </div>
                 );
               })}
@@ -66,36 +66,33 @@ class Medications extends React.Component {
           <button type="button" onClick={() => this.handleAdd()}>
             Add a Medication
           </button>
-          <ReactModal isOpen={this.state.add} contentLabel="Single Document">
-            (
+          <ReactModal
+            isOpen={this.state.add}
+            contentLabel="Single Document"
+            className="popup"
+          >
             <>
               <AddMedication />
               <button type="button" onClick={() => this.handleClose()}>
                 Close
               </button>
             </>
-            )
           </ReactModal>
           <ReactModal
             isOpen={this.state.selected}
             contentLabel="Single Document"
+            className="popup"
           >
-            <SingleMedication
-              selected={this.state.selected}
-              remove={remove}
-              // closeModal={this.handleClose}
-            />
+            <SingleMedication selected={this.state.selected} remove={remove} />
 
             <RemoveMedication
               medication={this.state.selected}
               remove={this.handleRemove}
-              // close={this.handleClose}
             />
             <button type="button" onClick={() => this.handleClose()}>
               Close
             </button>
           </ReactModal>
-
         </div>
       </div>
     );

@@ -53,14 +53,20 @@ class DCConditionForm extends Component {
               <div>
                 <label>
                   How much is this affecting you today? 1 (not too much) to 10 (so very much):
-            <input
-                    className='input'
-                    placeholder='1-10'
-                    type='text'
-                    name='rate'
-                    onChange={this.handleChange}
-                    value={this.state.rate}
-                  />
+                  <select onChange={this.handleChange}
+                    value={this.state.rate} name="rate">
+                      <option value=""></option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                  </select>
                 </label>
               </div>
               <div>
