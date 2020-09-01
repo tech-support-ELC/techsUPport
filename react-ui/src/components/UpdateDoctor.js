@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { updateSingleDoctor } from '../redux/singleDoctor'
-import { Link } from 'react-router-dom'
 
 
 export function UpdateDoctor(props) {
@@ -12,7 +11,6 @@ export function UpdateDoctor(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.log('what are props inside update doctor', props)
         const userId = props.currentUser.id
         const id = props.doctor.id
         const payload = { firstName, lastName, address, doctorType, userId }
@@ -22,7 +20,6 @@ export function UpdateDoctor(props) {
             }
         }
         props.updateDoctor(id, payload)
-        // props.updateAllDocs(id, payload)
     }
 
 
@@ -70,7 +67,6 @@ export function UpdateDoctor(props) {
                 </div>
                 <br />
                 <button type='submit'>change this doctor</button>
-                <Link to='/medications'>Add A Medication</Link>
             </form>
 
         </div>
