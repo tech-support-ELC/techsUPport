@@ -15,9 +15,11 @@ export function AddDoctor(props) {
         const userId = props.currentUser.id
         const payload = { firstName, lastName, address, doctorType, userId }
         props.addNewDoctor(payload)
+        setFirstName('');
+        setLastName('');
+        setAddress('');
+        setDoctorType('');
     }
-
-
     return (
         <div>
             <form onSubmit={(event) => handleSubmit(event)}>

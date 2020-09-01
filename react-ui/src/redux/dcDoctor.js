@@ -21,7 +21,7 @@ const addAppointment = appointment => {
 export const getAppointmentThunk = () => {
   return async dispatch => {
     try {
-      const { data } = await axios.get(`${API_URL}/api/dailycheckin/appointment`)
+      const { data } = await axios.get(`${API_URL}/api/doctors`)
       console.log('data inside get appointment thunk', data)
       dispatch(getAppointment(data))
     } catch (error) {

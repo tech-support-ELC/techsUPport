@@ -21,8 +21,7 @@ const addMedication = med => {
 export const getMedicationThunk = () => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`${API_URL}/api/dailycheckin/meds`)
-      console.log(data)
+      const {data} = await axios.get(`${API_URL}/api/medications`)
       dispatch(getMedication(data))
     } catch (error) {
       console.error(error)

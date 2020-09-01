@@ -9,6 +9,7 @@ class DCConditionForm extends Component {
       date: new Date(),
       notes: '',
       conditionId: 0,
+      isSubmitted: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -16,6 +17,7 @@ class DCConditionForm extends Component {
   handleChange(evt) {
     const conditionId = this.props.condition.id;
     this.setState({ conditionId });
+    this.setState({ isSubmitted: true });
     const target = evt.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
@@ -32,7 +34,8 @@ class DCConditionForm extends Component {
       rate: '',
       date: '',
       notes: '',
-      conditionId: 0
+      conditionId: 0,
+      isSubmitted: false
     })
   }
   render() {
@@ -48,7 +51,7 @@ class DCConditionForm extends Component {
           />
         </label>
         {
-          this.state.isClicked ?
+          (this.state.isClicked && this.state.isSubmitted) ?
             <div>
               <div>
                 <label>
@@ -72,8 +75,8 @@ class DCConditionForm extends Component {
               <div>
                 <label>
                   Notes on how I feel:
-            <input
-                    className='input'
+                <textarea
+                    className='textarea'
                     placeholder='Notes'
                     type='text'
                     name='notes'

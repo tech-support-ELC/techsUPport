@@ -8,8 +8,11 @@ import DCConditionForm from './DCConditionForm';
 import DCDoctorForm from './DCDoctorForm';
 import { getAllDoctorsThunk } from '../redux/doctors'
 import ReactModal from 'react-modal';
-import AddMedication from './AddMedication'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { getTodayScoreThunk } from '../redux/dcTodayScore';
+import { getTodayAppointmentThunk } from'../redux/dcTodayAppointment';
+import { getTodayMedsThunk } from '../redux/dcTodayMed'
+import DCSummary from './DCSummary';
 class DailyCheckin extends Component {
   constructor() {
     super();
@@ -29,6 +32,8 @@ class DailyCheckin extends Component {
     this.props.getScore();
     this.props.getAllDoctors();
     this.props.getMedication();
+    this.props.getTodayScore();
+    this.props.getTodayMeds();
     ReactModal.setAppElement('body');
   }
   openCondModal() {
@@ -57,24 +62,36 @@ class DailyCheckin extends Component {
   }
   render() {
     const score = this.props.score;
-    const doctors = this.props.doctors;
     const med = this.props.med;
+    const appointment = this.props.appointment;
+    const date = String(new Date()).slice(0, 15);
+    const todayScore = this.props.todayScore;
+    const todayAppointment = this.props.todayAppointment;
+    const todayMed = this.props.todayMed;
+    console.log('score', todayScore)
     return (
-      <div className="main" id="daily">
+      <div>
         <h1>Daily Check-in</h1>
+        <h3>{date}</h3>
           <div>
-            <button
-              className="bigButton"
-              type="button"
-              onClick={() => this.openCondModal()}
-            >
-              Conditions
-            </button>
+            <div>
+              Some text
+              <button
+                className="bigButton"
+                type="button"
+                onClick={() => this.openCondModal()}
+              >
+                Conditions
+              </button>
+            </div>
             <ReactModal
               isOpen={this.state.showCondModal}
               contentLabel="Single Document"
             >
             <div>
+              <div>
+                What conditions are you dealing with today today?
+              </div>
             {(score && score.length > 0) ?
               score.map((condition) => {
                 return (
@@ -96,53 +113,67 @@ class DailyCheckin extends Component {
             </ReactModal>
           </div>
           <div>
-            <button
-              className="bigButton"
-              type="button"
-              onClick={() => this.openDocModal()}
-            >
-              Doctors
-            </button>
+            <div>
+              <div>
+                Some text
+                <button
+                  className="bigButton"
+                  type="button"
+                  onClick={() => this.openDocModal()}
+                >
+                  Doctors
+                </button>
+              </div>
+            </div>
             <ReactModal
               isOpen={this.state.showDocModal}
               contentLabel="Single Document"
             >
             <div>
+              <div>
+                Do you have an appointment with a doctor today?
+              </div>
             {
-            (doctors && doctors.length>0) ?
-            doctors.map((doctor) => {
+            (appointment && appointment.length>0) ?
+            appointment.map((doc) => {
               return (
-                <div key={doctor.id}>
+                <div key={doc.id}>
                   <DCDoctorForm
-                    doctor={doctor}
+                    doctor={doc}
                     addAppointment={this.props.addAppointment}
                   />
                 </div>
               );
-            }) : "You don't have any doctors"
+            }) : "You don't have any appointment"
             }
             </div>
             <div>
               {
-                (doctors && doctors.length === 0) ? <Link to="/doctors">Add Doctor</Link> : null
+                (appointment && appointment.length === 0) ? <Link to="/doctors">Add Doctor</Link> : null
               }
               </div>
             <button onClick={this.closeDocModal}>Done</button>
             </ReactModal>
           </div>
           <div>
-            <button
-              className="bigButton"
-              type="button"
-              onClick={() => this.openMedModal()}
-            >
-              Medications
-            </button>
+            <div>
+              Some text
+              <button
+                className="bigButton"
+                type="button"
+                onClick={() => this.openMedModal()}
+              >
+                Medications
+              </button>
+            </div>
             <ReactModal
               isOpen={this.state.showMedModal}
               contentLabel="Single Document"
             >
             <div>
+              <div>
+                What medications are you taking today?
+              </div>
               {
                 (med && med.length > 0) ? med.map((eachMed) => {
                   return (
@@ -164,7 +195,11 @@ class DailyCheckin extends Component {
               <button onClick={this.closeMedModal}>Done</button>
             </ReactModal>
           </div>
-          
+          <div>
+            {
+              (todayScore.length>0 || todayAppointment.length>0 || todayMed>0) ? <DCSummary todayScore={todayScore} todayAppointment={todayAppointment} todayMed={todayMed} /> : null
+            }
+          </div>
       </div>
     );
   }
@@ -173,8 +208,10 @@ const mapStateToProps = (state) => {
   return {
     score: state.score,
     appointment: state.appointment,
-    doctors: state.doctors,
     med: state.med,
+    todayScore: state.todayScore,
+    todayAppointment: state.todayAppointment,
+    todayMed: state.todayMed
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -185,6 +222,9 @@ const mapDispatchToProps = (dispatch) => {
     addAppointment: (appointment) => dispatch(addAppointmentThunk(appointment)),
     getMedication: () => dispatch(getMedicationThunk()),
     addMedication: (med) => dispatch(addMedicationThunk(med)),
+    getTodayScore: () => dispatch(getTodayScoreThunk()),
+    getTodayAppointment: () => dispatch(getTodayAppointmentThunk()),
+    getTodayMeds: () => dispatch(getTodayMedsThunk()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(DailyCheckin);

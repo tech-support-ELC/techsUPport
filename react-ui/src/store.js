@@ -16,6 +16,9 @@ import score from './redux/dcCondition';
 import appointment from './redux/dcDoctor';
 import med from './redux/dcMedication';
 import chart from './redux/score';
+import todayScore from './redux/dcTodayScore';
+import todayAppointment from './redux/dcTodayAppointment';
+import todayMed from './redux/dcTodayMed';
 const reducer = combineReducers({
   users,
   currentUser,
@@ -30,7 +33,10 @@ const reducer = combineReducers({
   score,
   appointment,
   med,
-  chart
+  chart,
+  todayScore,
+  todayAppointment,
+  todayMed
 });
 
 const middleware = composeWithDevTools(

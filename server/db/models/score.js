@@ -20,6 +20,9 @@ const Score = db.define('score', {
   },
   notes: {
     type: Sequelize.TEXT
+  },
+  name: {
+    type: Sequelize.STRING
   }
 });
 
