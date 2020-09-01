@@ -64,14 +64,27 @@ export default class UpdateMedication extends React.Component {
           <option value="drops">drops</option>
         </select>
 
-        <label htmlFor="frequency">Updated Frequency:</label>
-        <input
-          type="text"
-          name="frequency"
-          value={this.state.frequency}
-          onChange={this.handleChange}
-          placeholder={this.props.medication.frequency || "Frequency"}
-        />
+        <label htmlFor="frequency">
+          Updated Frequency:
+          <input
+            type="text"
+            name="frequency"
+            value={this.state.frequency}
+            onChange={this.handleChange}
+            placeholder={this.props.medication.frequency || "Frequency"}
+          />
+          <select
+            onChange={this.handleChange}
+            value={this.state.frequencyUnit}
+            name="frequencyUnit"
+          >
+            <option value=""></option>
+            <option value="day">day</option>
+            <option value="hour">hour</option>
+            <option value="week">week</option>
+            <option value="as needed">as needed</option>
+          </select>
+        </label>
 
         <br />
         <br />
