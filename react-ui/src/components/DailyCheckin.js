@@ -201,7 +201,7 @@ class DailyCheckin extends Component {
           </div>
           <div>
             {
-              (todayScore.length>0 || todayAppointment.length>0 || todayMed>0) ? <DCSummary todayScore={todayScore} todayAppointment={todayAppointment} todayMed={todayMed} /> : null
+              (todayScore.length>0 || todayAppointment.length>0 || todayMed>0) ? <DCSummary /> : null
             }
           </div>
       </div>

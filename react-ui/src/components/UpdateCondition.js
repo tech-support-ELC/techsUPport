@@ -35,11 +35,11 @@ class UpdateCondition extends Component {
         <div>
           <input
             className="input"
-            placeholder="Update Name"
+            placeholder={name}
             type="text"
             name="name"
             onChange={this.handleChange}
-            value={name}
+            value={this.state.name}
           />
         </div>
         <br />
