@@ -22,8 +22,7 @@ const getAllUsers = users => {
 export const getUsersThunk = () => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`${API_URL}/api/users`);
-      console.log(data)
+      const { data } = await axios.get(`${API_URL}/api/users`);
       dispatch(getAllUsers(data));
     } catch (error) {
       console.log(error)
@@ -35,7 +34,7 @@ export const deleteUserThunk = (id) => {
     try {
       await axios.delete(`/api/users/${id}`);
       dispatch(remove(id));
-      const {data} = await axios.get(`${API_URL}/api/users`);
+      const { data } = await axios.get(`${API_URL}/api/users`);
       dispatch(getAllUsers(data));
     } catch (err) {
       console.log(err);

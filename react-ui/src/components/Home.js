@@ -12,6 +12,7 @@ import HomeAddButtons from './HomeAddButtons'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
 import Onboarding from './Onboarding'
+import checkDay from '../utils/onboarding-date-function'
 
 
 export class Home extends React.Component {
@@ -31,11 +32,15 @@ export class Home extends React.Component {
     const conditions = this.props.conditions
     const medications = this.props.medications
     const chart = this.props.chart
+    const currentUser = this.props.currentUser
     return (
-      <div className="welcomeName">
-        <h1>Welcome {firstName}!</h1>
-        <Onboarding />
+      <div>
+        <h1 id='welcomeName'>Welcome {firstName}!</h1>
+        {(!checkDay(currentUser.createdAt)) ?
+          <Onboarding /> : null
+        }
         <div>
+
           {
             (doctors.length === 0 && conditions.length === 0 && medications.length === 0) ?
               (
