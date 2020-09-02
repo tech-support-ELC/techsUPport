@@ -42,14 +42,22 @@ export class UploadProofOfIdentity extends Component {
 
   async uploadHandler(e) {
     e.preventDefault()
-    const description = e.target.description.value
+    const { description, selectedFile } = this.state
     const type = 'Proof of Identity'
-    const imageUrl = await this.sendFile()
 
-    const formData = {
-      description,
-      type,
-      imageUrl
+    let formData = {}
+    if (selectedFile) {
+      const imageUrl = await this.sendFile()
+      formData = {
+        description,
+        type,
+        imageUrl
+      }
+    } else {
+      formData = {
+        description,
+        type,
+      }
     }
     this.props.uploadDocumentThunk(formData)
     this.props.closeUploadModal()

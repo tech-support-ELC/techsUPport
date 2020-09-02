@@ -45,23 +45,25 @@ export class UploadDocuments extends Component {
 
   async uploadHandler(e) {
     e.preventDefault()
-
-    const description = e.target.description.value
-    const type = e.target.type.value
-    const doctorId = e.target.doctorId.value
-    const conditionId = e.target.conditionId.value
-    const imageUrl = await this.sendFile()
-
-    console.log(typeof (doctorId), conditionId)
-
-    const formData = {
-      description,
-      type,
-      doctorId,
-      conditionId,
-      imageUrl
+    const { description, type, doctorId, conditionId } = this.state
+    let formData = {}
+    if (this.state.selectedFile) {
+      const imageUrl = await this.sendFile()
+      formData = {
+        description,
+        type,
+        doctorId,
+        conditionId,
+        imageUrl
+      }
+    } else {
+      formData = {
+        description,
+        type,
+        doctorId,
+        conditionId
+      }
     }
-
     this.props.uploadDocumentThunk(formData)
     this.props.closeUploadModal()
   }
