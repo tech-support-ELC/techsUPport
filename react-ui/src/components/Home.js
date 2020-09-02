@@ -50,7 +50,7 @@ export class Home extends React.Component {
           <h2>Fill out your daily checkin for {moment().format('MMMM Do YYYY')}</h2>
           <div id="dailyCheckinHomePage">
             <Link to="/dailycheckin">
-              <button renderAs="button">
+              <button>
                 <span>Daily Checkin</span>
               </button>
             </Link>
