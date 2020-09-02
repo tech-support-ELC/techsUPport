@@ -14,7 +14,6 @@ const Login = (props) => {
         <h1>Log in</h1>
         <label>Email</label>
         <input name="email" type="email" required />
-
         <label>Password</label>
         <input name="password" type="password" required />
 

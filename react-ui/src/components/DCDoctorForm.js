@@ -11,7 +11,7 @@ class DCDoctorForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(evt) {
-    const doctorId = this.props.doctor.id;
+    const doctorId = this.props.doc.id;
     this.setState({ doctorId });
     const target = evt.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -23,6 +23,7 @@ class DCDoctorForm extends Component {
   handleSubmit(evt) {
     evt.preventDefault();
     this.props.addAppointment(this.state);
+    console.log('props inside daily checkin appointment submit', this.props)
     this.setState({
       isClicked: false,
       time: '',
@@ -30,11 +31,11 @@ class DCDoctorForm extends Component {
     })
   }
   render() {
-    const doctor = this.props.doctor;
+    const doc = this.props.doc;
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
-          {doctor.firstName} {doctor.lastName}
+          {doc.firstName} {doc.lastName}
           <input
             type='checkbox'
             name='isClicked'

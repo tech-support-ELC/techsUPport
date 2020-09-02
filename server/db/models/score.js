@@ -20,6 +20,13 @@ const Score = db.define('score', {
   },
   notes: {
     type: Sequelize.TEXT
+  },
+  name: {
+    type: Sequelize.STRING
+  },
+  isSubmitted: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 });
 

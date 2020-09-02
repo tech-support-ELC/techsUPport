@@ -7,4 +7,4 @@ router.use('/local', localRouter)
 router.use('/google', googleRouter)
 // router.use('/facebook', facebookRouter)
 
-module.exports = router
+module.exports = router;

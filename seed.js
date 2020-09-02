@@ -9,6 +9,7 @@ const {
   Medication,
   User,
 } = require("./server/db/models");
+const { merge } = require("superagent");
 async function seed() {
   await db.sync({ force: true });
   console.log("db synced!");
@@ -433,6 +434,7 @@ async function seed() {
       rate: 7,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-02",
@@ -440,6 +442,7 @@ async function seed() {
       rate: 7,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-03",
@@ -448,6 +451,7 @@ async function seed() {
       rate: 3,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-04",
@@ -455,6 +459,7 @@ async function seed() {
       rate: 8,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-05",
@@ -463,6 +468,7 @@ async function seed() {
       rate: 1,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-06",
@@ -471,6 +477,7 @@ async function seed() {
       rate: 4,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-07",
@@ -478,6 +485,7 @@ async function seed() {
       rate: 3,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-08",
@@ -486,6 +494,7 @@ async function seed() {
       rate: 6,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-09",
@@ -494,6 +503,7 @@ async function seed() {
       rate: 8,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-10",
@@ -502,6 +512,7 @@ async function seed() {
       rate: 2,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-11",
@@ -510,6 +521,7 @@ async function seed() {
       rate: 5,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-12",
@@ -517,6 +529,7 @@ async function seed() {
       rate: 2,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-13",
@@ -525,6 +538,7 @@ async function seed() {
       rate: 9,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-14",
@@ -532,6 +546,7 @@ async function seed() {
       rate: 7,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-15",
@@ -540,6 +555,7 @@ async function seed() {
       rate: 10,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-16",
@@ -548,6 +564,7 @@ async function seed() {
       rate: 6,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-17",
@@ -556,6 +573,7 @@ async function seed() {
       rate: 5,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-18",
@@ -564,6 +582,7 @@ async function seed() {
       rate: 8,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-19",
@@ -572,6 +591,7 @@ async function seed() {
       rate: 7,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-20",
@@ -579,6 +599,7 @@ async function seed() {
       rate: 3,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-21",
@@ -586,6 +607,7 @@ async function seed() {
       rate: 7,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-22",
@@ -594,6 +616,7 @@ async function seed() {
       rate: 1,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-23",
@@ -602,6 +625,7 @@ async function seed() {
       rate: 2,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-24",
@@ -610,6 +634,7 @@ async function seed() {
       rate: 1,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-25",
@@ -618,6 +643,7 @@ async function seed() {
       rate: 2,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-26",
@@ -625,6 +651,7 @@ async function seed() {
       rate: 3,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-27",
@@ -632,6 +659,7 @@ async function seed() {
       rate: 10,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-28",
@@ -640,6 +668,7 @@ async function seed() {
       rate: 5,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-29",
@@ -647,6 +676,7 @@ async function seed() {
       rate: 4,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-30",
@@ -655,6 +685,7 @@ async function seed() {
       rate: 2,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-07-31",
@@ -662,6 +693,7 @@ async function seed() {
       rate: 4,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-01",
@@ -670,6 +702,7 @@ async function seed() {
       rate: 3,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-02",
@@ -678,6 +711,7 @@ async function seed() {
       rate: 7,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-03",
@@ -686,6 +720,7 @@ async function seed() {
       rate: 1,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-04",
@@ -694,6 +729,7 @@ async function seed() {
       rate: 5,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-05",
@@ -702,6 +738,7 @@ async function seed() {
       rate: 8,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-06",
@@ -709,6 +746,7 @@ async function seed() {
       rate: 7,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-07",
@@ -716,6 +754,7 @@ async function seed() {
       rate: 10,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-08",
@@ -724,6 +763,7 @@ async function seed() {
       rate: 10,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-09",
@@ -731,6 +771,7 @@ async function seed() {
       rate: 10,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-10",
@@ -739,6 +780,7 @@ async function seed() {
       rate: 3,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-11",
@@ -747,6 +789,7 @@ async function seed() {
       rate: 10,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-12",
@@ -755,6 +798,7 @@ async function seed() {
       rate: 2,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-13",
@@ -763,6 +807,7 @@ async function seed() {
       rate: 1,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-14",
@@ -771,6 +816,7 @@ async function seed() {
       rate: 3,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-15",
@@ -779,6 +825,7 @@ async function seed() {
       rate: 8,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-16",
@@ -787,6 +834,7 @@ async function seed() {
       rate: 6,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-17",
@@ -794,6 +842,7 @@ async function seed() {
       rate: 2,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-18",
@@ -802,6 +851,7 @@ async function seed() {
       rate: 2,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-19",
@@ -809,6 +859,7 @@ async function seed() {
       rate: 8,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-20",
@@ -816,6 +867,7 @@ async function seed() {
       rate: 10,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-21",
@@ -824,6 +876,7 @@ async function seed() {
       rate: 5,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-22",
@@ -831,6 +884,7 @@ async function seed() {
       rate: 9,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-23",
@@ -838,6 +892,7 @@ async function seed() {
       rate: 9,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-24",
@@ -846,6 +901,7 @@ async function seed() {
       rate: 8,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-25",
@@ -854,6 +910,7 @@ async function seed() {
       rate: 5,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-26",
@@ -862,6 +919,7 @@ async function seed() {
       rate: 10,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-27",
@@ -870,6 +928,7 @@ async function seed() {
       rate: 10,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-28",
@@ -877,6 +936,7 @@ async function seed() {
       rate: 7,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-29",
@@ -885,6 +945,7 @@ async function seed() {
       rate: 8,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-30",
@@ -893,6 +954,7 @@ async function seed() {
       rate: 1,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
     {
       date: "2020-08-31",
@@ -901,6 +963,7 @@ async function seed() {
       rate: 2,
       conditionId: 1,
       userId: 1,
+      name: "Hypertension"
     },
   ];
 
@@ -909,279 +972,319 @@ async function seed() {
   ]);
   const medicationData = [
     {
-      name: "Advil",
-      dosage: "400 mg",
-      frequency: "once per day",
-      userId: 1
-    },
-    {
       name: "Ibuprofen",
-      dosage: "400 mg",
-      frequency: "once per day",
-      userId: 1
+      dosage: 400,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 1,
     },
     {
       name: "Synthroid",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 1
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 1,
     },
     {
       name: "Crestor",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 1
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 1,
     },
     {
       name: "Ventolin",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 1
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 1,
     },
     {
       name: "Nexium",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 1
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 1,
     },
     {
       name: "Advair Diskus",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 1
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 1,
     },
     {
       name: "Lantus",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 1
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 1,
     },
     {
       name: "Vyvanse",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 1
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 1,
     },
     {
       name: "Lyrica",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 1
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 1,
     },
     {
       name: "Spiriva",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 1
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 1,
     },
     {
       name: "Januvia",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 1
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 1,
     },
     {
       name: "Ibuprofen",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 2
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 2,
     },
     {
       name: "Ibuprofen",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 3
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 3,
     },
     {
       name: "Ibuprofen",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 4
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 4,
     },
     {
       name: "Ibuprofen",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 5
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 5,
     },
     {
       name: "Ibuprofen",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 6
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 6,
     },
     {
       name: "Ibuprofen",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 7
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 7,
     },
     {
       name: "Ibuprofen",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 8
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 8,
     },
     {
       name: "Ibuprofen",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 9
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 9,
     },
     {
       name: "Lantus",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 2
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 2,
     },
     {
       name: "Lantus",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 3
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 3,
     },
     {
       name: "Lantus",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 4
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 4,
     },
     {
       name: "Lantus",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 5
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 5,
     },
   ];
   const medications = await Promise.all([
     Medication.bulkCreate(medicationData, { validate: true }),
   ]);
-
-  const appointmentData = [{
-    id: 1,
-    appointmentDate: "2020-03-25",
-    time: "03:33",
-    userId: 1,
-    doctorId: 2
-  }, {
-    id: 2,
-    appointmentDate: "2020-03-24",
-    time: "17:07",
-    userId: 1,
-    doctorId: 4
-  }, {
-    id: 3,
-    appointmentDate: "2020-03-05",
-    time: "02:54",
-    userId: 1,
-    doctorId: 6
-  }, {
-    id: 4,
-    appointmentDate: "2020-01-21",
-    time: "09:06",
-    userId: 1,
-    doctorId: 5
-  }, {
-    id: 5,
-    appointmentDate: "2020-01-13",
-    time: "01:35",
-    userId: 1,
-    doctorId: 7
-  }, {
-    id: 6,
-    appointmentDate: "2020-05-18",
-    time: "11:22",
-    userId: 1,
-    doctorId: 1
-  }, {
-    id: 7,
-    appointmentDate: "2020-08-07",
-    time: "07:13",
-    userId: 1,
-    doctorId: 1
-  }, {
-    id: 8,
-    appointmentDate: "2020-08-15",
-    time: "01:08",
-    userId: 1,
-    doctorId: 5
-  }, {
-    id: 9,
-    appointmentDate: "2020-01-10",
-    time: "21:52",
-    userId: 1,
-    doctorId: 5
-  }, {
-    id: 10,
-    appointmentDate: "2020-03-02",
-    time: "05:34",
-    userId: 1,
-    doctorId: 4
-  }, {
-    id: 11,
-    appointmentDate: "2020-02-23",
-    time: "21:36",
-    userId: 1,
-    doctorId: 5
-  }, {
-    id: 12,
-    appointmentDate: "2020-04-24",
-    time: "20:05",
-    userId: 1,
-    doctorId: 3
-  }, {
-    id: 13,
-    appointmentDate: "2020-03-16",
-    time: "18:40",
-    userId: 1,
-    doctorId: 6
-  }, {
-    id: 14,
-    appointmentDate: "2020-01-28",
-    time: "05:21",
-    userId: 1,
-    doctorId: 2
-  }, {
-    id: 15,
-    appointmentDate: "2020-06-03",
-    time: "15:49",
-    userId: 1,
-    doctorId: 7
-  }, {
-    id: 16,
-    appointmentDate: "2020-06-17",
-    time: "23:05",
-    userId: 1,
-    doctorId: 7
-  }, {
-    id: 17,
-    appointmentDate: "2020-08-25",
-    time: "15:28",
-    userId: 1,
-    doctorId: 6
-  }, {
-    id: 18,
-    appointmentDate: "2020-08-03",
-    time: "03:23",
-    userId: 1,
-    doctorId: 3
-  }, {
-    id: 19,
-    appointmentDate: "2020-04-30",
-    time: "02:30",
-    userId: 1,
-    doctorId: 6
-  }, {
-    id: 20,
-    appointmentDate: "2020-03-14",
-    time: "02:43",
-    userId: 1,
-    doctorId: 1
-  }]
+  
+  const appointmentData = [
+    {
+      appointmentDate: "2020-03-25",
+      time: "03:33",
+      userId: 1,
+      doctorId: 2,
+    },
+    {
+      appointmentDate: "2020-03-24",
+      time: "17:07",
+      userId: 1,
+      doctorId: 4,
+    },
+    {
+      appointmentDate: "2020-03-05",
+      time: "02:54",
+      userId: 1,
+      doctorId: 6,
+    },
+    {
+      appointmentDate: "2020-01-21",
+      time: "09:06",
+      userId: 1,
+      doctorId: 5,
+    },
+    {
+      appointmentDate: "2020-01-13",
+      time: "01:35",
+      userId: 1,
+      doctorId: 7,
+    },
+    {
+      appointmentDate: "2020-05-18",
+      time: "11:22",
+      userId: 1,
+      doctorId: 1,
+    },
+    {
+      appointmentDate: "2020-08-07",
+      time: "07:13",
+      userId: 1,
+      doctorId: 1,
+    },
+    {
+      appointmentDate: "2020-08-15",
+      time: "01:08",
+      userId: 1,
+      doctorId: 5,
+    },
+    {
+      appointmentDate: "2020-01-10",
+      time: "21:52",
+      userId: 1,
+      doctorId: 5,
+    },
+    {
+      appointmentDate: "2020-03-02",
+      time: "05:34",
+      userId: 1,
+      doctorId: 4,
+    },
+    {
+      appointmentDate: "2020-02-23",
+      time: "21:36",
+      userId: 1,
+      doctorId: 5,
+    },
+    {
+      appointmentDate: "2020-04-24",
+      time: "20:05",
+      userId: 1,
+      doctorId: 3,
+    },
+    {
+      appointmentDate: "2020-03-16",
+      time: "18:40",
+      userId: 1,
+      doctorId: 6,
+    },
+    {
+      appointmentDate: "2020-01-28",
+      time: "05:21",
+      userId: 1,
+      doctorId: 2,
+    },
+    {
+      appointmentDate: "2020-06-03",
+      time: "15:49",
+      userId: 1,
+      doctorId: 7,
+    },
+    {
+      appointmentDate: "2020-06-17",
+      time: "23:05",
+      userId: 1,
+      doctorId: 7,
+    },
+    {
+      appointmentDate: "2020-08-25",
+      time: "15:28",
+      userId: 1,
+      doctorId: 6,
+    },
+    {
+      appointmentDate: "2020-08-03",
+      time: "03:23",
+      userId: 1,
+      doctorId: 3,
+    },
+    {
+      appointmentDate: "2020-04-30",
+      time: "02:30",
+      userId: 1,
+      doctorId: 6,
+    },
+    {
+      appointmentDate: "2020-03-14",
+      time: "02:43",
+      userId: 1,
+      doctorId: 1,
+    },
+  ];
 
   const appointments = await Promise.all([
     Appointment.bulkCreate(appointmentData, { validate: true }),
-
   ]);
 
   console.log(`seeded successfully`);

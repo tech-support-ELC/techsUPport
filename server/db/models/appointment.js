@@ -4,6 +4,8 @@ const db = require('../db');
 
 const Appointment = db.define('appointment', {
   id: {
+    // type: Sequelize.UUID,
+    // defaultValue: Sequelize.UUIDV1,
     type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true
@@ -15,6 +17,12 @@ const Appointment = db.define('appointment', {
   },
   time: {
     type: Sequelize.TIME
+  },
+  firstName: {
+    type: Sequelize.STRING
+  },
+  lastName: {
+    type: Sequelize.STRING
   }
 });
 
