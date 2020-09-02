@@ -68,7 +68,7 @@ export function UpdateDoctor(props) {
           />
         </div>
         <br />
-        <button type="submit">Upate this doctor</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
