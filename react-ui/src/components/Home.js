@@ -3,17 +3,14 @@ import { connect } from 'react-redux'
 import DoctorDonut from './datavis/doctor-appointment-donut'
 import { getAppointmentThunk } from '../redux/dcDoctor'
 import { getAllDoctorsThunk, addDoctorThunk } from '../redux/doctors'
-import conditions, { getAllConditionsThunk, addConditionThunk } from '../redux/conditions'
+import { getAllConditionsThunk, addConditionThunk } from '../redux/conditions'
 import LineChart from './lineChart/LineChartCondition'
-import medications from '../redux/medications'
-import ReactModal from "react-modal"
-import AddDoctor from '../components/AddDoctor'
-import AddConditionForm from '../components/AddConditionForm'
-import AddMedication from '../components/AddMedication'
 import { fetchMedications } from "../redux/medications";
 import { getChartThunk } from '../redux/score'
 import home from '../images/home.png'
 import HomeAddButtons from './HomeAddButtons'
+import moment from 'moment'
+import { Link } from 'react-router-dom'
 
 
 export class Home extends React.Component {
@@ -43,6 +40,12 @@ export class Home extends React.Component {
                 <h2>Get started by adding your doctors, conditions, and medications</h2>
               ) : null
           }
+          <h2>Fill out your daily checkin for {moment().format('MMMM Do YYYY')}</h2>
+          <Link to="/dailycheckin">
+            <button renderAs="button">
+              <span>Daily Checkin</span>
+            </button>
+          </Link>
           <HomeAddButtons />
           <>
             <img src={home} alt="" />
