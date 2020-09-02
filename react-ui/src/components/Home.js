@@ -12,6 +12,7 @@ import AddConditionForm from '../components/AddConditionForm'
 import AddMedication from '../components/AddMedication'
 import { fetchMedications } from "../redux/medications";
 import { getChartThunk } from '../redux/score'
+import home from '../images/home.png'
 
 
 export class Home extends React.Component {
@@ -75,7 +76,10 @@ export class Home extends React.Component {
               (
                 <div>
                   <h2>Get started by adding your doctors, conditions, and medications</h2>
-                  <div>
+                  <>
+                    <img src={home} alt="" />
+                  </>
+                  {/* <div>
                     <button onClick={this.openDoctorModal}>Add a Doctor</button>
                     <ReactModal isOpen={this.state.showDoctorModal} contentLabel="Example Modal">
                       <AddDoctor
@@ -105,7 +109,8 @@ export class Home extends React.Component {
                       />
                       <button onClick={this.closeConditionModal}>close</button>
                     </ReactModal>
-                  </div>
+                  </div> */}
+
 
                 </div>
               )
