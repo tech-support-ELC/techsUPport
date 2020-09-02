@@ -28,19 +28,17 @@ export class SingleDoctor extends React.Component {
         }
     }
 
-
     render() {
 
         const doctor = this.props.doctor
         const appointments = this.props.appointment
-        const filterApps = (appointmentArray) => {
+        const filterApps = function (appointmentArray) {
             return (appointmentArray.filter((oneapp) => {
                 return (
                     oneapp.doctorId === doctor.id)
             }))
         }
         const docApps = filterApps(appointments)
-
         if (!doctor) {
             return "This doctor is not in our system"
         } else {
