@@ -9,6 +9,13 @@ const DailyMed = db.define('dailyMed', {
   },
   notes: {
     type: Sequelize.TEXT
+  },
+  date: {
+    type: Sequelize.DATEONLY,
+    defaultValue: Sequelize.NOW
+  },
+  name: {
+    type: Sequelize.STRING
   }
 });
 
