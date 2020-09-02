@@ -12,6 +12,7 @@ const Medication = db.define("medication", {
   },
   dosageUnit: {
     type: Sequelize.ENUM(
+      "",
       "g",
       "mg",
       "mg/kg",
@@ -26,7 +27,7 @@ const Medication = db.define("medication", {
     type: Sequelize.INTEGER,
   },
   frequencyUnit: {
-    type: Sequelize.ENUM("day", "hour", "week", "as needed"),
+    type: Sequelize.ENUM("", "day", "hour", "week", "as needed"),
   },
 });
 module.exports = Medication;

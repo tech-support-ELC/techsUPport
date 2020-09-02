@@ -26,12 +26,15 @@ router.get("/:id", async (req, res, next) => {
 //ADD MED
 router.post("/", async (req, res, next) => {
   try {
-    const { name, dosage, frequency, userId } = req.body;
+    console.log("post");
+    const { name, dosage, dosageUnit, frequency, frequencyUnit } = req.body;
     const newMedication = await Medication.create({
       name,
       dosage,
+      dosageUnit,
       frequency,
-      userId,
+      frequencyUnit,
+      userId: req.user.id,
     });
     res.json(newMedication);
   } catch (err) {
@@ -43,14 +46,17 @@ router.post("/", async (req, res, next) => {
 // eslint-disable-next-line complexity
 router.put("/:id", async (req, res, next) => {
   try {
-    const { name, dosage, frequency } = req.body;
+    console.log("put");
+    const { name, dosage, dosageUnit, frequency, frequencyUnit } = req.body;
 
     const medication = await Medication.findByPk(req.params.id);
 
     const updatedMedication = await medication.update({
       name: name || medication.name,
       dosage: dosage || medication.dosage,
+      dosageUnit: dosageUnit || medication.dosageUnit,
       frequency: frequency || medication.frequency,
+      frequencyUnit: frequencyUnit || medication.frequencyUnit,
     });
     res.status(201).json(updatedMedication);
   } catch (err) {
