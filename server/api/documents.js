@@ -39,7 +39,10 @@ router.get('/:id', isOwnerOrAdmin, async (req, res, next) => {
 
 router.post('/', isOwnerOrAdmin, async (req, res, next) => {
   try {
-    const { description, type, doctorId, conditionId, imageUrl } = req.body
+    let { description, type, doctorId, conditionId, imageUrl } = req.body
+    if (doctorId === 'Select Doctor') doctorId = null
+    if (conditionId === 'Select Condition') conditionId = null
+
     const document = await Document.create({
       description, type, doctorId, conditionId, imageUrl,
       userId: req.user.id
@@ -53,7 +56,14 @@ router.post('/', isOwnerOrAdmin, async (req, res, next) => {
 // replaced the older document
 router.put('/:id', isOwnerOrAdmin, async (req, res, next) => {
   try {
-    const updatedDoc = await req.requestedDoc.update(req.body)
+    let { description, type, doctorId, conditionId, imageUrl } = req.body
+    if (doctorId === 'Select Doctor') doctorId = null
+    if (conditionId === 'Select Condition') conditionId = null
+
+    const updatedDoc = await req.requestedDoc.update({
+      description, type, doctorId, conditionId, imageUrl,
+      userId: req.user.id
+    })
     res.json(updatedDoc)
   } catch (err) {
     next(err)

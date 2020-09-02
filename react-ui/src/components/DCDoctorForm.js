@@ -23,6 +23,7 @@ class DCDoctorForm extends Component {
   handleSubmit(evt) {
     evt.preventDefault();
     this.props.addAppointment(this.state);
+    console.log('props inside daily checkin appointment submit', this.props)
     this.setState({
       isClicked: false,
       time: '',

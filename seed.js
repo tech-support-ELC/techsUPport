@@ -9,6 +9,7 @@ const {
   Medication,
   User,
 } = require("./server/db/models");
+const { merge } = require("superagent");
 async function seed() {
   await db.sync({ force: true });
   console.log("db synced!");
@@ -971,259 +972,319 @@ async function seed() {
   ]);
   const medicationData = [
     {
-      name: "Advil",
-      dosage: "400 mg",
-      frequency: "once per day",
-      userId: 1
-    },
-    {
       name: "Ibuprofen",
-      dosage: "400 mg",
-      frequency: "once per day",
-      userId: 1
+      dosage: 400,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 1,
     },
     {
       name: "Synthroid",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 1
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 1,
     },
     {
       name: "Crestor",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 1
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 1,
     },
     {
       name: "Ventolin",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 1
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 1,
     },
     {
       name: "Nexium",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 1
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 1,
     },
     {
       name: "Advair Diskus",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 1
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 1,
     },
     {
       name: "Lantus",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 1
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 1,
     },
     {
       name: "Vyvanse",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 1
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 1,
     },
     {
       name: "Lyrica",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 1
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 1,
     },
     {
       name: "Spiriva",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 1
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 1,
     },
     {
       name: "Januvia",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 1
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 1,
     },
     {
       name: "Ibuprofen",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 2
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 2,
     },
     {
       name: "Ibuprofen",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 3
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 3,
     },
     {
       name: "Ibuprofen",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 4
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 4,
     },
     {
       name: "Ibuprofen",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 5
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 5,
     },
     {
       name: "Ibuprofen",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 6
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 6,
     },
     {
       name: "Ibuprofen",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 7
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 7,
     },
     {
       name: "Ibuprofen",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 8
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 8,
     },
     {
       name: "Ibuprofen",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 9
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 9,
     },
     {
       name: "Lantus",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 2
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 2,
     },
     {
       name: "Lantus",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 3
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 3,
     },
     {
       name: "Lantus",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 4
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 4,
     },
     {
       name: "Lantus",
-      dosage: "25 mg",
-      frequency: "once per day",
-      userId: 5
+      dosage: 25,
+      dosageUnit: "mg",
+      frequency: 1,
+      frequencyUnit: "day",
+      userId: 5,
     },
   ];
   const medications = await Promise.all([
     Medication.bulkCreate(medicationData, { validate: true }),
   ]);
-
-  const appointmentData = [{
-    appointmentDate: "2020-03-25",
-    time: "03:33",
-    userId: 1,
-    doctorId: 2
-  }, {
-    appointmentDate: "2020-03-24",
-    time: "17:07",
-    userId: 1,
-    doctorId: 4
-  }, {
-    appointmentDate: "2020-03-05",
-    time: "02:54",
-    userId: 1,
-    doctorId: 6
-  }, {
-    appointmentDate: "2020-01-21",
-    time: "09:06",
-    userId: 1,
-    doctorId: 5
-  }, {
-    appointmentDate: "2020-01-13",
-    time: "01:35",
-    userId: 1,
-    doctorId: 7
-  }, {
-    appointmentDate: "2020-05-18",
-    time: "11:22",
-    userId: 1,
-    doctorId: 1
-  }, {
-    appointmentDate: "2020-08-07",
-    time: "07:13",
-    userId: 1,
-    doctorId: 1
-  }, {
-    appointmentDate: "2020-08-15",
-    time: "01:08",
-    userId: 1,
-    doctorId: 5
-  }, {
-    appointmentDate: "2020-01-10",
-    time: "21:52",
-    userId: 1,
-    doctorId: 5
-  }, {
-    appointmentDate: "2020-03-02",
-    time: "05:34",
-    userId: 1,
-    doctorId: 4
-  }, {
-    appointmentDate: "2020-02-23",
-    time: "21:36",
-    userId: 1,
-    doctorId: 5
-  }, {
-    appointmentDate: "2020-04-24",
-    time: "20:05",
-    userId: 1,
-    doctorId: 3
-  }, {
-    appointmentDate: "2020-03-16",
-    time: "18:40",
-    userId: 1,
-    doctorId: 6
-  }, {
-    appointmentDate: "2020-01-28",
-    time: "05:21",
-    userId: 1,
-    doctorId: 2
-  }, {
-    appointmentDate: "2020-06-03",
-    time: "15:49",
-    userId: 1,
-    doctorId: 7
-  }, {
-    appointmentDate: "2020-06-17",
-    time: "23:05",
-    userId: 1,
-    doctorId: 7
-  }, {
-    appointmentDate: "2020-08-25",
-    time: "15:28",
-    userId: 1,
-    doctorId: 6
-  }, {
-    appointmentDate: "2020-08-03",
-    time: "03:23",
-    userId: 1,
-    doctorId: 3
-  }, {
-    appointmentDate: "2020-04-30",
-    time: "02:30",
-    userId: 1,
-    doctorId: 6
-  }, {
-    appointmentDate: "2020-03-14",
-    time: "02:43",
-    userId: 1,
-    doctorId: 1
-  }]
+  
+  const appointmentData = [
+    {
+      appointmentDate: "2020-03-25",
+      time: "03:33",
+      userId: 1,
+      doctorId: 2,
+    },
+    {
+      appointmentDate: "2020-03-24",
+      time: "17:07",
+      userId: 1,
+      doctorId: 4,
+    },
+    {
+      appointmentDate: "2020-03-05",
+      time: "02:54",
+      userId: 1,
+      doctorId: 6,
+    },
+    {
+      appointmentDate: "2020-01-21",
+      time: "09:06",
+      userId: 1,
+      doctorId: 5,
+    },
+    {
+      appointmentDate: "2020-01-13",
+      time: "01:35",
+      userId: 1,
+      doctorId: 7,
+    },
+    {
+      appointmentDate: "2020-05-18",
+      time: "11:22",
+      userId: 1,
+      doctorId: 1,
+    },
+    {
+      appointmentDate: "2020-08-07",
+      time: "07:13",
+      userId: 1,
+      doctorId: 1,
+    },
+    {
+      appointmentDate: "2020-08-15",
+      time: "01:08",
+      userId: 1,
+      doctorId: 5,
+    },
+    {
+      appointmentDate: "2020-01-10",
+      time: "21:52",
+      userId: 1,
+      doctorId: 5,
+    },
+    {
+      appointmentDate: "2020-03-02",
+      time: "05:34",
+      userId: 1,
+      doctorId: 4,
+    },
+    {
+      appointmentDate: "2020-02-23",
+      time: "21:36",
+      userId: 1,
+      doctorId: 5,
+    },
+    {
+      appointmentDate: "2020-04-24",
+      time: "20:05",
+      userId: 1,
+      doctorId: 3,
+    },
+    {
+      appointmentDate: "2020-03-16",
+      time: "18:40",
+      userId: 1,
+      doctorId: 6,
+    },
+    {
+      appointmentDate: "2020-01-28",
+      time: "05:21",
+      userId: 1,
+      doctorId: 2,
+    },
+    {
+      appointmentDate: "2020-06-03",
+      time: "15:49",
+      userId: 1,
+      doctorId: 7,
+    },
+    {
+      appointmentDate: "2020-06-17",
+      time: "23:05",
+      userId: 1,
+      doctorId: 7,
+    },
+    {
+      appointmentDate: "2020-08-25",
+      time: "15:28",
+      userId: 1,
+      doctorId: 6,
+    },
+    {
+      appointmentDate: "2020-08-03",
+      time: "03:23",
+      userId: 1,
+      doctorId: 3,
+    },
+    {
+      appointmentDate: "2020-04-30",
+      time: "02:30",
+      userId: 1,
+      doctorId: 6,
+    },
+    {
+      appointmentDate: "2020-03-14",
+      time: "02:43",
+      userId: 1,
+      doctorId: 1,
+    },
+  ];
 
   const appointments = await Promise.all([
     Appointment.bulkCreate(appointmentData, { validate: true }),
-
   ]);
 
   console.log(`seeded successfully`);

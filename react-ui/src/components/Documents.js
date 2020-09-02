@@ -1,10 +1,12 @@
-
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import ReactModal from "react-modal";
 import SingleDocument from "./SingleDocument";
 import UploadDocuments from "./UploadDocuments";
 import { fetchDocuments } from "../redux/documents";
+import { fetchSingleDocument } from '../redux/singleDocument'
+import { getAllConditionsThunk } from '../redux/conditions'
+import { getAllDoctorsThunk } from '../redux/doctors'
 
 export class Documents extends Component {
   constructor() {
@@ -22,6 +24,8 @@ export class Documents extends Component {
   componentDidMount() {
     ReactModal.setAppElement("body");
     this.props.fetchDocuments();
+    this.props.getAllConditionsThunk();
+    this.props.getAllDoctorsThunk();
   }
 
   openUploadModal() {
@@ -32,13 +36,13 @@ export class Documents extends Component {
     this.setState({ showUploadModal: false });
   }
 
-  openDocumentModal() {
+  async openDocumentModal(id) {
     this.setState({ showDocumentModal: true });
+    await this.props.fetchSingleDocument(id)
   }
 
   closeDocumentModal() {
     this.setState({ showDocumentModal: false });
-
   }
 
   render() {
@@ -50,19 +54,20 @@ export class Documents extends Component {
       <div className="main">
         <div className="column">
           <h3>My Documents</h3>
-          {documents &&
+          {
             documents.map((doc) => {
               const { type, id, description } = doc;
               return (
                 <div key={id}>
                   {type !== "Proof of Identity" && (
                     <div>
-                      <button onClick={() => this.openDocumentModal()}>
+                      <button onClick={() => this.openDocumentModal(id)}>
                         {description}
                       </button>
                       <ReactModal
                         isOpen={this.state.showDocumentModal}
                         contentLabel="Single Document"
+                        className="popup"
                       >
                         <SingleDocument
                           {...this.props}
@@ -83,21 +88,20 @@ export class Documents extends Component {
           </button>
         </div>
 
-        <div className="popup">
-          <ReactModal
-            isOpen={this.state.showUploadModal}
-            contentLabel="Upload Documents"
-          >
-            <UploadDocuments closeUploadModal={this.closeUploadModal} />
-            <button onClick={() => this.closeUploadModal()}>close</button>
-          </ReactModal>
-        </div>
+        <ReactModal
+          isOpen={this.state.showUploadModal}
+          contentLabel="Upload Documents"
+          className="popup"
+        >
+          <UploadDocuments closeUploadModal={this.closeUploadModal} />
+          <button onClick={() => this.closeUploadModal()}>close</button>
+        </ReactModal>
       </div>
     );
   }
 }
 
 const mapState = ({ documents }) => ({ documents });
-const mapDispatch = { fetchDocuments };
+const mapDispatch = { fetchDocuments, fetchSingleDocument, getAllConditionsThunk, getAllDoctorsThunk };
 
 export default connect(mapState, mapDispatch)(Documents);

@@ -63,6 +63,7 @@ router.put('/dcscore/:id', async (req, res, next) => {
 });
 
 router.post('/appointment', async (req, res, next) => {
+  console.log('what is req.body in route', req.body)
   try {
     const userId = req.user.id;
     const time = req.body.appointmentDate.time;

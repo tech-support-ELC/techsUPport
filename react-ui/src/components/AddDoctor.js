@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { addDoctorThunk } from '../redux/doctors'
-import { Link } from 'react-router-dom'
+
 
 
 export function AddDoctor(props) {
@@ -68,7 +68,6 @@ export function AddDoctor(props) {
                 </div>
                 <br />
                 <button type='submit'>Add A Doctor</button>
-                <Link to='/medications'>Add A Medication</Link>
             </form>
 
         </div>
