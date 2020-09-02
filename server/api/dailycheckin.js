@@ -7,32 +7,20 @@ const Medication = require('../db/models/medication');
 const DailyMed = require('../db/models/dailyMed');
 module.exports = router;
 
-// router.get('/score', async (req, res, next) => {
-//   try {
-//     const conditions = await Condition.findAll({
-//       where: {
-//         userId: req.user.id,
-//       }
-//     });
-//     if (conditions) res.status(200).json(conditions);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
 router.post('/score', async (req, res, next) => {
   try {
     const userId = req.user.id;
     const rate = req.body.rate.rate;
-    const date = req.body.rate.date;
     const notes = req.body.rate.notes;
     const conditionId = req.body.rate.conditionId;
+    const isSubmitted = req.body.rate.isSubmitted;
     const condition = await Condition.findOne({
       where: {
         id: conditionId
       }
     });
     const name = condition.name;
-    const newScore = await Score.create({rate, date, notes, conditionId, userId, name});
+    const newScore = await Score.create({rate, notes, conditionId, userId, name, isSubmitted});
     res.status(201).json(newScore);
   } catch (error) {
     next(error);
@@ -54,18 +42,6 @@ router.get('/dcscore', async (req, res, next) => {
   }
 });
 
-// router.get('/appointment', async (req, res, next) => {
-//   try {
-//     const appointments = await Appointment.findAll({
-//       where: {
-//         userId: req.user.id,
-//       }
-//     });
-//     if (appointments) res.status(200).json(appointments);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
 router.post('/appointment', async (req, res, next) => {
   try {
     const userId = req.user.id;
@@ -75,7 +51,7 @@ router.post('/appointment', async (req, res, next) => {
       where: {
         id: doctorId
       }
-    })
+    });
     const firstName = doctor.firstName;
     const lastName = doctor.lastName;
     const newAppointment = await Appointment.create({time, doctorId, userId, firstName, lastName});
@@ -100,18 +76,6 @@ router.get('/dcappointment', async (req, res, next) => {
   }
 });
 
-// router.get('/meds', async (req, res, next) => {
-//   try {
-//     const medications = await Medication.findAll({
-//       where: {
-//         userId: req.user.id,
-//       }
-//     });
-//     if (medications) res.status(200).json(medications);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
 router.post('/meds', async (req, res, next) => {
   try {
     const userId = req.user.id;

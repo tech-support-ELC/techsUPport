@@ -14,8 +14,8 @@ export const getTodayMeds = todayMed => {
 export const getTodayMedsThunk = () => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`${API_URL}/api/dailycheckin/dcmeds`)
-      dispatch(getTodayMeds(data))
+      const {data} = await axios.get(`${API_URL}/api/dailycheckin/dcmeds`);
+      dispatch(getTodayMeds(data));
     } catch (error) {
       console.error(error)
     }
@@ -25,8 +25,8 @@ export const getTodayMedsThunk = () => {
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_TODAY_MEDS:
-      return action.todayMed
+      return action.todayMed;
     default:
-      return state
+      return state;
   }
 }

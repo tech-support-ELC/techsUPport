@@ -28,6 +28,7 @@ class UpdateCondition extends Component {
     })
   }
   render() {
+    const name = this.props.condition.name;
     return (
       <form onSubmit={this.handleSubmit}>
         <h1>Update Condition</h1>
@@ -38,7 +39,7 @@ class UpdateCondition extends Component {
             type="text"
             name="name"
             onChange={this.handleChange}
-            value={this.state.name}
+            value={name}
           />
         </div>
         <br />

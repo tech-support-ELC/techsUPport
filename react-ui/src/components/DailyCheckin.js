@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getScoreThunk, addScoreThunk } from '../redux/dcCondition';
-import { addAppointmentThunk } from '../redux/dcDoctor';
+import { getAppointmentThunk, addAppointmentThunk } from '../redux/dcDoctor';
 import { getMedicationThunk, addMedicationThunk } from '../redux/dcMedication';
 import DCMedicationForm from './DCMedicationForm';
 import DCConditionForm from './DCConditionForm';
 import DCDoctorForm from './DCDoctorForm';
-import { getAllDoctorsThunk } from '../redux/doctors'
 import ReactModal from 'react-modal';
 import { Link } from 'react-router-dom';
 import { getTodayScoreThunk } from '../redux/dcTodayScore';
@@ -30,10 +29,11 @@ class DailyCheckin extends Component {
   }
   componentDidMount() {
     this.props.getScore();
-    this.props.getAllDoctors();
+    this.props.getAppointment();
     this.props.getMedication();
     this.props.getTodayScore();
     this.props.getTodayMeds();
+    this.props.getTodayAppointment();
     ReactModal.setAppElement('body');
   }
   openCondModal() {
@@ -42,7 +42,7 @@ class DailyCheckin extends Component {
   }
   openDocModal() {
     this.setState({ showDocModal: true });
-    this.props.getAllDoctors();
+    this.props.getAppointment();
   }
   openMedModal() {
     this.setState({ showMedModal: true });
@@ -57,9 +57,6 @@ class DailyCheckin extends Component {
   closeMedModal() {
     this.setState({ showMedModal: false });
   }
-  addMedication() {
-
-  }
   render() {
     const score = this.props.score;
     const med = this.props.med;
@@ -67,6 +64,7 @@ class DailyCheckin extends Component {
     const date = String(new Date()).slice(0, 15);
     const todayScore = this.props.todayScore;
     const todayAppointment = this.props.todayAppointment;
+    console.log('todayAppointment', todayAppointment)
     const todayMed = this.props.todayMed;
     console.log('score', todayScore)
     return (
@@ -90,7 +88,9 @@ class DailyCheckin extends Component {
             >
             <div>
               <div>
-                What conditions are you dealing with today today?
+                {
+                  score.length > 0 ? 'What conditions are you dealing with today today?' : null
+                }
               </div>
             {(score && score.length > 0) ?
               score.map((condition) => {
@@ -131,21 +131,23 @@ class DailyCheckin extends Component {
             >
             <div>
               <div>
-                Do you have an appointment with a doctor today?
+                {
+                  appointment.length>0 ? 'Do you have an appointment with a doctor today?' : null
+                }
               </div>
-            {
-            (appointment && appointment.length>0) ?
-            appointment.map((doc) => {
-              return (
-                <div key={doc.id}>
-                  <DCDoctorForm
-                    doctor={doc}
-                    addAppointment={this.props.addAppointment}
-                  />
-                </div>
-              );
-            }) : "You don't have any appointment"
-            }
+              {
+              (appointment && appointment.length>0) ?
+              appointment.map((doc) => {
+                return (
+                  <div key={doc.id}>
+                    <DCDoctorForm
+                      doc={doc}
+                      addAppointment={this.props.addAppointment}
+                    />
+                  </div>
+                );
+              }) : "You don't have any appointment"
+              }
             </div>
             <div>
               {
@@ -172,7 +174,9 @@ class DailyCheckin extends Component {
             >
             <div>
               <div>
-                What medications are you taking today?
+                {
+                  med.length > 0 ? 'What medications are you taking today?' : null
+                }
               </div>
               {
                 (med && med.length > 0) ? med.map((eachMed) => {
@@ -218,7 +222,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getScore: () => dispatch(getScoreThunk()),
     addScore: (score) => dispatch(addScoreThunk(score)),
-    getAllDoctors: () => dispatch(getAllDoctorsThunk()),
+    getAppointment: () => dispatch(getAppointmentThunk()),
     addAppointment: (appointment) => dispatch(addAppointmentThunk(appointment)),
     getMedication: () => dispatch(getMedicationThunk()),
     addMedication: (med) => dispatch(addMedicationThunk(med)),

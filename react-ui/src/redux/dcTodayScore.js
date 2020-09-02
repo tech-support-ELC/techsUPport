@@ -14,10 +14,10 @@ export const getTodayScore = todayScore => {
 export const getTodayScoreThunk = () => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`${API_URL}/api/dailycheckin/dcscore`)
-      dispatch(getTodayScore(data))
+      const {data} = await axios.get(`${API_URL}/api/dailycheckin/dcscore`);
+      dispatch(getTodayScore(data));
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   }
 }
@@ -25,8 +25,8 @@ export const getTodayScoreThunk = () => {
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_TODAY_SCORE:
-      return action.todayScore
+      return action.todayScore;
     default:
-      return state
+      return state;
   }
 }

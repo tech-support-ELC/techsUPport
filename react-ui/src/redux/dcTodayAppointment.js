@@ -14,8 +14,8 @@ export const getTodayAppointment = todayAppointment => {
 export const getTodayAppointmentThunk = () => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`${API_URL}/api/dailycheckin/dcappointment`)
-      dispatch(getTodayAppointment(data))
+      const {data} = await axios.get(`${API_URL}/api/dailycheckin/dcappointment`);
+      dispatch(getTodayAppointment(data));
     } catch (error) {
       console.error(error)
     }
@@ -24,8 +24,8 @@ export const getTodayAppointmentThunk = () => {
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_TODAY_APPOINTMENT:
-      return action.todayAppointment
+      return action.todayAppointment;
     default:
-      return state
+      return state;
   }
 }

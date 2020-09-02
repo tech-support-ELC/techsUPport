@@ -23,6 +23,10 @@ const Score = db.define('score', {
   },
   name: {
     type: Sequelize.STRING
+  },
+  isSubmitted: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 });
 

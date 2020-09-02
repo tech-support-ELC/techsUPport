@@ -6,7 +6,6 @@ class DCConditionForm extends Component {
       isClicked: false,
       name: '',
       rate: '',
-      date: new Date(),
       notes: '',
       conditionId: 0,
       isSubmitted: false
@@ -16,8 +15,7 @@ class DCConditionForm extends Component {
   }
   handleChange(evt) {
     const conditionId = this.props.condition.id;
-    this.setState({ conditionId });
-    this.setState({ isSubmitted: true });
+    this.setState({ conditionId, isSubmitted: true });
     const target = evt.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
@@ -32,7 +30,6 @@ class DCConditionForm extends Component {
       isClicked: false,
       name: '',
       rate: '',
-      date: '',
       notes: '',
       conditionId: 0,
       isSubmitted: false
@@ -87,7 +84,7 @@ class DCConditionForm extends Component {
               </div>
               <button type="submit">
                 Submit
-          </button>
+              </button>
             </div> : null
         }
       </form>

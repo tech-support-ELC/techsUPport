@@ -33,7 +33,7 @@ class DCSummary extends Component {
         <div>
           <div>
           {
-            todayScore ? "Your Conditions:" : null
+            todayScore.length > 0 ? "Your Conditions:" : null
           }
           </div>
           {
@@ -51,7 +51,7 @@ class DCSummary extends Component {
         <div>
           <div>
           {
-            todayAppointment ? "Your Appointments:" : null
+            todayAppointment.length > 0 ? "Your Appointments:" : null
           }
           </div>
         {
@@ -59,7 +59,7 @@ class DCSummary extends Component {
             return (
               <div key={eachAppointment.id}>
                 <div>
-                  <div>{eachAppointment.firstName} {eachAppointment.lastName} {eachAppointment.time}</div>
+                  <div>{eachAppointment.firstName} {eachAppointment.lastName} {eachAppointment.time.slice(0,5)}</div>
                 </div>
               </div>
             );
@@ -69,7 +69,7 @@ class DCSummary extends Component {
         <div>
           <div>
           {
-            todayMed ? "Your Medications:" : null
+            todayMed.length > 0 ? "Your Medications:" : null
           }
           </div>
           {
