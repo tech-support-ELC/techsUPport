@@ -20,11 +20,7 @@ export class SingleMedication extends React.Component {
     }
   }
 
-  handleCancel() {
-    this.setState({ update: false });
-  }
   handleClose(id) {
-    // this.props.loadSingleMedication(id);
     this.setState({ update: false });
   }
 
@@ -42,21 +38,15 @@ export class SingleMedication extends React.Component {
 
     return (
       <div>
-        {/* {this.state.view && (
-          <> */}
         {medication && !this.state.update && (
           <div>
             <p>{medication.name}</p>
             <p>{medication.dosage}</p>
             <p>{medication.frequency}</p>
             <p>{rxcui}</p>
-            {/*
-                <RemoveMedication
-                  medication={medication}
-                  remove={this.props.remove}
-                /> */}
+
             <button type="button" onClick={() => this.handleOpen()}>
-              Update Medication Info
+              Update
             </button>
           </div>
         )}
@@ -67,9 +57,6 @@ export class SingleMedication extends React.Component {
               close={this.handleClose}
               update={this.handleUpdate}
             />
-            <button type="button" onClick={() => this.handleCancel()}>
-              Cancel Update
-            </button>
           </div>
         )}
       </div>

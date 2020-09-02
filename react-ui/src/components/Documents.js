@@ -4,9 +4,9 @@ import ReactModal from "react-modal";
 import SingleDocument from "./SingleDocument";
 import UploadDocuments from "./UploadDocuments";
 import { fetchDocuments } from "../redux/documents";
-import { fetchSingleDocument } from '../redux/singleDocument'
-import { getAllConditionsThunk } from '../redux/conditions'
-import { getAllDoctorsThunk } from '../redux/doctors'
+import { fetchSingleDocument } from "../redux/singleDocument";
+import { getAllConditionsThunk } from "../redux/conditions";
+import { getAllDoctorsThunk } from "../redux/doctors";
 
 export class Documents extends Component {
   constructor() {
@@ -38,7 +38,7 @@ export class Documents extends Component {
 
   async openDocumentModal(id) {
     this.setState({ showDocumentModal: true });
-    await this.props.fetchSingleDocument(id)
+    await this.props.fetchSingleDocument(id);
   }
 
   closeDocumentModal() {
@@ -54,35 +54,38 @@ export class Documents extends Component {
       <div className="main">
         <div className="column">
           <h3>My Documents</h3>
-          {
-            documents.map((doc) => {
-              const { type, id, description } = doc;
-              return (
-                <div key={id}>
-                  {type !== "Proof of Identity" && (
-                    <div>
-                      <button onClick={() => this.openDocumentModal(id)}>
-                        {description}
-                      </button>
-                      <ReactModal
-                        isOpen={this.state.showDocumentModal}
-                        contentLabel="Single Document"
-                        className="popup"
+          {documents.map((doc) => {
+            const { type, id, description } = doc;
+            return (
+              <div key={id}>
+                {type !== "Proof of Identity" && (
+                  <div>
+                    <button onClick={() => this.openDocumentModal(id)}>
+                      {description}
+                    </button>
+                    <ReactModal
+                      isOpen={this.state.showDocumentModal}
+                      contentLabel="Single Document"
+                      className="popup"
+                    >
+                      {" "}
+                      <button
+                        className="close"
+                        onClick={() => this.closeDocumentModal()}
                       >
-                        <SingleDocument
-                          {...this.props}
-                          closeDocumentModal={this.closeDocumentModal}
-                          id={id}
-                        />
-                        <button onClick={() => this.closeDocumentModal()}>
-                          close
-                        </button>
-                      </ReactModal>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+                        X
+                      </button>
+                      <SingleDocument
+                        {...this.props}
+                        closeDocumentModal={this.closeDocumentModal}
+                        id={id}
+                      />
+                    </ReactModal>
+                  </div>
+                )}
+              </div>
+            );
+          })}
           <button onClick={() => this.openUploadModal()}>
             Upload a Document
           </button>
@@ -93,8 +96,11 @@ export class Documents extends Component {
           contentLabel="Upload Documents"
           className="popup"
         >
+          {" "}
+          <button className="close" onClick={() => this.closeUploadModal()}>
+            X
+          </button>
           <UploadDocuments closeUploadModal={this.closeUploadModal} />
-          <button onClick={() => this.closeUploadModal()}>close</button>
         </ReactModal>
       </div>
     );
@@ -102,6 +108,11 @@ export class Documents extends Component {
 }
 
 const mapState = ({ documents }) => ({ documents });
-const mapDispatch = { fetchDocuments, fetchSingleDocument, getAllConditionsThunk, getAllDoctorsThunk };
+const mapDispatch = {
+  fetchDocuments,
+  fetchSingleDocument,
+  getAllConditionsThunk,
+  getAllDoctorsThunk,
+};
 
 export default connect(mapState, mapDispatch)(Documents);
