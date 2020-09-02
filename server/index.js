@@ -1,4 +1,4 @@
-require('dotenv').config()
+
 const express = require("express");
 const path = require("path");
 const cluster = require("cluster");
@@ -42,7 +42,7 @@ if (!isDev && cluster.isMaster) {
     );
   });
 } else {
-
+  require('dotenv').config()
 
   // logging middleware
   app.use(morgan("dev"));
