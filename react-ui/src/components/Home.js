@@ -11,6 +11,7 @@ import home from '../images/home.png'
 import HomeAddButtons from './HomeAddButtons'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
+import Onboarding from './Onboarding'
 
 
 export class Home extends React.Component {
@@ -31,8 +32,9 @@ export class Home extends React.Component {
     const medications = this.props.medications
     const chart = this.props.chart
     return (
-      <div>
+      <div className="welcomeName">
         <h1>Welcome {firstName}!</h1>
+        <Onboarding />
         <div>
           {
             (doctors.length === 0 && conditions.length === 0 && medications.length === 0) ?
@@ -41,15 +43,19 @@ export class Home extends React.Component {
               ) : null
           }
           <h2>Fill out your daily checkin for {moment().format('MMMM Do YYYY')}</h2>
-          <Link to="/dailycheckin">
-            <button renderAs="button">
-              <span>Daily Checkin</span>
-            </button>
-          </Link>
+          <div id="dailyCheckinHomePage">
+            <Link to="/dailycheckin">
+              <button renderAs="button">
+                <span>Daily Checkin</span>
+              </button>
+            </Link>
+          </div>
           <HomeAddButtons />
-          <>
+
+          <div className='mainHomepageArea'>
             <img src={home} alt="" />
-          </>
+          </div>
+
         </div>
         {
           (doctors && doctors.length > 0 && appointments && appointments.length > 0) ?
