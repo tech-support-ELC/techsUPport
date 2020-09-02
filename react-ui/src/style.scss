@@ -148,12 +148,19 @@ form {
   label {
     margin: 0.5em 0;
   }
+  input {
+    max-width: 200px;
+  }
+
+  select {
+    max-width: 200px;
+  }
 }
 
 .loginSignup {
   display: flex;
   flex-direction: column;
-
+  flex-wrap: wrap;
   flex: 1 0 auto;
   height: 30vh;
   width: 60%;

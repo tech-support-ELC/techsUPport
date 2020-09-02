@@ -17,6 +17,12 @@ const Appointment = db.define('appointment', {
   },
   time: {
     type: Sequelize.TIME
+  },
+  firstName: {
+    type: Sequelize.STRING
+  },
+  lastName: {
+    type: Sequelize.STRING
   }
 });
 

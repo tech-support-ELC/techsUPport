@@ -28,13 +28,14 @@ class UpdateCondition extends Component {
     })
   }
   render() {
+    const name = this.props.condition.name;
     return (
       <form onSubmit={this.handleSubmit}>
         <h1>Update Condition</h1>
         <div>
           <input
             className="input"
-            placeholder="Update Name"
+            placeholder={name}
             type="text"
             name="name"
             onChange={this.handleChange}

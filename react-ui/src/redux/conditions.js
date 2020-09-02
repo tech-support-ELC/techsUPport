@@ -67,20 +67,20 @@ export const deleteConditionThunk = (id) => {
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_CONDITIONS:
-      return action.conditions
+      return action.conditions;
     case ADD_CONDITION:
-      return [...state, action.condition]
+      return [...state, action.condition];
     case DELETE_CONDITION:
       return state.filter(condition => condition.id !== action.id);
     case UPDATE_CONDITIONS_LIST:
       return [...state].map((condition) => {
           if (condition.id === action.id) {
-              return action.condition
+              return action.condition;
           } else {
-              return condition
+              return condition;
           }
       })
     default:
-      return state
+      return state;
   }
 }

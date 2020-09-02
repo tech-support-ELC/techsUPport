@@ -47,8 +47,8 @@ class DCMedicationForm extends Component {
               <div>
                 <label>
                   Any notes on how this medication is making you feel?
-            <input
-                    className='input'
+                  <textarea
+                    className='textarea'
                     placeholder='notes'
                     type='text'
                     name='notes'
