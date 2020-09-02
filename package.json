@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "nodemon server",
-    "build": "cd react-ui/ && npm run build",
+    "build": "cd react-ui/ && npm install && npm run build",
     "seed": "node seed.js",
     "test": "mocha ./server/test/*.spec.js --watch"
   },
@@ -16,9 +16,7 @@
     "react-ui/node_modules"
   ],
   "dependencies": {
-    "cloudinary": "^1.22.0",
     "connect-session-sequelize": "^7.0.1",
-    "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
@@ -26,10 +24,7 @@
     "passport": "^0.4.1",
     "passport-google-oauth": "^2.0.0",
     "pg": "^8.3.2",
-    "sequelize": "^6.3.4",
-    "babel-eslint": "^9.0.0",
-    "eslint": "^5.12.0",
-    "nodemon": "^2.0.4"
+    "sequelize": "^6.3.4"
   },
   "repository": {
     "type": "git",
