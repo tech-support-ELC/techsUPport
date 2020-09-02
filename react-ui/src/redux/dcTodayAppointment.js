@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_URL } from './API_URL';
+// import { API_URL } from './API_URL';
 const initialState = [];
 
 const GET_TODAY_APPOINTMENT = 'GET_TODAY_APPOINTMENT';
@@ -21,7 +21,7 @@ const updateTodayAppointment = todayAppointment => {
 export const getTodayAppointmentThunk = () => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`${API_URL}/api/dailycheckin/dcappointment`);
+      const { data } = await axios.get(`/api/dailycheckin/dcappointment`);
       dispatch(getTodayAppointment(data));
     } catch (error) {
       console.error(error)
@@ -34,11 +34,11 @@ export const updateTodayAppointmentThunk = (
 ) => {
   return async dispatch => {
     try {
-      const {data} = await axios.put(
-        `${API_URL}/api/dailycheckin/dcappointment/${id}`,
+      const { data } = await axios.put(
+        `/api/dailycheckin/dcappointment/${id}`,
         todayAppointment
       );
-      const allData = await axios.get(`${API_URL}/api/dailycheckin/dcappointment`);
+      const allData = await axios.get(`/api/dailycheckin/dcappointment`);
       dispatch(updateTodayAppointment(data));
       dispatch(getTodayAppointment(allData.data));
     } catch (error) {
@@ -46,7 +46,7 @@ export const updateTodayAppointmentThunk = (
     }
   }
 }
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case GET_TODAY_APPOINTMENT:
       return action.todayAppointment;
