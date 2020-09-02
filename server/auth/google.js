@@ -3,13 +3,12 @@ const passport = require('passport')
 const router = require('express').Router()
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const { User } = require('../db/models')
-const CLIENT_ORIGIN = require('../CLIENT_ORIGIN')
 module.exports = router
 
 const googleConfig = {
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: `${CLIENT_ORIGIN}/auth/google/verify`
+  callbackURL: `/auth/google/verify`
 }
 
 const strategy = new GoogleStrategy(

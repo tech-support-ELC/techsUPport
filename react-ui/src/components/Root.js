@@ -23,7 +23,9 @@ import AdminDashboard from './AdminDashboard';
 
 class Root extends Component {
   componentDidMount() {
-    this.props.fetchInitialData();
+    if (this.props.isLoggedIn) {
+      this.props.fetchInitialData();
+    }
   }
   render() {
     const { isLoggedIn, currentUser } = this.props;

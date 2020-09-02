@@ -5,7 +5,7 @@ import Line from './Line';
 import { line, curveMonotoneX } from 'd3-shape';
 import { extent } from 'd3-array';
 import { transition } from 'd3-transition';
-import {getChartThunk} from '../../redux/score';
+import { getChartThunk } from '../../redux/score';
 import { connect } from 'react-redux';
 class LineChart extends Component {
   constructor() {
@@ -32,8 +32,8 @@ class LineChart extends Component {
     await this.props.getChart();
     const rate = this.props.chart.map(eachScore => eachScore.rate);
     const date = this.props.chart.map(eachDate => new Date(eachDate.date));
-    const shortDate = date.map(d => String(d).slice(4,10))
-    console.log(typeof(shortDate[0]))
+    const shortDate = date.map(d => String(d).slice(4, 10))
+    console.log(typeof (shortDate[0]))
     this.setState((prevState) => {
       const data = shortDate.map((d, i) => ({
         name: d,
@@ -49,7 +49,7 @@ class LineChart extends Component {
     const weeklyRate = rate.slice(-7)
     const date = this.props.chart.map(eachDate => new Date(eachDate.date));
     const weeklyDate = date.slice(-7)
-    const shortDate = weeklyDate.map(d => String(d).slice(4,10))
+    const shortDate = weeklyDate.map(d => String(d).slice(4, 10))
     console.log(shortDate)
     this.setState((prevState) => {
       const data = shortDate.map((d, i) => ({
@@ -66,7 +66,7 @@ class LineChart extends Component {
     const weeklyRate = rate.slice(-30)
     const date = this.props.chart.map(eachDate => new Date(eachDate.date));
     const weeklyDate = date.slice(-30)
-    const shortDate = weeklyDate.map(d => String(d).slice(4,10))
+    const shortDate = weeklyDate.map(d => String(d).slice(4, 10))
     console.log(shortDate)
     this.setState((prevState) => {
       const data = shortDate.map((d, i) => ({
@@ -80,7 +80,7 @@ class LineChart extends Component {
   }
   render() {
     const { data } = this.state;
-    console.log(data)
+    // console.log(data)
     const parentWidth = 500;
 
     const margins = {
@@ -113,13 +113,13 @@ class LineChart extends Component {
     const lineGenerator = line()
       .x(d => xScale(d.name))
       .y(d => yScale(d.value))
-      // .curve(curveMonotoneX);
+    // .curve(curveMonotoneX);
 
     return (
       <div>
         <h4>How I've Felt Over Time</h4>
-        <button onClick={this.weeklyData}>Weekly data</button>
-        <button onClick={this.monthlyData}>Monthly data</button>
+        <button onClick={this.weeklyData}>Last week</button>
+        <button onClick={this.monthlyData}>Last month</button>
         <svg
           width={width + margins.left + margins.right}
           height={height + margins.top + margins.bottom}

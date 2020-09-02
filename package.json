@@ -8,7 +8,6 @@
   "scripts": {
     "start": "nodemon server",
     "build": "cd react-ui/ && npm run build",
-    "start-dev": "NODE_ENV='development' npm run build & NODE_ENV='development' npm run start-server",
     "seed": "node seed.js",
     "test": "mocha ./server/test/*.spec.js --watch"
   },
@@ -21,14 +20,10 @@
     "connect-session-sequelize": "^7.0.1",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
-    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "express-form-data": "^2.0.14",
     "express-session": "^1.17.1",
-    "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
-    "passport-facebook": "^3.0.0",
     "passport-google-oauth": "^2.0.0",
     "pg": "^8.3.2",
     "sequelize": "^6.3.4"
@@ -45,6 +40,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "dotenv": "^8.2.0",
     "@babel/core": "^7.11.4",
     "@babel/polyfill": "^7.10.4",
     "@babel/register": "^7.10.5",

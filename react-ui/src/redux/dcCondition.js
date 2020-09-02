@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { API_URL } from './API_URL';
 const initialState = [];
 
 const GET_SCORE = 'GET_SCORE';
@@ -21,7 +20,7 @@ const addScore = score => {
 export const getScoreThunk = () => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`${API_URL}/api/dailycheckin/score`)
+      const { data } = await axios.get(`/api/dailycheckin/score`)
       dispatch(getScore(data))
     } catch (error) {
       console.error(error)
@@ -31,7 +30,7 @@ export const getScoreThunk = () => {
 export const addScoreThunk = (rate, date, notes) => {
   return async dispatch => {
     try {
-      const {data} = await axios.post(`${API_URL}/api/dailycheckin/score`, {rate, date, notes})
+      const { data } = await axios.post(`/api/dailycheckin/score`, { rate, date, notes })
       dispatch(addScore(data))
     } catch (error) {
       console.error(error)
@@ -39,7 +38,7 @@ export const addScoreThunk = (rate, date, notes) => {
   }
 }
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case GET_SCORE:
       return action.score

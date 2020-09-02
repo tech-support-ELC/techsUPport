@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getAllConditionsThunk, addConditionThunk } from '../redux/conditions';
-import { getSingleConditionThunk } from '../redux/singleCondition';
-import AddConditionForm from './AddConditionForm';
-import SingleCondition from './SingleCondition';
-import ReactModal from 'react-modal';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getAllConditionsThunk, addConditionThunk } from "../redux/conditions";
+import { getSingleConditionThunk } from "../redux/singleCondition";
+import AddConditionForm from "./AddConditionForm";
+import SingleCondition from "./SingleCondition";
+import ReactModal from "react-modal";
 
 // const customStyles = {
 //   content: {
@@ -21,23 +21,23 @@ class Conditions extends Component {
     super();
     this.state = {
       showModal: false,
-      showDocModal: false,
+      showCondModal: false,
     };
     this.openModal = this.openModal.bind(this);
-    this.openDocModal = this.openDocModal.bind(this);
+    this.openCondModal = this.openCondModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.closeDocModal = this.closeDocModal.bind(this);
+    this.closeCondModal = this.closeCondModal.bind(this);
   }
   componentDidMount() {
     this.props.getAllConditions();
-    ReactModal.setAppElement('body');
+    ReactModal.setAppElement("body");
   }
   openModal() {
     this.setState({ showModal: true });
   }
 
-  openDocModal(id) {
-    this.setState({ showDocModal: true });
+  openCondModal(id) {
+    this.setState({ showCondModal: true });
     this.props.getSingleCondition(id);
   }
 
@@ -45,8 +45,8 @@ class Conditions extends Component {
     this.setState({ showModal: false });
   }
 
-  closeDocModal() {
-    this.setState({ showDocModal: false });
+  closeCondModal() {
+    this.setState({ showCondModal: false });
   }
   render() {
     const conditions = this.props.conditions;
@@ -62,16 +62,17 @@ class Conditions extends Component {
                     <button
                       className="bigButton"
                       type="button"
-                      onClick={() => this.openDocModal(condition.id)}
+                      onClick={() => this.openCondModal(condition.id)}
                     >
                       {condition.name}
                     </button>
                     <ReactModal
-                      isOpen={this.state.showDocModal}
+                      isOpen={this.state.showCondModal}
                       contentLabel="Single Document"
+                      className="popup"
                     >
-                      <SingleCondition closeTheModal={this.closeDocModal} />
-                      <button onClick={this.closeDocModal}>Close</button>
+                      <SingleCondition closeTheModal={this.closeCondModal} />
+                      <button onClick={this.closeCondModal}>Close</button>
                     </ReactModal>
                   </div>
                 );
@@ -84,6 +85,7 @@ class Conditions extends Component {
           <ReactModal
             isOpen={this.state.showModal}
             contentLabel="Single Document"
+            className="popup"
           >
             <AddConditionForm
               currentUser={this.props.currentUser}

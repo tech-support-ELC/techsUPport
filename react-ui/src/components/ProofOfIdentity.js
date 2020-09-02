@@ -55,3 +55,4 @@ export class ProofOfIdentity extends Component {
 const mapDispatch = { deleteDocumentsThunk, fetchSingleDocument }
 
 export default connect(null, mapDispatch)(ProofOfIdentity)
+

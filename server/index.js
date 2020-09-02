@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const path = require("path");
 const cluster = require("cluster");
@@ -9,10 +10,8 @@ const db = require("./db");
 const { User } = require('./db/models')
 const sessionStore = new SequelizeStore({ db });
 const numCPUs = require("os").cpus().length;
-const isDev = process.env.NODE_ENV === "development";
-const PORT = process.env.PORT || 5000;
-const cors = require('cors')
-const CLIENT_ORIGIN = require('./CLIENT_ORIGIN')
+const isDev = process.env.NODE_ENV !== "production";
+const PORT = process.env.PORT || 5000
 const app = express();
 module.exports = app;
 
@@ -43,7 +42,7 @@ if (!isDev && cluster.isMaster) {
     );
   });
 } else {
-  require('dotenv').config()
+
 
   // logging middleware
   app.use(morgan("dev"));
@@ -65,12 +64,12 @@ if (!isDev && cluster.isMaster) {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  app.use(cors({
-    origin: CLIENT_ORIGIN
-  }))
+  // app.use(cors({
+  //   origin: CLIENT_ORIGIN
+  // }))
 
   // Image upload middleware
-  app.use(require('./cloudinaryMiddleware'))
+  // app.use(require('./cloudinaryMiddleware'))
 
   // Priority serve any static files.
   app.use(express.static(path.resolve(__dirname, "../react-ui/build")));
@@ -79,14 +78,14 @@ if (!isDev && cluster.isMaster) {
   app.use("/auth", require("./auth"));
 
   // Answer API requests.
-  app.get("/api", function (req, res) {
-    res.set("Content-Type", "application/json");
-    res.send('{"message":"Hello from the custom server!"}');
-  });
+  // app.get("/api", function (req, res) {
+  //   res.set("Content-Type", "application/json");
+  //   res.send('{"message":"Hello from the custom server!"}');
+  // });
 
   // All remaining requests return the React app, so it can handle routing.
   app.get("*", function (req, res) {
-    res.sendFile(path.resolve(__dirname, "../react-ui/build", "index.html"));
+    res.sendFile(path.join(__dirname, "../react-ui/build", "index.html"));
   });
 
   // error handling endware

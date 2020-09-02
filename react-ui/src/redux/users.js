@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { API_URL } from './API_URL';
+// import { API_URL } from './API_URL';
 /* -----------------    ACTION TYPES    ------------------ */
 
 const INITIALIZE = 'INITIALIZE_USERS'
@@ -22,7 +22,7 @@ const getAllUsers = users => {
 export const getUsersThunk = () => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`${API_URL}/api/users`);
+      const { data } = await axios.get(`/api/users`);
       console.log(data)
       dispatch(getAllUsers(data));
     } catch (error) {
@@ -35,7 +35,7 @@ export const deleteUserThunk = (id) => {
     try {
       await axios.delete(`/api/users/${id}`);
       dispatch(remove(id));
-      const {data} = await axios.get(`${API_URL}/api/users`);
+      const { data } = await axios.get(`/api/users`);
       dispatch(getAllUsers(data));
     } catch (err) {
       console.log(err);

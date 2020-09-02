@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_URL } from './API_URL';
+// import { API_URL } from './API_URL';
 const initialState = [];
 
 const GET_MEDS = 'GET_MEDS';
@@ -21,7 +21,7 @@ const addMedication = med => {
 export const getMedicationThunk = () => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`${API_URL}/api/dailycheckin/meds`)
+      const { data } = await axios.get(`/api/dailycheckin/meds`)
       console.log(data)
       dispatch(getMedication(data))
     } catch (error) {
@@ -32,14 +32,14 @@ export const getMedicationThunk = () => {
 export const addMedicationThunk = (notes) => {
   return async dispatch => {
     try {
-      const {data} = await axios.post(`${API_URL}/api/dailycheckin/meds`, {notes})
+      const { data } = await axios.post(`/api/dailycheckin/meds`, { notes })
       dispatch(addMedication(data))
     } catch (error) {
       console.error(error)
     }
   }
 }
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case GET_MEDS:
       return action.med

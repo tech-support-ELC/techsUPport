@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_URL } from './API_URL'
+// import { API_URL } from './API_URL'
 import { UPDATE_DOCUMENT as UPDATE_DOCUMENT_LIST } from './singleDocument'
 
 
@@ -47,7 +47,7 @@ export default function (state = [], action) {
 export const fetchDocuments = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`${API_URL}/api/documents`);
+      const { data } = await axios.get(`/api/documents`);
       dispatch(getDocuments(data));
     } catch (error) {
       console.log(error);
@@ -58,7 +58,7 @@ export const fetchDocuments = () => {
 export const uploadDocumentThunk = (formData) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post(`${API_URL}/api/documents`, formData)
+      const { data } = await axios.post(`/api/documents`, formData)
       dispatch(uploadDocument(data));
     } catch (error) {
       console.log(error);
@@ -69,7 +69,7 @@ export const uploadDocumentThunk = (formData) => {
 export const deleteDocumentsThunk = (id) => {
   return async (dispatch) => {
     try {
-      await axios.delete(`${API_URL}/api/documents/${id}`)
+      await axios.delete(`/api/documents/${id}`)
       dispatch(deleteDocument(id));
     } catch (error) {
       console.log(error);
