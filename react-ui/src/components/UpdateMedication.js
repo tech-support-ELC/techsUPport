@@ -40,29 +40,31 @@ export default class UpdateMedication extends React.Component {
           placeholder={this.props.medication.name}
         />
 
-        <label htmlFor="dosage">Updated Dosage:</label>
-        <input
-          type="text"
-          name="dosage"
-          value={this.state.dosage}
-          onChange={this.handleChange}
-          placeholder={this.props.medication.dosage || "Dosage"}
-        />
-        <select
-          onChange={this.handleChange}
-          value={this.state.dosageUnit}
-          name="dosageUnit"
-        >
-          <option value=""></option>
-          <option value="g">g</option>
-          <option value="mg">mg</option>
-          <option value="mg/kg">mg/kg</option>
-          <option value="mL">mL</option>
-          <option value="pills">pills</option>
-          <option value="capsules">capsules</option>
-          <option value="tablets">tablets</option>
-          <option value="drops">drops</option>
-        </select>
+        <label htmlFor="dosage">
+          Updated Dosage:
+          <input
+            type="text"
+            name="dosage"
+            value={this.state.dosage}
+            onChange={this.handleChange}
+            placeholder={this.props.medication.dosage || "Dosage"}
+          />
+          <select
+            onChange={this.handleChange}
+            value={this.state.dosageUnit}
+            name="dosageUnit"
+          >
+            <option value=""></option>
+            <option value="g">g</option>
+            <option value="mg">mg</option>
+            <option value="mg/kg">mg/kg</option>
+            <option value="mL">mL</option>
+            <option value="pills">pills</option>
+            <option value="capsules">capsules</option>
+            <option value="tablets">tablets</option>
+            <option value="drops">drops</option>
+          </select>
+        </label>
 
         <label htmlFor="frequency">
           Updated Frequency:
