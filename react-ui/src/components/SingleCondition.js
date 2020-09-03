@@ -33,19 +33,20 @@ class SingleCondition extends Component {
           <div>Has this been diagnosed?: {condition.diagnosed}</div>
           <div>Physical or mental condition?: {condition.typeOfPain}</div>
           <div>{this.state.clicked && <UpdateCondition />}</div>
-          <div>
+
+          <div className="buttons">
             {!this.state.clicked && (
-              <button onClick={() => this.updateCondition()}>Update</button>
+              <>
+                <button onClick={() => this.updateCondition()}>Update</button>
+                <button
+                  type="submit"
+                  onClick={() => this.props.removeCondition(condition.id)}
+                >
+                  Delete
+                </button>
+              </>
             )}
           </div>
-          {
-            <button
-              type="submit"
-              onClick={() => this.props.removeCondition(condition.id)}
-            >
-              Delete
-            </button>
-          }
         </div>
       );
     }

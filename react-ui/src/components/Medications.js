@@ -2,9 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import ReactModal from "react-modal";
-import { fetchMedications, deleteMedication } from "../redux/medications";
+import { fetchMedications } from "../redux/medications";
 import AddMedication from "./AddMedication";
-import RemoveMedication from "./RemoveMedication";
+// import RemoveMedication from "./RemoveMedication";
 import SingleMedication from "./SingleMedication";
 
 class Medications extends React.Component {
@@ -93,10 +93,10 @@ class Medications extends React.Component {
               X
             </button>
             <SingleMedication selected={this.state.selected} remove={remove} />
-            <RemoveMedication
+            {/* <RemoveMedication
               medication={this.state.selected}
               remove={this.handleRemove}
-            />
+            /> */}
           </ReactModal>
         </div>
       </div>
@@ -112,7 +112,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchMedications: () => dispatch(fetchMedications()),
-    remove: (id) => dispatch(deleteMedication(id)),
+    // remove: (id) => dispatch(deleteMedication(id)),
   };
 };
 
