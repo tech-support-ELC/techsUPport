@@ -16,7 +16,7 @@ class SingleCondition extends Component {
   }
   async handleDelete(id) {
     try {
-      await this.props.deleteCondition(id)
+      await this.props.removeCondition(id)
       this.props.closeTheModal()
     } catch (err) {
       console.log(err)
@@ -43,7 +43,7 @@ class SingleCondition extends Component {
           {
             <button
               type="submit"
-              onClick={() => this.props.removeCondition(condition.id)}
+              onClick={() => this.handleDelete(condition.id)}
             >
               Remove Condition
         </button>

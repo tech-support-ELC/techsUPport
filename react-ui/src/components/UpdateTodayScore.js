@@ -2,12 +2,11 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {
   updateTodayScoreThunk
-} from '../redux/dcTodayScore'
+} from '../redux/dcTodayScore';
 class UpdateTodayScore extends Component {
   constructor() {
     super();
     this.state = {
-      name: '',
       rate: '',
       notes: ''
     }
@@ -22,7 +21,6 @@ class UpdateTodayScore extends Component {
     const id = this.props.eachScore.id
     this.props.updateTodayScore(id, this.state)
     this.setState({
-      name: '',
       rate: '',
       notes: ''
     })
@@ -32,18 +30,6 @@ class UpdateTodayScore extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <h1>Update {name} Condition</h1>
-        <div>
-          <input
-            className="input"
-            placeholder={name}
-            type="text"
-            name="name"
-            onChange={this.handleChange}
-            value={this.state.name}
-          />
-        </div>
-        <br />
-
         <div>
         <label>
           How much is this affecting you today? 1 (not too much) to 10 (so very much):
@@ -86,11 +72,6 @@ class UpdateTodayScore extends Component {
     )
   }
 }
-// const mapStateToProps = state => {
-//   return {
-//       condition: state.condition,
-//   }
-// }
 const mapDispatchToProps = dispatch => {
   return {
     updateTodayScore: (id, todayScore) => (dispatch(updateTodayScoreThunk(id, todayScore)))
