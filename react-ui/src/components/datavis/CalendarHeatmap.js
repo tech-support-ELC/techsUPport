@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { getChartThunk } from "../../redux/score";
 import CalendarHeatmap from "react-calendar-heatmap";
 import "react-calendar-heatmap/dist/styles.css";
-import { getTodayScoreThunk, getTodayScore } from "../../redux/dcTodayScore";
+import { getTodayScoreThunk } from "../../redux/dcTodayScore";
+import ReactTooltip from 'react-tooltip';
 export class Heatmap extends React.Component {
   constructor() {
     super();
@@ -37,14 +38,14 @@ export class Heatmap extends React.Component {
     });
   }
   render() {
-    const chart = this.props.chart;
     const data = this.state.data;
-    console.log(data)
+    const chart = this.props.chart;
     return (
       <div>
         <div>
           <div>How I've felt over time</div>
-          {chart && chart.length > 0 ? (
+          {
+            (chart && chart.length > 0) ?
             <CalendarHeatmap
               values={data}
               classForValue={(value) => {
@@ -53,8 +54,17 @@ export class Heatmap extends React.Component {
                 }
                 return `color-scale-${value.count}`;
               }}
-            />
-          ) : null}
+              showWeekdayLabels={true}
+              tooltipDataAttrs={(value) => {
+                return {
+                  'data-tip': `${value.date} has average score: ${
+                    value.count
+                  }`,
+                };
+              }}
+            /> : null
+          }
+            <ReactTooltip />
         </div>
       </div>
     );
