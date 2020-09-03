@@ -79,8 +79,10 @@ export class AllDoctors extends React.Component {
                       className="popup"
                     // ariaHideApp={false}
                     >
+                      <button className="close" onClick={this.closeDocModal}>
+                        X
+                      </button>
                       <SingleDoctor closeTheModal={this.closeDocModal} />
-                      <button onClick={this.closeDocModal}>close</button>
                     </ReactModal>
                   </div>
 
@@ -96,12 +98,13 @@ export class AllDoctors extends React.Component {
             className="popup"
             ariaHideApp={false}
           >
+            <button className="close" onClick={this.closeModal}>
+              X
+            </button>
             <AddDoctor
               currentUser={this.props.currentUser}
               addNewDoctor={this.props.addNewDoctor}
             />
-
-            <button onClick={this.closeModal}>Close</button>
           </ReactModal>
         </div>
         <div>
