@@ -6,17 +6,20 @@ import { getAllDoctorsThunk, addDoctorThunk } from "../redux/doctors";
 import { getAllConditionsThunk, addConditionThunk } from "../redux/conditions";
 import LineChart from "./lineChart/LineChartCondition";
 import { fetchMedications } from "../redux/medications";
-import { getChartThunk } from "../redux/score";
-import home from "../images/home.png";
-import HomeAddButtons from "./HomeAddButtons";
-import moment from "moment";
-import { Link } from "react-router-dom";
-import ReactModal from "react-modal";
-import Onboarding from "./Onboarding";
-import checkDay from "../utils/onboarding-date-function";
 
-import CalendarHeatmap from "react-calendar-heatmap";
-import "react-calendar-heatmap/dist/styles.css";
+import { getChartThunk } from '../redux/score'
+import home from '../images/home.png'
+import HomeAddButtons from './HomeAddButtons'
+import moment from 'moment'
+import { Link } from 'react-router-dom'
+import ReactModal from 'react-modal'
+import Onboarding from './Onboarding'
+import checkDay from '../utils/onboarding-date-function'
+import Heatmap from './datavis/CalendarHeatmap';
+import CalendarHeatmap from 'react-calendar-heatmap';
+import 'react-calendar-heatmap/dist/styles.css';
+
+
 
 export class Home extends React.Component {
   constructor() {
@@ -53,7 +56,9 @@ export class Home extends React.Component {
     const currentUser = this.props.currentUser;
     const chart = this.props.chart;
     const data = this.state.data;
-    console.log(data);
+
+    // console.log(data)
+
     return (
       <div className="home">
         <div>
@@ -81,6 +86,9 @@ export class Home extends React.Component {
 
           <HomeAddButtons />
         </div>
+
+
+
         <div className="mainHomepageArea">
           {doctors.length === 0 &&
           conditions.length === 0 &&
@@ -93,21 +101,14 @@ export class Home extends React.Component {
           appointments.length > 0 ? (
             <DoctorDonut appointment={appointments} doctors={doctors} />
           ) : null}
-          {chart && chart.length > 0 ? (
-            <div>
-              <h4>My conditions over time</h4>
-              <CalendarHeatmap
-                values={data}
-                classForValue={(value) => {
-                  if (!value) {
-                    return "color-empty";
-                  }
-                  return `color-scale-${value.count}`;
-                }}
-              />{" "}
+          {
+          (chart && chart.length > 0) ?
+            <Heatmap /> : null
+        }
             </div>
           ) : null}
         </div>
+
       </div>
     );
   }
