@@ -65,7 +65,9 @@ export class Home extends React.Component {
             medications.length === 0 ? (
               <h2>
                 Get started by adding your doctors, conditions, and medications
-                <img src={home} alt="" />
+                <div className="mainHomepageArea">
+                  <img src={home} alt="" />
+                </div>
               </h2>
 
             ) : null}
