@@ -70,7 +70,7 @@ export const UploadForm = (props) => {
       <input
         type='file'
         onChange={handleFileRead}
-        required
+      // required
       />
       <button type="submit" >Upload</button>
     </form >

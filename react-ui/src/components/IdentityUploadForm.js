@@ -21,7 +21,7 @@ export class IdentityUploadForm extends Component {
         <input
           type='file'
           onChange={handleFileRead}
-          required
+        // required
         />
         <button type="submit" >Upload</button>
       </form >
