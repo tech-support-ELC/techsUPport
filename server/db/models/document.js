@@ -11,10 +11,7 @@ const Document = db.define('documents', {
   },
   imageUrl: {
     type: Sequelize.TEXT,
-    allowNull: false,
-    valideat: {
-      notEmpty: true
-    }
+    defaultValue: 'https://cdn2.iconfinder.com/data/icons/files-lineal/64/file-blank-empty-default-512.png'
   },
   doctorId: {
     type: Sequelize.INTEGER,

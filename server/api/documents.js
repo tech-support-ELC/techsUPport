@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const cloudinary = require('cloudinary')
+// const cloudinary = require('cloudinary')
 // const authenticateToken = require('../auth/verifyToken')
 const { Document } = require('../db/models')
 const { isOwnerOrAdmin } = require('../auth/authenticateUser')
