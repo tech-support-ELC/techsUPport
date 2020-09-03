@@ -13,19 +13,26 @@ const Navbar = (props) => {
         <Link to="/">Home</Link>
       </div>
       <div id="upperRight">
-        <div className="navDropdown">
-          <div className="navDropButton">Medical Info</div>
-          <div className="navDropContent">
-            <Link to="/medications">Medications</Link>
-            <Link to="/doctors">Doctors</Link>
-            <Link to="/conditions">Conditions</Link>
-            <Link to="/documents">Documents</Link>
+        <div className="MyMedicalInfo">
+          <div className="navDropdown">
+            <div className="navDropButton">Medical Info</div>
+            <div className="navDropContent">
+              <Link to="/medications">Medications</Link>
+              <Link to="/doctors">Doctors</Link>
+              <Link to="/conditions">Conditions</Link>
+              <Link to="/documents">Documents</Link>
+            </div>
           </div>
         </div>
-
-        <Link to="/dailycheckin">Daily Checkin</Link>
-        <Link to="/profile">Profile</Link>
-        <Link to='#' onClick={handleClick}>Log out</Link>
+        <div className='navDailyCheckin'>
+          <Link to="/dailycheckin">Daily Checkin</Link>
+        </div>
+        <div className='navProfile'>
+          <Link to="/profile">Profile</Link>
+        </div>
+        <div className='navLogout'>
+          <Link to='#' onClick={handleClick}>Log out</Link>
+        </div>
       </div>
     </nav>
   );

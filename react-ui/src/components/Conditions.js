@@ -71,8 +71,10 @@ class Conditions extends Component {
                       contentLabel="Single Document"
                       className="popup"
                     >
+                      <button className="close" onClick={this.closeCondModal}>
+                        X
+                      </button>
                       <SingleCondition closeTheModal={this.closeCondModal} />
-                      <button onClick={this.closeCondModal}>Close</button>
                     </ReactModal>
                   </div>
                 );
@@ -87,11 +89,13 @@ class Conditions extends Component {
             contentLabel="Single Document"
             className="popup"
           >
+            <button className="close" onClick={this.closeModal}>
+              X
+            </button>
             <AddConditionForm
               currentUser={this.props.currentUser}
               addCondition={this.props.addCondition}
             />
-            <button onClick={this.closeModal}>close</button>
           </ReactModal>
         </div>
       </div>

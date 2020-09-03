@@ -10,7 +10,7 @@ import SingleMedication from "./SingleMedication";
 class Medications extends React.Component {
   constructor() {
     super();
-    this.state = { selected: null, add: false };
+    this.state = { isSelected: false, selected: null, add: false };
     this.handleSelect = this.handleSelect.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -22,15 +22,15 @@ class Medications extends React.Component {
   }
 
   handleSelect(medication) {
-    this.setState({ selected: medication, add: false });
+    this.setState({ isSelected: true, selected: medication, add: false });
   }
 
   handleAdd() {
-    this.setState({ selected: null, add: true });
+    this.setState({ isSelected: false, selected: null, add: true });
   }
 
   handleClose() {
-    this.setState({ selected: null, add: false });
+    this.setState({ isSelected: false, selected: null, add: false });
   }
 
   handleRemove(id) {
@@ -71,27 +71,32 @@ class Medications extends React.Component {
             contentLabel="Single Document"
             className="popup"
           >
-            <>
-              <AddMedication />
-              <button type="button" onClick={() => this.handleClose()}>
-                Close
-              </button>
-            </>
+            <button
+              className="close"
+              type="button"
+              onClick={() => this.handleClose()}
+            >
+              X
+            </button>
+            <AddMedication />
           </ReactModal>
           <ReactModal
-            isOpen={this.state.selected}
+            isOpen={this.state.isSelected}
             contentLabel="Single Document"
             className="popup"
           >
+            <button
+              className="close"
+              type="button"
+              onClick={() => this.handleClose()}
+            >
+              X
+            </button>
             <SingleMedication selected={this.state.selected} remove={remove} />
-
             <RemoveMedication
               medication={this.state.selected}
               remove={this.handleRemove}
             />
-            <button type="button" onClick={() => this.handleClose()}>
-              Close
-            </button>
           </ReactModal>
         </div>
       </div>
