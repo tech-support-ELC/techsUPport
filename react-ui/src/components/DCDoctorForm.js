@@ -13,7 +13,7 @@ class DCDoctorForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(evt) {
-    const doctorId = this.props.doctor.id;
+    const doctorId = this.props.doc.id;
     this.setState({ doctorId });
     const target = evt.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -27,7 +27,6 @@ class DCDoctorForm extends Component {
     if (this.props.appointmentDate) {
       const date = this.props.appointmentDate
       let appointmentDate = moment(date).format('YYYY-MM-DD')
-      console.log(appointmentDate)
       let time = this.state.time
       let doctorId = this.state.doctorId
       this.props.addAppointment({ time, doctorId, appointmentDate })
@@ -42,11 +41,11 @@ class DCDoctorForm extends Component {
     })
   }
   render() {
-    const doctor = this.props.doctor;
+    const doc = this.props.doc;
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
-          {doctor.firstName} {doctor.lastName}
+          {doc.firstName} {doc.lastName}
           <input
             type='checkbox'
             name='isClicked'

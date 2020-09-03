@@ -39,7 +39,7 @@ export class AppointmentCalendar extends React.Component {
     render() {
 
         const doctors = this.props.doctors
-
+        const appointment = this.props.appointment
         return (
             <div styles={{ height: 100, width: 100 }}>
                 <div>
@@ -62,14 +62,11 @@ export class AppointmentCalendar extends React.Component {
                             {
                                 (doctors && doctors.length > 0) ?
                                     doctors.map((doctor) => {
-                                        console.log('what are props', this.props)
                                         let appointmentDate = this.state.appointmentDay
-
-                                        console.log('appointment format', appointmentDate)
                                         return (
                                             <div key={doctor.id}>
                                                 <DCDoctorForm
-                                                    doctor={doctor}
+                                                    doc={doctor}
                                                     addAppointment={this.props.addAppointment}
                                                     appointmentDate={appointmentDate}
                                                 />
