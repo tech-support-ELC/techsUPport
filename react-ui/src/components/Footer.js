@@ -9,7 +9,7 @@ const Footer = () => {
         <a href="https://github.com/2006-ghp-capstone-team-c/capstone">
           <GoMarkGithub color="##e36397" size={32} /> GitHub
         </a>
-        <>September 2020</>
+        <p>September 2020</p>
       </div>
       <div id="bottomRight">
         <div>

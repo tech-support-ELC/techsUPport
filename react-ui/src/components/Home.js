@@ -1,10 +1,10 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import DoctorDonut from './datavis/doctor-appointment-donut'
-import { getAppointmentThunk } from '../redux/dcDoctor'
-import { getAllDoctorsThunk, addDoctorThunk } from '../redux/doctors'
-import { getAllConditionsThunk, addConditionThunk } from '../redux/conditions'
-import LineChart from './lineChart/LineChartCondition'
+import React from "react";
+import { connect } from "react-redux";
+import DoctorDonut from "./datavis/doctor-appointment-donut";
+import { getAppointmentThunk } from "../redux/dcDoctor";
+import { getAllDoctorsThunk, addDoctorThunk } from "../redux/doctors";
+import { getAllConditionsThunk, addConditionThunk } from "../redux/conditions";
+import LineChart from "./lineChart/LineChartCondition";
 import { fetchMedications } from "../redux/medications";
 import { getChartThunk } from '../redux/score'
 import home from '../images/home.png'
@@ -22,6 +22,7 @@ export class Home extends React.Component {
   constructor() {
     super();
     this.state = {
+
       data: [],
     }
   }
@@ -31,6 +32,7 @@ export class Home extends React.Component {
     this.props.getAppointments();
     this.props.getAllConditions();
     this.props.getMedications();
+
     const count = this.props.chart.map(eachScore => eachScore.rate);
     const date = this.props.chart.map(eachDate => eachDate.date);
     this.setState((prevState) => {
@@ -43,7 +45,6 @@ export class Home extends React.Component {
       }
     })
   }
-
   render() {
     const { firstName } = this.props.currentUser
     const appointments = this.props.appointment
@@ -55,35 +56,33 @@ export class Home extends React.Component {
     const data = this.state.data;
     console.log(data)
     return (
-      <div>
-        <h1 id='welcomeName'>Welcome {firstName}!</h1>
-        {(!checkDay(currentUser.createdAt)) ?
-          <Onboarding /> : null
-        }
+      <div className="home">
         <div>
-
-          {
-            (doctors.length === 0 && conditions.length === 0 && medications.length === 0) ?
-              (
-                <h2>Get started by adding your doctors, conditions, and medications</h2>
-              ) : null
-          }
-          <h2>Fill out your daily checkin for {moment().format('MMMM Do YYYY')}</h2>
+          <h1 id="welcomeName">Welcome, {firstName}!</h1>
+          {!checkDay(currentUser.createdAt) ? <Onboarding /> : null}
+          {doctors.length === 0 &&
+          conditions.length === 0 &&
+          medications.length === 0 ? (
+            <h2>
+              Get started by adding your doctors, conditions, and medications
+            </h2>
+          ) : null}
+          <h2>
+            Fill out your daily check-in for {moment().format("MMMM Do YYYY")}
+          </h2>
           <div id="dailyCheckinHomePage">
             <Link to="/dailycheckin">
-              <button>
-                <span>Daily Checkin</span>
+
+              <button id="checkin">
+                <span>Daily Check-in</span>
               </button>
             </Link>
           </div>
 
           <HomeAddButtons />
-
-          <div className='mainHomepageArea'>
-            <img src={home} alt="" />
-          </div>
-
         </div>
+  <div className="mainHomepageArea">
+          <img src={home} alt="" />
         {
           (doctors && doctors.length > 0 && appointments && appointments.length > 0) ?
             <DoctorDonut appointment={appointments} doctors={doctors} /> : null
@@ -100,9 +99,9 @@ export class Home extends React.Component {
               }}
             /> : null
         }
+</div>
       </div>
-
-    )
+    );
   }
 }
 const mapState = (state) => {
@@ -112,9 +111,9 @@ const mapState = (state) => {
     currentUser: state.currentUser,
     appointment: state.appointment,
     medications: state.medications,
-    chart: state.chart
-  }
-}
+    chart: state.chart,
+  };
+};
 
 const mapDispatch = (dispatch) => ({
   getAllDoctors: () => dispatch(getAllDoctorsThunk()),
@@ -123,7 +122,7 @@ const mapDispatch = (dispatch) => ({
   addCondition: (condition) => dispatch(addConditionThunk(condition)),
   addNewDoctor: (newDoctor) => dispatch(addDoctorThunk(newDoctor)),
   getMedications: () => dispatch(fetchMedications()),
-  getChart: () => dispatch(getChartThunk())
-})
+  getChart: () => dispatch(getChartThunk()),
+});
 
-export default connect(mapState, mapDispatch)(Home)
+export default connect(mapState, mapDispatch)(Home);
