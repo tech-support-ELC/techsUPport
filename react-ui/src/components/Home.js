@@ -14,15 +14,33 @@ import { Link } from 'react-router-dom'
 import Onboarding from './Onboarding'
 import checkDay from '../utils/onboarding-date-function'
 
+import CalendarHeatmap from 'react-calendar-heatmap';
+import 'react-calendar-heatmap/dist/styles.css';
 
 export class Home extends React.Component {
-
-  componentDidMount() {
-    this.props.getAllDoctors()
-    this.props.getAppointments()
-    this.props.getAllConditions()
-    this.props.getMedications()
-    this.props.getChart()
+  constructor() {
+    super();
+    this.state = {
+      data: [],
+    }
+  }
+  async componentDidMount() {
+    await this.props.getChart();
+    this.props.getAllDoctors();
+    this.props.getAppointments();
+    this.props.getAllConditions();
+    this.props.getMedications();
+    const count = this.props.chart.map(eachScore => eachScore.rate);
+    const date = this.props.chart.map(eachDate => eachDate.date);
+    this.setState((prevState) => {
+      const data = date.map((d, i) => ({
+        date: d,
+        count: count[i]
+      }))
+      return {
+        data
+      }
+    })
   }
 
   render() {
@@ -31,8 +49,10 @@ export class Home extends React.Component {
     const doctors = this.props.doctors
     const conditions = this.props.conditions
     const medications = this.props.medications
-    const chart = this.props.chart
     const currentUser = this.props.currentUser
+    const chart = this.props.chart;
+    const data = this.state.data;
+    console.log(data)
     return (
       <div>
         <h1 id='welcomeName'>Welcome {firstName}!</h1>
@@ -64,10 +84,19 @@ export class Home extends React.Component {
         </div>
         {
           (doctors && doctors.length > 0 && appointments && appointments.length > 0) ?
-            <DoctorDonut appointment={appointments} doctors={doctors} /> :
-            (chart && chart.length > 0) ?
-              <LineChart />
-              : null
+            <DoctorDonut appointment={appointments} doctors={doctors} /> : null
+        }
+        {
+          (chart && chart.length > 0) ?
+            <CalendarHeatmap
+              values={data}
+              classForValue={(value) => {
+                if (!value) {
+                  return 'color-empty';
+                }
+                return `color-scale-${value.count}`;
+              }}
+            /> : null
         }
       </div>
 

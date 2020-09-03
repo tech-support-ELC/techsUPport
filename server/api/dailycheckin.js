@@ -41,6 +41,26 @@ router.get('/dcscore', async (req, res, next) => {
     next(error);
   }
 });
+router.get('/dcscore/:id', async (req, res, next) => {
+  try {
+    const condition = await Score.findOne({
+      where: {id: req.params.id}
+    });
+    res.status(200).json(condition);
+  } catch (error) {
+    next(error);
+  }
+});
+router.delete('/dcscore/:id', async (req, res, next) => {
+  try {
+    await Score.destroy({
+      where: {id: req.params.id}
+    });
+    res.sendStatus(204);
+  } catch (error) {
+    next(error);
+  }
+});
 router.put('/dcscore/:id', async (req, res, next) => {
   try {
     const { name, rate, notes } = req.body;
@@ -63,7 +83,6 @@ router.put('/dcscore/:id', async (req, res, next) => {
 });
 
 router.post('/appointment', async (req, res, next) => {
-  console.log('what is req.body in route', req.body)
   try {
     const userId = req.user.id;
     const time = req.body.appointmentDate.time;
@@ -122,6 +141,26 @@ router.put('/dcappointment/:id', async (req, res, next) => {
     next(error);
   }
 });
+router.get('/dcappointment/:id', async (req, res, next) => {
+  try {
+    const appointment = await Appointment.findOne({
+      where: {id: req.params.id}
+    });
+    res.status(200).json(appointment);
+  } catch (error) {
+    next(error);
+  }
+});
+router.delete('/dcappointment/:id', async (req, res, next) => {
+  try {
+    await Appointment.destroy({
+      where: {id: req.params.id}
+    });
+    res.sendStatus(204);
+  } catch (error) {
+    next(error);
+  }
+});
 router.post('/meds', async (req, res, next) => {
   try {
     const userId = req.user.id;
@@ -169,6 +208,26 @@ router.put('/dcmeds/:id', async (req, res, next) => {
     } else {
       res.status(404).send('DailyMed not found');
     }
+  } catch (error) {
+    next(error);
+  }
+});
+router.get('/dcmeds/:id', async (req, res, next) => {
+  try {
+    const meds = await DailyMed.findOne({
+      where: {id: req.params.id}
+    });
+    res.status(200).json(meds);
+  } catch (error) {
+    next(error);
+  }
+});
+router.delete('/dcmeds/:id', async (req, res, next) => {
+  try {
+    await DailyMed.destroy({
+      where: {id: req.params.id}
+    });
+    res.sendStatus(204);
   } catch (error) {
     next(error);
   }

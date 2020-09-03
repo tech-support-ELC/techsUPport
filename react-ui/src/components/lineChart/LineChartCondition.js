@@ -32,7 +32,7 @@ class LineChart extends Component {
     await this.props.getChart();
     const rate = this.props.chart.map(eachScore => eachScore.rate);
     const date = this.props.chart.map(eachDate => new Date(eachDate.date));
-    const shortDate = date.map(d => String(d).slice(4,10))
+    const shortDate = date.map(d => String(d).slice(0,10))
     console.log(typeof(shortDate[0]))
     this.setState((prevState) => {
       const data = shortDate.map((d, i) => ({

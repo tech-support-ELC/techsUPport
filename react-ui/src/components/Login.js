@@ -23,10 +23,6 @@ const Login = (props) => {
       <a target="_self" href={`${API_URL}/auth/google`}>
         Log in with Google
       </a>
-      <a target="_self" href={`${API_URL}/auth/facebook`}>
-        Log in with Facebook
-      </a>
-
       <Link to="/signup" id="signup">
         Sign up
       </Link>
