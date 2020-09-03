@@ -1,5 +1,4 @@
 import axios from "axios";
-// import { API_URL } from './API_URL'
 import { UPDATE_DOCUMENT as UPDATE_DOCUMENT_LIST } from './singleDocument'
 
 

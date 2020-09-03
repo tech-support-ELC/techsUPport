@@ -1,4 +1,3 @@
-
 const express = require("express");
 const path = require("path");
 const cluster = require("cluster");
@@ -65,10 +64,6 @@ if (!isDev && cluster.isMaster) {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  // app.use(cors({
-  //   origin: CLIENT_ORIGIN
-  // }))
-
   // Image upload middleware
   // app.use(require('./cloudinaryMiddleware'))
 
@@ -77,12 +72,6 @@ if (!isDev && cluster.isMaster) {
 
   app.use("/api", require("./api"));
   app.use("/auth", require("./auth"));
-
-  // Answer API requests.
-  // app.get("/api", function (req, res) {
-  //   res.set("Content-Type", "application/json");
-  //   res.send('{"message":"Hello from the custom server!"}');
-  // });
 
   // All remaining requests return the React app, so it can handle routing.
   app.get("*", function (req, res) {

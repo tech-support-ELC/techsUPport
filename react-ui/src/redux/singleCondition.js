@@ -1,5 +1,4 @@
 import axios from 'axios';
-// import { API_URL } from './API_URL';
 import { updateAllConditions } from './conditions';
 const initialState = {};
 

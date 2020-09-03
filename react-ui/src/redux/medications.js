@@ -1,5 +1,4 @@
 import axios from "axios";
-// import { API_URL } from "./API_URL";
 
 const GET_MEDICATIONS = "GET_MEDICATIONS";
 const NEW_MEDICATION = "NEW_MEDICATION";

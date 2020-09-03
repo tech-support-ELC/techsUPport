@@ -1,5 +1,4 @@
 import axios from 'axios'
-// import { API_URL } from './API_URL';
 /* -----------------    ACTION TYPES    ------------------ */
 
 const INITIALIZE = 'INITIALIZE_USERS'
