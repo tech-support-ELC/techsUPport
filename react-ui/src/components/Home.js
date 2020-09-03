@@ -56,9 +56,6 @@ export class Home extends React.Component {
     const currentUser = this.props.currentUser;
     const chart = this.props.chart;
     const data = this.state.data;
-
-    // console.log(data)
-
     return (
       <div className="home">
         <div>
@@ -83,12 +80,8 @@ export class Home extends React.Component {
               </button>
             </Link>
           </div>
-
           <HomeAddButtons />
         </div>
-
-
-
         <div className="mainHomepageArea">
           {doctors.length === 0 &&
           conditions.length === 0 &&
@@ -102,13 +95,9 @@ export class Home extends React.Component {
             <DoctorDonut appointment={appointments} doctors={doctors} />
           ) : null}
           {
-          (chart && chart.length > 0) ?
-            <Heatmap /> : null
-        }
-            </div>
-          ) : null}
-        </div>
-
+          (chart && chart.length > 0) ? <Heatmap /> : null
+          }
+          </div>
       </div>
     );
   }
