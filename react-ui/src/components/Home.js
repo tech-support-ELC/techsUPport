@@ -61,12 +61,16 @@ export class Home extends React.Component {
           <h1 id="welcomeName">Welcome, {firstName}!</h1>
           {!checkDay(currentUser.createdAt) ? <Onboarding /> : null}
           {doctors.length === 0 &&
-          conditions.length === 0 &&
-          medications.length === 0 ? (
-            <h2>
-              Get started by adding your doctors, conditions, and medications
-            </h2>
-          ) : null}
+            conditions.length === 0 &&
+            medications.length === 0 ? (
+              <h2>
+                Get started by adding your doctors, conditions, and medications
+                <div className="mainHomepageArea">
+                  <img src={home} alt="" />
+                </div>
+              </h2>
+
+            ) : null}
           <h2>
             Fill out your daily check-in for {moment().format("MMMM Do YYYY")}
           </h2>

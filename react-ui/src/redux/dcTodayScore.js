@@ -62,7 +62,7 @@ export const deleteTodayScoreThunk = (id) => {
     try {
       await axios.delete(`/api/dailycheckin/dcscore/${id}`);
       dispatch(deleteTodayScore(id));
-      const {data} = await axios.get(`/api/dailycheckin/dcscore`);
+      const { data } = await axios.get(`/api/dailycheckin/dcscore`);
       dispatch(getTodayScore(data));
     } catch (err) {
       console.log(err);
@@ -70,7 +70,7 @@ export const deleteTodayScoreThunk = (id) => {
   };
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case GET_TODAY_SCORE:
       return action.todayScore;

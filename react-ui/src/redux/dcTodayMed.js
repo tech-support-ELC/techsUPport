@@ -61,14 +61,14 @@ export const deleteTodayMedThunk = (id) => {
     try {
       await axios.delete(`/api/dailycheckin/dcmeds/${id}`);
       dispatch(deleteTodayMed(id));
-      const {data} = await axios.get(`/api/dailycheckin/dcmeds`);
+      const { data } = await axios.get(`/api/dailycheckin/dcmeds`);
       dispatch(getTodayMeds(data));
     } catch (err) {
       console.log(err);
     }
   };
 };
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
 
   switch (action.type) {
     case GET_TODAY_MEDS:
