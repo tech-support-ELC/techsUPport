@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { API_URL } from './API_URL';
 const initialState = {};
 const GET_SINGLE_TODAY_APPOINTMENT = 'GET_SINGLE_TODAY_APPOINTMENT';
 
@@ -12,7 +11,7 @@ export const getSingleTodayAppointment = singleTodayAppointment => {
 export const getSingleTodayAppointmentThunk = (id) => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`${API_URL}/api/dailycheckin/dcappointment/${id}`);
+      const {data} = await axios.get(`/api/dailycheckin/dcappointment/${id}`);
       dispatch(getSingleTodayAppointment(data));
     } catch (error) {
       console.error(error);
