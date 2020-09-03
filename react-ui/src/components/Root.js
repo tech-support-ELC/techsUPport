@@ -25,12 +25,12 @@ import PageNotFound from './PageNotFound'
 /* -----------------    COMPONENT     ------------------ */
 
 class Root extends Component {
-  async componentDidMount() {
-    try {
-      await this.props.fetchInitialData();
-    } catch (e) {
-      console.log(e)
-    }
+  componentDidMount() {
+    // try {
+    this.props.fetchInitialData();
+    // } catch (e) {
+    //   console.log(e)
+    // }
   }
   render() {
     const { isLoggedIn, currentUser } = this.props;
