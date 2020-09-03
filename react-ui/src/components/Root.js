@@ -84,7 +84,7 @@ class Root extends Component {
           )}
 
         {/* Displays our Login component as a fallback */}
-        {/* <Route component={Login} /> */}
+        <Route component={Login} />
       </Switch >
     );
   }
