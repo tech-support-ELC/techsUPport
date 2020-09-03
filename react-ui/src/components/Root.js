@@ -26,24 +26,50 @@ import PageNotFound from './PageNotFound'
 
 class Root extends Component {
   async componentDidMount() {
-    // if (this.props.isLoggedIn) {
-    await this.props.fetchInitialData();
-    // }
+    try {
+      await this.props.fetchInitialData();
+    } catch (e) {
+      console.log(e)
+    }
   }
   render() {
     const { isLoggedIn, currentUser } = this.props;
+    if (!currentUser) {
+      return (
+        <h1>Loading...</h1>
+      )
+    }
+
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        {/* <Route path="/login">
-          {isLoggedIn ? <Redirect to='/' /> : <Login />}
-        </Route> */}
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
+        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/login" component={Login} />
 
-        {isLoggedIn && !currentUser.isAdmin && (
+        {isLoggedIn && !currentUser.isAdmin &&
           <>
             {/* Routes placed here are only available after logging in */}
+            < Navbar />
+            <Route exact path='/' component={Home} />
+            <Route exact path='/dailycheckin' component={DailyCheckin} />
+            <Route exact path='/conditions' component={Conditions} />
+            <Route path='/conditions/:id' component={SingleCondition} />
+            <Route path="/medications" component={Medications} />
+            <Route path="/medications/:id" component={SingleMedication} />
+            <Route path="/doctors" component={AllDoctors} />
+            <Route path="/doctors/:id" component={SingleDoctor} />
+            <Route exact path="/profile" component={Profile} />
+            <Route path="/documents" component={Documents} />
+            <Route path="/documents/:id" component={SingleDocument} />
+            <Route path='/chart' component={BarChartCondition} />
+            <Route path='/linechart' component={LineChart} />
+            {isLoggedIn && currentUser.isAdmin &&
+              <Route exact path='/admindashboard' component={AdminDashboard} />
+            }
+          </>
+        } {isLoggedIn && currentUser.isAdmin &&
+          <>
+            {/* Routes placed here are only available for admins */}
             <Navbar />
             <Route exact path='/' component={Home} />
             <Route exact path='/dailycheckin' component={DailyCheckin} />
@@ -58,30 +84,9 @@ class Root extends Component {
             <Route path="/documents/:id" component={SingleDocument} />
             <Route path='/chart' component={BarChartCondition} />
             <Route path='/linechart' component={LineChart} />
+            <Route exact path='/admindashboard' component={AdminDashboard} />
           </>
-        )}
-        {
-          isLoggedIn && currentUser.isAdmin && (
-            <>
-              {/* Routes placed here are only available for admins */}
-              <Navbar />
-              <Route exact path='/' component={Home} />
-              <Route exact path='/dailycheckin' component={DailyCheckin} />
-              <Route exact path='/conditions' component={Conditions} />
-              <Route path='/conditions/:id' component={SingleCondition} />
-              <Route path="/medications" component={Medications} />
-              <Route path="/medications/:id" component={SingleMedication} />
-              <Route path="/doctors" component={AllDoctors} />
-              <Route path="/doctors/:id" component={SingleDoctor} />
-              <Route exact path="/profile" component={Profile} />
-              <Route path="/documents" component={Documents} />
-              <Route path="/documents/:id" component={SingleDocument} />
-              <Route path='/chart' component={BarChartCondition} />
-              <Route path='/linechart' component={LineChart} />
-
-              <Route exact path='/admindashboard' component={AdminDashboard} />
-            </>
-          )}
+        }
 
         {/* Displays our Login component as a fallback */}
         <Route component={Login} />
