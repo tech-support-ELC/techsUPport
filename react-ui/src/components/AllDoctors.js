@@ -108,8 +108,12 @@ export class AllDoctors extends React.Component {
           </ReactModal>
         </div>
         <div>
-          <h2>Add an appointment with your doctor</h2>
-          <AppointmentCalendar />
+          {(doctors && doctors.length > 0) ?
+            <div>
+              <h2>Add an appointment with your doctor</h2>
+              <AppointmentCalendar />
+            </div> : null
+          }
         </div>
       </div>
     );
