@@ -31,7 +31,6 @@ export const getAppointmentThunk = () => {
   }
 }
 export const addAppointmentThunk = (appointmentDate) => {
-  console.log('appointment date inside add appointment thunk', appointmentDate)
   return async dispatch => {
     try {
       const { data } = await axios.post(`${API_URL}/api/dailycheckin/appointment`, { appointmentDate });
