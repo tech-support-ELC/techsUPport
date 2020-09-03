@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import UploadProofOfIdentity from "./UploadProofOfIdentity";
 import ReactModal from "react-modal";
 import ProofOfIdentity from "./ProofOfIdentity";
-import { getAllConditionsThunk } from "../redux/conditions";
-import { getAllDoctorsThunk } from "../redux/doctors";
 import { Link } from "react-router-dom";
 import { fetchDocuments } from "../redux/documents";
 
@@ -20,7 +18,6 @@ class Profile extends Component {
 
   componentDidMount() {
     ReactModal.setAppElement("body");
-    this.props.loadUserInfo();
     this.props.fetchDocuments();
   }
 
@@ -83,12 +80,6 @@ class Profile extends Component {
 
 const mapState = ({ currentUser, documents }) => ({ currentUser, documents });
 
-const mapDispatch = (dispatch) => ({
-  loadUserInfo: () => {
-    dispatch(getAllConditionsThunk());
-    dispatch(getAllDoctorsThunk());
-  },
-  fetchDocuments: () => dispatch(fetchDocuments()),
-});
+const mapDispatch = { fetchDocuments }
 
 export default connect(mapState, mapDispatch)(Profile);

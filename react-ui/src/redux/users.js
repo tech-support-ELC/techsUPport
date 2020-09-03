@@ -22,7 +22,6 @@ export const getUsersThunk = () => {
   return async dispatch => {
     try {
       const { data } = await axios.get(`/api/users`);
-      console.log(data)
       dispatch(getAllUsers(data));
     } catch (error) {
       console.log(error)
