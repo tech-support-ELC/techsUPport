@@ -9,7 +9,7 @@ import DCDoctorForm from './DCDoctorForm';
 import ReactModal from 'react-modal';
 import { Link } from 'react-router-dom';
 import { getTodayScoreThunk } from '../redux/dcTodayScore';
-import { getTodayAppointmentThunk } from'../redux/dcTodayAppointment';
+import { getTodayAppointmentThunk } from '../redux/dcTodayAppointment';
 import { getTodayMedsThunk } from '../redux/dcTodayMed'
 import DCSummary from './DCSummary';
 class DailyCheckin extends Component {
@@ -71,107 +71,107 @@ class DailyCheckin extends Component {
       <div>
         <h1>Daily Check-in</h1>
         <h3>{date}</h3>
+        <div>
           <div>
-            <div>
-              Some text
+            Some text
               <button
-                className="bigButton"
-                type="button"
-                onClick={() => this.openCondModal()}
-              >
-                Conditions
-              </button>
-            </div>
-            <ReactModal
-              isOpen={this.state.showCondModal}
-              contentLabel="Single Document"
+              className="bigButton"
+              type="button"
+              onClick={() => this.openCondModal()}
             >
+              Conditions
+              </button>
+          </div>
+          <ReactModal
+            isOpen={this.state.showCondModal}
+            contentLabel="Single Document"
+          >
             <div>
               <div>
                 {
                   score.length > 0 ? 'What conditions are you dealing with today today?' : null
                 }
               </div>
-            {(score && score.length > 0) ?
-              score.map((condition) => {
-                return (
-                  <div key={condition.id}>
-                    <DCConditionForm
-                      condition={condition}
-                      addScore={this.props.addScore}
-                    />
-                  </div>
-                );
-              }) : "You don't have any conditions"}
+              {(score && score.length > 0) ?
+                score.map((condition) => {
+                  return (
+                    <div key={condition.id}>
+                      <DCConditionForm
+                        condition={condition}
+                        addScore={this.props.addScore}
+                      />
+                    </div>
+                  );
+                }) : "You don't have any conditions"}
               <div>
-              {
-                (score && score.length === 0) ? <Link to="/conditions">Add Condition</Link> : null
-              }
-              </div>
-              </div>
-              <button onClick={this.closeCondModal}>Done</button>
-            </ReactModal>
-          </div>
-          <div>
-            <div>
-              <div>
-                Some text
-                <button
-                  className="bigButton"
-                  type="button"
-                  onClick={() => this.openDocModal()}
-                >
-                  Doctors
-                </button>
+                {
+                  (score && score.length === 0) ? <Link to="/conditions">Add Condition</Link> : null
+                }
               </div>
             </div>
-            <ReactModal
-              isOpen={this.state.showDocModal}
-              contentLabel="Single Document"
-            >
+            <button onClick={this.closeCondModal}>Done</button>
+          </ReactModal>
+        </div>
+        <div>
+          <div>
+            <div>
+              Some text
+                <button
+                className="bigButton"
+                type="button"
+                onClick={() => this.openDocModal()}
+              >
+                Doctors
+                </button>
+            </div>
+          </div>
+          <ReactModal
+            isOpen={this.state.showDocModal}
+            contentLabel="Single Document"
+          >
             <div>
               <div>
                 {
-                  appointment.length>0 ? 'Do you have an appointment with a doctor today?' : null
+                  appointment.length > 0 ? 'Do you have an appointment with a doctor today?' : null
                 }
               </div>
               {
-              (appointment && appointment.length>0) ?
-              appointment.map((doc) => {
-                return (
-                  <div key={doc.id}>
-                    <DCDoctorForm
-                      doc={doc}
-                      addAppointment={this.props.addAppointment}
-                    />
-                  </div>
-                );
-              }) : "You don't have any appointment"
+                (appointment && appointment.length > 0) ?
+                  appointment.map((doc) => {
+                    return (
+                      <div key={doc.id}>
+                        <DCDoctorForm
+                          doc={doc}
+                          addAppointment={this.props.addAppointment}
+                        />
+                      </div>
+                    );
+                  }) : "You don't have any appointment"
               }
             </div>
             <div>
               {
                 (appointment && appointment.length === 0) ? <Link to="/doctors">Add Doctor</Link> : null
               }
-              </div>
-            <button onClick={this.closeDocModal}>Done</button>
-            </ReactModal>
-          </div>
-          <div>
-            <div>
-              Some text
-              <button
-                className="bigButton"
-                type="button"
-                onClick={() => this.openMedModal()}
-              >
-                Medications
-              </button>
             </div>
-            <ReactModal
-              isOpen={this.state.showMedModal}
-              contentLabel="Single Document"
+            <button onClick={this.closeDocModal}>Done</button>
+          </ReactModal>
+        </div>
+        <div>
+          <div>
+            Some text
+              <button
+              className="bigButton"
+              type="button"
+              onClick={() => this.openMedModal()}
             >
+              Medications
+              </button>
+          </div>
+          <ReactModal
+            isOpen={this.state.showMedModal}
+            contentLabel="Single Document"
+          >
             <div>
               <div>
                 {
@@ -195,15 +195,15 @@ class DailyCheckin extends Component {
               {
                 (med && med.length === 0) ? <Link to="/medications">Add Medication</Link> : null
               }
-              </div>
-              <button onClick={this.closeMedModal}>Done</button>
-            </ReactModal>
-          </div>
-          <div>
-            {
-              (todayScore.length>0 || todayAppointment.length>0 || todayMed>0) ? <DCSummary /> : null
-            }
-          </div>
+            </div>
+            <button onClick={this.closeMedModal}>Done</button>
+          </ReactModal>
+        </div>
+        <div>
+          {
+            (todayScore.length > 0 || todayAppointment.length > 0 || todayMed > 0) ? <DCSummary /> : null
+          }
+        </div>
       </div>
     );
   }

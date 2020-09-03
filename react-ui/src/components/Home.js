@@ -11,13 +11,49 @@ import home from '../images/home.png'
 import HomeAddButtons from './HomeAddButtons'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
+import ReactModal from 'react-modal'
 import Onboarding from './Onboarding'
 import checkDay from '../utils/onboarding-date-function'
 
 
 export class Home extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      showDoctorModal: false,
+      showConditionModal: false,
+      showMedicineModal: false
+    }
+    this.openDoctorModal = this.openDoctorModal.bind(this)
+    this.openConditionModal = this.openConditionModal.bind(this)
+    this.openMedicineModal = this.openMedicineModal.bind(this)
+    this.closeDoctorModal = this.closeDoctorModal.bind(this)
+    this.closeConditionModal = this.closeConditionModal.bind(this)
+    this.closeMedicineModal = this.closeMedicineModal.bind(this)
+  }
+
+  openDoctorModal() {
+    this.setState({ showDoctorModal: true })
+  }
+  openConditionModal() {
+    this.setState({ showConditionModal: true })
+  }
+  openMedicineModal() {
+    this.setState({ showMedicineModal: true })
+  }
+
+  closeDoctorModal() {
+    this.setState({ showDoctorModal: false })
+  }
+  closeConditionModal() {
+    this.setState({ showConditionModal: false })
+  }
+  closeMedicineModal() {
+    this.setState({ showMedicineModal: false })
+  }
 
   componentDidMount() {
+    ReactModal.setAppElement("body")
     this.props.getAllDoctors()
     this.props.getAppointments()
     this.props.getAllConditions()
@@ -50,11 +86,12 @@ export class Home extends React.Component {
           <h2>Fill out your daily checkin for {moment().format('MMMM Do YYYY')}</h2>
           <div id="dailyCheckinHomePage">
             <Link to="/dailycheckin">
-              <button renderAs="button">
+              <button renderas="button">
                 <span>Daily Checkin</span>
               </button>
             </Link>
           </div>
+
           <HomeAddButtons />
 
           <div className='mainHomepageArea'>

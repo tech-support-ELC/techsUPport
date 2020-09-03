@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { API_URL } from './API_URL';
 const initialState = [];
 
 const GET_ALL_CONDITIONS = 'GET_ALL_CONDITIONS';
@@ -26,15 +25,15 @@ const deleteCondition = id => {
 }
 export const updateAllConditions = (id, condition) => {
   return {
-      type: UPDATE_CONDITIONS_LIST,
-      id,
-      condition
+    type: UPDATE_CONDITIONS_LIST,
+    id,
+    condition
   }
 }
 export const getAllConditionsThunk = () => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`${API_URL}/api/conditions/`);
+      const { data } = await axios.get(`/api/conditions/`);
       dispatch(getAllConditions(data));
     } catch (error) {
       console.log(error)
@@ -44,7 +43,7 @@ export const getAllConditionsThunk = () => {
 export const addConditionThunk = (condition) => {
   return async dispatch => {
     try {
-      const {data} = await axios.post(`${API_URL}/api/conditions`, condition);
+      const { data } = await axios.post(`/api/conditions`, condition);
       dispatch(addCondition(data));
     } catch (error) {
       console.log(error)
@@ -57,14 +56,14 @@ export const deleteConditionThunk = (id) => {
     try {
       await axios.delete(`/api/conditions/${id}`);
       dispatch(deleteCondition(id));
-      const {data} = await axios.get(`${API_URL}/api/conditions/`);
+      const { data } = await axios.get(`/api/conditions/`);
       dispatch(getAllConditions(data));
     } catch (err) {
       console.log(err);
     }
   };
 };
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case GET_ALL_CONDITIONS:
       return action.conditions;
@@ -74,11 +73,11 @@ export default function(state = initialState, action) {
       return state.filter(condition => condition.id !== action.id);
     case UPDATE_CONDITIONS_LIST:
       return [...state].map((condition) => {
-          if (condition.id === action.id) {
-              return action.condition;
-          } else {
-              return condition;
-          }
+        if (condition.id === action.id) {
+          return action.condition;
+        } else {
+          return condition;
+        }
       })
     default:
       return state;

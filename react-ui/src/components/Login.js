@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { login } from "../redux/auth";
-import { API_URL } from "../redux/API_URL";
 import { Link } from "react-router-dom";
 
 /* -----------------    COMPONENT     ------------------ */
@@ -20,13 +19,9 @@ const Login = (props) => {
         <button type="submit">Log in</button>
       </form>
       <p>OR</p>
-      <a target="_self" href={`${API_URL}/auth/google`}>
+      <a target="_self" href="/auth/google">
         Log in with Google
       </a>
-      <a target="_self" href={`${API_URL}/auth/facebook`}>
-        Log in with Facebook
-      </a>
-
       <Link to="/signup" id="signup">
         Sign up
       </Link>

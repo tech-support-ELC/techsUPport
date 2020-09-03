@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { API_URL } from './API_URL';
 import { getTodayMeds } from './dcTodayMed';
 const initialState = [];
 
@@ -22,7 +21,7 @@ const addMedication = med => {
 export const getMedicationThunk = () => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`${API_URL}/api/medications`);
+      const { data } = await axios.get(`/api/medications`);
       dispatch(getMedication(data));
     } catch (error) {
       console.error(error)
@@ -32,9 +31,9 @@ export const getMedicationThunk = () => {
 export const addMedicationThunk = (notes) => {
   return async dispatch => {
     try {
-      const {data} = await axios.post(`${API_URL}/api/dailycheckin/meds`, {notes});
-      const newData = await axios.get(`${API_URL}/api/medications`);
-      const allData = await axios.get(`${API_URL}/api/dailycheckin/dcmeds`);
+      const { data } = await axios.post(`/api/dailycheckin/meds`, { notes });
+      const newData = await axios.get(`/api/medications`);
+      const allData = await axios.get(`/api/dailycheckin/dcmeds`);
       dispatch(addMedication(data));
       dispatch(getMedication(newData.data));
       dispatch(getTodayMeds(allData.data));
@@ -43,7 +42,7 @@ export const addMedicationThunk = (notes) => {
     }
   }
 }
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case GET_MEDS:
       return action.med;

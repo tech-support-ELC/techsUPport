@@ -30,10 +30,6 @@ const Signup = (props) => {
         <i />
         <span>Sign up with Google</span>
       </a>
-      <a target="_self" href="/auth/facebook">
-        <i />
-        <span>Sign up with Facebook</span>
-      </a>
     </div>
   );
 };
