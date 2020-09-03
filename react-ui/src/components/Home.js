@@ -61,12 +61,14 @@ export class Home extends React.Component {
           <h1 id="welcomeName">Welcome, {firstName}!</h1>
           {!checkDay(currentUser.createdAt) ? <Onboarding /> : null}
           {doctors.length === 0 &&
-          conditions.length === 0 &&
-          medications.length === 0 ? (
-            <h2>
-              Get started by adding your doctors, conditions, and medications
-            </h2>
-          ) : null}
+            conditions.length === 0 &&
+            medications.length === 0 ? (
+              <h2>
+                Get started by adding your doctors, conditions, and medications
+                <img src={home} alt="" />
+              </h2>
+
+            ) : null}
           <h2>
             Fill out your daily check-in for {moment().format("MMMM Do YYYY")}
           </h2>
@@ -81,25 +83,29 @@ export class Home extends React.Component {
 
           <HomeAddButtons />
         </div>
-  <div className="mainHomepageArea">
-          <img src={home} alt="" />
-        {
-          (doctors && doctors.length > 0 && appointments && appointments.length > 0) ?
-            <DoctorDonut appointment={appointments} doctors={doctors} /> : null
-        }
-        {
-          (chart && chart.length > 0) ?
-            <CalendarHeatmap
-              values={data}
-              classForValue={(value) => {
-                if (!value) {
-                  return 'color-empty';
-                }
-                return `color-scale-${value.count}`;
-              }}
-            /> : null
-        }
-</div>
+        <div className="mainHomepageArea">
+          {/* {((!doctors || doctors.length === 0) && (!conditions || conditions.length === 0) && (!medications && medications.length === 0)) ?
+            <img src={home} alt="" /> : null
+          } */}
+          {
+            (doctors && doctors.length > 0 && appointments && appointments.length > 0) ?
+              <DoctorDonut appointment={appointments} doctors={doctors} /> : null
+          }
+          {
+            (chart && chart.length > 0) ?
+              <div>
+                <h4>My conditions over time</h4>
+                <CalendarHeatmap
+                  values={data}
+                  classForValue={(value) => {
+                    if (!value) {
+                      return 'color-empty';
+                    }
+                    return `color-scale-${value.count}`;
+                  }}
+                /> </div> : null
+          }
+        </div>
       </div>
     );
   }
