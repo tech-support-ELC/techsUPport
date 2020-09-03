@@ -138,6 +138,9 @@ footer {
       color: #339e66;
     }
   }
+  p {
+    margin: 10px 0;
+  }
 }
 
 form {
@@ -495,6 +498,11 @@ form {
       }
     }
   }
+
+  .loginSignup {
+    margin: 2em 1em 1em;
+    height: fit-content;
+  }
   .column {
     h3 {
       font-size: $small-font;
@@ -505,7 +513,8 @@ form {
     font-size: 16pt;
   }
   footer {
-    height: 15vh;
+    height: 20vh;
+    width: 100vw;
     max-height: 240px;
     // a {
     //   font-size: $small-font;
