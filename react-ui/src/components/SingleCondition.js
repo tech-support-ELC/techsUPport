@@ -35,19 +35,17 @@ class SingleCondition extends Component {
           <div>{this.state.clicked && <UpdateCondition />}</div>
 
           <div className="buttons">
-            <div>
-              {!this.state.clicked && (
+            {!this.state.clicked && (
+              <>
                 <button onClick={() => this.updateCondition()}>Update</button>
-              )}
-            </div>
-            {
-              <button
-                type="submit"
-                onClick={() => this.props.removeCondition(condition.id)}
-              >
-                Delete
-              </button>
-            }
+                <button
+                  type="submit"
+                  onClick={() => this.props.removeCondition(condition.id)}
+                >
+                  Delete
+                </button>
+              </>
+            )}
           </div>
         </div>
       );

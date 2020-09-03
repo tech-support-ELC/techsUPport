@@ -50,12 +50,14 @@ export class SingleDoctor extends React.Component {
 
           <div>{this.state.clicked === true && <UpdateDoctor />}</div>
           <div className="buttons">
-            <div>
-              {this.state.clicked === false && (
+            {this.state.clicked === false && (
+              <>
                 <button onClick={() => this.updateDoctor()}>Update</button>
-              )}
-            </div>
-            <button onClick={() => this.handleDelete(doctor.id)}>Delete</button>
+                <button onClick={() => this.handleDelete(doctor.id)}>
+                  Delete
+                </button>
+              </>
+            )}
           </div>
 
           <div>

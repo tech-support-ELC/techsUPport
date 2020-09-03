@@ -113,8 +113,8 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 10vh;
-  max-height: 200px;
+  height: 15vh;
+  max-height: 250px;
   padding: $padding;
   div {
     display: flex;
@@ -269,6 +269,34 @@ form {
   flex-wrap: wrap;
 }
 
+.home {
+  padding: 2em 2em 0;
+  display: flex;
+  justify-content: space-evenly;
+  height: fit-content;
+  min-height: 50vh;
+  max-height: 70vh;
+  .mainHomepageArea {
+    img {
+      max-width: 30vw;
+    }
+  }
+  h2 {
+    max-width: 40vw;
+  }
+  button {
+    font-size: 16pt;
+  }
+  #checkin {
+    background: #5ccc92;
+
+    &:hover {
+      background: #339e66;
+      color: white;
+    }
+  }
+}
+
 .column {
   font-size: 16pt;
   display: flex;
@@ -314,6 +342,7 @@ form {
   background: white;
   width: fit-content;
   max-width: 60%;
+  min-width: 300px;
   margin: 3em auto;
   padding: 2em;
   border: 3px solid #022ea8;

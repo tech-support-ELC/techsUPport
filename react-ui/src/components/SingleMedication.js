@@ -1,7 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchMedication, updateMedication } from "../redux/singleMedication";
+import { deleteMedication } from "../redux/medications";
 import UpdateMedication from "./UpdateMedication";
+import RemoveMedication from "./RemoveMedication";
 
 export class SingleMedication extends React.Component {
   constructor() {
@@ -20,7 +22,7 @@ export class SingleMedication extends React.Component {
     }
   }
 
-  handleClose(id) {
+  handleClose() {
     this.setState({ update: false });
   }
 
@@ -30,6 +32,15 @@ export class SingleMedication extends React.Component {
 
   handleUpdate(medication, updatedMedication) {
     this.props.update(medication, updatedMedication);
+  }
+
+  async handleDelete(id) {
+    try {
+      await this.props.delete(id);
+      this.props.handleClose();
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   render() {
@@ -44,10 +55,15 @@ export class SingleMedication extends React.Component {
             <p>{medication.dosage}</p>
             <p>{medication.frequency}</p>
             <p>{rxcui}</p>
-
-            <button type="button" onClick={() => this.handleOpen()}>
-              Update
-            </button>
+            <div className="buttons">
+              <button type="button" onClick={() => this.handleOpen()}>
+                Update
+              </button>
+              <RemoveMedication
+                medication={this.state.selected}
+                remove={this.handleRemove}
+              />
+            </div>
           </div>
         )}
         {medication && this.state.update && (
@@ -76,6 +92,7 @@ const mapDispatch = (dispatch) => {
     loadSingleMedication: (id) => dispatch(fetchMedication(id)),
     update: (medication, updatedMedication) =>
       dispatch(updateMedication(medication, updatedMedication)),
+    delete: (id) => dispatch(deleteMedication(id)),
   };
 };
 
