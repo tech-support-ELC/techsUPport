@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { API_URL } from './API_URL';
 import { getSingleTodayAppointment } from './dcSingleAppointment';
 const initialState = [];
 
@@ -49,7 +48,7 @@ export const updateTodayAppointmentThunk = (
       const allData = await axios.get(`/api/dailycheckin/dcappointment`);
       dispatch(updateTodayAppointment(data));
       dispatch(getTodayAppointment(allData.data));
-      const newData= await axios.get(`${API_URL}/api/dailycheckin/dcappointment/${id}`);
+      const newData = await axios.get(`/api/dailycheckin/dcappointment/${id}`);
       dispatch(getSingleTodayAppointment(newData.data));
     } catch (error) {
       console.log(error)
@@ -62,14 +61,14 @@ export const deleteTodayAppointmentThunk = (id) => {
     try {
       await axios.delete(`/api/dailycheckin/dcappointment/${id}`);
       dispatch(deleteTodayAppointment(id));
-      const {data} = await axios.get(`${API_URL}/api/dailycheckin/dcappointment`);
+      const { data } = await axios.get(`/api/dailycheckin/dcappointment`);
       dispatch(getTodayAppointment(data));
     } catch (err) {
       console.log(err);
     }
   };
 };
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
 
   switch (action.type) {
     case GET_TODAY_APPOINTMENT:

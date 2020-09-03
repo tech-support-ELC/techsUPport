@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { API_URL } from './API_URL';
 import { getSingleTodayMeds } from './dcSingleMed';
 
 const initialState = [];
@@ -39,7 +38,7 @@ export const updateTodayMedThunk = (
       const allData = await axios.get(`/api/dailycheckin/dcmeds`);
       dispatch(updateTodayMed(data));
       dispatch(getTodayMeds(allData.data));
-      const newData = await axios.get(`${API_URL}/api/dailycheckin/dcmeds/${id}`);
+      const newData = await axios.get(`/api/dailycheckin/dcmeds/${id}`);
       dispatch(getSingleTodayMeds(newData.data));
     } catch (error) {
       console.log(error);
@@ -62,14 +61,14 @@ export const deleteTodayMedThunk = (id) => {
     try {
       await axios.delete(`/api/dailycheckin/dcmeds/${id}`);
       dispatch(deleteTodayMed(id));
-      const {data} = await axios.get(`${API_URL}/api/dailycheckin/dcmeds`);
+      const { data } = await axios.get(`/api/dailycheckin/dcmeds`);
       dispatch(getTodayMeds(data));
     } catch (err) {
       console.log(err);
     }
   };
 };
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
 
   switch (action.type) {
     case GET_TODAY_MEDS:

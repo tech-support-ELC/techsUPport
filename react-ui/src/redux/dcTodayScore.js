@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { API_URL } from './API_URL';
 import { getSingleTodayScore } from './dcSingleScore';
 
 const initialState = [];
@@ -50,7 +49,7 @@ export const updateTodayScoreThunk = (
       const allData = await axios.get(`/api/dailycheckin/dcscore`);
       dispatch(updateTodayScore(data));
       dispatch(getTodayScore(allData.data));
-      const newData = await axios.get(`${API_URL}/api/dailycheckin/dcscore/${id}`);
+      const newData = await axios.get(`/api/dailycheckin/dcscore/${id}`);
       dispatch(getSingleTodayScore(newData.data));
     } catch (error) {
       console.log(error);
@@ -63,7 +62,7 @@ export const deleteTodayScoreThunk = (id) => {
     try {
       await axios.delete(`/api/dailycheckin/dcscore/${id}`);
       dispatch(deleteTodayScore(id));
-      const {data} = await axios.get(`${API_URL}/api/dailycheckin/dcscore`);
+      const { data } = await axios.get(`/api/dailycheckin/dcscore`);
       dispatch(getTodayScore(data));
     } catch (err) {
       console.log(err);
@@ -71,7 +70,7 @@ export const deleteTodayScoreThunk = (id) => {
   };
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case GET_TODAY_SCORE:
       return action.todayScore;
