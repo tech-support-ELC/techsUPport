@@ -143,6 +143,7 @@ class DailyCheckin extends Component {
                     <DCDoctorForm
                       doc={doc}
                       addAppointment={this.props.addAppointment}
+                      close={this.closeDocModal}
                     />
                   </div>
                 );
