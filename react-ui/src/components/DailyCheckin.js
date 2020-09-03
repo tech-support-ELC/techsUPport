@@ -69,7 +69,7 @@ class DailyCheckin extends Component {
     const todayScore = this.props.todayScore;
     const todayAppointment = this.props.todayAppointment;
     const todayMed = this.props.todayMed;
-    console.log('score', todayScore)
+    console.log('score', score)
     return (
       <div>
         <h1>Daily Check-in</h1>

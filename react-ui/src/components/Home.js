@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom'
 import ReactModal from 'react-modal'
 import Onboarding from './Onboarding'
 import checkDay from '../utils/onboarding-date-function'
-
+import Heatmap from './datavis/CalendarHeatmap';
 import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
 
@@ -54,7 +54,7 @@ export class Home extends React.Component {
     const currentUser = this.props.currentUser
     const chart = this.props.chart;
     const data = this.state.data;
-    console.log(data)
+    // console.log(data)
     return (
       <div className="home">
         <div>
@@ -89,15 +89,7 @@ export class Home extends React.Component {
         }
         {
           (chart && chart.length > 0) ?
-            <CalendarHeatmap
-              values={data}
-              classForValue={(value) => {
-                if (!value) {
-                  return 'color-empty';
-                }
-                return `color-scale-${value.count}`;
-              }}
-            /> : null
+            <Heatmap /> : null
         }
 </div>
       </div>

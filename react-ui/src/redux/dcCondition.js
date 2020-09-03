@@ -21,7 +21,7 @@ const addScore = score => {
 export const getScoreThunk = () => {
   return async dispatch => {
     try {
-      const { data } = await axios.get(`/api/dailycheckin/score`)
+      const { data } = await axios.get(`/api/conditions`)
       dispatch(getScore(data))
     } catch (error) {
       console.error(error)
