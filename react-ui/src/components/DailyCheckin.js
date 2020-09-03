@@ -141,6 +141,7 @@ class DailyCheckin extends Component {
               {
                 (doctors && doctors.length > 0) ?
                   doctors.map((doc) => {
+
                     return (
                       <div key={doc.id}>
                         <DCDoctorForm

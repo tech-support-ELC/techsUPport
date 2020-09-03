@@ -1,5 +1,4 @@
 import axios from "axios";
-import { API_URL } from './API_URL'
 
 
 /* -----------------    ACTION TYPES    ------------------ */
@@ -34,7 +33,7 @@ export default function (state = {}, action) {
 export const fetchSingleDocument = (id) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`${API_URL}/api/documents/${id}`);
+      const { data } = await axios.get(`/api/documents/${id}`);
       dispatch(getDocument(data));
     } catch (error) {
       console.log(error);
@@ -45,7 +44,7 @@ export const fetchSingleDocument = (id) => {
 export const updateDocumentThunk = (id, formData) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.put(`${API_URL}/api/documents/${id}`, formData);
+      const { data } = await axios.put(`/api/documents/${id}`, formData);
       dispatch(updateDocument(id, data));
     } catch (error) {
       console.log(error);

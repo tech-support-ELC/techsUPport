@@ -11,6 +11,7 @@ import home from '../images/home.png'
 import HomeAddButtons from './HomeAddButtons'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
+import ReactModal from 'react-modal'
 import Onboarding from './Onboarding'
 import checkDay from '../utils/onboarding-date-function'
 
@@ -75,6 +76,7 @@ export class Home extends React.Component {
               </button>
             </Link>
           </div>
+
           <HomeAddButtons />
 
           <div className='mainHomepageArea'>

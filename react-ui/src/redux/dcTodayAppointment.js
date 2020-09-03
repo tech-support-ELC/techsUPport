@@ -29,7 +29,7 @@ const updateTodayAppointment = todayAppointment => {
 export const getTodayAppointmentThunk = () => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`${API_URL}/api/dailycheckin/dcappointment`);
+      const { data } = await axios.get(`/api/dailycheckin/dcappointment`);
       dispatch(getTodayAppointment(data));
     } catch (error) {
       console.error(error)
@@ -42,11 +42,11 @@ export const updateTodayAppointmentThunk = (
 ) => {
   return async dispatch => {
     try {
-      const {data} = await axios.put(
-        `${API_URL}/api/dailycheckin/dcappointment/${id}`,
+      const { data } = await axios.put(
+        `/api/dailycheckin/dcappointment/${id}`,
         todayAppointment
       );
-      const allData = await axios.get(`${API_URL}/api/dailycheckin/dcappointment`);
+      const allData = await axios.get(`/api/dailycheckin/dcappointment`);
       dispatch(updateTodayAppointment(data));
       dispatch(getTodayAppointment(allData.data));
       const newData= await axios.get(`${API_URL}/api/dailycheckin/dcappointment/${id}`);
@@ -56,6 +56,7 @@ export const updateTodayAppointmentThunk = (
     }
   }
 }
+
 export const deleteTodayAppointmentThunk = (id) => {
   return async (dispatch) => {
     try {
@@ -69,6 +70,7 @@ export const deleteTodayAppointmentThunk = (id) => {
   };
 };
 export default function(state = initialState, action) {
+
   switch (action.type) {
     case GET_TODAY_APPOINTMENT:
       return action.todayAppointment;

@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { API_URL } from './API_URL'
 
 /* -----------------    ACTION TYPES    ------------------ */
 
@@ -32,7 +31,7 @@ export default function reducer(currentUser = {}, action) {
 export const login = (credentials, history) => {
   return async dispatch => {
     try {
-      const { data } = await axios.post(`${API_URL}/auth/local/login`, credentials)
+      const { data } = await axios.post(`/auth/local/login`, credentials)
       setUserAndRedirect(data, history, dispatch)
     } catch (err) {
       console.error(`Logging in with ${credentials.email} was unsuccesful`, err)
@@ -43,7 +42,7 @@ export const login = (credentials, history) => {
 export const logout = history => {
   return async dispatch => {
     try {
-      await axios.delete(`${API_URL}/auth/local/logout`)
+      await axios.delete(`/auth/local/logout`)
       dispatch(removeCurrentUser())
       history.push('/login')
     } catch (err) {
@@ -56,7 +55,7 @@ export const logout = history => {
 export const signup = (credentials, history) => {
   return async dispatch => {
     try {
-      const { data } = await axios.post(`${API_URL}/auth/local/signup`, credentials)
+      const { data } = await axios.post(`/auth/local/signup`, credentials)
       setUserAndRedirect(data, history, dispatch)
     } catch (err) {
       console.error(`Signing up with ${credentials.email} was unsuccesful`, err)
@@ -67,7 +66,7 @@ export const signup = (credentials, history) => {
 export const fetchCurrentUser = () => {
   return async dispatch => {
     try {
-      const { data } = await axios.get(`${API_URL}/auth/local/me`)
+      const { data } = await axios.get(`/auth/local/me`)
       dispatch(setCurrentUser(data))
     } catch (err) {
       console.error('Fetching current user failed', err)
@@ -79,7 +78,6 @@ export const fetchCurrentUser = () => {
 
 function setUserAndRedirect(user, history, dispatch) {
   console.log('setUserAndRedirect')
-  console.log(user)
   dispatch(setCurrentUser(user))
   history.push(`/`)
 }

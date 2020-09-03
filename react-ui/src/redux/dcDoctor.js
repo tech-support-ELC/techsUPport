@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { API_URL } from './API_URL';
 import { getTodayAppointment } from './dcTodayAppointment';
 const initialState = [];
 
@@ -33,9 +32,9 @@ export const getAppointmentThunk = () => {
 export const addAppointmentThunk = (appointmentDate) => {
   return async dispatch => {
     try {
-      const { data } = await axios.post(`${API_URL}/api/dailycheckin/appointment`, { appointmentDate });
-      const newData = await axios.get(`${API_URL}/api/doctors`);
-      const allData = await axios.get(`${API_URL}/api/dailycheckin/dcappointment`);
+      const { data } = await axios.post(`/api/dailycheckin/appointment`, { appointmentDate });
+      const newData = await axios.get(`/api/doctors`);
+      const allData = await axios.get(`/api/dailycheckin/dcappointment`);
       dispatch(addAppointment(data));
       dispatch(getAppointment(newData.data));
       dispatch(getTodayAppointment(allData.data));
