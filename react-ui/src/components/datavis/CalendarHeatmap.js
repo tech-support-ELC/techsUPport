@@ -43,6 +43,7 @@ export class Heatmap extends React.Component {
     return (
       <div>
         <div>
+          <div>How I've felt over time</div>
           {chart && chart.length > 0 ? (
             <CalendarHeatmap
               values={data}
