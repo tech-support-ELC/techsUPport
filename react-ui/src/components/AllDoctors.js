@@ -73,6 +73,7 @@ export class AllDoctors extends React.Component {
                     <ReactModal
                       isOpen={this.state.showDocModal}
                       contentLabel="Example Modal"
+                      transparent={true}
                       className="popup"
                     >
                       <button className="close" onClick={this.closeDocModal}>

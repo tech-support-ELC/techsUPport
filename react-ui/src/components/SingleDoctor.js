@@ -47,16 +47,20 @@ export class SingleDoctor extends React.Component {
           </div>
           <div>Specialty: {doctor.doctorType}</div>
           <div>Address: {doctor.address}</div>
+
           <div>{this.state.clicked === true && <UpdateDoctor />}</div>
-          <div>
-            {this.state.clicked === false && (
-              <button onClick={() => this.updateDoctor()}>Update</button>
-            )}
+          <div className="buttons">
+            <div>
+              {this.state.clicked === false && (
+                <button onClick={() => this.updateDoctor()}>Update</button>
+              )}
+            </div>
+            <button onClick={() => this.handleDelete(doctor.id)}>Delete</button>
           </div>
-          <button onClick={() => this.handleDelete(doctor.id)}>Delete</button>
+
           <div>
             <div>
-              My Appointments with {doctor.firstName} {doctor.lastName}{" "}
+              My Appointments with {doctor.firstName} {doctor.lastName}
             </div>
             <ul>
               {docApps.map((oneapp) => {
