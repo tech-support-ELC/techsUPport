@@ -59,7 +59,7 @@ export class HomeAddButtons extends React.Component {
 
     render() {
         return (
-            <div>
+            <div id="addButtons">
                 <div>
                     <button onClick={this.openDoctorModal}>Add a Doctor</button>
                     <ReactModal isOpen={this.state.showDoctorModal} contentLabel="Example Modal">
