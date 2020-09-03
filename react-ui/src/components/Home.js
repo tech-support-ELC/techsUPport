@@ -6,68 +6,55 @@ import { getAllDoctorsThunk, addDoctorThunk } from "../redux/doctors";
 import { getAllConditionsThunk, addConditionThunk } from "../redux/conditions";
 import LineChart from "./lineChart/LineChartCondition";
 import { fetchMedications } from "../redux/medications";
-import { getChartThunk } from "../redux/score";
-import home from "../images/home.png";
-import HomeAddButtons from "./HomeAddButtons";
-import moment from "moment";
-import { Link } from "react-router-dom";
-import ReactModal from "react-modal";
-import Onboarding from "./Onboarding";
-import checkDay from "../utils/onboarding-date-function";
+import { getChartThunk } from '../redux/score'
+import home from '../images/home.png'
+import HomeAddButtons from './HomeAddButtons'
+import moment from 'moment'
+import { Link } from 'react-router-dom'
+import ReactModal from 'react-modal'
+import Onboarding from './Onboarding'
+import checkDay from '../utils/onboarding-date-function'
+
+import CalendarHeatmap from 'react-calendar-heatmap';
+import 'react-calendar-heatmap/dist/styles.css';
 
 export class Home extends React.Component {
   constructor() {
     super();
     this.state = {
-      showDoctorModal: false,
-      showConditionModal: false,
-      showMedicineModal: false,
-    };
-    this.openDoctorModal = this.openDoctorModal.bind(this);
-    this.openConditionModal = this.openConditionModal.bind(this);
-    this.openMedicineModal = this.openMedicineModal.bind(this);
-    this.closeDoctorModal = this.closeDoctorModal.bind(this);
-    this.closeConditionModal = this.closeConditionModal.bind(this);
-    this.closeMedicineModal = this.closeMedicineModal.bind(this);
-  }
 
-  openDoctorModal() {
-    this.setState({ showDoctorModal: true });
+      data: [],
+    }
   }
-  openConditionModal() {
-    this.setState({ showConditionModal: true });
-  }
-  openMedicineModal() {
-    this.setState({ showMedicineModal: true });
-  }
-
-  closeDoctorModal() {
-    this.setState({ showDoctorModal: false });
-  }
-  closeConditionModal() {
-    this.setState({ showConditionModal: false });
-  }
-  closeMedicineModal() {
-    this.setState({ showMedicineModal: false });
-  }
-
-  componentDidMount() {
-    ReactModal.setAppElement("body");
+  async componentDidMount() {
+    await this.props.getChart();
     this.props.getAllDoctors();
     this.props.getAppointments();
     this.props.getAllConditions();
     this.props.getMedications();
-    this.props.getChart();
-  }
 
+    const count = this.props.chart.map(eachScore => eachScore.rate);
+    const date = this.props.chart.map(eachDate => eachDate.date);
+    this.setState((prevState) => {
+      const data = date.map((d, i) => ({
+        date: d,
+        count: count[i]
+      }))
+      return {
+        data
+      }
+    })
+  }
   render() {
-    const { firstName } = this.props.currentUser;
-    const appointments = this.props.appointment;
-    const doctors = this.props.doctors;
-    const conditions = this.props.conditions;
-    const medications = this.props.medications;
+    const { firstName } = this.props.currentUser
+    const appointments = this.props.appointment
+    const doctors = this.props.doctors
+    const conditions = this.props.conditions
+    const medications = this.props.medications
+    const currentUser = this.props.currentUser
     const chart = this.props.chart;
-    const currentUser = this.props.currentUser;
+    const data = this.state.data;
+    console.log(data)
     return (
       <div className="home">
         <div>
@@ -85,7 +72,8 @@ export class Home extends React.Component {
           </h2>
           <div id="dailyCheckinHomePage">
             <Link to="/dailycheckin">
-              <button id="checkin" renderas="button">
+
+              <button id="checkin">
                 <span>Daily Check-in</span>
               </button>
             </Link>
@@ -93,17 +81,25 @@ export class Home extends React.Component {
 
           <HomeAddButtons />
         </div>
-        <div className="mainHomepageArea">
+  <div className="mainHomepageArea">
           <img src={home} alt="" />
-          {doctors &&
-          doctors.length > 0 &&
-          appointments &&
-          appointments.length > 0 ? (
-            <DoctorDonut appointment={appointments} doctors={doctors} />
-          ) : chart && chart.length > 0 ? (
-            <LineChart />
-          ) : null}
-        </div>
+        {
+          (doctors && doctors.length > 0 && appointments && appointments.length > 0) ?
+            <DoctorDonut appointment={appointments} doctors={doctors} /> : null
+        }
+        {
+          (chart && chart.length > 0) ?
+            <CalendarHeatmap
+              values={data}
+              classForValue={(value) => {
+                if (!value) {
+                  return 'color-empty';
+                }
+                return `color-scale-${value.count}`;
+              }}
+            /> : null
+        }
+</div>
       </div>
     );
   }

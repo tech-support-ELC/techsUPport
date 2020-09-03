@@ -22,6 +22,16 @@ router.get('/', async (req, res, next) => {
         next(error)
     }
 })
+router.get('/appointments', async (req, res, next) => {
+    try {
+        const allDoctors = await Appointment.findAll({ where: { userId: req.user.id } })
+        if (allDoctors) {
+            res.json(allDoctors)
+        }
+    } catch (error) {
+        next(error)
+    }
+})
 router.get('/:id', async (req, res, next) => {
     try {
         const oneDoctor = await Doctor.findOne({

@@ -1,13 +1,23 @@
 import axios from 'axios';
+import { API_URL } from './API_URL';
+import { getSingleTodayScore } from './dcSingleScore';
+
 const initialState = [];
 
 const GET_TODAY_SCORE = 'GET_TODAY_SCORE';
 const UPDATE_TODAY_SCORE = 'UPDATE_TODAY_SCORE';
+const DELETE_TODAY_SCORE = 'DELETE_TODAY_SCORE';
 
 export const getTodayScore = todayScore => {
   return {
     type: GET_TODAY_SCORE,
     todayScore
+  }
+}
+const deleteTodayScore = id => {
+  return {
+    type: DELETE_TODAY_SCORE,
+    id
   }
 }
 const updateTodayScore = todayScore => {
@@ -26,6 +36,7 @@ export const getTodayScoreThunk = () => {
     }
   }
 }
+
 export const updateTodayScoreThunk = (
   id,
   todayScore
@@ -39,13 +50,28 @@ export const updateTodayScoreThunk = (
       const allData = await axios.get(`/api/dailycheckin/dcscore`);
       dispatch(updateTodayScore(data));
       dispatch(getTodayScore(allData.data));
+      const newData = await axios.get(`${API_URL}/api/dailycheckin/dcscore/${id}`);
+      dispatch(getSingleTodayScore(newData.data));
     } catch (error) {
       console.log(error);
     }
   }
 }
 
-export default function (state = initialState, action) {
+export const deleteTodayScoreThunk = (id) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(`/api/dailycheckin/dcscore/${id}`);
+      dispatch(deleteTodayScore(id));
+      const {data} = await axios.get(`${API_URL}/api/dailycheckin/dcscore`);
+      dispatch(getTodayScore(data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export default function(state = initialState, action) {
   switch (action.type) {
     case GET_TODAY_SCORE:
       return action.todayScore;
@@ -55,6 +81,8 @@ export default function (state = initialState, action) {
       updated.rate = action.todayScore.rate;
       updated.notes = action.todayScore.notes;
       return updated;
+    case DELETE_TODAY_SCORE:
+      return state.filter(todayScore => todayScore.id !== action.id);
     default:
       return state;
   }

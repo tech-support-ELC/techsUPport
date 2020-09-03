@@ -15,7 +15,7 @@ class DCConditionForm extends Component {
   }
   handleChange(evt) {
     const conditionId = this.props.condition.id;
-    this.setState({ conditionId, isSubmitted: true });
+    this.setState({ conditionId, isSubmitted: true, isClicked: true });
     const target = evt.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;

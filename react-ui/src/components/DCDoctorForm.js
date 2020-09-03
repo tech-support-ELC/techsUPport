@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import moment from 'moment'
+
 class DCDoctorForm extends Component {
   constructor() {
     super();
@@ -22,8 +24,16 @@ class DCDoctorForm extends Component {
   }
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.addAppointment(this.state);
-    console.log('props inside daily checkin appointment submit', this.props)
+    if (this.props.appointmentDate) {
+      const date = this.props.appointmentDate
+      let appointmentDate = moment(date).format('YYYY-MM-DD')
+      let time = this.state.time
+      let doctorId = this.state.doctorId
+      this.props.addAppointment({ time, doctorId, appointmentDate })
+    } else {
+      this.props.addAppointment(this.state)
+    }
+    console.log('props inside daily checkin submit', this.props)
     this.setState({
       isClicked: false,
       time: '',
@@ -40,6 +50,7 @@ class DCDoctorForm extends Component {
             type='checkbox'
             name='isClicked'
             onChange={this.handleChange}
+            // disabled={this.state.isClicked}
           />
         </label>
         {
@@ -58,7 +69,7 @@ class DCDoctorForm extends Component {
                   />
                 </label>
               </div>
-              <button type="submit">
+              <button type="submit" onClick={!this.state.isClicked}>
                 Submit
           </button>
             </div> : null

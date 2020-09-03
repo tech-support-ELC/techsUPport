@@ -6,6 +6,7 @@ import { AddDoctor } from "./AddDoctor";
 import ReactModal from "react-modal";
 import SingleDoctor from "./SingleDoctor";
 import { getAppointmentThunk } from "../redux/dcDoctor";
+import AppointmentCalendar from './AppointmentCalendar'
 
 // const customStyles = {
 //     content: {
@@ -31,7 +32,7 @@ export class AllDoctors extends React.Component {
     this.closeDocModal = this.closeDocModal.bind(this);
   }
   componentDidMount() {
-    ReactModal.setAppElement("body");
+    ReactModal.setAppElement("body")
     this.props.getAllDoctors();
   }
 
@@ -63,6 +64,7 @@ export class AllDoctors extends React.Component {
             {doctors &&
               doctors.map((doctor) => {
                 return (
+
                   <div className="listItem" key={doctor.id}>
                     <button
                       className="bigButton"
@@ -70,11 +72,12 @@ export class AllDoctors extends React.Component {
                     >
                       {doctor.firstName} {doctor.lastName}
                     </button>
+
                     <ReactModal
                       isOpen={this.state.showDocModal}
-                      contentLabel="Example Modal"
-                      transparent={true}
+                      contentLabel="Single Document"
                       className="popup"
+                    // ariaHideApp={false}
                     >
                       <button className="close" onClick={this.closeDocModal}>
                         X
@@ -82,16 +85,18 @@ export class AllDoctors extends React.Component {
                       <SingleDoctor closeTheModal={this.closeDocModal} />
                     </ReactModal>
                   </div>
+
                 );
               })}
           </div>
           <button onClick={this.openModal}>Add a Doctor</button>
         </div>
-        <div className="column">
+        <div id='modal' className="column">
           <ReactModal
             isOpen={this.state.showModal}
-            contentLabel="Example Modal"
+            contentLabel="Single Document"
             className="popup"
+            ariaHideApp={false}
           >
             <button className="close" onClick={this.closeModal}>
               X
@@ -101,6 +106,10 @@ export class AllDoctors extends React.Component {
               addNewDoctor={this.props.addNewDoctor}
             />
           </ReactModal>
+        </div>
+        <div>
+          <h2>Add an appointment with your doctor</h2>
+          <AppointmentCalendar />
         </div>
       </div>
     );

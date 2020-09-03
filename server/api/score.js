@@ -6,7 +6,6 @@ router.get('/', async (req, res, next) => {
   try {
     const scores = await Score.findAll({where: {
       userId: req.user.id,
-      conditionId: 1
     }});
     res.json(scores);
   } catch (error) {
