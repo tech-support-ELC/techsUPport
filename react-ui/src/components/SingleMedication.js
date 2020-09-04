@@ -52,8 +52,12 @@ export class SingleMedication extends React.Component {
         {medication && !this.state.update && (
           <div>
             <p>{medication.name}</p>
-            <p>{medication.dosage}</p>
-            <p>{medication.frequency}</p>
+            <p>
+              {medication.dosage} {medication.dosageUnit}
+            </p>
+            <p>
+              {medication.frequency} / {medication.frequencyUnit}
+            </p>
             <p>{rxcui}</p>
             <div className="buttons">
               <button type="button" onClick={() => this.handleOpen()}>

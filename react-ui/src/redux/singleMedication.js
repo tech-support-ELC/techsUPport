@@ -29,8 +29,9 @@ export const fetchMedId = (medName) => {
       const { data } = await axios.get(
         `https://rxnav.nlm.nih.gov/REST/rxcui.json?name=${medName}`
       );
-      console.log(data.idGroup.rxnormId[0]);
-      dispatch(getMedId(data.idGroup.rxnormId[0]));
+      if (data) {
+        dispatch(getMedId(data.idGroup.rxnormId[0]));
+      }
     } catch (error) {
       console.log(error);
     }

@@ -54,49 +54,45 @@ export class Home extends React.Component {
     const currentUser = this.props.currentUser;
     const chart = this.props.chart;
     const data = this.state.data;
-
-    // console.log(data)
-
     return (
-      <div className="home">
-        <div>
-          <h1 id="welcomeName">Welcome, {firstName}!</h1>
-          {!checkDay(currentUser.createdAt) ? <Onboarding /> : null}
-        </div>
-        <div>
-          {doctors.length === 0 &&
-          conditions.length === 0 &&
-          medications.length === 0 ? (
+      <div>
+        <h1 id="welcomeName">Welcome, {firstName}!</h1>
+        <div className="home">
+          <div>{!checkDay(currentUser.createdAt) ? <Onboarding /> : null}</div>
+          <div>
+            {doctors.length === 0 &&
+            conditions.length === 0 &&
+            medications.length === 0 ? (
+              <h2>
+                Get started by adding your doctors, conditions, and medications
+              </h2>
+            ) : null}
             <h2>
-              Get started by adding your doctors, conditions, and medications
+              Fill out your daily check-in for {moment().format("MMMM Do YYYY")}
             </h2>
-          ) : null}
-          <h2>
-            Fill out your daily check-in for {moment().format("MMMM Do YYYY")}
-          </h2>
-          <div id="dailyCheckinHomePage">
-            <Link to="/dailycheckin">
-              <button id="checkin">
-                <span>Daily Check-in</span>
-              </button>
-            </Link>
+            <div id="dailyCheckinHomePage">
+              <Link to="/dailycheckin">
+                <button id="checkin">
+                  <span>Daily Check-in</span>
+                </button>
+              </Link>
+            </div>
+            <HomeAddButtons />
           </div>
-
-          <HomeAddButtons />
-        </div>
-        <div className="mainHomepageArea">
-          {doctors.length === 0 &&
-          conditions.length === 0 &&
-          medications.length === 0 ? (
-            <img src={home} alt="" />
-          ) : null}
-          {doctors &&
-          doctors.length > 0 &&
-          appointments &&
-          appointments.length > 0 ? (
-            <DoctorDonut appointment={appointments} doctors={doctors} />
-          ) : null}
-          {chart && chart.length > 0 ? <Heatmap /> : null}
+          <div className="mainHomepageArea">
+            {doctors.length === 0 &&
+            conditions.length === 0 &&
+            medications.length === 0 ? (
+              <img src={home} alt="" />
+            ) : null}
+            {doctors &&
+            doctors.length > 0 &&
+            appointments &&
+            appointments.length > 0 ? (
+              <DoctorDonut appointment={appointments} doctors={doctors} />
+            ) : null}
+            {chart && chart.length > 0 ? <Heatmap /> : null}
+          </div>
         </div>
       </div>
     );
