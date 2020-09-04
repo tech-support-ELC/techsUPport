@@ -8,24 +8,24 @@ class AdminDashboard extends Component {
   }
   render() {
     const users = this.props.users;
-    console.log(this.props)
+
     return (
       <div>
         <h2>Admin Dashboard</h2>
         <h3>All users</h3>
-            {users && users.map((user) => {
-              return (
-                <div key={user.id}>
-                  <div>{user.firstName} {user.lastName}</div>
-                   <button
-                    type="submit"
-                    onClick={() => this.props.deleteUser(user.id)}
-                    >
-                      Delete User
+        {users && users.map((user) => {
+          return (
+            <div key={user.id}>
+              <div>{user.firstName} {user.lastName}</div>
+              <button
+                type="submit"
+                onClick={() => this.props.deleteUser(user.id)}
+              >
+                Delete User
                     </button>
-                </div>
-              )
-            })}
+            </div>
+          )
+        })}
       </div>
     )
   }

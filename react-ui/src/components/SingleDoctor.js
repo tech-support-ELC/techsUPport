@@ -85,6 +85,7 @@ export class SingleDoctor extends React.Component {
 }
 
 
+
 const mapStateToProps = (state) => {
   return {
     doctor: state.doctor,
