@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { connect } from 'react-redux'
-import { logout } from '../redux/auth'
-import history from '../utils/history'
+import { connect } from "react-redux";
+import { logout } from "../redux/auth";
+import history from "../utils/history";
 
 const Navbar = (props) => {
-  const { handleClick } = props
+  const { handleClick } = props;
 
   return (
     <nav>
@@ -32,17 +32,18 @@ const Navbar = (props) => {
         </div>
         <div className='navLogout'>
           <Link to='/login' onClick={handleClick}>Log out</Link>
+
         </div>
       </div>
     </nav>
   );
 };
 
-const mapDispatch = (dispatch) => {
-  return {
-    handleClick: () => {
-      dispatch(logout(history))
-    }
-  }
-}
+
+const mapDispatch = (dispatch) => ({
+  handleClick: () => {
+    dispatch(logout(history));
+  },
+});
+
 export default connect(null, mapDispatch)(Navbar);

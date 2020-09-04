@@ -1,42 +1,60 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import UpdateTodayScore from './UpdateTodayScore';
+import DCSingleTodayScore from './DCSingleTodayScore';
 import { getTodayScoreThunk } from '../redux/dcTodayScore';
 import { getTodayAppointmentThunk } from'../redux/dcTodayAppointment';
-import { getTodayMedsThunk } from '../redux/dcTodayMed'
+import { getTodayMedsThunk } from '../redux/dcTodayMed';
+import { getSingleTodayScoreThunk } from '../redux/dcSingleScore';
+import { getSingleTodayAppointmentThunk } from '../redux/dcSingleAppointment';
+import DCSingleTodayAppointment from './DCSingleTodayAppointment';
+import { getSingleTodayMedsThunk } from '../redux/dcSingleMed';
+import DCSingleTodayMed from './DCSingleTodayMed';
+import ReactModal from "react-modal";
 class DCSummary extends Component {
   constructor() {
     super();
     this.state = {
-      isClickedScore: false
+      showCondModal: false,
+      showDocModal: false,
+      showMedModal: false,
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.updateScore = this.updateScore.bind(this);
+    this.openCondModal = this.openCondModal.bind(this);
+    this.closeCondModal = this.closeCondModal.bind(this);
+    this.closeDocModal = this.closeDocModal.bind(this);
+    this.closeMedModal = this.closeMedModal.bind(this);
+    this.openDocModal = this.openDocModal.bind(this);
+    this.openMedModal = this.openMedModal.bind(this);
   }
   componentDidMount() {
     this.props.getTodayScore();
     this.props.getTodayMeds();
     this.props.getTodayAppointment();
+    ReactModal.setAppElement("body");
   }
-  handleChange(evt) {
-    const doctorId = this.props.doctor.id;
-    this.setState({ doctorId });
-    const target = evt.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-    this.setState({
-      [name]: value
-    });
+  openDocModal(id) {
+    this.setState({ showDocModal: true });
+    this.props.getSingleTodayAppointment(id);
   }
-  handleSubmit(evt) {
-    evt.preventDefault();
-    this.setState({
 
-    })
+  openCondModal(id) {
+    this.setState({ showCondModal: true });
+    this.props.getSingleTodayScore(id);
   }
-  updateScore() {
-    this.setState({isClickedScore: !this.state.isClickedScore})
+  openMedModal(id) {
+    this.setState({ showMedModal: true });
+    this.props.getSingleTodayMeds(id);
+  }
+
+  closeMedModal() {
+    this.setState({ showMedModal: false });
+  }
+
+  closeDocModal() {
+    this.setState({ showDocModal: false });
+  }
+
+  closeCondModal() {
+    this.setState({ showCondModal: false });
   }
   render() {
     const todayScore = this.props.todayScore;
@@ -49,25 +67,27 @@ class DCSummary extends Component {
         <div>
           <div>
           {
-            todayScore.length > 0 ? "Your Conditions:" : null
+            todayScore.length > 0 ? "Your Conditions and Rate:" : null
           }
           </div>
           {
           (todayScore && todayScore.length > 0) && todayScore.map((eachScore) => {
             return (
               <div key={eachScore.id}>
-                <div>
-                  <div>{eachScore.name} {eachScore.rate} {eachScore.notes}</div>
-                </div>
-                <button type='submit' onClick={()=>this.updateScore()}>
-                  Update
+                <button type="button"
+                  onClick={() => this.openCondModal(eachScore.id)}>
+                 {eachScore.name}
+                 {' '}
+                 {eachScore.rate}
                 </button>
-                {
-                  this.state.isClickedScore ? <UpdateTodayScore eachScore={eachScore}updateTodayScore={this.props.updateTodayScore}/> : null
-                }
-                <button type='submit'>
-                  X
-                </button>
+                <ReactModal
+                  isOpen={this.state.showCondModal}
+                  contentLabel="Single Document"
+                  className="popup"
+                >
+                  <DCSingleTodayScore closeTheModal={this.closeCondModal} />
+                  <button onClick={this.closeCondModal}>Close</button>
+                </ReactModal>
               </div>
             );
           })
@@ -80,12 +100,25 @@ class DCSummary extends Component {
           }
           </div>
         {
-          todayAppointment && todayAppointment.map((eachAppointment) => {
+          (todayAppointment && todayAppointment.length > 0) &&todayAppointment.map((eachAppointment) => {
             return (
               <div key={eachAppointment.id}>
-                <div>
-                  <div>{eachAppointment.firstName} {eachAppointment.lastName} {eachAppointment.time.slice(0,5)}</div>
-                </div>
+                <button type="button"
+                  onClick={() => this.openDocModal(eachAppointment.id)}>
+                 {eachAppointment.firstName}
+                 {' '}
+                 {eachAppointment.lastName}
+                 {' '}
+                 {eachAppointment.time.slice(0,5)}
+                </button>
+                <ReactModal
+                  isOpen={this.state.showDocModal}
+                  contentLabel="Single Document"
+                  className="popup"
+                >
+                  <DCSingleTodayAppointment closeTheModal={this.closeDocModal} />
+                  <button onClick={this.closeDocModal}>Close</button>
+                </ReactModal>
               </div>
             );
           })
@@ -98,12 +131,23 @@ class DCSummary extends Component {
           }
           </div>
           {
-          todayMed && todayMed.map((eachMed) => {
+          (todayMed && todayMed.length > 0) && todayMed.map((eachMed) => {
             return (
               <div key={eachMed.id}>
-                <div>
-                  <div>{eachMed.name} {eachMed.notes}</div>
-                </div>
+                <button type="button"
+                  onClick={() => this.openMedModal(eachMed.id)}>
+                 {eachMed.name}
+                 {' '}
+                 {eachMed.notes}
+                </button>
+                <ReactModal
+                  isOpen={this.state.showMedModal}
+                  contentLabel="Single Document"
+                  className="popup"
+                >
+                  <DCSingleTodayMed closeTheModal={this.closeMedModal} />
+                  <button onClick={this.closeMedModal}>Close</button>
+                </ReactModal>
               </div>
             );
           })
@@ -126,6 +170,9 @@ const mapDispatchToProps = (dispatch) => {
     getTodayScore: () => dispatch(getTodayScoreThunk()),
     getTodayAppointment: () => dispatch(getTodayAppointmentThunk()),
     getTodayMeds: () => dispatch(getTodayMedsThunk()),
+    getSingleTodayScore: (id) => dispatch(getSingleTodayScoreThunk(id)),
+    getSingleTodayAppointment: (id) => dispatch(getSingleTodayAppointmentThunk(id)),
+    getSingleTodayMeds: (id) => dispatch(getSingleTodayMedsThunk(id))
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(DCSummary);

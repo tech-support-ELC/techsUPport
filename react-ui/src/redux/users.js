@@ -21,6 +21,7 @@ const getAllUsers = users => {
 export const getUsersThunk = () => {
   return async dispatch => {
     try {
+
       const { data } = await axios.get(`/api/users`);
       dispatch(getAllUsers(data));
     } catch (error) {

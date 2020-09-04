@@ -113,8 +113,8 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 10vh;
-  max-height: 200px;
+  height: 15vh;
+  max-height: 250px;
   padding: $padding;
   div {
     display: flex;
@@ -137,6 +137,9 @@ footer {
     &:hover {
       color: #339e66;
     }
+  }
+  p {
+    margin: 10px 0;
   }
 }
 
@@ -269,6 +272,37 @@ form {
   flex-wrap: wrap;
 }
 
+.home {
+  padding: 0 2em;
+  display: flex;
+  justify-content: space-evenly;
+  height: fit-content;
+  min-height: 50vh;
+  max-height: 70vh;
+  div {
+    max-width: 30vw;
+  }
+  .mainHomepageArea {
+    img {
+      max-width: 30vw;
+    }
+  }
+  h2 {
+    max-width: 40vw;
+  }
+  button {
+    font-size: 16pt;
+  }
+  #checkin {
+    background: #5ccc92;
+
+    &:hover {
+      background: #339e66;
+      color: white;
+    }
+  }
+}
+
 .column {
   font-size: 16pt;
   display: flex;
@@ -314,6 +348,7 @@ form {
   background: white;
   width: fit-content;
   max-width: 60%;
+  min-width: 300px;
   margin: 3em auto;
   padding: 2em;
   border: 3px solid #022ea8;
@@ -462,6 +497,11 @@ form {
       }
     }
   }
+
+  .loginSignup {
+    margin: 2em 1em 1em;
+    height: fit-content;
+  }
   .column {
     h3 {
       font-size: $small-font;
@@ -472,7 +512,8 @@ form {
     font-size: 16pt;
   }
   footer {
-    height: 15vh;
+    height: 20vh;
+    width: 100vw;
     max-height: 240px;
     // a {
     //   font-size: $small-font;
@@ -484,4 +525,34 @@ form {
       }
     }
   }
+}
+.react-calendar-heatmap .color-scale-1 {
+  fill: #c8c4fd;
+}
+.react-calendar-heatmap .color-scale-2 {
+  fill: #9089fb;
+}
+.react-calendar-heatmap .color-scale-3 {
+  fill: #6c62f9;
+}
+.react-calendar-heatmap .color-scale-4 {
+  fill: #473af8;
+}
+.react-calendar-heatmap .color-scale-5 {
+  fill: #2213f6;
+}
+.react-calendar-heatmap .color-scale-6 {
+  fill: #1608d9;
+}
+.react-calendar-heatmap .color-scale-7 {
+  fill: #1206b1;
+}
+.react-calendar-heatmap .color-scale-8 {
+  fill: #10069d;
+}
+.react-calendar-heatmap .color-scale-9 {
+  fill: #0e058a;
+}
+.react-calendar-heatmap .color-scale-10 {
+  fill: #0c0476;
 }

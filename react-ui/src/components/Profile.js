@@ -80,6 +80,7 @@ class Profile extends Component {
 
 const mapState = ({ currentUser, documents }) => ({ currentUser, documents });
 
+
 const mapDispatch = { fetchDocuments }
 
 export default connect(mapState, mapDispatch)(Profile);

@@ -28,52 +28,63 @@ export class SingleDoctor extends React.Component {
   }
 
   render() {
-    const doctor = this.props.doctor;
-    const appointments = this.props.appointment;
-    const filterApps = (appointmentArray) => {
-      return appointmentArray.filter((oneapp) => {
-        return oneapp.doctorId === doctor.id;
-      });
-    };
-    const docApps = filterApps(appointments);
 
+    const doctor = this.props.doctor
+    const appointments = this.props.appointment
+    const filterApps = function (appointmentArray) {
+      return (appointmentArray.filter((oneapp) => {
+        return (
+          oneapp.doctorId === doctor.id)
+      }))
+    }
+    const docApps = filterApps(appointments)
     if (!doctor) {
-      return "This doctor is not in our system";
+      return "This doctor is not in our system"
     } else {
       return (
         <div>
-          <div>
-            Doctor: {doctor.firstName} {doctor.lastName}
-          </div>
+          <div>Doctor: {doctor.firstName} {doctor.lastName}</div>
           <div>Specialty: {doctor.doctorType}</div>
           <div>Address: {doctor.address}</div>
+
           <div>{this.state.clicked === true && <UpdateDoctor />}</div>
-          <div>
+          <div className="buttons">
             {this.state.clicked === false && (
-              <button onClick={() => this.updateDoctor()}>Update</button>
+              <>
+                <button onClick={() => this.updateDoctor()}>Update</button>
+                <button onClick={() => this.handleDelete(doctor.id)}>
+                  Delete
+                </button>
+              </>
             )}
           </div>
-          <button onClick={() => this.handleDelete(doctor.id)}>Delete</button>
+
           <div>
             <div>
-              My Appointments with {doctor.firstName} {doctor.lastName}{" "}
+              My Appointments with {doctor.firstName} {doctor.lastName}
             </div>
             <ul>
-              {docApps.map((oneapp) => {
-                return (
-                  <li key={oneapp.id}>
-                    <div>Date: {oneapp.appointmentDate}</div>
-                    <div>Time: {oneapp.time}</div>
-                  </li>
-                );
-              })}
+              {
+                docApps.map((oneapp) => {
+                  return (
+                    <li key={oneapp.id}>
+                      <div>Date: {oneapp.appointmentDate}</div>
+                      <div>Time: {oneapp.time}</div>
+                    </li>
+                  )
+                })
+              }
             </ul>
           </div>
         </div>
-      );
-    }
+
+
+      )
+    };
   }
 }
+
+
 
 const mapStateToProps = (state) => {
   return {

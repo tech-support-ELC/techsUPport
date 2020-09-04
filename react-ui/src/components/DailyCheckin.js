@@ -11,6 +11,8 @@ import { Link } from 'react-router-dom';
 import { getTodayScoreThunk } from '../redux/dcTodayScore';
 import { getTodayAppointmentThunk } from '../redux/dcTodayAppointment';
 import { getTodayMedsThunk } from '../redux/dcTodayMed'
+import { getAllDoctorsThunk } from "../redux/doctors";
+
 import DCSummary from './DCSummary';
 class DailyCheckin extends Component {
   constructor() {
@@ -34,6 +36,7 @@ class DailyCheckin extends Component {
     this.props.getTodayScore();
     this.props.getTodayMeds();
     this.props.getTodayAppointment();
+    this.props.getAllDoctors()
     ReactModal.setAppElement('body');
   }
   openCondModal() {
@@ -58,15 +61,15 @@ class DailyCheckin extends Component {
     this.setState({ showMedModal: false });
   }
   render() {
+    const doctors = this.props.doctors
     const score = this.props.score;
     const med = this.props.med;
     const appointment = this.props.appointment;
     const date = String(new Date()).slice(0, 15);
     const todayScore = this.props.todayScore;
     const todayAppointment = this.props.todayAppointment;
-    console.log('todayAppointment', todayAppointment)
     const todayMed = this.props.todayMed;
-    console.log('score', todayScore)
+    console.log('score', score)
     return (
       <div>
         <h1>Daily Check-in</h1>
@@ -132,12 +135,13 @@ class DailyCheckin extends Component {
             <div>
               <div>
                 {
-                  appointment.length > 0 ? 'Do you have an appointment with a doctor today?' : null
+                  doctors.length > 0 ? 'Do you have an appointment with a doctor today?' : null
                 }
               </div>
               {
-                (appointment && appointment.length > 0) ?
-                  appointment.map((doc) => {
+                (doctors && doctors.length > 0) ?
+                  doctors.map((doc) => {
+
                     return (
                       <div key={doc.id}>
                         <DCDoctorForm
@@ -215,11 +219,13 @@ const mapStateToProps = (state) => {
     med: state.med,
     todayScore: state.todayScore,
     todayAppointment: state.todayAppointment,
-    todayMed: state.todayMed
+    todayMed: state.todayMed,
+    doctors: state.doctors
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
+    getAllDoctors: () => dispatch(getAllDoctorsThunk()),
     getScore: () => dispatch(getScoreThunk()),
     addScore: (score) => dispatch(addScoreThunk(score)),
     getAppointment: () => dispatch(getAppointmentThunk()),
