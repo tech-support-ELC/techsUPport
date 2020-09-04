@@ -369,10 +369,6 @@ form {
   }
 }
 
-.buttons {
-  display: flex;
-}
-
 .bigButton {
   font-size: 20pt;
   background: #5ccc92;
@@ -559,4 +555,13 @@ form {
 }
 .react-calendar-heatmap .color-scale-10 {
   fill: #0c0476;
+}
+
+.colorDate {
+  background: #2213f6;
+  color: white;
+}
+
+.regDate {
+  background: #95dbe5
 }

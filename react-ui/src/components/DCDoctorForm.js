@@ -50,7 +50,7 @@ class DCDoctorForm extends Component {
             type='checkbox'
             name='isClicked'
             onChange={this.handleChange}
-            // disabled={this.state.isClicked}
+          // disabled={this.state.isClicked}
           />
         </label>
         {

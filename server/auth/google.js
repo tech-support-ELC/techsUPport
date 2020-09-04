@@ -25,6 +25,7 @@ const strategy = new GoogleStrategy(
         defaults: { email, firstName, lastName }
       })
       done(null, user)
+      console.log(req.user)
     } catch (err) {
       done(err)
     }
@@ -41,7 +42,7 @@ router.get(
 router.get(
   '/verify',
   passport.authenticate('google', {
-    successRedirect: '/',
+    successRedirect: '/dailycheckin',
     failureRedirect: '/login'
   })
 )

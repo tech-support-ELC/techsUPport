@@ -6,7 +6,6 @@ import { getAllDoctorsThunk, addDoctorThunk } from "../redux/doctors";
 import { getAllConditionsThunk, addConditionThunk } from "../redux/conditions";
 import LineChart from "./lineChart/LineChartCondition";
 import { fetchMedications } from "../redux/medications";
-
 import { getChartThunk } from "../redux/score";
 import home from "../images/home.png";
 import HomeAddButtons from "./HomeAddButtons";
@@ -55,44 +54,39 @@ export class Home extends React.Component {
     const chart = this.props.chart;
     const data = this.state.data;
     return (
-      <div>
-        <h1 id="welcomeName">Welcome, {firstName}!</h1>
-        <div className="home">
-          <div>{!checkDay(currentUser.createdAt) ? <Onboarding /> : null}</div>
-          <div>
-            {doctors.length === 0 &&
-            conditions.length === 0 &&
-            medications.length === 0 ? (
-              <h2>
-                Get started by adding your doctors, conditions, and medications
-              </h2>
-            ) : null}
+      <div className="home">
+        <div>
+          <h1 id="welcomeName">Welcome, {firstName}!</h1>
+          {!checkDay(currentUser.createdAt) ? <Onboarding /> : null}
+        </div>
+        <div>
+          {doctors.length === 0 &&
+          conditions.length === 0 &&
+          medications.length === 0 ? (
             <h2>
-              Fill out your daily check-in for {moment().format("MMMM Do YYYY")}
+              Get started by adding your doctors, conditions, and medications
             </h2>
-            <div id="dailyCheckinHomePage">
-              <Link to="/dailycheckin">
-                <button id="checkin">
-                  <span>Daily Check-in</span>
-                </button>
-              </Link>
-            </div>
-            <HomeAddButtons />
+          ) : null}
+          <h2>
+            Fill out your daily check-in for {moment().format("MMMM Do YYYY")}
+          </h2>
+          <div id="dailyCheckinHomePage">
+            <Link to="/dailycheckin">
+              <button id="checkin">
+                <span>Daily Check-in</span>
+              </button>
+            </Link>
           </div>
-          <div className="mainHomepageArea">
-            {doctors.length === 0 &&
-            conditions.length === 0 &&
-            medications.length === 0 ? (
-              <img src={home} alt="" />
-            ) : null}
-            {doctors &&
-            doctors.length > 0 &&
-            appointments &&
-            appointments.length > 0 ? (
-              <DoctorDonut appointment={appointments} doctors={doctors} />
-            ) : null}
-            {chart && chart.length > 0 ? <Heatmap /> : null}
-          </div>
+          <HomeAddButtons />
+        </div>
+        <div className="mainHomepageArea">
+          {doctors.length === 0 &&
+          conditions.length === 0 &&
+          medications.length === 0 ? (
+            <img src={home} alt="" />
+          ) : null}
+
+          {chart && chart.length > 0 ? <Heatmap /> : null}
         </div>
       </div>
     );
