@@ -25,72 +25,50 @@ import PageNotFound from './PageNotFound'
 /* -----------------    COMPONENT     ------------------ */
 
 class Root extends Component {
-  componentDidMount() {
-    // try {
-    this.props.fetchInitialData();
-    // } catch (e) {
-    //   console.log(e)
-    // }
+  async componentDidMount() {
+    try {
+      await this.props.fetchInitialData();
+    } catch (e) {
+      console.log(e)
+    }
   }
   render() {
     const { isLoggedIn, currentUser } = this.props;
-    if (!currentUser) {
-      return (
-        <h1>Loading...</h1>
-      )
-    }
 
     return (
-      <Switch>
+      <>
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/login" component={Login} />
-
-        {isLoggedIn && !currentUser.isAdmin &&
-          <>
-            {/* Routes placed here are only available after logging in */}
-            < Navbar />
-            <Route exact path='/' component={Home} />
-            <Route exact path='/dailycheckin' component={DailyCheckin} />
-            <Route exact path='/conditions' component={Conditions} />
-            <Route path='/conditions/:id' component={SingleCondition} />
-            <Route path="/medications" component={Medications} />
-            <Route path="/medications/:id" component={SingleMedication} />
-            <Route path="/doctors" component={AllDoctors} />
-            <Route path="/doctors/:id" component={SingleDoctor} />
-            <Route exact path="/profile" component={Profile} />
-            <Route path="/documents" component={Documents} />
-            <Route path="/documents/:id" component={SingleDocument} />
-            <Route path='/chart' component={BarChartCondition} />
-            <Route path='/linechart' component={LineChart} />
-            {isLoggedIn && currentUser.isAdmin &&
-              <Route exact path='/admindashboard' component={AdminDashboard} />
-            }
-          </>
-        } {isLoggedIn && currentUser.isAdmin &&
-          <>
-            {/* Routes placed here are only available for admins */}
-            <Navbar />
-            <Route exact path='/' component={Home} />
-            <Route exact path='/dailycheckin' component={DailyCheckin} />
-            <Route exact path='/conditions' component={Conditions} />
-            <Route path='/conditions/:id' component={SingleCondition} />
-            <Route path="/medications" component={Medications} />
-            <Route path="/medications/:id" component={SingleMedication} />
-            <Route path="/doctors" component={AllDoctors} />
-            <Route path="/doctors/:id" component={SingleDoctor} />
-            <Route exact path="/profile" component={Profile} />
-            <Route path="/documents" component={Documents} />
-            <Route path="/documents/:id" component={SingleDocument} />
-            <Route path='/chart' component={BarChartCondition} />
-            <Route path='/linechart' component={LineChart} />
-            <Route exact path='/admindashboard' component={AdminDashboard} />
-          </>
+        {isLoggedIn &&
+          < Navbar />
         }
 
-        {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
-      </Switch >
+        {isLoggedIn && (
+          <Switch>
+            {/* Routes placed here are only available after logging in */}
+            {/* < Navbar /> */}
+            <Route exact path='/' component={Home} />
+            <Route exact path='/dailycheckin' component={DailyCheckin} />
+            <Route exact path='/conditions' component={Conditions} />
+            <Route exact path='/conditions/:id' component={SingleCondition} />
+            <Route exact path="/medications" component={Medications} />
+            <Route exact path="/medications/:id" component={SingleMedication} />
+            <Route exact path="/doctors" component={AllDoctors} />
+            <Route exact path="/doctors/:id" component={SingleDoctor} />
+            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/documents" component={Documents} />
+            <Route exact path="/documents/:id" component={SingleDocument} />
+            <Route exact path='/chart' component={BarChartCondition} />
+            <Route exact path='/linechart' component={LineChart} />
+            {currentUser.isAdmin && (
+              <Route exact path='/admindashboard' component={AdminDashboard} />
+            )}
+            <Route component={PageNotFound} />
+          </Switch>
+        )}
+
+      </ >
     );
   }
 }

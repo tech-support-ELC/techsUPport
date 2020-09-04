@@ -31,16 +31,18 @@ const Navbar = (props) => {
           <Link to="/profile">Profile</Link>
         </div>
         <div className='navLogout'>
-          <Link to='#' onClick={handleClick}>Log out</Link>
+          <Link to='/login' onClick={handleClick}>Log out</Link>
         </div>
       </div>
     </nav>
   );
 };
 
-const mapDispatch = (dispatch) => ({
-  handleClick: () => {
-    dispatch(logout(history))
+const mapDispatch = (dispatch) => {
+  return {
+    handleClick: () => {
+      dispatch(logout(history))
+    }
   }
-})
+}
 export default connect(null, mapDispatch)(Navbar);
