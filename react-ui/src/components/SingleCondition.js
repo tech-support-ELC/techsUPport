@@ -18,6 +18,7 @@ class SingleCondition extends Component {
     try {
       await this.props.removeCondition(id)
       this.props.closeTheModal()
+
     } catch (err) {
       console.log(err);
     }
@@ -33,7 +34,6 @@ class SingleCondition extends Component {
           <div>Has this been diagnosed?: {condition.diagnosed}</div>
           <div>Physical or mental condition?: {condition.typeOfPain}</div>
           <div>{this.state.clicked && <UpdateCondition />}</div>
-
           <div className="buttons">
             {!this.state.clicked && (
               <>

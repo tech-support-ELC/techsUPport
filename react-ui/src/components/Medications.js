@@ -97,6 +97,7 @@ class Medications extends React.Component {
               medication={this.state.selected}
               remove={this.handleRemove}
             /> */}
+
           </ReactModal>
         </div>
       </div>
