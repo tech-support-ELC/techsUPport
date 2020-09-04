@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter, Route, Switch, Redirect } from "react-router-dom";
+import { withRouter, Route, Switch } from "react-router-dom";
 import Home from "./Home";
 import Signup from "./Signup";
 import Login from "./Login";
@@ -40,14 +40,14 @@ class Root extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/login" component={Login} />
-        {isLoggedIn &&
-          < Navbar />
-        }
 
+        {isLoggedIn && (
+          < Navbar />
+        )}
+        {/* This is on purpose since Switch only renders the first matched component and we don't need to render all of them at the same time except for Navbar */}
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            {/* < Navbar /> */}
             <Route exact path='/' component={Home} />
             <Route exact path='/dailycheckin' component={DailyCheckin} />
             <Route exact path='/conditions' component={Conditions} />
@@ -61,13 +61,13 @@ class Root extends Component {
             <Route exact path="/documents/:id" component={SingleDocument} />
             <Route exact path='/chart' component={BarChartCondition} />
             <Route exact path='/linechart' component={LineChart} />
+            {/* Only for admin's eyes */}
             {currentUser.isAdmin && (
               <Route exact path='/admindashboard' component={AdminDashboard} />
             )}
             <Route component={PageNotFound} />
           </Switch>
         )}
-
       </ >
     );
   }
