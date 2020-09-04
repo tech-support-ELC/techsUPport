@@ -36,17 +36,27 @@ export class AppointmentCalendar extends React.Component {
         this.setState({ showDocModal: false })
     }
     onChange = appointmentDay => this.setState({ appointmentDay })
+
+
     render() {
 
         const doctors = this.props.doctors
         const appointment = this.props.appointment
+        let appointmentDate = this.state.appointmentDay
+        const apptFilter = function (appointmentString) {
+            appointment.filter((oneapp) => {
+                return ((moment(appointmentString).format('YYYY-MM-DD') === oneapp.appointmentDate))
+            })
+        }
+        const daysAppts = apptFilter(appointmentDate)
+
         return (
             <div styles={{ height: 100, width: 100 }}>
                 <div>
                     <Calendar
-                        onClickDay={this.clickDay}
+                        onClickDay={() => this.clickDay()}
                         onChange={this.onChange}
-                        value={this.state.appointmentDay}
+                        // value={appointment}
                         formatLongDate={(locale, date) => moment(date).format('YYYY-MM-DD')}
                     />
                 </div>
@@ -55,14 +65,30 @@ export class AppointmentCalendar extends React.Component {
                         isOpen={this.state.showDocModal}
                         contentLabel="Single Document"
                     >
+
                         <div>
                             <div>
                                 <h2>Add an Appointment With Your Doctor</h2>
                             </div>
+                            <div>
+                                <h4>Appointments scheduled for this date: </h4>
+                                {
+                                    daysAppts.map((oneapp) => {
+                                        return (
+                                            <li key={oneapp.id}>
+                                                <div>Doctor: {oneapp.firstName} {oneapp.lastName}</div>
+                                                <div>Date: {oneapp.appointmentDate}</div>
+                                                <div>Time: {oneapp.time}</div>
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </div>
                             {
                                 (doctors && doctors.length > 0) ?
                                     doctors.map((doctor) => {
-                                        let appointmentDate = this.state.appointmentDay
+
+                                        console.log("appointment date in add appointment", appointmentDate)
                                         return (
                                             <div key={doctor.id}>
                                                 <DCDoctorForm
