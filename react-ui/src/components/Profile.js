@@ -38,10 +38,8 @@ class Profile extends Component {
     return (
       <div className="loginSignup">
         <h1>User Profile</h1>
-        <h4>
-          Name: {firstName} {lastName}
-        </h4>
-        <h4>Email: {email}</h4>
+        <h3>Name: {firstName} {lastName}
+          <p>Email: {email}</p></h3>
 
         {documents.map((doc) => {
           const { type, id, imageUrl, description } = doc;
@@ -61,6 +59,7 @@ class Profile extends Component {
         <Link to="#" onClick={() => this.openUploadModal()}>
           Upload your insurance card and ID card here.
         </Link>
+        (We currently only support image format such as png, jpeg, gif)
         <div className="popup">
           <ReactModal
             isOpen={this.state.showUploadModal}

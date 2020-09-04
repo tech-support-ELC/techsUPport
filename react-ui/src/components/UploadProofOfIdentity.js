@@ -10,6 +10,7 @@ export class UploadProofOfIdentity extends Component {
     super()
     this.state = {
       selectedFile: null,
+      targetFile: {},
       description: ''
     }
     this.uploadHandler = this.uploadHandler.bind(this)
@@ -24,10 +25,11 @@ export class UploadProofOfIdentity extends Component {
 
   handleFileRead(e) {
     if (e.target.files[0]) {
+      const targetFile = Array.from(e.target.files)
       let reader = new FileReader()
       reader.readAsDataURL(e.target.files[0])
       reader.onload = () => {
-        this.setState({ selectedFile: reader.result })
+        this.setState({ selectedFile: reader.result, targetFile: targetFile[0] })
       }
     }
   }
@@ -42,25 +44,32 @@ export class UploadProofOfIdentity extends Component {
 
   async uploadHandler(e) {
     e.preventDefault()
-    const { description, selectedFile } = this.state
+    const { description, targetFile, selectedFile } = this.state
     const type = 'Proof of Identity'
 
-    let formData = {}
-    if (selectedFile) {
-      const imageUrl = await this.sendFile()
-      formData = {
-        description,
-        type,
-        imageUrl
-      }
+    const fileTypes = ['image/png', 'image/jpeg', 'image/gif']
+    if (fileTypes.every(fileType => targetFile.type !== fileType)) {
+      alert(`'${targetFile.type}' is not a supported format`)
+    } else if (targetFile.size > 150000) {
+      alert(`'${targetFile.name}' is too large, please pick a smaller file`)
     } else {
-      formData = {
-        description,
-        type,
+      let formData = {}
+      if (selectedFile) {
+        const imageUrl = await this.sendFile()
+        formData = {
+          description,
+          type,
+          imageUrl
+        }
+      } else {
+        formData = {
+          description,
+          type,
+        }
       }
+      this.props.uploadDocumentThunk(formData)
+      this.props.closeUploadModal()
     }
-    this.props.uploadDocumentThunk(formData)
-    this.props.closeUploadModal()
   }
 
   render() {
