@@ -8,3 +8,11 @@ export default function checkDay(stringDate) {
         return false
     }
 }
+
+export function possibleData(stringDate) {
+    if (moment(stringDate).isSameOrBefore(moment().subtract(1, 'week'))) {
+        return true
+    } else {
+        return false
+    }
+}

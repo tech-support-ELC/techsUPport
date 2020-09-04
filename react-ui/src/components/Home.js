@@ -62,12 +62,12 @@ export class Home extends React.Component {
         </div>
         <div>
           {doctors.length === 0 &&
-          conditions.length === 0 &&
-          medications.length === 0 ? (
-            <h2>
-              Get started by adding your doctors, conditions, and medications
-            </h2>
-          ) : null}
+            conditions.length === 0 &&
+            medications.length === 0 ? (
+              <h2>
+                Get started by adding your doctors, conditions, and medications
+              </h2>
+            ) : null}
           <h2>
             Fill out your daily check-in for {moment().format("MMMM Do YYYY")}
           </h2>
@@ -82,20 +82,15 @@ export class Home extends React.Component {
         </div>
         <div className="mainHomepageArea">
           {doctors.length === 0 &&
-          conditions.length === 0 &&
-          medications.length === 0 ? (
-            <img src={home} alt="" />
-          ) : null}
-          {doctors &&
-          doctors.length > 0 &&
-          appointments &&
-          appointments.length > 0 ? (
-            <DoctorDonut appointment={appointments} doctors={doctors} />
-          ) : null}
+            conditions.length === 0 &&
+            medications.length === 0 ? (
+              <img src={home} alt="" />
+            ) : null}
+
           {
-          (chart && chart.length > 0) ? <Heatmap /> : null
+            (chart && chart.length > 0) ? <Heatmap /> : null
           }
-          </div>
+        </div>
       </div>
     );
   }
