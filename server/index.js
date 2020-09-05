@@ -13,6 +13,15 @@ const isDev = process.env.NODE_ENV !== "production";
 if (isDev) require('dotenv').config()
 const PORT = process.env.PORT || 5000
 const app = express();
+const cors = require('cors')
+const { CLIENT_ORIGIN } = process.env.NODE_ENV === 'production'
+  ? 'https://elemental-health.herokuapp.com/'
+  : 'http://localhost:3000'
+
+app.use(cors({
+  origin: CLIENT_ORIGIN
+}))
+
 module.exports = app;
 
 // passport registration
