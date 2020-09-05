@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { updateSingleDoctor } from "../redux/singleDoctor";
+import { toast } from "react-toastify";
 
 export function UpdateDoctor(props) {
   const [firstName, setFirstName] = useState("");
@@ -19,6 +20,12 @@ export function UpdateDoctor(props) {
       }
     }
     props.updateDoctor(id, payload);
+    toast(
+      `Dr. ${firstName !== "" ? firstName : props.doctor.firstName} ${
+        lastName !== "" ? lastName : props.doctor.lastName
+      } updated!`
+    );
+    props.close();
   };
 
   const doctorFirstName = props.doctor.firstName;

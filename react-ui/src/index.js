@@ -5,11 +5,14 @@ import { BrowserRouter as Router } from "react-router-dom";
 import store from "./store";
 import Root from "./components/Root";
 import Footer from "./components/Footer";
-import * as serviceWorker from './serviceWorker';
-import './style.scss'
+import * as serviceWorker from "./serviceWorker";
+import "./style.scss";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 ReactDOM.render(
   <Provider store={store}>
+    <ToastContainer />
     <Router>
       <Root />
       <Footer />

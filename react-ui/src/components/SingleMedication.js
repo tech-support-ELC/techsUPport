@@ -12,6 +12,7 @@ export class SingleMedication extends React.Component {
 
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
   componentDidMount() {
     try {
@@ -37,14 +38,14 @@ export class SingleMedication extends React.Component {
   async handleDelete(id) {
     try {
       await this.props.delete(id);
-      this.props.handleClose();
+      this.props.close();
     } catch (err) {
       console.log(err);
     }
   }
 
   render() {
-    const medication = this.props.medication;
+    const medication = this.props.selected;
     const rxcui = this.props.rxcui;
 
     return (
@@ -64,8 +65,8 @@ export class SingleMedication extends React.Component {
                 Update
               </button>
               <RemoveMedication
-                medication={this.state.selected}
-                remove={this.handleRemove}
+                medication={medication}
+                remove={this.handleDelete}
               />
             </div>
           </div>
@@ -74,7 +75,7 @@ export class SingleMedication extends React.Component {
           <div>
             <UpdateMedication
               medication={medication}
-              close={this.handleClose}
+              close={this.props.close}
               update={this.handleUpdate}
             />
           </div>
