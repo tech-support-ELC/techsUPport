@@ -93,6 +93,7 @@ class Conditions extends Component {
               X
             </button>
             <AddConditionForm
+              close={this.closeModal}
               currentUser={this.props.currentUser}
               addCondition={this.props.addCondition}
             />

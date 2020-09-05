@@ -54,7 +54,6 @@ export class Documents extends Component {
       <div className="main">
         <div className="column">
           <h3>My Documents</h3>
-          <h4>We currently only support image format such as png, jpeg, gif</h4>
           {documents.map((doc) => {
             const { type, id, description } = doc;
             return (
@@ -97,7 +96,6 @@ export class Documents extends Component {
           contentLabel="Upload Documents"
           className="popup"
         >
-          {" "}
           <button className="close" onClick={() => this.closeUploadModal()}>
             X
           </button>
