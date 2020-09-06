@@ -34,7 +34,6 @@ class DCDoctorForm extends Component {
     } else {
       this.props.addAppointment(this.state);
     }
-    console.log("props inside daily checkin submit", this.props);
     this.setState({
       isClicked: false,
       time: "",

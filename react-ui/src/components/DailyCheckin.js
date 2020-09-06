@@ -12,8 +12,8 @@ import { getTodayScoreThunk } from '../redux/dcTodayScore';
 import { getTodayAppointmentThunk } from '../redux/dcTodayAppointment';
 import { getTodayMedsThunk } from '../redux/dcTodayMed'
 import { getAllDoctorsThunk } from "../redux/doctors";
-
 import DCSummary from './DCSummary';
+
 class DailyCheckin extends Component {
   constructor() {
     super();

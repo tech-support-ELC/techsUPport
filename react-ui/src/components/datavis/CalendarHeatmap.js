@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { getChartThunk } from "../../redux/score";
 import CalendarHeatmap from "react-calendar-heatmap";
 import "react-calendar-heatmap/dist/styles.css";
-import { getTodayScoreThunk, getTodayScore } from "../../redux/dcTodayScore";
+import { getTodayScoreThunk } from "../../redux/dcTodayScore";
+import ReactTooltip from 'react-tooltip';
 export class Heatmap extends React.Component {
   constructor() {
     super();
@@ -17,34 +18,46 @@ export class Heatmap extends React.Component {
     const len = this.props.todayScore.length;
     const count = this.props.chart.map((eachScore) => eachScore.rate);
     const date = this.props.chart.map((eachDate) => eachDate.date);
-    const countWithoutToday = count.slice(0, -len);
-    const dateWithoutToday = date.slice(0, -len);
-    const todayCount = count.slice(-len);
-    const average = Math.floor(todayCount.reduce((accum, each) => {
-      return accum+each
-    }, 0)/len);
-    const todayDate = date.slice(-len)[0];
-    countWithoutToday.push(average);
-    dateWithoutToday.push(todayDate);
-    this.setState((prevState) => {
-      const data = dateWithoutToday.map((d, i) => ({
-        date: d,
-        count: countWithoutToday[i],
-      }));
-      return {
-        data,
-      };
-    });
+    if (len > 0) {
+      const countWithoutToday = count.slice(0, -len);
+      const dateWithoutToday = date.slice(0, -len);
+      const todayCount = count.slice(-len);
+      const average = Math.floor(todayCount.reduce((accum, each) => {
+        return accum+each
+      }, 0)/len);
+      const todayDate = date.slice(-len)[0];
+      countWithoutToday.push(average);
+      dateWithoutToday.push(todayDate);
+      this.setState((prevState) => {
+        const data = dateWithoutToday.map((d, i) => ({
+          date: d,
+          count: countWithoutToday[i],
+        }));
+        return {
+          data,
+        };
+      });
+    } else {
+      this.setState((prevState) => {
+        const data = date.map((d, i) => ({
+          date: d,
+          count: count[i],
+        }));
+        return {
+          data,
+        };
+      });
+    }
   }
   render() {
-    const chart = this.props.chart;
     const data = this.state.data;
-    console.log(data)
+    const chart = this.props.chart;
     return (
       <div>
         <div>
           <div>How I've felt over time</div>
-          {chart && chart.length > 0 ? (
+          {
+            (chart && chart.length > 0) ?
             <CalendarHeatmap
               values={data}
               classForValue={(value) => {
@@ -53,8 +66,17 @@ export class Heatmap extends React.Component {
                 }
                 return `color-scale-${value.count}`;
               }}
-            />
-          ) : null}
+              showWeekdayLabels={true}
+              tooltipDataAttrs={(value) => {
+                  return {
+                    'data-tip': `${value.date} has average score: ${
+                      value.count
+                    }`,
+                  };
+              }}
+            /> : null
+          }
+            <ReactTooltip />
         </div>
       </div>
     );

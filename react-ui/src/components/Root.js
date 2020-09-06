@@ -16,8 +16,6 @@ import AllDoctors from "./AllDoctors"
 import SingleDoctor from "./SingleDoctor";
 import SingleMedication from "./SingleMedication";
 import Navbar from "./Navbar";
-import BarChartCondition from './BarChartCondition'
-import LineChart from '../components/lineChart/LineChartCondition';
 import AdminDashboard from './AdminDashboard';
 import PageNotFound from './PageNotFound'
 
@@ -57,8 +55,6 @@ class Root extends Component {
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/documents" component={Documents} />
               <Route exact path="/documents/:id" component={SingleDocument} />
-              <Route exact path='/chart' component={BarChartCondition} />
-              <Route exact path='/linechart' component={LineChart} />
               {/* Only for admin's eyes */}
               {currentUser.isAdmin && (
                 <Route exact path='/admindashboard' component={AdminDashboard} />
