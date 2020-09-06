@@ -42,7 +42,7 @@ export default function BeforeDCHome(props) {
                 {
                     (chart && chart.length > 0) ? <Heatmap /> : (
                         <div>
-                            <h4>Fill out your daily checkin and start seeing your data over time</h4>
+                            <h4>Fill out your daily checkin to start seeing your data over time</h4>
                             <img src={possibleData} alt="" />
                         </div>
                     )
