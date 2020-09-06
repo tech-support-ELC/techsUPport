@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-toastify";
 
 export default class UpdateMedication extends React.Component {
   constructor() {
@@ -24,6 +25,9 @@ export default class UpdateMedication extends React.Component {
     const updated = this.state;
     console.log("SUMBIT", medication, updated);
     this.props.update(medication, updated);
+    toast(
+      `${this.state.name !== "" ? this.state.name : medication.name} updated!`
+    );
 
     this.props.close();
   }
@@ -95,10 +99,3 @@ export default class UpdateMedication extends React.Component {
     );
   }
 }
-
-// const mapDispatch = (dispatch) => {
-//   return {
-//     update: (medication, updatedMedication) =>
-//       dispatch(updateMedication(medication, updatedMedication)),
-//   };
-// };

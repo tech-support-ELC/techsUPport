@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { addMedication } from "../redux/medications";
 
+import { toast } from "react-toastify";
+
 class AddMedication extends React.Component {
   constructor() {
     super();
@@ -25,8 +27,11 @@ class AddMedication extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    const med = this.state.name;
     this.props.addMedication(this.state);
     this.setState({ name: "", dosage: "", frequency: "", userId: 0 });
+    toast(`${med} added!`);
+    this.props.close();
   }
 
   render() {

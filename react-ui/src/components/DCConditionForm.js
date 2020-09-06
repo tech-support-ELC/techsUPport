@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { toast } from "react-toastify";
 class DCConditionForm extends Component {
   constructor() {
     super();
     this.state = {
       isClicked: false,
-      name: '',
-      rate: '',
-      notes: '',
+      name: "",
+      rate: "",
+      notes: "",
       conditionId: 0,
-      isSubmitted: false
+      isSubmitted: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -17,23 +18,25 @@ class DCConditionForm extends Component {
     const conditionId = this.props.condition.id;
     this.setState({ conditionId, isSubmitted: true, isClicked: true });
     const target = evt.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
     this.setState({
-      [name]: value
+      [name]: value,
     });
   }
   handleSubmit(evt) {
     evt.preventDefault();
+    const condition = this.props.condition.name;
     this.props.addScore(this.state);
     this.setState({
       isClicked: false,
-      name: '',
-      rate: '',
-      notes: '',
+      name: "",
+      rate: "",
+      notes: "",
       conditionId: 0,
-      isSubmitted: false
-    })
+      isSubmitted: false,
+    });
+    toast(`Check-in for ${condition} successful!`);
   }
   render() {
     const condition = this.props.condition;
@@ -42,53 +45,54 @@ class DCConditionForm extends Component {
         <label>
           {condition.name}
           <input
-            type='checkbox'
-            name='isClicked'
+            type="checkbox"
+            name="isClicked"
             onChange={this.handleChange}
           />
         </label>
-        {
-          (this.state.isClicked && this.state.isSubmitted) ?
+        {this.state.isClicked && this.state.isSubmitted ? (
+          <div>
             <div>
-              <div>
-                <label>
-                  How much is this affecting you today? 1 (not too much) to 10 (so very much):
-                  <select onChange={this.handleChange}
-                    value={this.state.rate} name="rate">
-                      <option value=""></option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="7">7</option>
-                      <option value="8">8</option>
-                      <option value="9">9</option>
-                      <option value="10">10</option>
-                  </select>
-                </label>
-              </div>
-              <div>
-                <label>
-                  Notes on how I feel:
+              <label>
+                How much is this affecting you today? 1 (not too much) to 10 (so
+                very much):
+                <select
+                  onChange={this.handleChange}
+                  value={this.state.rate}
+                  name="rate"
+                >
+                  <option value=""></option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+              </label>
+            </div>
+            <div>
+              <label>
+                Notes on how I feel:
                 <textarea
-                    className='textarea'
-                    placeholder='Notes'
-                    type='text'
-                    name='notes'
-                    onChange={this.handleChange}
-                    value={this.state.notes}
-                  />
-                </label>
-              </div>
-              <button type="submit">
-                Submit
-              </button>
-            </div> : null
-        }
+                  className="textarea"
+                  placeholder="Notes"
+                  type="text"
+                  name="notes"
+                  onChange={this.handleChange}
+                  value={this.state.notes}
+                />
+              </label>
+            </div>
+            <button type="submit">Submit</button>
+          </div>
+        ) : null}
       </form>
-    )
+    );
   }
 }
 export default DCConditionForm;

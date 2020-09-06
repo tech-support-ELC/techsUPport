@@ -6,18 +6,17 @@ import { getAllDoctorsThunk, addDoctorThunk } from "../redux/doctors";
 import { getAllConditionsThunk, addConditionThunk } from "../redux/conditions";
 import LineChart from "./lineChart/LineChartCondition";
 import { fetchMedications } from "../redux/medications";
-import { getChartThunk } from '../redux/score'
-import home from '../images/home.png'
-import HomeAddButtons from './HomeAddButtons'
-import moment from 'moment'
-import { Link } from 'react-router-dom'
-import ReactModal from 'react-modal'
-import Onboarding from './Onboarding'
-import checkDay from '../utils/onboarding-date-function'
-import Heatmap from './datavis/CalendarHeatmap';
-import CalendarHeatmap from 'react-calendar-heatmap';
-import 'react-calendar-heatmap/dist/styles.css';
-
+import { getChartThunk } from "../redux/score";
+import home from "../images/home.png";
+import HomeAddButtons from "./HomeAddButtons";
+import moment from "moment";
+import { Link } from "react-router-dom";
+import ReactModal from "react-modal";
+import Onboarding from "./Onboarding";
+import checkDay from "../utils/onboarding-date-function";
+import Heatmap from "./datavis/CalendarHeatmap";
+import CalendarHeatmap from "react-calendar-heatmap";
+import "react-calendar-heatmap/dist/styles.css";
 
 export class Home extends React.Component {
   constructor() {
@@ -62,12 +61,12 @@ export class Home extends React.Component {
         </div>
         <div>
           {doctors.length === 0 &&
-            conditions.length === 0 &&
-            medications.length === 0 ? (
-              <h2>
-                Get started by adding your doctors, conditions, and medications
-              </h2>
-            ) : null}
+          conditions.length === 0 &&
+          medications.length === 0 ? (
+            <h2>
+              Get started by adding your doctors, conditions, and medications
+            </h2>
+          ) : null}
           <h2>
             Fill out your daily check-in for {moment().format("MMMM Do YYYY")}
           </h2>
@@ -82,14 +81,12 @@ export class Home extends React.Component {
         </div>
         <div className="mainHomepageArea">
           {doctors.length === 0 &&
-            conditions.length === 0 &&
-            medications.length === 0 ? (
-              <img src={home} alt="" />
-            ) : null}
+          conditions.length === 0 &&
+          medications.length === 0 ? (
+            <img src={home} alt="" />
+          ) : null}
 
-          {
-            (chart && chart.length > 0) ? <Heatmap /> : null
-          }
+          {chart && chart.length > 0 ? <Heatmap /> : null}
         </div>
       </div>
     );

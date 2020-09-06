@@ -6,7 +6,7 @@ import { AddDoctor } from "./AddDoctor";
 import ReactModal from "react-modal";
 import SingleDoctor from "./SingleDoctor";
 import { getAppointmentThunk } from "../redux/dcDoctor";
-import AppointmentCalendar from './AppointmentCalendar'
+import AppointmentCalendar from "./AppointmentCalendar";
 import DoctorDonut from "./datavis/doctor-appointment-donut";
 
 // const customStyles = {
@@ -33,7 +33,7 @@ export class AllDoctors extends React.Component {
     this.closeDocModal = this.closeDocModal.bind(this);
   }
   componentDidMount() {
-    ReactModal.setAppElement("body")
+    ReactModal.setAppElement("body");
     this.props.getAllDoctors();
     this.props.getAppointments();
   }
@@ -67,7 +67,6 @@ export class AllDoctors extends React.Component {
             {doctors &&
               doctors.map((doctor) => {
                 return (
-
                   <div className="listItem" key={doctor.id}>
                     <button
                       className="bigButton"
@@ -80,7 +79,7 @@ export class AllDoctors extends React.Component {
                       isOpen={this.state.showDocModal}
                       contentLabel="Single Document"
                       className="popup"
-                    // ariaHideApp={false}
+                      // ariaHideApp={false}
                     >
                       <button className="close" onClick={this.closeDocModal}>
                         X
@@ -88,13 +87,12 @@ export class AllDoctors extends React.Component {
                       <SingleDoctor closeTheModal={this.closeDocModal} />
                     </ReactModal>
                   </div>
-
                 );
               })}
           </div>
           <button onClick={this.openModal}>Add a Doctor</button>
         </div>
-        <div id='modal' className="column">
+        <div id="modal" className="column">
           <ReactModal
             isOpen={this.state.showModal}
             contentLabel="Single Document"
@@ -105,26 +103,27 @@ export class AllDoctors extends React.Component {
               X
             </button>
             <AddDoctor
+              close={this.closeModal}
               currentUser={this.props.currentUser}
               addNewDoctor={this.props.addNewDoctor}
             />
           </ReactModal>
         </div>
         <div>
-          {(doctors && doctors.length > 0) ?
+          {doctors && doctors.length > 0 ? (
             <div>
               <h2>Add an appointment with your doctor</h2>
               <AppointmentCalendar />
-            </div> : null
-          }
+            </div>
+          ) : null}
         </div>
         <div>
           {doctors &&
-            doctors.length > 0 &&
-            appointments &&
-            appointments.length > 0 ? (
-              <DoctorDonut appointment={appointments} doctors={doctors} />
-            ) : null}
+          doctors.length > 0 &&
+          appointments &&
+          appointments.length > 0 ? (
+            <DoctorDonut appointment={appointments} doctors={doctors} />
+          ) : null}
         </div>
       </div>
     );
