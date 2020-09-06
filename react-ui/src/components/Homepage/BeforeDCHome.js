@@ -4,11 +4,13 @@ import HomeAddButtons from '../HomeAddButtons'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 import possibleData from "../../images/possible-data.png"
-import Heatmap from "./datavis/CalendarHeatmap";
+import Heatmap from "../../components/datavis/CalendarHeatmap";
+import checkDay from '../../utils/onboarding-date-function'
 
 export default function BeforeDCHome(props) {
-    const chart = this.props.chart; //send this as props form home
-    const currentUser = this.props.currentUser;
+    const chart = props.chart; //send this as props form home
+    const currentUser = props.currentUser;
+    const firstName = props.currentUser.firstName
 
     return (
         <div>

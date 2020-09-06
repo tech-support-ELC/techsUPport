@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import DCSingleTodayScore from './DCSingleTodayScore';
-import { getTodayScoreThunk } from '../redux/dcTodayScore';
-import { getTodayAppointmentThunk } from '../redux/dcTodayAppointment';
-import { getTodayMedsThunk } from '../redux/dcTodayMed';
-import { getSingleTodayScoreThunk } from '../redux/dcSingleScore';
-import { getSingleTodayAppointmentThunk } from '../redux/dcSingleAppointment';
-import DCSingleTodayAppointment from './DCSingleTodayAppointment';
-import { getSingleTodayMedsThunk } from '../redux/dcSingleMed';
-import DCSingleTodayMed from './DCSingleTodayMed';
+import { getTodayScoreThunk } from '../../redux/dcTodayScore';
+import { getTodayAppointmentThunk } from '../../redux/dcTodayAppointment';
+import { getTodayMedsThunk } from '../../redux/dcTodayMed';
+import { getSingleTodayScoreThunk } from '../../redux/dcSingleScore';
+import { getSingleTodayAppointmentThunk } from '../../redux/dcSingleAppointment';
+import DCSingleTodayAppointment from '../../components/DCSingleTodayAppointment';
+import { getSingleTodayMedsThunk } from '../../redux/dcSingleMed';
 import ReactModal from "react-modal";
 import Onboarding from '../Onboarding'
 import HomeAddButtons from '../HomeAddButtons'
 import moment from 'moment'
 import home from "../../images/home.png";
-import Heatmap from "./datavis/CalendarHeatmap";
+import Heatmap from "../../components/datavis/CalendarHeatmap";
+import checkDay from '../../utils/onboarding-date-function'
+import possibleData from '../../images/possible-data.png'
+import { fetchMedications } from "../../redux/medications";
 
 class afterDCHome extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             showDocModal: false,
         };
@@ -29,7 +30,7 @@ class afterDCHome extends React.Component {
         this.props.getTodayScore();
         this.props.getTodayMeds();
         this.props.getTodayAppointment();
-        this.props.getMedication();
+        this.props.getMedications();
         ReactModal.setAppElement("body");
     }
     openDocModal(id) {
@@ -46,7 +47,10 @@ class afterDCHome extends React.Component {
         const todayScore = this.props.todayScore;
         const todayAppointment = this.props.todayAppointment;
         const todayMed = this.props.todayMed;
-        const med = this.props.med;
+        const medications = this.props.medications;
+        const chart = this.props.chart
+        const currentUser = this.props.currentUser
+        const firstName = this.props.currentUser.firstName
         const findMedDosage = (medication, medArray) => {
             for (let i = 0; i < medArray.length; i++) {
                 let currentMed = medArray[i]
@@ -54,7 +58,7 @@ class afterDCHome extends React.Component {
                     return (
                         <div>
                             <div>Dosage: {currentMed.dosage} {currentMed.dosageUnit}</div>
-                            <div>Frequency: {currentMed.frequency} {currentMed.frequencyUnit}</div>
+                            <div>Frequency: {currentMed.frequency} per {currentMed.frequencyUnit}</div>
                         </div>
                     )
                 }
@@ -131,7 +135,7 @@ class afterDCHome extends React.Component {
                                             <ul>
                                                 <li>{eachMed.name}
                                                     {
-                                                        findMedDosage(eachMed, med)
+                                                        findMedDosage(eachMed, medications)
                                                     }
                                                 </li>
                                             </ul>
@@ -147,9 +151,6 @@ class afterDCHome extends React.Component {
                         <h3>
                             My Conditions Today
                         </h3>
-                        <h4>
-                            placeholder: chart of today's conditions
-                        </h4>
                         <div>
                             {
                                 (todayScore && todayScore.length > 0) ?
@@ -185,6 +186,8 @@ const mapStateToProps = (state) => {
         todayAppointment: state.todayAppointment,
         todayMed: state.todayMed,
         med: state.med,
+        currentUser: state.currentUser,
+        medications: state.medications,
     };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -195,7 +198,7 @@ const mapDispatchToProps = (dispatch) => {
         getSingleTodayScore: (id) => dispatch(getSingleTodayScoreThunk(id)),
         getSingleTodayAppointment: (id) => dispatch(getSingleTodayAppointmentThunk(id)),
         getSingleTodayMeds: (id) => dispatch(getSingleTodayMedsThunk(id)),
-        getMedication: () => dispatch(getMedicationThunk()),
+        getMedications: () => dispatch(fetchMedications())
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(afterDCHome);

@@ -4,9 +4,11 @@ import HomeAddButtons from '../HomeAddButtons'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 import home from "../../images/home.png";
+import checkDay from '../../utils/onboarding-date-function'
 
-export default function newUserHome() {
-
+export default function newUserHome(props) {
+    const firstName = props.currentUser.firstName
+    const currentUser = props.currentUser
     return (
         <div>
             <div>
