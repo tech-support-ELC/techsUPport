@@ -16,6 +16,7 @@ import Heatmap from "../../components/datavis/CalendarHeatmap";
 import checkDay from '../../utils/onboarding-date-function'
 import possibleData from '../../images/possible-data.png'
 import { fetchMedications } from "../../redux/medications";
+import BarChart from '../datavis/BarChart'
 
 class afterDCHome extends React.Component {
     constructor(props) {
@@ -73,7 +74,7 @@ class afterDCHome extends React.Component {
                 </div>
 
                 <div>
-                    <HomeAddButtons />
+                    <HomeAddButtons currentUser={currentUser} />
                 </div>
                 <div className="mainHomepageArea">
                     <h2>
@@ -148,15 +149,13 @@ class afterDCHome extends React.Component {
                     </div>
 
                     <div>
-                        <h3>
-                            My Conditions Today
-                        </h3>
+                        {
+                            todayScore.length > 0 ? "Today's Conditions:" : (<div><h4>No conditions recorded today</h4></div>)
+                        }
                         <div>
                             {
                                 (todayScore && todayScore.length > 0) ?
-                                    (<div><h4>
-                                        placeholder: chart of today's conditions
-                                </h4></div>) : null
+                                    (<div><BarChart /></div>) : null
                             }
                         </div>
                     </div>

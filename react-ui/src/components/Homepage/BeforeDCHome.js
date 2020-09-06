@@ -34,7 +34,7 @@ export default function BeforeDCHome(props) {
 
 
             <div>
-                <HomeAddButtons />
+                <HomeAddButtons currentUser={currentUser} />
             </div>
 
 

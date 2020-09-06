@@ -31,7 +31,7 @@ export default function newUserHome(props) {
             </div>
 
             <div>
-                <HomeAddButtons />
+                <HomeAddButtons currentUser={currentUser} />
             </div>
             <div className="mainHomepageArea">
                 <img src={home} alt="" />

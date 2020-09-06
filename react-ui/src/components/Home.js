@@ -8,33 +8,18 @@ import { getChartThunk } from "../redux/score";
 import NewUserHome from '../components/Homepage/NewUserHome'
 import BeforeDCHome from '../components/Homepage/BeforeDCHome'
 import AfterDCHome from '../components/Homepage/AfterDCHome'
-import "react-calendar-heatmap/dist/styles.css";
+import { Link } from 'react-router-dom'
+import 'react-calendar-heatmap/dist/styles.css';
+import BarChart from './datavis/BarChart'
+import { getTodayScoreThunk } from "../redux/dcTodayScore";
 
 export class Home extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      data: [],
-    };
-  }
-  async componentDidMount() {
-    await this.props.getChart();
-    this.props.getAllDoctors();
-    this.props.getAppointments();
-    this.props.getAllConditions();
-    this.props.getMedications();
-
-    const count = this.props.chart.map((eachScore) => eachScore.rate);
-    const date = this.props.chart.map((eachDate) => eachDate.date);
-    this.setState((prevState) => {
-      const data = date.map((d, i) => ({
-        date: d,
-        count: count[i],
-      }));
-      return {
-        data,
-      };
-    });
+  componentDidMount() {
+    // this.props.getChart();
+    // this.props.getAllDoctors();
+    // this.props.getAppointments();
+    // this.props.getAllConditions();
+    // this.props.getMedications();
   }
   render() {
     const { firstName } = this.props.currentUser;
@@ -43,7 +28,6 @@ export class Home extends React.Component {
     const medications = this.props.medications;
     const currentUser = this.props.currentUser;
     const chart = this.props.chart;
-    const data = this.state.data;
     const todayScore = this.props.todayScore;
     const todayAppointment = this.props.todayAppointment;
     const todayMed = this.props.todayMed;
@@ -76,7 +60,7 @@ export class Home extends React.Component {
               (todayScore.length > 0 ||
                 todayAppointment.length > 0 ||
                 todayMed.length > 0)) ?
-              <AfterDCHome chart={chart} /> : null
+              <AfterDCHome chart={chart} currentUser={currentUser} /> : null
         }
 
       </div>
@@ -84,6 +68,7 @@ export class Home extends React.Component {
     )
   }
 }
+
 const mapState = (state) => {
   return {
     doctors: state.doctors,
@@ -99,13 +84,13 @@ const mapState = (state) => {
 };
 
 const mapDispatch = (dispatch) => ({
-  getAllDoctors: () => dispatch(getAllDoctorsThunk()),
-  getAppointments: () => dispatch(getAppointmentThunk()),
-  getAllConditions: () => dispatch(getAllConditionsThunk()),
-  addCondition: (condition) => dispatch(addConditionThunk(condition)),
-  addNewDoctor: (newDoctor) => dispatch(addDoctorThunk(newDoctor)),
-  getMedications: () => dispatch(fetchMedications()),
-  getChart: () => dispatch(getChartThunk()),
+  // getAllDoctors: () => dispatch(getAllDoctorsThunk()),
+  // getAppointments: () => dispatch(getAppointmentThunk()),
+  // getAllConditions: () => dispatch(getAllConditionsThunk()),
+  // addCondition: (condition) => dispatch(addConditionThunk(condition)),
+  // addNewDoctor: (newDoctor) => dispatch(addDoctorThunk(newDoctor)),
+  // getMedications: () => dispatch(fetchMedications()),
+  // getChart: () => dispatch(getChartThunk()),
 });
 
-export default connect(mapState, mapDispatch)(Home);
+export default connect(mapState, null)(Home);
