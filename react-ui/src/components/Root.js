@@ -16,8 +16,6 @@ import AllDoctors from "./AllDoctors"
 import SingleDoctor from "./SingleDoctor";
 import SingleMedication from "./SingleMedication";
 import Navbar from "./Navbar";
-import BarChartCondition from './BarChartCondition'
-import LineChart from '../components/lineChart/LineChartCondition';
 import AdminDashboard from './AdminDashboard';
 /* -----------------    COMPONENT     ------------------ */
 
@@ -51,8 +49,6 @@ class Root extends Component {
             <Route exact path="/profile" component={Profile} />
             <Route path="/documents" component={Documents} />
             <Route path="/documents/:id" component={SingleDocument} />
-            <Route path='/chart' component={BarChartCondition} />
-            <Route path='/linechart' component={LineChart} />
             {
               currentUser.isAdmin &&
               <Route path='/admindashboard' component={AdminDashboard} />

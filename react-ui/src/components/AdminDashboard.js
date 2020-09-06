@@ -8,7 +8,6 @@ class AdminDashboard extends Component {
   }
   render() {
     const users = this.props.users;
-    console.log(this.props)
     return (
       <div>
         <h2>Admin Dashboard</h2>

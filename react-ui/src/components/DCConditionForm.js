@@ -32,7 +32,7 @@ class DCConditionForm extends Component {
       rate: '',
       notes: '',
       conditionId: 0,
-      isSubmitted: false
+      isSubmitted: false,
     })
   }
   render() {
@@ -45,10 +45,11 @@ class DCConditionForm extends Component {
             type='checkbox'
             name='isClicked'
             onChange={this.handleChange}
+            disabled={this.state.isSubmitted}
           />
         </label>
         {
-          (this.state.isClicked && this.state.isSubmitted) ?
+          (this.state.isClicked) ?
             <div>
               <div>
                 <label>

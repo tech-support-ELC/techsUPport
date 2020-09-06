@@ -18,24 +18,36 @@ export class Heatmap extends React.Component {
     const len = this.props.todayScore.length;
     const count = this.props.chart.map((eachScore) => eachScore.rate);
     const date = this.props.chart.map((eachDate) => eachDate.date);
-    const countWithoutToday = count.slice(0, -len);
-    const dateWithoutToday = date.slice(0, -len);
-    const todayCount = count.slice(-len);
-    const average = Math.floor(todayCount.reduce((accum, each) => {
-      return accum+each
-    }, 0)/len);
-    const todayDate = date.slice(-len)[0];
-    countWithoutToday.push(average);
-    dateWithoutToday.push(todayDate);
-    this.setState((prevState) => {
-      const data = dateWithoutToday.map((d, i) => ({
-        date: d,
-        count: countWithoutToday[i],
-      }));
-      return {
-        data,
-      };
-    });
+    if (len > 0) {
+      const countWithoutToday = count.slice(0, -len);
+      const dateWithoutToday = date.slice(0, -len);
+      const todayCount = count.slice(-len);
+      const average = Math.floor(todayCount.reduce((accum, each) => {
+        return accum+each
+      }, 0)/len);
+      const todayDate = date.slice(-len)[0];
+      countWithoutToday.push(average);
+      dateWithoutToday.push(todayDate);
+      this.setState((prevState) => {
+        const data = dateWithoutToday.map((d, i) => ({
+          date: d,
+          count: countWithoutToday[i],
+        }));
+        return {
+          data,
+        };
+      });
+    } else {
+      this.setState((prevState) => {
+        const data = date.map((d, i) => ({
+          date: d,
+          count: count[i],
+        }));
+        return {
+          data,
+        };
+      });
+    }
   }
   render() {
     const data = this.state.data;
@@ -56,11 +68,11 @@ export class Heatmap extends React.Component {
               }}
               showWeekdayLabels={true}
               tooltipDataAttrs={(value) => {
-                return {
-                  'data-tip': `${value.date} has average score: ${
-                    value.count
-                  }`,
-                };
+                  return {
+                    'data-tip': `${value.date} has average score: ${
+                      value.count
+                    }`,
+                  };
               }}
             /> : null
           }

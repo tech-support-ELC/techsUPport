@@ -4,48 +4,26 @@ import DoctorDonut from "./datavis/doctor-appointment-donut";
 import { getAppointmentThunk } from "../redux/dcDoctor";
 import { getAllDoctorsThunk, addDoctorThunk } from "../redux/doctors";
 import { getAllConditionsThunk, addConditionThunk } from "../redux/conditions";
-import LineChart from "./lineChart/LineChartCondition";
 import { fetchMedications } from "../redux/medications";
-
 import { getChartThunk } from '../redux/score'
 import home from '../images/home.png'
 import HomeAddButtons from './HomeAddButtons'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
-import ReactModal from 'react-modal'
 import Onboarding from './Onboarding'
 import checkDay from '../utils/onboarding-date-function'
 import Heatmap from './datavis/CalendarHeatmap';
-import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
-
-
+import BarChart from './datavis/BarChart'
+import { getTodayScoreThunk } from "../redux/dcTodayScore";
 
 export class Home extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      data: [],
-    };
-  }
-  async componentDidMount() {
-    await this.props.getChart();
-    this.props.getAllDoctors();
-    this.props.getAppointments();
-    this.props.getAllConditions();
-    this.props.getMedications();
-
-    const count = this.props.chart.map((eachScore) => eachScore.rate);
-    const date = this.props.chart.map((eachDate) => eachDate.date);
-    this.setState((prevState) => {
-      const data = date.map((d, i) => ({
-        date: d,
-        count: count[i],
-      }));
-      return {
-        data,
-      };
-    });
+  componentDidMount() {
+    // this.props.getChart();
+    // this.props.getAllDoctors();
+    // this.props.getAppointments();
+    // this.props.getAllConditions();
+    // this.props.getMedications();
   }
   render() {
     const { firstName } = this.props.currentUser;
@@ -55,7 +33,7 @@ export class Home extends React.Component {
     const medications = this.props.medications;
     const currentUser = this.props.currentUser;
     const chart = this.props.chart;
-    const data = this.state.data;
+    const todayScore = this.props.todayScore;
     return (
       <div className="home">
         <div>
@@ -83,21 +61,31 @@ export class Home extends React.Component {
           <HomeAddButtons />
         </div>
         <div className="mainHomepageArea">
-          {doctors.length === 0 &&
-          conditions.length === 0 &&
-          medications.length === 0 ? (
-            <img src={home} alt="" />
-          ) : null}
-          {doctors &&
-          doctors.length > 0 &&
-          appointments &&
-          appointments.length > 0 ? (
-            <DoctorDonut appointment={appointments} doctors={doctors} />
-          ) : null}
           {
-          (chart && chart.length > 0) ? <Heatmap /> : null
+            (doctors.length === 0 &&
+            conditions.length === 0 &&
+            medications.length === 0) ? (
+              <img src={home} alt="" />
+            ) : null
+          }
+          {
+            (doctors &&
+            doctors.length > 0 &&
+            appointments &&
+            appointments.length > 0)
+            ? (
+              <DoctorDonut appointment={appointments} doctors={doctors} />
+            ) : null
+          }
+          {
+            (chart && chart.length > 0) ? <Heatmap /> : null
           }
           </div>
+          <div>
+          {
+            todayScore && todayScore.length > 0 ? <BarChart /> : null
+          }
+        </div>
       </div>
     );
   }
@@ -110,17 +98,18 @@ const mapState = (state) => {
     appointment: state.appointment,
     medications: state.medications,
     chart: state.chart,
+    todayScore: state.todayScore
   };
 };
 
 const mapDispatch = (dispatch) => ({
-  getAllDoctors: () => dispatch(getAllDoctorsThunk()),
-  getAppointments: () => dispatch(getAppointmentThunk()),
-  getAllConditions: () => dispatch(getAllConditionsThunk()),
-  addCondition: (condition) => dispatch(addConditionThunk(condition)),
-  addNewDoctor: (newDoctor) => dispatch(addDoctorThunk(newDoctor)),
-  getMedications: () => dispatch(fetchMedications()),
-  getChart: () => dispatch(getChartThunk()),
+  // getAllDoctors: () => dispatch(getAllDoctorsThunk()),
+  // getAppointments: () => dispatch(getAppointmentThunk()),
+  // getAllConditions: () => dispatch(getAllConditionsThunk()),
+  // addCondition: (condition) => dispatch(addConditionThunk(condition)),
+  // addNewDoctor: (newDoctor) => dispatch(addDoctorThunk(newDoctor)),
+  // getMedications: () => dispatch(fetchMedications()),
+  // getChart: () => dispatch(getChartThunk()),
 });
 
-export default connect(mapState, mapDispatch)(Home);
+export default connect(mapState, null)(Home);
