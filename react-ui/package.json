@@ -26,20 +26,21 @@
     "react-calendar-heatmap": "^1.8.1",
     "react-d3-donut": "^1.1.2",
     "react-dom": "^16.8.6",
-    "react-form-carousel": "^1.0.2",
+    "react-elastic-carousel": "^0.7.5",
     "react-icons": "^3.11.0",
     "react-joyride": "^2.2.1",
     "react-modal": "^3.11.2",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^2.1.8",
-    "react-tooltip": "^4.2.9",
     "react-toastify": "^6.0.8",
+    "react-tooltip": "^4.2.9",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "sass-loader": "^10.0.1"
+    "sass-loader": "^10.0.1",
+    "styled-components": "^5.2.0"
   },
   "eslintConfig": {
     "extends": "react-app"
