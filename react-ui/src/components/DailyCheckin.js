@@ -119,6 +119,7 @@ class DailyCheckin extends Component {
         <div>
           <div>
             <div>
+              <h2>Appointments</h2>
               {doctors.length > 0
                 ? "Do you have an appointment with a doctor today?"
                 : null}
@@ -146,6 +147,7 @@ class DailyCheckin extends Component {
 
 
         <div>
+          <h2>Medications</h2>
           <div>
             {med.length > 0 ? "What medications are you taking today?" : null}
 
