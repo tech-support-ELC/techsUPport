@@ -1,18 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import DoctorDonut from "./datavis/doctor-appointment-donut";
 import { getAppointmentThunk } from "../redux/dcDoctor";
 import { getAllDoctorsThunk, addDoctorThunk } from "../redux/doctors";
 import { getAllConditionsThunk, addConditionThunk } from "../redux/conditions";
 import { fetchMedications } from "../redux/medications";
-import { getChartThunk } from '../redux/score'
-import home from '../images/home.png'
-import HomeAddButtons from './HomeAddButtons'
-import moment from 'moment'
+import { getChartThunk } from "../redux/score";
+import NewUserHome from '../components/Homepage/NewUserHome'
+import BeforeDCHome from '../components/Homepage/BeforeDCHome'
+import AfterDCHome from '../components/Homepage/AfterDCHome'
 import { Link } from 'react-router-dom'
-import Onboarding from './Onboarding'
-import checkDay from '../utils/onboarding-date-function'
-import Heatmap from './datavis/CalendarHeatmap';
 import 'react-calendar-heatmap/dist/styles.css';
 import BarChart from './datavis/BarChart'
 import { getTodayScoreThunk } from "../redux/dcTodayScore";
@@ -27,60 +23,52 @@ export class Home extends React.Component {
   }
   render() {
     const { firstName } = this.props.currentUser;
-    const appointments = this.props.appointment;
     const doctors = this.props.doctors;
     const conditions = this.props.conditions;
     const medications = this.props.medications;
     const currentUser = this.props.currentUser;
     const chart = this.props.chart;
     const todayScore = this.props.todayScore;
+    const todayAppointment = this.props.todayAppointment;
+    const todayMed = this.props.todayMed;
     return (
-      <div className="home">
-        <div>
-          <h1 id="welcomeName">Welcome, {firstName}!</h1>
-          {!checkDay(currentUser.createdAt) ? <Onboarding /> : null}
-        </div>
-        <div>
-          {doctors.length === 0 &&
+
+
+
+      <div>
+        {/* if you have no info in the database */}
+        {(doctors.length === 0 &&
           conditions.length === 0 &&
-          medications.length === 0 ? (
-            <h2>
-              Get started by adding your doctors, conditions, and medications
-            </h2>
-          ) : null}
-          <h2>
-            Fill out your daily check-in for {moment().format("MMMM Do YYYY")}
-          </h2>
-          <div id="dailyCheckinHomePage">
-            <Link to="/dailycheckin">
-              <button id="checkin">
-                <span>Daily Check-in</span>
-              </button>
-            </Link>
-          </div>
-          <HomeAddButtons />
-        </div>
-        <div className="mainHomepageArea">
-          {
-            (doctors.length === 0 &&
-            conditions.length === 0 &&
-            medications.length === 0) ? (
-              <img src={home} alt="" />
-            ) : null
-          }
-          {
-            (chart && chart.length > 0) ? <Heatmap /> : null
-          }
-          </div>
-          <div>
-          {
-            todayScore && todayScore.length > 0 ? <BarChart /> : null
-          }
-        </div>
+          medications.length === 0) ? (
+            <div><NewUserHome currentUser={currentUser} /> </div>
+
+          ) :
+
+          // before daily checkin
+          ((doctors.length > 0 ||
+            conditions.length > 0 ||
+            medications.length > 0) &&
+            (todayScore.length === 0 &&
+              todayAppointment.length === 0 &&
+              todayMed.length === 0)) ?
+            <BeforeDCHome chart={chart} currentUser={currentUser} /> :
+
+            //after daily checkin
+            ((doctors.length > 0 ||
+              conditions.length > 0 ||
+              medications.length > 0) &&
+              (todayScore.length > 0 ||
+                todayAppointment.length > 0 ||
+                todayMed.length > 0)) ?
+              <AfterDCHome chart={chart} currentUser={currentUser} /> : null
+        }
+
       </div>
-    );
+
+    )
   }
 }
+
 const mapState = (state) => {
   return {
     doctors: state.doctors,
@@ -89,7 +77,9 @@ const mapState = (state) => {
     appointment: state.appointment,
     medications: state.medications,
     chart: state.chart,
-    todayScore: state.todayScore
+    todayScore: state.todayScore,
+    todayAppointment: state.todayAppointment,
+    todayMed: state.todayMed
   };
 };
 
