@@ -406,6 +406,34 @@ form {
       background: rgba(255, 0, 0, 0.4);
     }
   }
+
+  .form-carousel__container {
+    border: 1px solid black;
+  }
+
+  .form-carousel {
+    transition: height 0.6s;
+  }
+
+  .form-carousel__page {
+    padding: 10px;
+    text-align: center;
+  }
+
+  .form-carousel__nav-container {
+    padding: 10px;
+    padding-top: 0;
+    text-align: center;
+  }
+
+  .form-carousel__nav-container button {
+    padding: 2px 5px;
+    margin: 0 5px;
+    width: 100px;
+  }
+
+  .form-carousel__nav-container button.hide {
+  }
 }
 
 @media (max-width: 900px) {

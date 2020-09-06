@@ -6,6 +6,7 @@ import moment from 'moment'
 import possibleData from "../../images/possible-data.png"
 import Heatmap from "../../components/datavis/CalendarHeatmap";
 import checkDay from '../../utils/onboarding-date-function'
+import turtlepredc from '../../images/turtlepredc.png'
 
 export default function BeforeDCHome(props) {
     const chart = props.chart; //send this as props form home
@@ -39,6 +40,7 @@ export default function BeforeDCHome(props) {
 
 
             <div className="mainHomepageArea">
+                <img src={turtlepredc} />
                 {
                     (chart && chart.length > 0) ? <Heatmap /> : (
                         <div>
