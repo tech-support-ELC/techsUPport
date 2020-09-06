@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import UploadProofOfIdentity from "./UploadProofOfIdentity";
 import ReactModal from "react-modal";
 import ProofOfIdentity from "./ProofOfIdentity";
-import { getAllConditionsThunk } from "../redux/conditions";
-import { getAllDoctorsThunk } from "../redux/doctors";
 import { Link } from "react-router-dom";
 import { fetchDocuments } from "../redux/documents";
 
@@ -20,7 +18,6 @@ class Profile extends Component {
 
   componentDidMount() {
     ReactModal.setAppElement("body");
-    this.props.loadUserInfo();
     this.props.fetchDocuments();
   }
 
@@ -41,11 +38,10 @@ class Profile extends Component {
     return (
       <div className="loginSignup">
         <h1>User Profile</h1>
-        <h4>
+        <h3>
           Name: {firstName} {lastName}
-        </h4>
-        <h4>Email: {email}</h4>
-
+          <p>Email: {email}</p>
+        </h3>
         {documents.map((doc) => {
           const { type, id, imageUrl, description } = doc;
           return (
@@ -60,12 +56,13 @@ class Profile extends Component {
             </div>
           );
         })}
-
         <Link to="#" onClick={() => this.openUploadModal()}>
           Upload your insurance card and ID card here.
         </Link>
-        <div className="popup">
+        (We currently only support image format such as png, jpeg, gif)
+        <div>
           <ReactModal
+            className="popup"
             isOpen={this.state.showUploadModal}
             contentLabel="Upload Documents"
           >
@@ -83,12 +80,6 @@ class Profile extends Component {
 
 const mapState = ({ currentUser, documents }) => ({ currentUser, documents });
 
-const mapDispatch = (dispatch) => ({
-  loadUserInfo: () => {
-    dispatch(getAllConditionsThunk());
-    dispatch(getAllDoctorsThunk());
-  },
-  fetchDocuments: () => dispatch(fetchDocuments()),
-});
+const mapDispatch = { fetchDocuments };
 
 export default connect(mapState, mapDispatch)(Profile);

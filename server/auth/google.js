@@ -8,7 +8,7 @@ module.exports = router
 const googleConfig = {
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: `/auth/google/verify`
+  callbackURL: `/auth/google/callback`
 }
 
 const strategy = new GoogleStrategy(
@@ -39,7 +39,7 @@ router.get(
 )
 
 router.get(
-  '/verify',
+  '/callback',
   passport.authenticate('google', {
     successRedirect: '/',
     failureRedirect: '/login'

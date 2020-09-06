@@ -69,15 +69,6 @@ export class Home extends React.Component {
             ) : null
           }
           {
-            (doctors &&
-            doctors.length > 0 &&
-            appointments &&
-            appointments.length > 0)
-            ? (
-              <DoctorDonut appointment={appointments} doctors={doctors} />
-            ) : null
-          }
-          {
             (chart && chart.length > 0) ? <Heatmap /> : null
           }
           </div>

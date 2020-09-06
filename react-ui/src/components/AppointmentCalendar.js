@@ -7,6 +7,8 @@ import { getAppointmentThunk, addAppointmentThunk } from '../redux/dcDoctor';
 import { getAllDoctorsThunk } from "../redux/doctors";
 import moment from 'moment'
 
+
+
 export class AppointmentCalendar extends React.Component {
     constructor() {
         super()
@@ -36,17 +38,42 @@ export class AppointmentCalendar extends React.Component {
         this.setState({ showDocModal: false })
     }
     onChange = appointmentDay => this.setState({ appointmentDay })
+
+
+
     render() {
 
         const doctors = this.props.doctors
         const appointment = this.props.appointment
+        let appointmentDate = this.state.appointmentDay
+
+
+
+        const apptFilter = (appointmentString) => {
+            return (appointment.filter((oneapp) => {
+                return (oneapp.appointmentDate === moment(appointmentString).format('YYYY-MM-DD'))
+            }
+            ))
+        }
+        const daysAppts = apptFilter(appointmentDate)
+
+        const tileClassName = ({ activeStartDate, date, view }) => {
+            if (view === 'month' && appointment) {
+                let apptArrayPerDay = apptFilter(date)
+                if (apptArrayPerDay && apptArrayPerDay.length > 0) {
+                    return 'colorDate'
+                } else {
+                    return 'regDate'
+                }
+            }
+        }
         return (
             <div styles={{ height: 100, width: 100 }}>
                 <div>
                     <Calendar
-                        onClickDay={this.clickDay}
+                        onClickDay={() => this.clickDay()}
                         onChange={this.onChange}
-                        value={this.state.appointmentDay}
+                        tileClassName={tileClassName}
                         formatLongDate={(locale, date) => moment(date).format('YYYY-MM-DD')}
                     />
                 </div>
@@ -55,14 +82,32 @@ export class AppointmentCalendar extends React.Component {
                         isOpen={this.state.showDocModal}
                         contentLabel="Single Document"
                     >
+                        <button className="close" onClick={this.closeDocModal}>
+                            X
+                     </button>
                         <div>
                             <div>
                                 <h2>Add an Appointment With Your Doctor</h2>
                             </div>
+                            <div>
+                                <h4>Appointments scheduled for {moment(appointmentDate).format("MMMM Do YYYY")}: </h4>
+                                {(daysAppts && daysAppts.length > 0) ?
+                                    daysAppts.map((oneapp) => {
+                                        return (
+                                            <ul>
+                                                <li key={oneapp.id}>
+                                                    <div>Doctor: {oneapp.firstName} {oneapp.lastName}</div>
+                                                    <div>Date: {moment(oneapp.appointmentDate).format("MMMM D, YYYY")}</div>
+                                                    <div>Time: {oneapp.time}</div>
+                                                </li>
+                                            </ul>
+                                        )
+                                    }) : <h5>None scheduled for today</h5>
+                                }
+                            </div>
                             {
                                 (doctors && doctors.length > 0) ?
                                     doctors.map((doctor) => {
-                                        let appointmentDate = this.state.appointmentDay
                                         return (
                                             <div key={doctor.id}>
                                                 <DCDoctorForm
@@ -76,6 +121,7 @@ export class AppointmentCalendar extends React.Component {
                             }
                         </div>
                         <button onClick={this.closeDocModal}>Done</button>
+
                     </ReactModal>
                 </div>
             </div>

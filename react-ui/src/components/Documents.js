@@ -96,7 +96,6 @@ export class Documents extends Component {
           contentLabel="Upload Documents"
           className="popup"
         >
-          {" "}
           <button className="close" onClick={() => this.closeUploadModal()}>
             X
           </button>

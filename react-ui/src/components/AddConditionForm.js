@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { toast } from "react-toastify";
 class AddConditionForm extends Component {
   constructor() {
     super();
@@ -18,6 +19,7 @@ class AddConditionForm extends Component {
   }
   handleSubmit(evt) {
     evt.preventDefault();
+    const condition = this.state.name;
     this.props.addCondition(this.state);
     this.setState({
       name: "",
@@ -25,6 +27,8 @@ class AddConditionForm extends Component {
       typeOfPain: "",
       userId: 0,
     });
+    toast(`${condition} added!`);
+    this.props.close();
   }
   render() {
     return (

@@ -369,10 +369,6 @@ form {
   }
 }
 
-.buttons {
-  display: flex;
-}
-
 .bigButton {
   font-size: 20pt;
   background: #5ccc92;
@@ -515,6 +511,13 @@ form {
   .bigButton {
     font-size: 16pt;
   }
+
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
   footer {
     height: 20vh;
     width: 100vw;
@@ -595,5 +598,15 @@ form {
 }
 
 .container .bar-group:hover .value-label {
-  font-size: 0.8em;
+  font-size: 0.8em;  
 }
+
+// For apointments calendar
+.colorDate {
+  background: #2213f6;
+  color: white;
+}
+
+.regDate {
+  background: #95dbe5;
+

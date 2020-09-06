@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import moment from 'moment'
-
+import React, { Component } from "react";
+import moment from "moment";
+import { toast } from "react-toastify";
 class DCDoctorForm extends Component {
   constructor() {
     super();
     this.state = {
       isClicked: false,
-      time: '',
-      doctorId: 0
+      time: "",
+      doctorId: 0,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -16,28 +16,30 @@ class DCDoctorForm extends Component {
     const doctorId = this.props.doc.id;
     this.setState({ doctorId });
     const target = evt.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
     this.setState({
-      [name]: value
+      [name]: value,
     });
   }
   handleSubmit(evt) {
     evt.preventDefault();
+    const doc = this.props.doc;
     if (this.props.appointmentDate) {
-      const date = this.props.appointmentDate
-      let appointmentDate = moment(date).format('YYYY-MM-DD')
-      let time = this.state.time
-      let doctorId = this.state.doctorId
-      this.props.addAppointment({ time, doctorId, appointmentDate })
+      const date = this.props.appointmentDate;
+      let appointmentDate = moment(date).format("YYYY-MM-DD");
+      let time = this.state.time;
+      let doctorId = this.state.doctorId;
+      this.props.addAppointment({ time, doctorId, appointmentDate });
     } else {
-      this.props.addAppointment(this.state)
+      this.props.addAppointment(this.state);
     }
     this.setState({
       isClicked: false,
-      time: '',
-      doctorId: 0
-    })
+      time: "",
+      doctorId: 0,
+    });
+    toast(`Check-in for ${doc.firstName} ${doc.lastName} successful!`);
   }
   render() {
     const doc = this.props.doc;
@@ -46,35 +48,34 @@ class DCDoctorForm extends Component {
         <label>
           {doc.firstName} {doc.lastName}
           <input
-            type='checkbox'
-            name='isClicked'
+            type="checkbox"
+            name="isClicked"
             onChange={this.handleChange}
             // disabled={this.state.isClicked}
           />
         </label>
-        {
-          this.state.isClicked ?
+        {this.state.isClicked ? (
+          <div>
             <div>
-              <div>
-                <label>
-                  Time of your appointment
-              <input
-                    className='input'
-                    placeholder='HH:MM'
-                    type='text'
-                    name='time'
-                    onChange={this.handleChange}
-                    value={this.state.time}
-                  />
-                </label>
-              </div>
-              <button type="submit" onClick={!this.state.isClicked}>
-                Submit
-          </button>
-            </div> : null
-        }
+              <label>
+                Time of your appointment
+                <input
+                  className="input"
+                  placeholder="HH:MM"
+                  type="text"
+                  name="time"
+                  onChange={this.handleChange}
+                  value={this.state.time}
+                />
+              </label>
+            </div>
+            <button type="submit" onClick={!this.state.isClicked}>
+              Submit
+            </button>
+          </div>
+        ) : null}
       </form>
-    )
+    );
   }
 }
 export default DCDoctorForm;

@@ -16,8 +16,8 @@ class SingleCondition extends Component {
   };
   async handleDelete(id) {
     try {
-      await this.props.removeCondition(id)
-      this.props.closeTheModal()
+      await this.props.removeCondition(id);
+      this.props.closeTheModal();
     } catch (err) {
       console.log(err);
     }
@@ -32,8 +32,11 @@ class SingleCondition extends Component {
           <div>Condition: {condition.name} </div>
           <div>Has this been diagnosed?: {condition.diagnosed}</div>
           <div>Physical or mental condition?: {condition.typeOfPain}</div>
-          <div>{this.state.clicked && <UpdateCondition />}</div>
-
+          <div>
+            {this.state.clicked && (
+              <UpdateCondition close={this.props.closeTheModal} />
+            )}
+          </div>
           <div className="buttons">
             {!this.state.clicked && (
               <>

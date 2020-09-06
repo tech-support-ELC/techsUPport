@@ -39,7 +39,7 @@ class Medications extends React.Component {
   }
 
   render() {
-    const { medications, remove } = this.props;
+    const { medications } = this.props;
 
     return (
       <div className="main">
@@ -78,7 +78,7 @@ class Medications extends React.Component {
             >
               X
             </button>
-            <AddMedication />
+            <AddMedication close={this.handleClose} />
           </ReactModal>
           <ReactModal
             isOpen={this.state.isSelected}
@@ -92,11 +92,11 @@ class Medications extends React.Component {
             >
               X
             </button>
-            <SingleMedication selected={this.state.selected} remove={remove} />
-            {/* <RemoveMedication
-              medication={this.state.selected}
-              remove={this.handleRemove}
-            /> */}
+            <SingleMedication
+              selected={this.state.selected}
+              // remove={remove}
+              close={this.handleClose}
+            />
           </ReactModal>
         </div>
       </div>
@@ -112,7 +112,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchMedications: () => dispatch(fetchMedications()),
-    // remove: (id) => dispatch(deleteMedication(id)),
   };
 };
 
