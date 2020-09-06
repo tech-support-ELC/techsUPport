@@ -2,6 +2,11 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Document = db.define('documents', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
   description: {
     type: Sequelize.STRING,
     defaultValue: 'Undefined',
