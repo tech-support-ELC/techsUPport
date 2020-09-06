@@ -511,6 +511,13 @@ form {
   .bigButton {
     font-size: 16pt;
   }
+
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
   footer {
     height: 20vh;
     width: 100vw;
@@ -563,5 +570,5 @@ form {
 }
 
 .regDate {
-  background: #95dbe5
+  background: #95dbe5;
 }

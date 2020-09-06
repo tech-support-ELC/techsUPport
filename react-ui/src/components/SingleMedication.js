@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { fetchMedication, updateMedication } from "../redux/singleMedication";
 import { deleteMedication } from "../redux/medications";
 import UpdateMedication from "./UpdateMedication";
-import RemoveMedication from "./RemoveMedication";
 
 export class SingleMedication extends React.Component {
   constructor() {
@@ -46,6 +45,7 @@ export class SingleMedication extends React.Component {
 
   render() {
     const medication = this.props.selected;
+
     const rxcui = this.props.rxcui;
 
     return (
@@ -64,10 +64,12 @@ export class SingleMedication extends React.Component {
               <button type="button" onClick={() => this.handleOpen()}>
                 Update
               </button>
-              <RemoveMedication
-                medication={medication}
-                remove={this.handleDelete}
-              />
+              <button
+                type="button"
+                onClick={() => this.handleDelete(medication.id)}
+              >
+                Delete
+              </button>
             </div>
           </div>
         )}

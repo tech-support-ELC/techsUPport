@@ -25,6 +25,7 @@
     "react-calendar-heatmap": "^1.8.1",
     "react-d3-donut": "^1.1.2",
     "react-dom": "^16.8.6",
+    "react-form-carousel": "^1.0.2",
     "react-icons": "^3.11.0",
     "react-joyride": "^2.2.1",
     "react-modal": "^3.11.2",
