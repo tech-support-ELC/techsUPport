@@ -54,39 +54,41 @@ export class Home extends React.Component {
     const chart = this.props.chart;
     const data = this.state.data;
     return (
-      <div className="home">
-        <div>
+      <div className="fullHome">
+        <div id="welcome">
           <h1 id="welcomeName">Welcome, {firstName}!</h1>
           {!checkDay(currentUser.createdAt) ? <Onboarding /> : null}
         </div>
-        <div>
-          {doctors.length === 0 &&
-          conditions.length === 0 &&
-          medications.length === 0 ? (
+        <div className="home">
+          <div>
+            {doctors.length === 0 &&
+            conditions.length === 0 &&
+            medications.length === 0 ? (
+              <h2>
+                Get started by adding your doctors, conditions, and medications
+              </h2>
+            ) : null}
             <h2>
-              Get started by adding your doctors, conditions, and medications
+              Fill out your daily check-in for {moment().format("MMMM Do YYYY")}
             </h2>
-          ) : null}
-          <h2>
-            Fill out your daily check-in for {moment().format("MMMM Do YYYY")}
-          </h2>
-          <div id="dailyCheckinHomePage">
-            <Link to="/dailycheckin">
-              <button id="checkin">
-                <span>Daily Check-in</span>
-              </button>
-            </Link>
+            <div id="dailyCheckinHomePage">
+              <Link to="/dailycheckin">
+                <button id="checkin">
+                  <span>Daily Check-in</span>
+                </button>
+              </Link>
+              <HomeAddButtons />
+            </div>
           </div>
-          <HomeAddButtons />
-        </div>
-        <div className="mainHomepageArea">
-          {doctors.length === 0 &&
-          conditions.length === 0 &&
-          medications.length === 0 ? (
-            <img src={home} alt="" />
-          ) : null}
+          <div className="mainHomepageArea">
+            {doctors.length === 0 &&
+            conditions.length === 0 &&
+            medications.length === 0 ? (
+              <img src={home} alt="" />
+            ) : null}
 
-          {chart && chart.length > 0 ? <Heatmap /> : null}
+            {chart && chart.length > 0 ? <Heatmap /> : null}
+          </div>
         </div>
       </div>
     );
