@@ -550,7 +550,7 @@ form {
   }
   .home {
     display: block;
-
+    max-height: fit-content;
     max-width: 100vw;
     h2 {
       max-width: 100%;
@@ -571,7 +571,11 @@ form {
     align-content: center;
     max-height: fit-content;
   }
-
+  .mainHomepageArea {
+    img {
+      display: none;
+    }
+  }
   button {
     font-size: 12pt;
   }
