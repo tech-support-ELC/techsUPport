@@ -79,7 +79,7 @@ export class AllDoctors extends React.Component {
                       isOpen={this.state.showDocModal}
                       contentLabel="Single Document"
                       className="popup"
-                      // ariaHideApp={false}
+                      ariaHideApp={false}
                     >
                       <button className="close" onClick={this.closeDocModal}>
                         X

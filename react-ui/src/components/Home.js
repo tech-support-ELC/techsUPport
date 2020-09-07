@@ -5,12 +5,12 @@ import { getAllDoctorsThunk, addDoctorThunk } from "../redux/doctors";
 import { getAllConditionsThunk, addConditionThunk } from "../redux/conditions";
 import { fetchMedications } from "../redux/medications";
 import { getChartThunk } from "../redux/score";
-import NewUserHome from '../components/Homepage/NewUserHome'
-import BeforeDCHome from '../components/Homepage/BeforeDCHome'
-import AfterDCHome from '../components/Homepage/AfterDCHome'
-import { Link } from 'react-router-dom'
-import 'react-calendar-heatmap/dist/styles.css';
-import BarChart from './datavis/BarChart'
+import NewUserHome from "../components/Homepage/NewUserHome";
+import BeforeDCHome from "../components/Homepage/BeforeDCHome";
+import AfterDCHome from "../components/Homepage/AfterDCHome";
+import { Link } from "react-router-dom";
+import "react-calendar-heatmap/dist/styles.css";
+import BarChart from "./datavis/BarChart";
 import { getTodayScoreThunk } from "../redux/dcTodayScore";
 
 export class Home extends React.Component {
@@ -32,40 +32,33 @@ export class Home extends React.Component {
     const todayAppointment = this.props.todayAppointment;
     const todayMed = this.props.todayMed;
     return (
-
-
-
       <div>
         {/* if you have no info in the database */}
-        {(doctors.length === 0 &&
-          conditions.length === 0 &&
-          medications.length === 0) ? (
-            <div><NewUserHome currentUser={currentUser} /> </div>
-
-          ) :
-
-          // before daily checkin
-          ((doctors.length > 0 ||
+        {doctors.length === 0 &&
+        conditions.length === 0 &&
+        medications.length === 0 ? (
+          <div>
+            <NewUserHome currentUser={currentUser} />{" "}
+          </div>
+        ) : // before daily checkin
+        (doctors.length > 0 ||
             conditions.length > 0 ||
             medications.length > 0) &&
-            (todayScore.length === 0 &&
-              todayAppointment.length === 0 &&
-              todayMed.length === 0)) ?
-            <BeforeDCHome chart={chart} currentUser={currentUser} /> :
-
-            //after daily checkin
-            ((doctors.length > 0 ||
-              conditions.length > 0 ||
-              medications.length > 0) &&
-              (todayScore.length > 0 ||
-                todayAppointment.length > 0 ||
-                todayMed.length > 0)) ?
-              <AfterDCHome chart={chart} currentUser={currentUser} /> : null
-        }
-
+          todayScore.length === 0 &&
+          todayAppointment.length === 0 &&
+          todayMed.length === 0 ? (
+          <BeforeDCHome chart={chart} currentUser={currentUser} />
+        ) : //after daily checkin
+        (doctors.length > 0 ||
+            conditions.length > 0 ||
+            medications.length > 0) &&
+          (todayScore.length > 0 ||
+            todayAppointment.length > 0 ||
+            todayMed.length > 0) ? (
+          <AfterDCHome chart={chart} currentUser={currentUser} />
+        ) : null}
       </div>
-
-    )
+    );
   }
 }
 
@@ -79,7 +72,7 @@ const mapState = (state) => {
     chart: state.chart,
     todayScore: state.todayScore,
     todayAppointment: state.todayAppointment,
-    todayMed: state.todayMed
+    todayMed: state.todayMed,
   };
 };
 
