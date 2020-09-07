@@ -24,21 +24,21 @@ const Navbar = (props) => {
             </div>
           </div>
         </div>
-        <div className='navDailyCheckin'>
-          <Link to="/dailycheckin">Daily Checkin</Link>
+        <div className="navDailyCheckin">
+          <Link to="/dailycheckin">Daily Check-in</Link>
         </div>
-        <div className='navProfile'>
+        <div className="navProfile">
           <Link to="/profile">Profile</Link>
         </div>
-        <div className='navLogout'>
-          <Link to='/login' onClick={handleClick}>Log out</Link>
-
+        <div className="navLogout">
+          <Link to="/login" onClick={handleClick}>
+            Log out
+          </Link>
         </div>
       </div>
     </nav>
   );
 };
-
 
 const mapDispatch = (dispatch) => ({
   handleClick: () => {

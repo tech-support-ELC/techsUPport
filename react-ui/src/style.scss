@@ -536,10 +536,9 @@ form {
     }
   }
   body {
-    max-width: 100vw;
-    height: 95vh;
     #root {
       height: 100%;
+      width: 100%;
       display: block;
       justify-content: space-between;
     }
@@ -579,14 +578,17 @@ form {
   }
   nav {
     justify-content: space-around;
-    // padding: 1em 0.5em 0;
+    padding: 1em 0 0;
     a {
       font-size: 10pt;
+      text-align: center;
     }
 
     #upperRight {
       .navDropdown {
         font-size: 10pt;
+
+        text-align: center;
         .navDropContent {
           a {
             font-size: 8pt;
@@ -618,7 +620,7 @@ form {
 
   footer {
     height: 20vh;
-    width: 100vw;
+
     max-height: 240px;
     // a {
     //   font-size: $small-font;
