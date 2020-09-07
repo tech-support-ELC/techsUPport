@@ -64,21 +64,27 @@ export class Home extends React.Component {
             {doctors.length === 0 &&
             conditions.length === 0 &&
             medications.length === 0 ? (
-              <h2>
-                Get started by adding your doctors, conditions, and medications
-              </h2>
-            ) : null}
-            <h2>
-              Fill out your daily check-in for {moment().format("MMMM Do YYYY")}
-            </h2>
-            <div id="dailyCheckinHomePage">
-              <Link to="/dailycheckin">
-                <button id="checkin">
-                  <span>Daily Check-in</span>
-                </button>
-              </Link>
-              <HomeAddButtons />
-            </div>
+              <div id="dailyCheckinHomePage">
+                <h2>
+                  Get started by adding your doctors, conditions, and
+                  medications
+                </h2>
+                <HomeAddButtons />
+              </div>
+            ) : (
+              <div id="dailyCheckinHomePage">
+                <h2>
+                  Fill out your daily check-in for{" "}
+                  {moment().format("MMMM Do YYYY")}
+                </h2>
+                <Link to="/dailycheckin">
+                  <button id="checkin">
+                    <span>Daily Check-in</span>
+                  </button>
+                </Link>
+                <HomeAddButtons />
+              </div>
+            )}
           </div>
           <div className="mainHomepageArea">
             {doctors.length === 0 &&
