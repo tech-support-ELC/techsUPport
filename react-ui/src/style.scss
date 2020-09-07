@@ -274,13 +274,13 @@ form {
 .fullHome {
   min-height: 50vh;
   max-height: 70vh;
-  padding: 2em 2em 4em;
+  padding: 2em 2em;
 }
 
 #welcome {
   display: flex;
   align-items: center;
-  padding: 1em 2em 1em 15%;
+  padding-left: 10%;
   h1 {
     margin: 0;
     padding: 0.3em;
@@ -307,6 +307,7 @@ form {
   }
   h2 {
     max-width: 40vw;
+    height: fit-content;
   }
   button {
     font-size: 16pt;
@@ -320,11 +321,11 @@ form {
     }
   }
 }
-#dailyCheckinHomePage {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
+// #dailyCheckinHomePage {
+//   display: flex;
+//   flex-direction: column;
+//   flex-wrap: wrap;
+// }
 
 .column {
   font-size: 16pt;
@@ -703,7 +704,7 @@ form {
 }
 
 .container .bar-group:hover .value-label {
-  font-size: 0.8em;  
+  font-size: 0.8em;
 }
 
 // For apointments calendar
