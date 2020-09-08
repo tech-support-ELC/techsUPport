@@ -126,12 +126,12 @@ class afterDCHome extends React.Component {
                   </div>
                 )}
               </div>
-              <div>
+              <div className="scroll">
                 {todayMed &&
                   todayMed.length > 0 &&
                   todayMed.map((eachMed) => {
                     return (
-                      <div key={eachMed.id}>
+                      <div className="listItem" key={eachMed.id}>
                         <ul>
                           <li>
                             {eachMed.name}
@@ -143,23 +143,6 @@ class afterDCHome extends React.Component {
                   })}
               </div>
             </div>
-
-            <div>
-              {todayScore.length > 0 ? (
-                "Today's Conditions:"
-              ) : (
-                <div>
-                  <h4>No conditions recorded today</h4>
-                </div>
-              )}
-              <div>
-                {todayScore && todayScore.length > 0 ? (
-                  <div>
-                    <BarChart />
-                  </div>
-                ) : null}
-              </div>
-            </div>
           </div>
 
           <div className="mainHomepageArea">
@@ -167,17 +150,33 @@ class afterDCHome extends React.Component {
             <HomeAddButtons currentUser={currentUser} />
           </div>
         </div>
-        <div id="heatmap">
-          {chart && chart.length > 0 ? (
-            <Heatmap />
-          ) : (
+        <div id="afterViz">
+          <div>
+            {todayScore.length > 0 ? (
+              <p> Today's Conditions:</p>
+            ) : (
+              <div>
+                <h4>No conditions recorded today</h4>
+              </div>
+            )}
             <div>
-              <h4>
-                Fill out your daily checkin to start seeing your data over time
-              </h4>
-              <img src={possibleData} alt="" />
+              {todayScore && todayScore.length > 0 ? <BarChart /> : null}
             </div>
-          )}
+          </div>
+
+          <div id="afterHeatmap">
+            {chart && chart.length > 0 ? (
+              <Heatmap />
+            ) : (
+              <div>
+                <h4>
+                  Fill out your daily checkin to start seeing your data over
+                  time
+                </h4>
+                <img src={possibleData} alt="" />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     );

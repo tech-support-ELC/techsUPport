@@ -225,8 +225,11 @@ form {
 }
 .fullHome {
   height: 70vh;
-  padding: 2em 2em;
+  padding: 1em 2em 2em;
   flex: 1 0 auto;
+  h2 {
+    margin: 0.5em 0;
+  }
 }
 
 #welcome {
@@ -259,6 +262,28 @@ form {
 #smallTurtle {
   display: none;
 }
+#afterViz {
+  display: flex;
+  flex-wrap: wrap;
+  width: 95vw;
+  justify-content: space-evenly;
+  margin: 1em auto 0;
+  p {
+    text-align: left;
+    margin: 0;
+  }
+  div #bar {
+    max-width: 30vw;
+    overflow: visible;
+    width: 200px;
+    height: 100px;
+    margin-top: -50px;
+  }
+  #afterHeatmap {
+    width: 60vw;
+  }
+}
+
 .home {
   display: flex;
   flex-wrap: wrap;
@@ -601,6 +626,27 @@ form {
       }
     }
   }
+  .home {
+    #dailyCheckinHomePage {
+      padding: 0;
+    }
+  }
+
+  #afterViz {
+    #afterHeatmap {
+      width: 95vw;
+      margin-top: 4em;
+      text-align: center;
+      div {
+        margin: 2px 0;
+      }
+    }
+    p {
+      text-align: left;
+      margin: 0;
+    }
+  }
+
   .fullHome {
     padding: 0.5em 0.5em 0;
     align-content: center;
