@@ -79,11 +79,137 @@ class DailyCheckin extends Component {
 
     console.log("score", score);
     return (
-      // <div>
-      //   <h1>Daily Check-in</h1>
-      //   <h3>{date}</h3>
+      <div className="fullHome">
+        <div id="dc">
+          <h1>Daily Check-in</h1>
+          <h3>{date}</h3>
+          <div>
+            <div>
+              <button
+                className="bigButton"
+                type="button"
+                onClick={() => this.openCondModal()}
+              >
+                Conditions
+              </button>
+            </div>
+            <ReactModal
+              className="popup"
+              isOpen={this.state.showCondModal}
+              contentLabel="Single Document"
+            >
+              <div>
+                {score.length > 0
+                  ? "What conditions are you dealing with today today?"
+                  : null}
+              </div>
+              {score && score.length > 0
+                ? score.map((condition) => {
+                    return (
+                      <div key={condition.id}>
+                        <DCConditionForm
+                          condition={condition}
+                          addScore={this.props.addScore}
+                        />
+                      </div>
+                    );
+                  })
+                : "You don't have any conditions"}
+              <div>
+                {score && score.length === 0 ? (
+                  <Link to="/conditions">Add Condition</Link>
+                ) : null}
+              </div>
 
-      <Carousel itemsToShow={1}>
+              <button onClick={this.closeCondModal}>Done</button>
+            </ReactModal>
+          </div>
+
+          <div>
+            <div>
+              <button
+                className="bigButton"
+                type="button"
+                onClick={() => this.openDocModal()}
+              >
+                Doctors
+              </button>
+            </div>
+
+            <ReactModal
+              className="popup"
+              isOpen={this.state.showDocModal}
+              contentLabel="Single Document"
+            >
+              <div>
+                {doctors.length > 0
+                  ? "Do you have an appointment with a doctor today?"
+                  : null}
+              </div>
+              {doctors && doctors.length > 0
+                ? doctors.map((doc) => {
+                    return (
+                      <div key={doc.id}>
+                        <DCDoctorForm
+                          doc={doc}
+                          addAppointment={this.props.addAppointment}
+                        />
+                      </div>
+                    );
+                  })
+                : "You don't have any appointment"}
+
+              <div>
+                {appointment && appointment.length === 0 ? (
+                  <Link to="/doctors">Add Doctor</Link>
+                ) : null}
+              </div>
+              <button onClick={this.closeDocModal}>Done</button>
+            </ReactModal>
+          </div>
+
+          <div>
+            <div>
+              <button
+                className="bigButton"
+                type="button"
+                onClick={() => this.openMedModal()}
+              >
+                Medications
+              </button>
+            </div>
+            <ReactModal
+              className="popup"
+              isOpen={this.state.showMedModal}
+              contentLabel="Single Document"
+            >
+              <div>
+                {med.length > 0
+                  ? "What medications are you taking today?"
+                  : null}
+              </div>
+              {med && med.length > 0
+                ? med.map((eachMed) => {
+                    return (
+                      <div key={eachMed.id}>
+                        <DCMedicationForm
+                          eachMed={eachMed}
+                          addMedication={this.props.addMedication}
+                        />
+                      </div>
+                    );
+                  })
+                : "You don't have any medications"}
+
+              {med && med.length === 0 ? (
+                <Link to="/medications">Add Medication</Link>
+              ) : null}
+
+              <button onClick={this.closeMedModal}>Done</button>
+            </ReactModal>
+          </div>
+        </div>
+        {/* <Carousel itemsToShow={1}>
         <div>
           <div>
             <h2>Conditions</h2>
@@ -176,152 +302,9 @@ class DailyCheckin extends Component {
             <DCSummary />
           ) : null}
         </div>
-      </Carousel>
+      </Carousel> */}
+      </div>
     );
-
-    {
-      /* <div>
-          <div>
-            Some text
-              <button
-              className="bigButton"
-              type="button"
-              onClick={() => this.openCondModal()}
-            >
-              Conditions
-              </button>
-          </div>
-          <ReactModal
-            isOpen={this.state.showCondModal}
-            contentLabel="Single Document"
-          >
-            <div>
-              <div>
-                {
-                  score.length > 0 ? 'What conditions are you dealing with today today?' : null
-                }
-              </div>
-              {(score && score.length > 0) ?
-                score.map((condition) => {
-                  return (
-                    <div key={condition.id}>
-                      <DCConditionForm
-                        condition={condition}
-                        addScore={this.props.addScore}
-                      />
-                    </div>
-                  );
-                }) : "You don't have any conditions"}
-              <div>
-                {
-                  (score && score.length === 0) ? <Link to="/conditions">Add Condition</Link> : null
-                }
-              </div>
-            </div>
-            <button onClick={this.closeCondModal}>Done</button>
-          </ReactModal>
-        </div> */
-    }
-    {
-      /* <div>
-
-            <div>
-              Some text
-                <button
-                className="bigButton"
-                type="button"
-                onClick={() => this.openDocModal()}
-              >
-                Doctors
-                </button>
-            </div>
-
-          <ReactModal
-            isOpen={this.state.showDocModal}
-            contentLabel="Single Document"
-          >
-            <div>
-              <div>
-                {
-                  doctors.length > 0 ? 'Do you have an appointment with a doctor today?' : null
-                }
-              </div>
-              {
-                (doctors && doctors.length > 0) ?
-                  doctors.map((doc) => {
-
-                    return (
-                      <div key={doc.id}>
-                        <DCDoctorForm
-                          doc={doc}
-                          addAppointment={this.props.addAppointment}
-                        />
-                      </div>
-                    );
-                  }) : "You don't have any appointment"
-              }
-            </div>
-            <div>
-              {
-                (appointment && appointment.length === 0) ? <Link to="/doctors">Add Doctor</Link> : null
-              }
-            </div>
-            <button onClick={this.closeDocModal}>Done</button>
-          </ReactModal>
-        </div> */
-    }
-    {
-      /* <div>
-          <div>
-            Some text
-            <button
-              className="bigButton"
-              type="button"
-              onClick={() => this.openMedModal()}
-            >
-              Medications
-            </button>
-          </div>
-          <ReactModal
-            isOpen={this.state.showMedModal}
-            contentLabel="Single Document"
-          >
-            <div>
-              <div>
-                {med.length > 0
-                  ? "What medications are you taking today?"
-                  : null}
-              </div>
-              {med && med.length > 0
-                ? med.map((eachMed) => {
-                    return (
-                      <div key={eachMed.id}>
-                        <DCMedicationForm
-                          eachMed={eachMed}
-                          addMedication={this.props.addMedication}
-                        />
-                      </div>
-                    );
-                  })
-                : "You don't have any medications"}
-            </div>
-            <div>
-              {med && med.length === 0 ? (
-                <Link to="/medications">Add Medication</Link>
-              ) : null}
-            </div>
-            <button onClick={this.closeMedModal}>Done</button>
-          </ReactModal>
-        </div>
-        <div>
-          {todayScore.length > 0 ||
-          todayAppointment.length > 0 ||
-          todayMed > 0 ? (
-            <DCSummary />
-          ) : null}
-        </div> */
-    }
-    // </div>
   }
 }
 const mapStateToProps = (state) => {

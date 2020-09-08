@@ -230,8 +230,24 @@ form {
   h2 {
     margin: 0 0 0.5em;
   }
+  #dc {
+    width: fit-content;
+    margin: auto;
+  }
 }
-
+#dcPopup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 3;
+  background: white;
+  width: fit-content;
+  max-width: 60%;
+  min-width: 300px;
+  margin: 3em auto;
+  padding: 2em;
+  border: 3px solid #022ea8;
+}
 #welcome {
   display: flex;
 
@@ -637,7 +653,7 @@ form {
   .newHome {
     align-content: center;
     height: fit-content;
-    padding: 0.5em 0.5em 0;
+    padding: 0em 0.5em 0;
 
     .home {
       justify-content: space-evenly;
