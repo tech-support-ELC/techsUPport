@@ -240,6 +240,18 @@ form {
   }
 }
 
+.newHome {
+  height: 70vh;
+  padding: 2em 2em;
+  flex: 1 0 auto;
+  .home {
+    justify-content: space-evenly;
+    img {
+      max-width: 40vw;
+    }
+  }
+}
+
 #addButtons {
   display: flex;
   margin: 0.5em 0 0 -0.5em;
@@ -287,6 +299,10 @@ form {
       color: white;
     }
   }
+}
+#afterTurtle {
+  height: 250px;
+  width: 250px;
 }
 
 #heatmap {
@@ -568,7 +584,23 @@ form {
   #turtle {
     display: none;
   }
+  #afterTurtle {
+    display: none;
+  }
 
+  .newHome {
+    align-content: center;
+    height: fit-content;
+    padding: 0.5em 0.5em 0;
+
+    .home {
+      justify-content: space-evenly;
+      img {
+        max-width: 55vw;
+        margin: auto;
+      }
+    }
+  }
   .fullHome {
     padding: 0.5em 0.5em 0;
     align-content: center;

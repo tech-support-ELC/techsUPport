@@ -13,10 +13,12 @@ import HomeAddButtons from "../HomeAddButtons";
 import moment from "moment";
 import home from "../../images/home.png";
 import Heatmap from "../../components/datavis/CalendarHeatmap";
+import { Link } from "react-router-dom";
 import checkDay from "../../utils/onboarding-date-function";
 import possibleData from "../../images/possible-data.png";
 import { fetchMedications } from "../../redux/medications";
 import BarChart from "../datavis/BarChart";
+import turtlepredc from "../../images/turtlepredc.png";
 
 class afterDCHome extends React.Component {
   constructor(props) {
@@ -71,15 +73,8 @@ class afterDCHome extends React.Component {
 
     return (
       <div className="fullHome">
-        <div id="welcome">
-          <h1 id="welcomeName">Welcome, {firstName}!</h1>
-          {!checkDay(currentUser.createdAt) ? <Onboarding /> : null}
-        </div>
         <div className="home">
-          <div>
-            <HomeAddButtons currentUser={currentUser} />
-          </div>
-          <div className="mainHomepageArea">
+          <div id="dailyCheckinHomePage">
             <h2>From my Daily Checkin for {moment().format("MMMM Do YYYY")}</h2>
 
             <div>
@@ -165,21 +160,24 @@ class afterDCHome extends React.Component {
                 ) : null}
               </div>
             </div>
-
-            <div className="mainHomepageArea">
-              {chart && chart.length > 0 ? (
-                <Heatmap />
-              ) : (
-                <div>
-                  <h4>
-                    Fill out your daily checkin and start seeing your data over
-                    time
-                  </h4>
-                  <img src={possibleData} alt="" />
-                </div>
-              )}
-            </div>
           </div>
+
+          <div className="mainHomepageArea">
+            <img id="afterTurtle" src={turtlepredc} />
+            <HomeAddButtons currentUser={currentUser} />
+          </div>
+        </div>
+        <div id="heatmap">
+          {chart && chart.length > 0 ? (
+            <Heatmap />
+          ) : (
+            <div>
+              <h4>
+                Fill out your daily checkin to start seeing your data over time
+              </h4>
+              <img src={possibleData} alt="" />
+            </div>
+          )}
         </div>
       </div>
     );
