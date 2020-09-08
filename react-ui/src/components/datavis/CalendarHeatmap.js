@@ -4,7 +4,7 @@ import { getChartThunk } from "../../redux/score";
 import CalendarHeatmap from "react-calendar-heatmap";
 import "react-calendar-heatmap/dist/styles.css";
 import { getTodayScoreThunk } from "../../redux/dcTodayScore";
-import ReactTooltip from 'react-tooltip';
+import ReactTooltip from "react-tooltip";
 export class Heatmap extends React.Component {
   constructor() {
     super();
@@ -22,9 +22,11 @@ export class Heatmap extends React.Component {
       const countWithoutToday = count.slice(0, -len);
       const dateWithoutToday = date.slice(0, -len);
       const todayCount = count.slice(-len);
-      const average = Math.floor(todayCount.reduce((accum, each) => {
-        return accum+each
-      }, 0)/len);
+      const average = Math.floor(
+        todayCount.reduce((accum, each) => {
+          return accum + each;
+        }, 0) / len
+      );
       const todayDate = date.slice(-len)[0];
       countWithoutToday.push(average);
       dateWithoutToday.push(todayDate);
@@ -55,9 +57,8 @@ export class Heatmap extends React.Component {
     return (
       <div>
         <div>
-          <div>How I've felt over time</div>
-          {
-            (chart && chart.length > 0) ?
+          <div>How I've felt over time:</div>
+          {chart && chart.length > 0 ? (
             <CalendarHeatmap
               values={data}
               classForValue={(value) => {
@@ -68,15 +69,13 @@ export class Heatmap extends React.Component {
               }}
               showWeekdayLabels={true}
               tooltipDataAttrs={(value) => {
-                  return {
-                    'data-tip': `${value.date} has average score: ${
-                      value.count
-                    }`,
-                  };
+                return {
+                  "data-tip": `${value.date} has average score: ${value.count}`,
+                };
               }}
-            /> : null
-          }
-            <ReactTooltip />
+            />
+          ) : null}
+          <ReactTooltip />
         </div>
       </div>
     );

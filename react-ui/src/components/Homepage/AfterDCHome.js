@@ -75,8 +75,40 @@ class afterDCHome extends React.Component {
       <div className="fullHome">
         <div className="home">
           <div id="dailyCheckinHomePage">
-            <h2>From my Daily Checkin for {moment().format("MMMM Do YYYY")}</h2>
-
+            <h2>
+              From my{" "}
+              <Link id="checkinLink" to="/dailycheckin">
+                <button id="checkin">
+                  <span>Daily Check-in</span>
+                </button>
+              </Link>{" "}
+              for {moment().format("MMMM Do YYYY")}
+            </h2>
+            <div>
+              <div>
+                {todayMed.length > 0 ? (
+                  "Today's Medications:"
+                ) : (
+                  <div>
+                    <h4>No medications recorded today</h4>
+                  </div>
+                )}
+              </div>
+              <div className="scroll">
+                {todayMed &&
+                  todayMed.length > 0 &&
+                  todayMed.map((eachMed) => {
+                    return (
+                      <div className="listItem" key={eachMed.id}>
+                        {eachMed.name}
+                        {findMedDosage(eachMed, medications)}
+                      </div>
+                    );
+                  })}
+              </div>
+            </div>
+          </div>
+          <div className="mainHomepageArea">
             <div>
               <div>
                 <div>
@@ -116,58 +148,24 @@ class afterDCHome extends React.Component {
               </div>
             </div>
 
-            <div>
+            <div id="afterViz">
               <div>
-                {todayMed.length > 0 ? (
-                  "Today's Medications:"
+                {todayScore.length > 0 ? (
+                  <p> Today's Conditions:</p>
                 ) : (
                   <div>
-                    <h4>No medications recorded today</h4>
+                    <h4>No conditions recorded today</h4>
                   </div>
                 )}
-              </div>
-              <div>
-                {todayMed &&
-                  todayMed.length > 0 &&
-                  todayMed.map((eachMed) => {
-                    return (
-                      <div key={eachMed.id}>
-                        <ul>
-                          <li>
-                            {eachMed.name}
-                            {findMedDosage(eachMed, medications)}
-                          </li>
-                        </ul>
-                      </div>
-                    );
-                  })}
-              </div>
-            </div>
-
-            <div>
-              {todayScore.length > 0 ? (
-                "Today's Conditions:"
-              ) : (
                 <div>
-                  <h4>No conditions recorded today</h4>
+                  {todayScore && todayScore.length > 0 ? <BarChart /> : null}
                 </div>
-              )}
-              <div>
-                {todayScore && todayScore.length > 0 ? (
-                  <div>
-                    <BarChart />
-                  </div>
-                ) : null}
               </div>
             </div>
-          </div>
-
-          <div className="mainHomepageArea">
-            <img id="afterTurtle" src={turtlepredc} />
-            <HomeAddButtons currentUser={currentUser} />
           </div>
         </div>
-        <div id="heatmap">
+
+        <div id="afterHeatmap">
           {chart && chart.length > 0 ? (
             <Heatmap />
           ) : (
