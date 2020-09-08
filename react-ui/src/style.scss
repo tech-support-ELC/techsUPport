@@ -60,7 +60,7 @@ nav {
     justify-content: space-between;
   }
   #upperRight {
-    max-width: 70%;
+    max-width: 75%;
     min-width: 40%;
     a {
       padding-left: 1em;
@@ -165,56 +165,9 @@ form {
   flex-direction: column;
   flex-wrap: wrap;
   flex: 1 0 auto;
-  height: 30vh;
-  width: 60%;
-  margin: 3em 0 0 30%;
-  padding: $padding;
-  form {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    padding: 1em;
-    max-width: 200px;
+  height: 40vh;
 
-    border: 2px solid #ec360d;
-    border-radius: 10px;
-    button {
-      margin: 1.5em 0 0;
-    }
-    h1 {
-      margin: 0 0 0.5em;
-    }
-  }
-
-  #signup {
-    margin-top: 1em;
-    font-size: 14pt;
-    background: #5ccc92;
-    color: black;
-    border-radius: 10px;
-    width: fit-content;
-    padding: 0.5em;
-    &:hover {
-      background: #339e66;
-      color: white;
-    }
-  }
-  a {
-    padding: 0.5em 0;
-    &:hover {
-      color: #ec360d;
-    }
-  }
-}
-
-.loginSignup {
-  display: flex;
-  flex-direction: column;
-
-  flex: 1 0 auto;
-  height: 30vh;
-  width: 60%;
-  margin: 3em 0 0 30%;
+  margin: 50px auto;
   padding: $padding;
   form {
     display: flex;
@@ -273,6 +226,7 @@ form {
 .fullHome {
   height: 70vh;
   padding: 2em 2em;
+  flex: 1 0 auto;
 }
 
 #welcome {
@@ -589,17 +543,23 @@ form {
       justify-content: space-between;
     }
     #dailyCheckinHomePage {
-      padding: 0 0 1em;
+      padding: 0.8em 0 1em;
       width: 95vw;
     }
     #checkin {
+      font-size: 14pt;
       margin: 0 0.3em;
       align-self: center;
     }
   }
+  #addButtons {
+    margin: 0;
+  }
   #heatmap {
+    padding-top: 7px;
     width: 95vw;
     margin: auto;
+    height: fit-content;
   }
   #smallTurtle {
     display: inline;
@@ -610,7 +570,7 @@ form {
   }
 
   .fullHome {
-    padding: 0.5em;
+    padding: 0.5em 0.5em 0;
     align-content: center;
     height: fit-content;
   }
@@ -652,7 +612,7 @@ form {
   }
 
   .loginSignup {
-    margin: 2em 1em 1em;
+    margin: 5px auto;
     height: fit-content;
   }
   .column {
@@ -672,9 +632,10 @@ form {
   }
 
   footer {
-    height: 20vh;
-
-    max-height: 240px;
+    // height: 20vh;
+    height: fit-content;
+    padding: 5px 5px 5px 10px;
+    // max-height: 240px;
     // a {
     //   font-size: $small-font;
     // }
