@@ -14,7 +14,7 @@ import { getTodayMedsThunk } from "../redux/dcTodayMed";
 import { getAllDoctorsThunk } from "../redux/doctors";
 // import Form, { Page } from "react-form-carousel";
 import DCSummary from "./DCSummary";
-import Carousel from 'react-elastic-carousel'
+import Carousel from "react-elastic-carousel";
 
 class DailyCheckin extends Component {
   constructor() {
@@ -30,7 +30,7 @@ class DailyCheckin extends Component {
     this.closeDocModal = this.closeDocModal.bind(this);
     this.closeMedModal = this.closeMedModal.bind(this);
     this.closeCondModal = this.closeCondModal.bind(this);
-    this.onSubmit = this.onSubmit.bind(this)
+    this.onSubmit = this.onSubmit.bind(this);
   }
   componentDidMount() {
     this.props.getScore();
@@ -65,8 +65,8 @@ class DailyCheckin extends Component {
   }
   onSubmit = (e) => {
     e.preventDefault();
-    console.log("submitted")
-  }
+    console.log("submitted");
+  };
   render() {
     const doctors = this.props.doctors;
     const score = this.props.score;
@@ -84,7 +84,6 @@ class DailyCheckin extends Component {
       //   <h3>{date}</h3>
 
       <Carousel itemsToShow={1}>
-
         <div>
           <div>
             <h2>Conditions</h2>
@@ -96,15 +95,16 @@ class DailyCheckin extends Component {
             </div>
             {score && score.length > 0
               ? score.map((condition) => {
-                return (
-                  <div key={condition.id}>
-                    <DCConditionForm
-                      condition={condition}
-                      addScore={this.props.addScore}
-                    />
-                  </div>
-                );
-              })
+                  return (
+                    <div key={condition.id}>
+                      <DCConditionForm
+                        className="scroll"
+                        condition={condition}
+                        addScore={this.props.addScore}
+                      />
+                    </div>
+                  );
+                })
               : "You don't have any conditions"}
             <div>
               {score && score.length === 0 ? (
@@ -113,8 +113,6 @@ class DailyCheckin extends Component {
             </div>
           </div>
         </div>
-
-
 
         <div>
           <div>
@@ -126,15 +124,15 @@ class DailyCheckin extends Component {
             </div>
             {doctors && doctors.length > 0
               ? doctors.map((doc) => {
-                return (
-                  <div key={doc.id}>
-                    <DCDoctorForm
-                      doc={doc}
-                      addAppointment={this.props.addAppointment}
-                    />
-                  </div>
-                );
-              })
+                  return (
+                    <div key={doc.id}>
+                      <DCDoctorForm
+                        doc={doc}
+                        addAppointment={this.props.addAppointment}
+                      />
+                    </div>
+                  );
+                })
               : "You don't have any appointment"}
           </div>
           <div>
@@ -144,8 +142,6 @@ class DailyCheckin extends Component {
           </div>
         </div>
 
-
-
         <div>
           <h2>Medications</h2>
           <div>
@@ -153,15 +149,16 @@ class DailyCheckin extends Component {
 
             {med && med.length > 0
               ? med.map((eachMed) => {
-                return (
-                  <div key={eachMed.id}>
-                    <DCMedicationForm
-                      eachMed={eachMed}
-                      addMedication={this.props.addMedication}
-                    />
-                  </div>
-                );
-              })
+                  return (
+                    <div key={eachMed.id}>
+                      <DCMedicationForm
+
+                        eachMed={eachMed}
+                        addMedication={this.props.addMedication}
+                      />
+                    </div>
+                  );
+                })
               : "You don't have any medications"}
           </div>
           <div>
@@ -171,21 +168,19 @@ class DailyCheckin extends Component {
           </div>
         </div>
 
-
         <div>
           <h4>Thanks for submitting your daily checkin for {date}!</h4>
           {todayScore.length > 0 ||
-            todayAppointment.length > 0 ||
-            todayMed > 0 ? (
-              <DCSummary />
-            ) : null}
+          todayAppointment.length > 0 ||
+          todayMed > 0 ? (
+            <DCSummary />
+          ) : null}
         </div>
-
       </Carousel>
+    );
 
-    )
-
-    {/* <div>
+    {
+      /* <div>
           <div>
             Some text
               <button
@@ -225,8 +220,10 @@ class DailyCheckin extends Component {
             </div>
             <button onClick={this.closeCondModal}>Done</button>
           </ReactModal>
-        </div> */}
-    {/* <div>
+        </div> */
+    }
+    {
+      /* <div>
 
             <div>
               Some text
@@ -271,8 +268,10 @@ class DailyCheckin extends Component {
             </div>
             <button onClick={this.closeDocModal}>Done</button>
           </ReactModal>
-        </div> */}
-    {/* <div>
+        </div> */
+    }
+    {
+      /* <div>
           <div>
             Some text
             <button
@@ -320,9 +319,9 @@ class DailyCheckin extends Component {
           todayMed > 0 ? (
             <DCSummary />
           ) : null}
-        </div> */}
+        </div> */
+    }
     // </div>
-
   }
 }
 const mapStateToProps = (state) => {

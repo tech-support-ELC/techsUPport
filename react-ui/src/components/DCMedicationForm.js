@@ -43,34 +43,36 @@ class DCMedicationForm extends Component {
   render() {
     const med = this.props.eachMed;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          {med.name}
-          <input
-            type="checkbox"
-            name="isClicked"
-            onChange={this.handleChange}
-          />
-        </label>
-        {this.state.isClicked ? (
-          <div>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            {med.name}
+            <input
+              type="checkbox"
+              name="isClicked"
+              onChange={this.handleChange}
+            />
+          </label>
+          {this.state.isClicked ? (
             <div>
-              <label>
-                Any notes on how this medication is making you feel?
-                <textarea
-                  className="textarea"
-                  placeholder="notes"
-                  type="text"
-                  name="notes"
-                  onChange={this.handleChange}
-                  value={this.state.notes}
-                />
-              </label>
+              <div>
+                <label>
+                  Any notes on how this medication is making you feel?
+                  <textarea
+                    className="textarea"
+                    placeholder="notes"
+                    type="text"
+                    name="notes"
+                    onChange={this.handleChange}
+                    value={this.state.notes}
+                  />
+                </label>
+              </div>
+              <button type="submit">Submit</button>
             </div>
-            <button type="submit">Submit</button>
-          </div>
-        ) : null}
-      </form>
+          ) : null}
+        </form>
+      </div>
     );
   }
 }

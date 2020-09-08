@@ -25,7 +25,7 @@ const Navbar = (props) => {
           </div>
         </div>
         <div className="navDailyCheckin">
-          <Link to="/dailycheckin">Daily Check-in</Link>
+          {/* <Link to="/dailycheckin">Daily Check-in</Link> */}
         </div>
         <div className="navProfile">
           <Link to="/profile">Profile</Link>

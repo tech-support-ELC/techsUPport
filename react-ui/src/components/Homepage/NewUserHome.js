@@ -10,14 +10,11 @@ export default function newUserHome(props) {
   const firstName = props.currentUser.firstName;
   const currentUser = props.currentUser;
   return (
-    <div className="fullHome">
-      <div id="welcome">
-        <h1 id="welcomeName">Welcome, {firstName}!</h1>
-        {!checkDay(currentUser.createdAt) ? <Onboarding /> : null}
-      </div>
-
+    <div className="newHome">
       <div className="home">
         <div>
+          <h1 id="welcomeName">Welcome, {firstName}!</h1>
+          {!checkDay(currentUser.createdAt) ? <Onboarding /> : null}
           <h2>
             Get started by adding your doctors, conditions, and medications
           </h2>
