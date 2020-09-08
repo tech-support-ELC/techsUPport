@@ -171,7 +171,7 @@ class afterDCHome extends React.Component {
           ) : (
             <div>
               <h4>
-                Fill out your daily checkin to start seeing your data over time
+                Fill out your daily check-in to start seeing your data over time
               </h4>
               <img src={possibleData} alt="" />
             </div>
