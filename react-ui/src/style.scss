@@ -259,8 +259,7 @@ form {
   display: flex;
   flex: 1 0 auto;
   justify-content: center;
-  min-height: 50vh;
-  max-height: 70vh;
+  height: 70vh;
   padding: $padding;
 
   h1 {
@@ -272,60 +271,80 @@ form {
   flex-wrap: wrap;
 }
 .fullHome {
-  min-height: 50vh;
-  max-height: 70vh;
+  height: 70vh;
   padding: 2em 2em;
 }
 
 #welcome {
   display: flex;
-  align-items: center;
-  padding-left: 10%;
+
   h1 {
     margin: 0;
-    padding: 0.3em;
   }
   button {
-    // max-height: 80%;
+    padding: 0.3em;
   }
 }
 
+#addButtons {
+  display: flex;
+  margin: 0.5em 0 0 -0.5em;
+}
+#smallTurtle {
+  display: none;
+}
 .home {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-between;
   height: fit-content;
-  min-height: 50vh;
-  max-height: 70vh;
+  width: 80vw;
+  margin: auto;
   div {
     max-width: 30vw;
   }
   .mainHomepageArea {
+    display: flex;
+    flex-direction: column;
     img {
-      max-width: 30vw;
+      width: 30vw;
+      height: auto;
     }
   }
   h2 {
     max-width: 40vw;
     height: fit-content;
   }
-  button {
-    font-size: 16pt;
+  #dailyCheckinHomePage {
+    display: flex;
+    flex-direction: column;
   }
+
+  // #checkinLink {
+  //   align-self: center;
+  // }
   #checkin {
     background: #5ccc92;
-
+    font-size: 16pt;
+    margin: auto;
+    align-self: center;
     &:hover {
       background: #339e66;
       color: white;
     }
   }
 }
-// #dailyCheckinHomePage {
-//   display: flex;
-//   flex-direction: column;
-//   flex-wrap: wrap;
-// }
+
+#heatmap {
+  width: 80vw;
+  margin: auto;
+}
+
+.addButtons {
+  button {
+    font-size: 12pt;
+  }
+}
 
 .column {
   font-size: 16pt;
@@ -552,24 +571,48 @@ form {
     display: block;
     max-height: fit-content;
     max-width: 100vw;
+
+    align-items: center;
+    align-content: center;
     h2 {
       max-width: 100%;
     }
     button {
-      font-size: 12pt;
+      font-size: 10pt;
     }
     div {
       max-width: 100%;
     }
+    #checkinLink {
+      display: flex;
+      margin-top: 0.5em;
+      justify-content: space-between;
+    }
+    #dailyCheckinHomePage {
+      padding: 0 0 1em;
+      width: 95vw;
+    }
+    #checkin {
+      margin: 0 0.3em;
+      align-self: center;
+    }
+  }
+  #heatmap {
+    width: 95vw;
+    margin: auto;
+  }
+  #smallTurtle {
+    display: inline;
+    max-height: 90px;
+  }
+  #turtle {
+    display: none;
   }
 
-  #dailyCheckinHomePage {
-    padding: 0 0 1em;
-  }
   .fullHome {
     padding: 0.5em;
     align-content: center;
-    max-height: fit-content;
+    height: fit-content;
   }
   // .mainHomepageArea {
   //   img {

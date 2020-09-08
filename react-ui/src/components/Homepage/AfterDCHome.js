@@ -76,7 +76,6 @@ class afterDCHome extends React.Component {
           {!checkDay(currentUser.createdAt) ? <Onboarding /> : null}
         </div>
         <div className="home">
-          {" "}
           <div>
             <HomeAddButtons currentUser={currentUser} />
           </div>

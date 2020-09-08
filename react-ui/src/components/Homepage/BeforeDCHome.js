@@ -15,37 +15,39 @@ export default function BeforeDCHome(props) {
 
   return (
     <div className="fullHome">
-      <div id="welcome">
-        <h1 id="welcomeName">Welcome, {firstName}!</h1>
-        {!checkDay(currentUser.createdAt) ? <Onboarding /> : null}
-      </div>
-
       <div className="home">
         <div id="dailyCheckinHomePage">
+          <div id="welcome">
+            <h1 id="welcomeName">Welcome, {firstName}!</h1>
+            {!checkDay(currentUser.createdAt) ? <Onboarding /> : null}
+          </div>
           <h2>
             Fill out your daily check-in for {moment().format("MMMM Do YYYY")}
           </h2>
-          <Link to="/dailycheckin">
+          <Link id="checkinLink" to="/dailycheckin">
             <button id="checkin">
               <span>Daily Check-in</span>
             </button>
+            <img id="smallTurtle" src={turtlepredc} />
           </Link>
           <HomeAddButtons currentUser={currentUser} />
         </div>
 
         <div className="mainHomepageArea">
-          <img src={turtlepredc} />
-          {chart && chart.length > 0 ? (
-            <Heatmap />
-          ) : (
-            <div>
-              <h4>
-                Fill out your daily checkin to start seeing your data over time
-              </h4>
-              <img src={possibleData} alt="" />
-            </div>
-          )}
+          <img id="turtle" src={turtlepredc} />
         </div>
+      </div>
+      <div id="heatmap">
+        {chart && chart.length > 0 ? (
+          <Heatmap />
+        ) : (
+          <div>
+            <h4>
+              Fill out your daily checkin to start seeing your data over time
+            </h4>
+            <img src={possibleData} alt="" />
+          </div>
+        )}
       </div>
     </div>
   );
