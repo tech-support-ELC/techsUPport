@@ -24,7 +24,7 @@ const Onboarding = () => {
       {
         title: "Your Daily Checkin",
         target: "#dailyCheckinHomePage",
-        content: "Fill out your daily checkin here each day.",
+        content: "Fill out your daily check-in here each day.",
       },
       {
         title: "Home",
@@ -37,12 +37,6 @@ const Onboarding = () => {
         target: ".MyMedicalInfo",
         content:
           "See all your info here: your doctors & appointments, you medications, and your conditions.",
-      },
-      {
-        title: "Daily Checkin",
-        target: ".navDailyCheckin",
-        content:
-          "Here is another way to access your daily check in. Make sure to fill it out each day!",
       },
       {
         title: "Your Profile",
