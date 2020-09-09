@@ -60,71 +60,78 @@ export class AllDoctors extends React.Component {
     const doctors = this.props.doctors;
     const appointments = this.props.appointment;
     return (
-      <div className="main">
-        <div className="column">
-          <h3>My Doctors</h3>
-          <div className="scroll">
-            {doctors &&
-              doctors.map((doctor) => {
-                return (
-                  <div className="listItem" key={doctor.id}>
-                    <button
-                      className="bigButton"
-                      onClick={() => this.openDocModal(doctor.id)}
-                    >
-                      {doctor.firstName} {doctor.lastName}
-                    </button>
-
-                    <ReactModal
-                      isOpen={this.state.showDocModal}
-                      contentLabel="Single Document"
-                      className="popup"
-                      ariaHideApp={false}
-                    >
-                      <button className="close" onClick={this.closeDocModal}>
-                        X
+      <div >
+        <div className="docBox">
+          <div id='doctors' className="column">
+            <h3>My Doctors</h3>
+            <div className="scroll">
+              {doctors &&
+                doctors.map((doctor) => {
+                  return (
+                    <div className="listItem" key={doctor.id}>
+                      <button
+                        className="bigButton"
+                        onClick={() => this.openDocModal(doctor.id)}
+                      >
+                        {doctor.firstName} {doctor.lastName}
                       </button>
-                      <SingleDoctor closeTheModal={this.closeDocModal} />
-                    </ReactModal>
-                  </div>
-                );
-              })}
-          </div>
-          <button onClick={this.openModal}>Add a Doctor</button>
-        </div>
-        <div id="modal" className="column">
-          <ReactModal
-            isOpen={this.state.showModal}
-            contentLabel="Single Document"
-            className="popup"
-            ariaHideApp={false}
-          >
-            <button className="close" onClick={this.closeModal}>
-              X
-            </button>
-            <AddDoctor
-              close={this.closeModal}
-              currentUser={this.props.currentUser}
-              addNewDoctor={this.props.addNewDoctor}
-            />
-          </ReactModal>
-        </div>
-        <div>
-          {doctors && doctors.length > 0 ? (
-            <div>
-              <h2>Add an appointment with your doctor</h2>
-              <AppointmentCalendar />
+
+                      <ReactModal
+                        isOpen={this.state.showDocModal}
+                        contentLabel="Single Document"
+                        className="popup"
+                        ariaHideApp={false}
+                      >
+                        <button className="close" onClick={this.closeDocModal}>
+                          X
+                      </button>
+                        <SingleDoctor closeTheModal={this.closeDocModal} />
+                      </ReactModal>
+                    </div>
+                  );
+                })}
             </div>
-          ) : null}
+            <button onClick={this.openModal}>Add a Doctor</button>
+          </div>
+
+          <div id="modal" className="column">
+            <ReactModal
+              isOpen={this.state.showModal}
+              contentLabel="Single Document"
+              className="popup"
+              ariaHideApp={false}
+            >
+              <button className="close" onClick={this.closeModal}>
+                X
+            </button>
+              <AddDoctor
+                close={this.closeModal}
+                currentUser={this.props.currentUser}
+                addNewDoctor={this.props.addNewDoctor}
+              />
+            </ReactModal>
+          </div>
+
+          <div id='calendar' className='column'>
+            <div>
+              {doctors && doctors.length > 0 ? (
+                <div>
+                  <h3>Add an appointment </h3>
+                  <AppointmentCalendar />
+                </div>
+              ) : null}
+            </div>
+            <div className="donut">
+              {doctors &&
+                doctors.length > 0 &&
+                appointments &&
+                appointments.length > 0 ? (
+                  <DoctorDonut appointment={appointments} doctors={doctors} />
+                ) : null}
+            </div>
+          </div>
         </div>
-        <div>
-          {doctors &&
-          doctors.length > 0 &&
-          appointments &&
-          appointments.length > 0 ? (
-            <DoctorDonut appointment={appointments} doctors={doctors} />
-          ) : null}
-        </div>
+
       </div>
     );
   }
