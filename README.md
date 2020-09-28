@@ -1,16 +1,12 @@
-# Element Health
-
-A patient-focused PWA that helps streamline and integrate patient data for healthcare professionals.
-
-Visit [Element Health](https://element-health.herokuapp.com/) to get your health managment up to speed!
+# ELC Hackathon 2020
 
 ## Table of Contents
 
 - [Setup](#Setup)
 - [Team](#Team)
-  - [Lu Wang](#Lu-Wang)
-  - [Megan Leaf](#Megan-Leaf)
-  - [Biligma Oyola](#Biligma-Oyola)
+  - [Ariel Ng](#Ariel-Ng)
+  - [Taihua Rubin](#Taihua-Rubin)
+  - [Kristi Nanco](#Kristi-Nanco)
   - [Emma Seely-Katz](#Emma-Seely-Katz)
 - [Tech Stack](#Tech-Stack)
 
@@ -40,20 +36,11 @@ Go to http://localhost:3000 to use Element Health!
 
 ## Team
 
-### Lu Wang
+### Ariel Ng
 
-[Github](https://github.com/LuWang1983)
-[LinkedIn](https://www.linkedin.com/in/loowang)
+### Taihua Rubin
 
-### Megan Leaf
-
-[Github](https://github.com/meganbleaf)
-[LinkedIn](https://www.linkedin.com/in/meganleaf/)
-
-### Biligma Oyola
-
-[Github](https://github.com/sandylykova)
-[LinkedIn](https://www.linkedin.com/in/biligma-oyola/)
+### Kristi Nanco
 
 ### Emma Seely-Katz
 
